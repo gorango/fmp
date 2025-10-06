@@ -1,0 +1,7 @@
+{
+	"name": "fmp-docs",
+	"type": "module",
+	"dependencies": {
+		"puppeteer": "^24.19.0"
+	}
+}

@@ -57,7 +57,7 @@ function getJSDocDescription(node: Node): string | undefined {
  */
 function getParamDescription(funcJsDocs: JSDoc[], paramName: string): string | undefined {
 	for (const doc of funcJsDocs) {
-		const paramTags = doc.getTags().filter(tag => tag.getTagName() === 'param')
+		const paramTags = doc.getTags().filter((tag) => tag.getTagName() === 'param')
 
 		for (const paramTag of paramTags) {
 			const tagNameNode = (paramTag.compilerNode as any).name
@@ -97,84 +97,78 @@ function typeToZod(type: Type, contextNode: Node, isParamOptionalFlag: boolean, 
 
 	if (type.isUndefined()) {
 		zodSchema = 'z.undefined()'
-	}
-	else if (type.isNull()) {
+	} else if (type.isNull()) {
 		zodSchema = 'z.null()'
-	}
-	else if (type.isString() || type.isStringLiteral()) {
+	} else if (type.isString() || type.isStringLiteral()) {
 		zodSchema = 'z.string()'
-	}
-	else if (type.isNumber() || type.isNumberLiteral()) {
+	} else if (type.isNumber() || type.isNumberLiteral()) {
 		zodSchema = 'z.number()'
-	}
-	else if (type.isBoolean() || type.isBooleanLiteral()) {
+	} else if (type.isBoolean() || type.isBooleanLiteral()) {
 		zodSchema = 'z.boolean()'
-	}
-	else if (type.isUnion()) {
+	} else if (type.isUnion()) {
 		const unionTypes = type.getUnionTypes()
-		const nonUndefinedTypes = unionTypes.filter(t => !t.isUndefined())
-		const hasUndefined = unionTypes.some(t => t.isUndefined())
+		const nonUndefinedTypes = unionTypes.filter((t) => !t.isUndefined())
+		const hasUndefined = unionTypes.some((t) => t.isUndefined())
 
 		if (nonUndefinedTypes.length === 1) {
 			zodSchema = typeToZod(nonUndefinedTypes[0], contextNode, false, depth + 1)
-			if (hasUndefined && !zodSchema.endsWith('.nullable()') && !zodSchema.includes('.nullable()')) {
+			if (
+				hasUndefined &&
+				!zodSchema.endsWith('.nullable()') &&
+				!zodSchema.includes('.nullable()')
+			) {
 				zodSchema += '.nullable()'
 			}
-		}
-		else if (nonUndefinedTypes.length > 0) {
-			const allLiterals = nonUndefinedTypes.every(t => t.isLiteral())
+		} else if (nonUndefinedTypes.length > 0) {
+			const allLiterals = nonUndefinedTypes.every((t) => t.isLiteral())
 
 			if (allLiterals) {
-				const literals = nonUndefinedTypes.map(t =>
-					t.getText(contextNode, TypeFormatFlags.UseSingleQuotesForStringLiteralType))
+				const literals = nonUndefinedTypes.map((t) =>
+					t.getText(contextNode, TypeFormatFlags.UseSingleQuotesForStringLiteralType),
+				)
 				zodSchema = `z.enum([${literals.join(', ')}])`
-			}
-			else {
+			} else {
 				const uniqueZodFragments = new Set(
-					nonUndefinedTypes.map(t => typeToZod(t, contextNode, false, depth + 1)),
+					nonUndefinedTypes.map((t) => typeToZod(t, contextNode, false, depth + 1)),
 				)
 				zodSchema = `z.union([${Array.from(uniqueZodFragments).join(', ')}])`
 			}
 
-			if (hasUndefined && !zodSchema.endsWith('.nullable()') && !zodSchema.includes('.nullable()')) {
+			if (
+				hasUndefined &&
+				!zodSchema.endsWith('.nullable()') &&
+				!zodSchema.includes('.nullable()')
+			) {
 				zodSchema += '.nullable()'
 			}
-		}
-		else {
+		} else {
 			zodSchema = 'z.undefined()'
 		}
-	}
-	else if (type.isArray()) {
+	} else if (type.isArray()) {
 		const elementType = type.getArrayElementTypeOrThrow()
 		zodSchema = `z.array(${typeToZod(elementType, contextNode, false, depth + 1)})`
-	}
-	else if (type.isIntersection()) {
+	} else if (type.isIntersection()) {
 		const properties = type.getApparentProperties()
 
 		if (properties.length > 0) {
 			zodSchema = generateObjectSchema(properties, contextNode, depth)
-		}
-		else {
+		} else {
 			zodSchema = 'z.any() /* Intersection type not resolvable to object */'
 		}
-	}
-	else if (type.isObject() || type.isInterface()) {
+	} else if (type.isObject() || type.isInterface()) {
 		const properties = type.getApparentProperties()
 
 		if (properties.length > 0) {
 			zodSchema = generateObjectSchema(properties, contextNode, depth)
-		}
-		else {
+		} else {
 			const stringIndexType = type.getStringIndexType()
 			if (stringIndexType) {
 				zodSchema = `z.record(z.string(), ${typeToZod(stringIndexType, contextNode, false, depth + 1)})`
-			}
-			else {
+			} else {
 				const numberIndexType = type.getNumberIndexType()
 				if (numberIndexType) {
 					zodSchema = `z.record(z.number(), ${typeToZod(numberIndexType, contextNode, false, depth + 1)})`
-				}
-				else {
+				} else {
 					zodSchema = 'z.object({})'
 				}
 			}
@@ -182,11 +176,14 @@ function typeToZod(type: Type, contextNode: Node, isParamOptionalFlag: boolean, 
 	}
 
 	if (isParamOptionalFlag) {
-		const isAlreadyOptionalByNature = (
-			type.isUnion() && type.getUnionTypes().some(t => t.isUndefined())
-		) || type.isUndefined()
+		const isAlreadyOptionalByNature =
+			(type.isUnion() && type.getUnionTypes().some((t) => t.isUndefined())) || type.isUndefined()
 
-		if (!isAlreadyOptionalByNature && !zodSchema.endsWith('.nullable()') && !zodSchema.includes('.nullable()')) {
+		if (
+			!isAlreadyOptionalByNature &&
+			!zodSchema.endsWith('.nullable()') &&
+			!zodSchema.includes('.nullable()')
+		) {
 			zodSchema += '.nullable()'
 		}
 	}
@@ -211,12 +208,22 @@ function generateObjectSchema(properties: any[], contextNode: Node, depth: numbe
 			return `${propName}: z.any() /* Type resolution failed for property */`
 		}
 
-		const isPropertyOptional = propSymbol.hasFlags(SymbolFlags.Optional)
-			|| (propType.isUnion() && propType.getUnionTypes().some((t: any) => t.isUndefined()))
+		const isPropertyOptional =
+			propSymbol.hasFlags(SymbolFlags.Optional) ||
+			(propType.isUnion() && propType.getUnionTypes().some((t: any) => t.isUndefined()))
 
-		let zodPropSchemaString = typeToZod(propType.getNonNullableType(), contextNode, false, depth + 1)
+		let zodPropSchemaString = typeToZod(
+			propType.getNonNullableType(),
+			contextNode,
+			false,
+			depth + 1,
+		)
 
-		if (isPropertyOptional && !zodPropSchemaString.endsWith('.nullable()') && !zodPropSchemaString.includes('.nullable()')) {
+		if (
+			isPropertyOptional &&
+			!zodPropSchemaString.endsWith('.nullable()') &&
+			!zodPropSchemaString.includes('.nullable()')
+		) {
 			zodPropSchemaString += '.nullable()'
 		}
 
@@ -225,7 +232,7 @@ function generateObjectSchema(properties: any[], contextNode: Node, depth: numbe
 		const propDescription = primaryDeclaration ? getJSDocDescription(primaryDeclaration) : undefined
 
 		if (propDescription) {
-			zodPropSchemaString += `.describe('${propDescription.replace(/'/g, '\\\'')}')`
+			zodPropSchemaString += `.describe('${propDescription.replace(/'/g, "\\'")}')`
 		}
 
 		return `${propName}: ${zodPropSchemaString}`
@@ -263,14 +270,15 @@ function getTypeName(type: Type, contextNode?: Node): string | undefined {
  * @param contextNode Node providing context for type resolution
  * @returns The effective return type name or undefined
  */
-function getEffectiveReturnItemTypeName(funcReturnType: Type, contextNode: Node): string | undefined {
+function getEffectiveReturnItemTypeName(
+	funcReturnType: Type,
+	contextNode: Node,
+): string | undefined {
 	let currentType = funcReturnType
 
 	if (currentType.isObject() && currentType.getTargetType()?.getSymbol()?.getName() === 'Promise') {
 		const typeArgs = currentType.getTypeArguments()
-		currentType = typeArgs.length > 0
-			? typeArgs[0]
-			: currentType.getConstraint() || currentType
+		currentType = typeArgs.length > 0 ? typeArgs[0] : currentType.getConstraint() || currentType
 
 		if (!typeArgs.length && !currentType.getConstraint()) {
 			return 'any'
@@ -322,17 +330,19 @@ export function buildToolSchemas(includeAll: boolean = false): ToolSchema[] {
 				const paramType = param.getType()
 				const contextNode = param
 
-				const isParamOptional = param.isOptional()
-					|| param.hasInitializer()
-					|| (paramType.isUnion() && paramType.getUnionTypes().some(t => t.isUndefined()))
+				const isParamOptional =
+					param.isOptional() ||
+					param.hasInitializer() ||
+					(paramType.isUnion() && paramType.getUnionTypes().some((t) => t.isUndefined()))
 
 				const paramZodSchemaItself = typeToZod(paramType, contextNode, isParamOptional, 0)
-				const paramDescriptionText = getParamDescription(jsDocs, paramName) || `Parameter ${paramName}`
+				const paramDescriptionText =
+					getParamDescription(jsDocs, paramName) || `Parameter ${paramName}`
 
 				return {
 					name: paramName,
 					typeScriptType: param.getTypeNode()?.getText() || paramType.getText(contextNode),
-					zodTypeFragment: `${paramName}: ${paramZodSchemaItself}.describe('${paramDescriptionText.replace(/'/g, '\\\'')}')`,
+					zodTypeFragment: `${paramName}: ${paramZodSchemaItself}.describe('${paramDescriptionText.replace(/'/g, "\\'")}')`,
 					description: paramDescriptionText,
 				}
 			})
@@ -341,7 +351,10 @@ export function buildToolSchemas(includeAll: boolean = false): ToolSchema[] {
 			const effectiveReturnTypeName = getEffectiveReturnItemTypeName(funcReturnType, func)
 
 			let effectiveItemTypeForKeys = funcReturnType
-			if (funcReturnType.isObject() && funcReturnType.getTargetType()?.getSymbol()?.getName() === 'Promise') {
+			if (
+				funcReturnType.isObject() &&
+				funcReturnType.getTargetType()?.getSymbol()?.getName() === 'Promise'
+			) {
 				const typeArgs = funcReturnType.getTypeArguments()
 				if (typeArgs.length > 0) {
 					effectiveItemTypeForKeys = typeArgs[0]
@@ -349,23 +362,27 @@ export function buildToolSchemas(includeAll: boolean = false): ToolSchema[] {
 			}
 			effectiveItemTypeForKeys = effectiveItemTypeForKeys.getNonNullableType()
 			if (effectiveItemTypeForKeys.isArray()) {
-				effectiveItemTypeForKeys = effectiveItemTypeForKeys.getArrayElementTypeOrThrow().getNonNullableType()
+				effectiveItemTypeForKeys = effectiveItemTypeForKeys
+					.getArrayElementTypeOrThrow()
+					.getNonNullableType()
 			}
 
-			const availableReturnKeys = (effectiveItemTypeForKeys.isObject() || effectiveItemTypeForKeys.isInterface())
-				? effectiveItemTypeForKeys.getApparentProperties().map(p => p.getName())
-				: []
+			const availableReturnKeys =
+				effectiveItemTypeForKeys.isObject() || effectiveItemTypeForKeys.isInterface()
+					? effectiveItemTypeForKeys.getApparentProperties().map((p) => p.getName())
+					: []
 
-			const parameterZodEntries = rawParameters.map(p => p.zodTypeFragment)
+			const parameterZodEntries = rawParameters.map((p) => p.zodTypeFragment)
 			if (availableReturnKeys.length > 0) {
-				const keysEnum = `z.enum([${availableReturnKeys.map(k => `'${k.replace(/'/g, '\\\'')}'`).join(', ')}])`
+				const keysEnum = `z.enum([${availableReturnKeys.map((k) => `'${k.replace(/'/g, "\\'")}'`).join(', ')}])`
 				const valuesParamZod = `values: z.array(${keysEnum}).nullable().describe('Specific fields to return from the result. Available fields: ${availableReturnKeys.join(', ')}')`
 				parameterZodEntries.push(valuesParamZod)
 			}
 
-			const fullParametersZodString = parameterZodEntries.length > 0
-				? `z.object({ ${parameterZodEntries.join(',\n\t\t')} })`
-				: 'z.object({})'
+			const fullParametersZodString =
+				parameterZodEntries.length > 0
+					? `z.object({ ${parameterZodEntries.join(',\n\t\t')} })`
+					: 'z.object({})'
 
 			return {
 				name,

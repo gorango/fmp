@@ -20,23 +20,23 @@ npm install fmp-sdk
 ## Quick Start
 
 ```typescript
-import * as fmp from "fmp";
+import * as fmp from 'fmp'
 
 async function example() {
 	// Search for a stock symbol
-	const results = await fmp.searchSymbol("AAPL", { exchange: "NASDAQ" });
-	console.log(results);
+	const results = await fmp.searchSymbol('AAPL', { exchange: 'NASDAQ' })
+	console.log(results)
 
 	// Get company profile
-	const profile = await fmp.companyProfile("AAPL");
-	console.log(profile);
+	const profile = await fmp.companyProfile('AAPL')
+	console.log(profile)
 
 	// Fetch historical stock data
-	const chart = await fmp.stockChartFull("AAPL", {
-		from: "2023-01-01",
-		to: "2023-12-31",
-	});
-	console.log(chart);
+	const chart = await fmp.stockChartFull('AAPL', {
+		from: '2023-01-01',
+		to: '2023-12-31',
+	})
+	console.log(chart)
 }
 ```
 

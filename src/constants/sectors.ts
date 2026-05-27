@@ -37,7 +37,7 @@ export const sectorEtfs = {
 		{ ticker: 'KXI', focus: 'consumer staples' },
 		{ ticker: 'FXG', focus: 'food & staples' },
 	],
-	'Energy': [
+	Energy: [
 		{ ticker: 'XLE', focus: 'broad energy' },
 		{ ticker: 'VDE', focus: 'broad energy' },
 		{ ticker: 'IXC', focus: 'global energy' },
@@ -49,13 +49,13 @@ export const sectorEtfs = {
 		{ ticker: 'KBE', focus: 'U.S. banks' },
 		{ ticker: 'IYF', focus: 'U.S. financials' },
 	],
-	'Healthcare': [
+	Healthcare: [
 		{ ticker: 'XLV', focus: 'broad healthcare' },
 		{ ticker: 'VHT', focus: 'broad healthcare' },
 		{ ticker: 'IYH', focus: 'U.S. healthcare' },
 		{ ticker: 'XBI', focus: 'biotech' },
 	],
-	'Industrials': [
+	Industrials: [
 		{ ticker: 'XLI', focus: 'broad industrials' },
 		{ ticker: 'VIS', focus: 'U.S. industrials' },
 		{ ticker: 'IYJ', focus: 'U.S. industrials' },
@@ -67,14 +67,14 @@ export const sectorEtfs = {
 		{ ticker: 'IYR', focus: 'broad U.S. REITs' },
 		{ ticker: 'SCHH', focus: 'U.S. REITs' },
 	],
-	'Technology': [
+	Technology: [
 		{ ticker: 'XLK', focus: 'broad U.S.' },
 		{ ticker: 'VGT', focus: 'broad U.S.' },
 		{ ticker: 'QQQ', focus: 'large-cap tech & NASDAQ 100' },
 		{ ticker: 'SMH', focus: 'semiconductors' },
 		{ ticker: 'IGV', focus: 'software & tech growth' },
 	],
-	'Utilities': [
+	Utilities: [
 		{ ticker: 'XLU', focus: 'broad U.S. utilities' },
 		{ ticker: 'VPU', focus: 'broad U.S. utilities' },
 		{ ticker: 'IDU', focus: 'U.S. utilities' },

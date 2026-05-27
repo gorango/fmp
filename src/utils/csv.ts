@@ -30,13 +30,14 @@ export function csvToJson<T extends Record<string, any>>(csvString: string): T[]
  * @param csvStream A ReadableStream containing CSV data.
  * @returns An async generator that yields parsed objects.
  */
-export async function* csvStreamToJson<T extends Record<string, any>>(csvStream: Readable): AsyncGenerator<T> {
+export async function* csvStreamToJson<T extends Record<string, any>>(
+	csvStream: Readable,
+): AsyncGenerator<T> {
 	const originalConsoleWarn = console.warn
 	const knownRedundantWarning = 'Duplicate headers found'
 	try {
 		console.warn = (...args: any[]) => {
-			if (typeof args[0] === 'string' && args[0].includes(knownRedundantWarning))
-				return
+			if (typeof args[0] === 'string' && args[0].includes(knownRedundantWarning)) return
 			originalConsoleWarn.apply(console, args)
 		}
 
@@ -46,10 +47,8 @@ export async function* csvStreamToJson<T extends Record<string, any>>(csvStream:
 			skipEmptyLines: true,
 		})
 		const objectStream = csvStream.pipe(parserStream)
-		for await (const row of objectStream)
-			yield row as T
-	}
-	finally {
+		for await (const row of objectStream) yield row as T
+	} finally {
 		console.warn = originalConsoleWarn
 	}
 }

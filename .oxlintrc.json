@@ -1,0 +1,21 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": null,
+	"categories": {
+		"correctness": "error",
+		"suspicious": "warn"
+	},
+	"rules": {
+		"no-underscore-dangle": ["warn", { "allow": ["_raw_parameters", "__filename"] }]
+	},
+	"settings": {
+		"vitest": {
+			"typecheck": false
+		}
+	},
+	"env": {
+		"builtin": true
+	},
+	"globals": {},
+	"ignorePatterns": ["src/generated/"]
+}

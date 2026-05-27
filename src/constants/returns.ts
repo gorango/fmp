@@ -602,9 +602,7 @@ const financialEstimates = [
 	'numAnalystsEps',
 ] as const
 
-const dcfValuation = [
-	'dcf',
-] as const
+const dcfValuation = ['dcf'] as const
 
 const dcfAnalysis = [
 	'revenue',
@@ -666,12 +664,7 @@ const priceTargetSummary = [
 	'publishers',
 ] as const
 
-const priceTargetConsensus = [
-	'targetHigh',
-	'targetLow',
-	'targetConsensus',
-	'targetMedian',
-] as const
+const priceTargetConsensus = ['targetHigh', 'targetLow', 'targetConsensus', 'targetMedian'] as const
 
 const priceTargetNews = [
 	'publishedDate',
@@ -686,21 +679,9 @@ const priceTargetNews = [
 	'analystCompany',
 ] as const
 
-const stockGrades = [
-	'gradingCompany',
-	'previousGrade',
-	'newGrade',
-	'action',
-] as const
+const stockGrades = ['gradingCompany', 'previousGrade', 'newGrade', 'action'] as const
 
-const stockGradeConsensus = [
-	'strongBuy',
-	'buy',
-	'hold',
-	'sell',
-	'strongSell',
-	'consensus',
-] as const
+const stockGradeConsensus = ['strongBuy', 'buy', 'hold', 'sell', 'strongSell', 'consensus'] as const
 
 const stockGradeNews = [
 	'publishedDate',
@@ -760,7 +741,7 @@ const economicIndicators = [
 ] as const
 
 type ApiFunctionNames = {
-	[K in keyof typeof api]: typeof api[K] extends (...args: any[]) => any ? K : never
+	[K in keyof typeof api]: (typeof api)[K] extends (...args: any[]) => any ? K : never
 }[keyof typeof api]
 
 export const returns: Partial<Record<ApiFunctionNames, readonly string[]>> = {

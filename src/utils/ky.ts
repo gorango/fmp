@@ -1,4 +1,5 @@
-import type { HTTPError, Options as KyOptions, KyRequest } from 'ky'
+import type { Options as KyOptions, KyRequest } from 'ky'
+import { isHTTPError } from 'ky'
 import { Buffer } from 'node:buffer'
 import process from 'node:process'
 import Redis from 'ioredis'
@@ -35,7 +36,8 @@ const FMP_RATE_LIMIT = {
 
 async function enforceRateLimit(): Promise<void> {
 	const now = Date.now()
-	const windowStart = Math.floor(now / (FMP_RATE_LIMIT.windowSeconds * 1000)) * FMP_RATE_LIMIT.windowSeconds
+	const windowStart =
+		Math.floor(now / (FMP_RATE_LIMIT.windowSeconds * 1000)) * FMP_RATE_LIMIT.windowSeconds
 	const rateLimitKey = `${RATE_LIMIT_PREFIX}${windowStart}`
 	const currentCount = await redis.incr(rateLimitKey)
 	// Set expiration only on first increment to avoid race conditions
@@ -46,21 +48,31 @@ async function enforceRateLimit(): Promise<void> {
 		const nextWindow = (windowStart + FMP_RATE_LIMIT.windowSeconds) * 1000
 		const waitTime = Math.max(nextWindow - now, FMP_RATE_LIMIT.retryAfterMs)
 		console.log(`SEC rate limit exceeded. Waiting ${waitTime}ms before retrying...`)
-		await new Promise(resolve => setTimeout(resolve, waitTime))
+		await new Promise((resolve) => setTimeout(resolve, waitTime))
 		return enforceRateLimit()
 	}
 }
 
 export const fmpApi = ky.create({
-	prefixUrl: baseUrl,
+	prefix: baseUrl,
 	timeout: 15000,
 	hooks: {
 		beforeRequest: [
-			async (request: KyRequest): Promise<Request | Response | void> => {
+			async ({
+				request,
+				options: _options,
+			}: {
+				request: KyRequest
+				options: KyOptions
+			}): Promise<Request | Response | void> => {
 				const url = new URL(request.url)
 				url.searchParams.set('apikey', apiKey)
 
-				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = ['symbol', 'symbols', 'tickers']
+				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = [
+					'symbol',
+					'symbols',
+					'tickers',
+				]
 				paramsToUppercase.forEach((paramName) => {
 					if (url.searchParams.has(paramName)) {
 						const value = url.searchParams.get(paramName)
@@ -87,9 +99,11 @@ export const fmpApi = ky.create({
 									'X-Cache-Hit': 'true',
 								},
 							})
-						}
-						catch (e) {
-							console.error(`[CACHE ERROR] Failed to parse cached entry for ${finalRequestUrl}. Removing corrupted entry. Error:`, e)
+						} catch (e) {
+							console.error(
+								`[CACHE ERROR] Failed to parse cached entry for ${finalRequestUrl}. Removing corrupted entry. Error:`,
+								e,
+							)
 							await redis.del(cacheKey)
 						}
 					}
@@ -99,8 +113,20 @@ export const fmpApi = ky.create({
 			},
 		],
 		afterResponse: [
-			async (request: Request, _options: KyOptions, response: Response): Promise<Response | void> => {
-				if (request.method.toUpperCase() === 'GET' && response.ok && !response.headers.get('X-Cache-Hit')) {
+			async ({
+				request,
+				options: _options,
+				response,
+			}: {
+				request: Request
+				options: KyOptions
+				response: Response
+			}): Promise<Response | void> => {
+				if (
+					request.method.toUpperCase() === 'GET' &&
+					response.ok &&
+					!response.headers.get('X-Cache-Hit')
+				) {
 					const responseToCache = response.clone()
 					const originalResponseBody = await responseToCache.text()
 					const contentType = response.headers.get('Content-Type') || 'application/octet-stream'
@@ -120,9 +146,11 @@ export const fmpApi = ky.create({
 									processedBody = JSON.stringify(transformedData)
 									// console.log(`[TRANSFORMATION] Applied rule for ${apiPath} (${rule.description || rule.pattern.toString()})`)
 									break
-								}
-								catch (e) {
-									console.error(`[TRANSFORMATION ERROR] Failed to apply transformation for ${apiPath}. Error:`, e)
+								} catch (e) {
+									console.error(
+										`[TRANSFORMATION ERROR] Failed to apply transformation for ${apiPath}. Error:`,
+										e,
+									)
 									processedBody = originalResponseBody
 								}
 							}
@@ -149,8 +177,14 @@ export const fmpApi = ky.create({
 							break
 						}
 					}
-					if (ttlToUse === DEFAULT_CACHE_TTL_SECONDS && !TTL_CONFIG.some(rule => rule.pattern.test(apiPath))) { // Check if default was because no rule matched
-						console.log(`[CACHE SET] ${request.url.split('/').pop()} with DEFAULT TTL: ${ttlToUse}s`)
+					if (
+						ttlToUse === DEFAULT_CACHE_TTL_SECONDS &&
+						!TTL_CONFIG.some((rule) => rule.pattern.test(apiPath))
+					) {
+						// Check if default was because no rule matched
+						console.log(
+							`[CACHE SET] ${request.url.split('/').pop()} with DEFAULT TTL: ${ttlToUse}s`,
+						)
 					}
 
 					await redis.set(cacheKey, cacheEntryString, 'EX', ttlToUse)
@@ -169,16 +203,18 @@ export const fmpApi = ky.create({
 			},
 		],
 		beforeError: [
-			(error: HTTPError) => {
-				console.error(`FMP API Request Failed: ${error.request?.method} ${error.request?.url}`)
-				console.error(`Status: ${error.response?.status}`)
-				if (error.response?.status === 429) {
-					console.error('FMP rate limit exceeded by server')
-				}
-				if (error.response && error.response.body) {
-					error.response.clone().text().then((body) => {
-						console.error('Response body:', body)
-					}).catch(e => console.error('Failed to read error response body:', e))
+			({ error }) => {
+				if (isHTTPError(error)) {
+					console.error(`FMP API Request Failed: ${error.request?.method} ${error.request?.url}`)
+					console.error(`Status: ${error.response?.status}`)
+					if (error.response?.status === 429) {
+						console.error('FMP rate limit exceeded by server')
+					}
+					if (error.data) {
+						console.error('Response body:', error.data)
+					}
+				} else {
+					console.error(`FMP API Request Failed: ${error.message}`)
 				}
 				return error
 			},
@@ -187,15 +223,25 @@ export const fmpApi = ky.create({
 })
 
 export const fmpApiStream = ky.create({
-	prefixUrl: baseUrl,
+	prefix: baseUrl,
 	timeout: 15000,
 	hooks: {
 		beforeRequest: [
-			async (request: KyRequest): Promise<Request | Response | void> => {
+			async ({
+				request,
+				options: _options,
+			}: {
+				request: KyRequest
+				options: KyOptions
+			}): Promise<Request | Response | void> => {
 				const url = new URL(request.url)
 				url.searchParams.set('apikey', apiKey)
 
-				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = ['symbol', 'symbols', 'tickers']
+				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = [
+					'symbol',
+					'symbols',
+					'tickers',
+				]
 				paramsToUppercase.forEach((paramName) => {
 					if (url.searchParams.has(paramName)) {
 						const value = url.searchParams.get(paramName)
@@ -213,16 +259,20 @@ export const fmpApiStream = ky.create({
 			},
 		],
 		beforeError: [
-			(error: HTTPError) => {
-				console.error(`FMP API Streaming Request Failed: ${error.request?.method} ${error.request?.url}`)
-				console.error(`Status: ${error.response?.status}`)
-				if (error.response?.status === 429) {
-					console.error('FMP rate limit exceeded by server')
-				}
-				if (error.response && error.response.body) {
-					error.response.clone().text().then((body) => {
-						console.error('Response body:', body)
-					}).catch(e => console.error('Failed to read error response body:', e))
+			({ error }) => {
+				if (isHTTPError(error)) {
+					console.error(
+						`FMP API Streaming Request Failed: ${error.request?.method} ${error.request?.url}`,
+					)
+					console.error(`Status: ${error.response?.status}`)
+					if (error.response?.status === 429) {
+						console.error('FMP rate limit exceeded by server')
+					}
+					if (error.data) {
+						console.error('Response body:', error.data)
+					}
+				} else {
+					console.error(`FMP API Streaming Request Failed: ${error.message}`)
 				}
 				return error
 			},
@@ -240,8 +290,7 @@ export function cleanQuery(query: Record<string, any> = {}): KySearchParams {
 		if (value !== undefined && value !== null) {
 			if (Array.isArray(value)) {
 				acc[key] = value.join(',')
-			}
-			else {
+			} else {
 				acc[key] = value as string | number | boolean
 			}
 		}

@@ -103,12 +103,7 @@ const allCategories = {
 		'searchSecFilings', // NOTE: internal
 		'queryFilingDocument', // NOTE: internal
 	],
-	discountedCashFlow: [
-		'dcfValuation',
-		'leveredDcfValuation',
-		'dcfAnalysis',
-		'dcfLeveredAnalysis',
-	],
+	discountedCashFlow: ['dcfValuation', 'leveredDcfValuation', 'dcfAnalysis', 'dcfLeveredAnalysis'],
 	chart: [
 		// 'stockChartLight',
 		'stockChartFull',
@@ -186,11 +181,7 @@ const allCategories = {
 		// 'forexChart5Min',
 		// 'forexChart1Hour',
 	],
-	commitmentOfTraders: [
-		'cotReport',
-		'cotAnalysis',
-		'cotReportList',
-	],
+	commitmentOfTraders: ['cotReport', 'cotAnalysis', 'cotReportList'],
 	technicalIndicators: [
 		'simpleMovingAverage',
 		'exponentialMovingAverage',

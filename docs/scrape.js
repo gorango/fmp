@@ -36,38 +36,44 @@ async function main() {
 
 	try {
 		console.log('Identifying all target div containers...')
-		const targetDivHandles = await page.evaluateHandle((wrapperSelector, dividerClass) => {
-			const wrapperElement = document.querySelector(wrapperSelector)
-			if (!wrapperElement) {
-				console.error('[Browser] WRAPPER element not found.')
-				return []
-			}
-			const targetDivs = []
-			let foundDivider = false
-			const directChildren = wrapperElement.children
-			for (let i = 0; i < directChildren.length; i++) {
-				const child = directChildren[i]
-				if (!foundDivider) {
-					if (child.classList.contains(dividerClass)) {
-						foundDivider = true
-					}
-					continue
+		const targetDivHandles = await page.evaluateHandle(
+			(wrapperSelector, dividerClass) => {
+				const wrapperElement = document.querySelector(wrapperSelector)
+				if (!wrapperElement) {
+					console.error('[Browser] WRAPPER element not found.')
+					return []
 				}
-				if (child.tagName === 'DIV') {
-					targetDivs.push(child)
-				}
-			}
-			if (!foundDivider && directChildren.length > 0 && wrapperElement.children.length > 0) {
-				console.warn('[Browser] Single divider was NOT found among wrapper children. All DIV children of wrapper will be targeted (if any). This might be incorrect.')
+				const targetDivs = []
+				let foundDivider = false
+				const directChildren = wrapperElement.children
 				for (let i = 0; i < directChildren.length; i++) {
 					const child = directChildren[i]
+					if (!foundDivider) {
+						if (child.classList.contains(dividerClass)) {
+							foundDivider = true
+						}
+						continue
+					}
 					if (child.tagName === 'DIV') {
 						targetDivs.push(child)
 					}
 				}
-			}
-			return targetDivs
-		}, WRAPPER_SELECTOR, DIVIDER_CLASS)
+				if (!foundDivider && directChildren.length > 0 && wrapperElement.children.length > 0) {
+					console.warn(
+						'[Browser] Single divider was NOT found among wrapper children. All DIV children of wrapper will be targeted (if any). This might be incorrect.',
+					)
+					for (let i = 0; i < directChildren.length; i++) {
+						const child = directChildren[i]
+						if (child.tagName === 'DIV') {
+							targetDivs.push(child)
+						}
+					}
+				}
+				return targetDivs
+			},
+			WRAPPER_SELECTOR,
+			DIVIDER_CLASS,
+		)
 
 		const properties = await targetDivHandles.getProperties()
 		const targetDivsArray = []
@@ -80,7 +86,9 @@ async function main() {
 		await targetDivHandles.dispose()
 		console.log(`Found ${targetDivsArray.length} target div containers to process.`)
 		if (targetDivsArray.length === 0) {
-			console.error('No target div containers identified after the divider. Check selectors and page structure.')
+			console.error(
+				'No target div containers identified after the divider. Check selectors and page structure.',
+			)
 		}
 
 		for (let i = 0; i < targetDivsArray.length; i++) {
@@ -91,19 +99,21 @@ async function main() {
 					el.scrollIntoView({ block: 'center', behavior: 'smooth' })
 				}
 			}, targetDivHandle)
-			await new Promise(resolve => setTimeout(resolve, WAIT_FOR_INTERNAL_CONTENT_MS))
-			const itemHTML = await page.evaluate(el => el ? el.outerHTML : null, targetDivHandle)
+			await new Promise((resolve) => setTimeout(resolve, WAIT_FOR_INTERNAL_CONTENT_MS))
+			const itemHTML = await page.evaluate((el) => (el ? el.outerHTML : null), targetDivHandle)
 			if (itemHTML) {
 				allCollectedItemsHTML.push(itemHTML)
-				console.log(`Collected HTML for div container ${i + 1}. Total collected: ${allCollectedItemsHTML.length}`)
-			}
-			else {
-				console.warn(`Could not get HTML for div container ${i + 1}. It might have been removed or is invalid.`)
+				console.log(
+					`Collected HTML for div container ${i + 1}. Total collected: ${allCollectedItemsHTML.length}`,
+				)
+			} else {
+				console.warn(
+					`Could not get HTML for div container ${i + 1}. It might have been removed or is invalid.`,
+				)
 			}
 			await targetDivHandle.dispose()
 		}
-	}
-	catch (error) {
+	} catch (error) {
 		console.error('Error during processing items:', error)
 		if (error.message.includes('Node is detached')) {
 			console.error('An element handle became stale. This can happen if the DOM changes rapidly.')
@@ -115,7 +125,7 @@ async function main() {
 	console.log('\nCollected HTML saved to docs.html')
 
 	console.log(`Browser will close in 5 seconds...`)
-	await new Promise(resolve => setTimeout(resolve, 5000))
+	await new Promise((resolve) => setTimeout(resolve, 5000))
 	await browser.close()
 }
 

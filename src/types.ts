@@ -23,7 +23,8 @@ export type IndicatorTimeframe = IntradayTimeframe | '1day' // As per docs for i
 export type IndicatorPriceSource = 'close' | 'open' | 'high' | 'low'
 
 /** Common analyst recommendation ratings. */
-export type Recommendation = 'Strong Sell'
+export type Recommendation =
+	| 'Strong Sell'
 	| 'Sell'
 	| 'Hold'
 	| 'Underweight'
@@ -385,7 +386,7 @@ export interface CompanyDividend {
 	frequency: string | null
 }
 
-export interface CalendarDividend extends CompanyDividend { }
+export interface CalendarDividend extends CompanyDividend {}
 
 export interface CompanyEarningsReport {
 	symbol: string
@@ -779,9 +780,9 @@ export interface CotReportListItem {
  */
 
 export interface DcfValuation {
-	'symbol': string
-	'date': string
-	'dcf': number
+	symbol: string
+	date: string
+	dcf: number
 	'Stock Price': number
 }
 
@@ -894,7 +895,30 @@ export interface TreasuryRate {
 	year30: number | null
 }
 
-export type EconomicIndicatorName = 'GDP' | 'realGDP' | 'nominalPotentialGDP' | 'realGDPPerCapita' | 'federalFunds' | 'CPI' | 'inflationRate' | 'inflation' | 'retailSales' | 'consumerSentiment' | 'durableGoods' | 'unemploymentRate' | 'totalNonfarmPayroll' | 'initialClaims' | 'industrialProductionTotalIndex' | 'newPrivatelyOwnedHousingUnitsStartedTotalUnits' | 'totalVehicleSales' | 'retailMoneyFunds' | 'smoothedUSRecessionProbabilities' | '3MonthOr90DayRatesAndYieldsCertificatesOfDeposit' | 'commercialBankInterestRateOnCreditCardPlansAllAccounts' | '30YearFixedRateMortgageAverage' | '15YearFixedRateMortgageAverage'
+export type EconomicIndicatorName =
+	| 'GDP'
+	| 'realGDP'
+	| 'nominalPotentialGDP'
+	| 'realGDPPerCapita'
+	| 'federalFunds'
+	| 'CPI'
+	| 'inflationRate'
+	| 'inflation'
+	| 'retailSales'
+	| 'consumerSentiment'
+	| 'durableGoods'
+	| 'unemploymentRate'
+	| 'totalNonfarmPayroll'
+	| 'initialClaims'
+	| 'industrialProductionTotalIndex'
+	| 'newPrivatelyOwnedHousingUnitsStartedTotalUnits'
+	| 'totalVehicleSales'
+	| 'retailMoneyFunds'
+	| 'smoothedUSRecessionProbabilities'
+	| '3MonthOr90DayRatesAndYieldsCertificatesOfDeposit'
+	| 'commercialBankInterestRateOnCreditCardPlansAllAccounts'
+	| '30YearFixedRateMortgageAverage'
+	| '15YearFixedRateMortgageAverage'
 
 export interface EconomicIndicator {
 	name: EconomicIndicatorName
@@ -1096,9 +1120,9 @@ export interface CommodityListItem {
 	currency: string | null
 }
 
-export interface CommodityQuote extends BaseQuote { }
+export interface CommodityQuote extends BaseQuote {}
 
-export interface CommodityQuoteShort extends BaseQuoteShort { }
+export interface CommodityQuoteShort extends BaseQuoteShort {}
 
 /**
  * ========================================================================
@@ -1230,9 +1254,9 @@ export interface CryptocurrencyListItem {
 	totalSupply: number | null
 }
 
-export interface CryptocurrencyQuote extends BaseQuote { }
+export interface CryptocurrencyQuote extends BaseQuote {}
 
-export interface CryptocurrencyQuoteShort extends BaseQuoteShort { }
+export interface CryptocurrencyQuoteShort extends BaseQuoteShort {}
 
 /**
  * ========================================================================
@@ -1248,9 +1272,9 @@ export interface ForexPair {
 	toName: string | null
 }
 
-export interface ForexQuote extends BaseQuote { }
+export interface ForexQuote extends BaseQuote {}
 
-export interface ForexQuoteShort extends BaseQuoteShort { }
+export interface ForexQuoteShort extends BaseQuoteShort {}
 
 /**
  * ========================================================================
@@ -1907,19 +1931,31 @@ export interface AsReportedIncomeStatementData {
 	operatingexpenses?: number | null
 	operatingincomeloss?: number | null
 	nonoperatingincomeexpense?: number | null
-	incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest?: number | null
+	incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest?:
+		| number
+		| null
 	incometaxexpensebenefit?: number | null
 	netincomeloss?: number | null
 	earningspersharebasic?: number | null
 	earningspersharediluted?: number | null
 	weightedaveragenumberofsharesoutstandingbasic?: number | null
 	weightedaveragenumberofdilutedsharesoutstanding?: number | null
-	othercomprehensiveincomelossforeigncurrencytransactionandtranslationadjustmentnetoftax?: number | null
-	othercomprehensiveincomelossderivativeinstrumentgainlossbeforereclassificationaftertax?: number | null
+	othercomprehensiveincomelossforeigncurrencytransactionandtranslationadjustmentnetoftax?:
+		| number
+		| null
+	othercomprehensiveincomelossderivativeinstrumentgainlossbeforereclassificationaftertax?:
+		| number
+		| null
 	othercomprehensiveincomelossderivativeinstrumentgainlossreclassificationaftertax?: number | null
-	othercomprehensiveincomelossderivativeinstrumentgainlossafterreclassificationandtax?: number | null
-	othercomprehensiveincomeunrealizedholdinggainlossonsecuritiesarisingduringperiodnetoftax?: number | null
-	othercomprehensiveincomelossreclassificationadjustmentfromaociforsaleofsecuritiesnetoftax?: number | null
+	othercomprehensiveincomelossderivativeinstrumentgainlossafterreclassificationandtax?:
+		| number
+		| null
+	othercomprehensiveincomeunrealizedholdinggainlossonsecuritiesarisingduringperiodnetoftax?:
+		| number
+		| null
+	othercomprehensiveincomelossreclassificationadjustmentfromaociforsaleofsecuritiesnetoftax?:
+		| number
+		| null
 	othercomprehensiveincomelossavailableforsalesecuritiesadjustmentnetoftax?: number | null
 	othercomprehensiveincomelossnetoftaxportionattributabletoparent?: number | null
 	comprehensiveincomenetoftax?: number | null
@@ -2009,7 +2045,9 @@ export interface AsReportedCashFlowData {
 	proceedsfrompaymentsforotherfinancingactivities?: number | null
 	netcashprovidedbyusedinfinancingactivities?: number | null
 	effectofforeigncurrencyexchangeratesoncash?: number | null
-	cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect?: number | null // Net change in cash
+	cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect?:
+		| number
+		| null // Net change in cash
 	cashcashequivalentsrestrictedcashandrestrictedcashequivalentsatbeginningofperiod?: number | null
 	incometaxespaidnet?: number | null
 	interestpaidnet?: number | null
@@ -2072,19 +2110,31 @@ export interface FullAsReportedFinancialStatementData {
 	operatingexpenses?: number | null
 	operatingincomeloss?: number | null
 	nonoperatingincomeexpense?: number | null
-	incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest?: number | null
+	incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest?:
+		| number
+		| null
 	incometaxexpensebenefit?: number | null
 	netincomeloss?: number | null
 	earningspersharebasic?: number | null
 	earningspersharediluted?: number | null
 	weightedaveragenumberofsharesoutstandingbasic?: number | null
 	weightedaveragenumberofdilutedsharesoutstanding?: number | null
-	othercomprehensiveincomelossforeigncurrencytransactionandtranslationadjustmentnetoftax?: number | null
-	othercomprehensiveincomelossderivativeinstrumentgainlossbeforereclassificationaftertax?: number | null
+	othercomprehensiveincomelossforeigncurrencytransactionandtranslationadjustmentnetoftax?:
+		| number
+		| null
+	othercomprehensiveincomelossderivativeinstrumentgainlossbeforereclassificationaftertax?:
+		| number
+		| null
 	othercomprehensiveincomelossderivativeinstrumentgainlossreclassificationaftertax?: number | null
-	othercomprehensiveincomelossderivativeinstrumentgainlossafterreclassificationandtax?: number | null
-	othercomprehensiveincomeunrealizedholdinggainlossonsecuritiesarisingduringperiodnetoftax?: number | null
-	othercomprehensiveincomelossreclassificationadjustmentfromaociforsaleofsecuritiesnetoftax?: number | null
+	othercomprehensiveincomelossderivativeinstrumentgainlossafterreclassificationandtax?:
+		| number
+		| null
+	othercomprehensiveincomeunrealizedholdinggainlossonsecuritiesarisingduringperiodnetoftax?:
+		| number
+		| null
+	othercomprehensiveincomelossreclassificationadjustmentfromaociforsaleofsecuritiesnetoftax?:
+		| number
+		| null
 	othercomprehensiveincomelossavailableforsalesecuritiesadjustmentnetoftax?: number | null
 	othercomprehensiveincomelossnetoftaxportionattributabletoparent?: number | null
 	comprehensiveincomenetoftax?: number | null
@@ -2148,13 +2198,17 @@ export interface FullAsReportedFinancialStatementData {
 	proceedsfromrepaymentsofcommercialpaper?: number | null
 	proceedsfrompaymentsforotherfinancingactivities?: number | null
 	netcashprovidedbyusedinfinancingactivities?: number | null
-	cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect?: number | null
+	cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect?:
+		| number
+		| null
 	incometaxespaidnet?: number | null
 
 	// Additional detailed fields from the example
 	stockissuedduringperiodvaluenewissues?: number | null
 	adjustmentsrelatedtotaxwithholdingforsharebasedcompensation?: number | null
-	adjustmentstoadditionalpaidincapitalsharebasedcompensationrequisiteserviceperiodrecognitionvalue?: number | null
+	adjustmentstoadditionalpaidincapitalsharebasedcompensationrequisiteserviceperiodrecognitionvalue?:
+		| number
+		| null
 	dividends?: number | null // Potentially redundant with paymentsofdividends
 	stockrepurchasedandretiredduringperiodvalue?: number | null // Potentially redundant
 	commonstockdividendspersharedeclared?: number | null
@@ -2179,9 +2233,15 @@ export interface FullAsReportedFinancialStatementData {
 	cashcashequivalentsandmarketablesecurities?: number | null
 	restrictedcashandcashequivalents?: number | null
 	debtsecuritiesavailableforsalerestricted?: number | null
-	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafteronethroughfiveyearspercentage?: number | null
-	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafterfivethroughtenyearspercentage?: number | null
-	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingaftertenyearspercentage?: number | null
+	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafteronethroughfiveyearspercentage?:
+		| number
+		| null
+	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafterfivethroughtenyearspercentage?:
+		| number
+		| null
+	debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingaftertenyearspercentage?:
+		| number
+		| null
 	maximumlengthoftimeforeigncurrencycashflowhedge?: string | null
 	concentrationriskpercentage1?: number | null
 	numberofsignificantvendors?: number | null
@@ -2243,7 +2303,9 @@ export interface FullAsReportedFinancialStatementData {
 	unrecognizedtaxbenefitsincreasesresultingfrompriorperiodtaxpositions?: number | null
 	unrecognizedtaxbenefitsdecreasesresultingfrompriorperiodtaxpositions?: number | null
 	unrecognizedtaxbenefitsincreasesresultingfromcurrentperiodtaxpositions?: number | null
-	unrecognizedtaxbenefitsreductionsresultingfromlapseofapplicablestatuteoflimitations?: number | null
+	unrecognizedtaxbenefitsreductionsresultingfromlapseofapplicablestatuteoflimitations?:
+		| number
+		| null
 	lesseeoperatingandfinanceleasetermofcontract?: string | null
 	operatingleasecost?: number | null
 	variableleasecost?: number | null
@@ -2311,22 +2373,50 @@ export interface FullAsReportedFinancialStatementData {
 	longtermdebtmaturitiesrepaymentsofprincipalinyearfive?: number | null
 	longtermdebtmaturitiesrepaymentsofprincipalafteryearfive?: number | null
 	stockrepurchasedandretiredduringperiodshares?: number | null
-	stockissuedduringperiodsharessharebasedpaymentarrangementnetofshareswithheldfortaxes?: number | null
+	stockissuedduringperiodsharessharebasedpaymentarrangementnetofshareswithheldfortaxes?:
+		| number
+		| null
 	sharebasedcompensationarrangementbysharebasedpaymentawardawardvestingperiod1?: string | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnumberofsharesofcommonstockissuedperunituponvesting?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodtotalfairvalue?: number | null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnumberofsharesofcommonstockissuedperunituponvesting?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodtotalfairvalue?:
+		| number
+		| null
 	sharespaidfortaxwithholdingforsharebasedcompensation?: number | null
-	employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognized?: number | null
-	employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognizedperiodforrecognition1?: string | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestednumber?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiod?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiod?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeitedinperiod?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestedweightedaveragegrantdatefairvalue?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiodweightedaveragegrantdatefairvalue?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodweightedaveragegrantdatefairvalue?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeituresweightedaveragegrantdatefairvalue?: number | null
-	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsaggregateintrinsicvaluenonvested?: number | null
+	employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognized?:
+		| number
+		| null
+	employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognizedperiodforrecognition1?:
+		| string
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestednumber?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiod?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiod?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeitedinperiod?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestedweightedaveragegrantdatefairvalue?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiodweightedaveragegrantdatefairvalue?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodweightedaveragegrantdatefairvalue?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeituresweightedaveragegrantdatefairvalue?:
+		| number
+		| null
+	sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsaggregateintrinsicvaluenonvested?:
+		| number
+		| null
 	allocatedsharebasedcompensationexpense?: number | null
 	employeeservicesharebasedcompensationtaxbenefitfromcompensationexpense?: number | null
 	unrecordedunconditionalpurchaseobligationbalanceonfirstanniversary?: number | null
@@ -2541,9 +2631,9 @@ export interface IndexListItem {
 	currency: string | null
 }
 
-export interface IndexQuote extends BaseQuote { }
+export interface IndexQuote extends BaseQuote {}
 
-export interface IndexQuoteShort extends BaseQuoteShort { }
+export interface IndexQuoteShort extends BaseQuoteShort {}
 
 export interface IndexConstituent {
 	symbol: string
@@ -2726,15 +2816,33 @@ export interface GeneralNewsArticle {
  * ========================================================================
  */
 
-export interface SmaPoint extends BaseChartItem { sma: number }
-export interface EmaPoint extends BaseChartItem { ema: number }
-export interface WmaPoint extends BaseChartItem { wma: number }
-export interface DemaPoint extends BaseChartItem { dema: number }
-export interface TemaPoint extends BaseChartItem { tema: number }
-export interface RsiPoint extends BaseChartItem { rsi: number }
-export interface StandardDeviationPoint extends BaseChartItem { standardDeviation: number }
-export interface WilliamsPoint extends BaseChartItem { williams: number }
-export interface AdxPoint extends BaseChartItem { adx: number }
+export interface SmaPoint extends BaseChartItem {
+	sma: number
+}
+export interface EmaPoint extends BaseChartItem {
+	ema: number
+}
+export interface WmaPoint extends BaseChartItem {
+	wma: number
+}
+export interface DemaPoint extends BaseChartItem {
+	dema: number
+}
+export interface TemaPoint extends BaseChartItem {
+	tema: number
+}
+export interface RsiPoint extends BaseChartItem {
+	rsi: number
+}
+export interface StandardDeviationPoint extends BaseChartItem {
+	standardDeviation: number
+}
+export interface WilliamsPoint extends BaseChartItem {
+	williams: number
+}
+export interface AdxPoint extends BaseChartItem {
+	adx: number
+}
 
 /**
  * ========================================================================
@@ -2769,7 +2877,7 @@ export interface StockQuote extends BaseQuote {
 	// but are part of BaseQuote for broader compatibility.
 }
 
-export interface StockQuoteShort extends BaseQuoteShort { }
+export interface StockQuoteShort extends BaseQuoteShort {}
 
 export interface AftermarketTrade {
 	symbol: string
@@ -2789,18 +2897,18 @@ export interface AftermarketQuote {
 }
 
 export interface StockPriceChange {
-	'symbol': string
+	symbol: string
 	'1D'?: number
 	'5D'?: number
 	'1M'?: number
 	'3M'?: number
 	'6M'?: number
-	'ytd'?: number
+	ytd?: number
 	'1Y'?: number
 	'3Y'?: number
 	'5Y'?: number
 	'10Y'?: number
-	'max'?: number
+	max?: number
 }
 
 export type ExchangeStockQuoteItem = StockQuoteShort

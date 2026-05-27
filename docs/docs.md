@@ -2,8 +2,7 @@
 
 ## Stock Market API and Financial Statements API Documentation
 
-Search
-------
+## Search
 
 [Stock Symbol Search API](/developer/docs/stable/search-symbol)
 
@@ -175,8 +174,7 @@ symbol\* string AAPL
 
 `[ { "symbol": "AAPL", "price": 225.46, "beta": 1.24, "volAvg": 54722288, "mktCap": 3427916386000, "lastDiv": 1, "range": "164.08-237.23", "changes": -7.54, "companyName": "Apple Inc.", "currency": "USD", "cik": "0000320193", "isin": "US0378331005", "cusip": "037833100", "exchange": "NASDAQ Global Select", "exchangeShortName": "NASDAQ", "industry": "Consumer Electronics", "website": "https://www.apple.com", "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discov...", "ceo": "Mr. Timothy D. Cook", "sector": "Technology", "country": "US", "fullTimeEmployees": "161000", "phone": "408 996 1010", "address": "One Apple Park Way", "city": "Cupertino", "state": "CA", "zip": "95014", "dcfDiff": 62.45842, "dcf": 161.68157666868984, "image": "https://financialmodelingprep.com/image-stock/AAPL.png", "ipoDate": "1980-12-12", "defaultImage": false, "isEtf": false, "isActivelyTrading": true, "isAdr": false, "isFund": false } ]`
 
-Directory
----------
+## Directory
 
 [Company Symbols List API](/developer/docs/stable/company-symbols-list)
 
@@ -341,8 +339,7 @@ Endpoint:
 
 `[ { "country": "FK" } ]`
 
-Analyst
--------
+## Analyst
 
 [Financial Estimates API](/developer/docs/stable/financial-estimates)
 
@@ -613,8 +610,7 @@ limit number 10
 
 `[ { "symbol": "PYPL", "publishedDate": "2025-02-04T19:18:04.000Z", "newsURL": "https://www.benzinga.com/25/02/43475080/paypal-beats-q4-estimates-as-transaction-margins-and-payment-volume-drive-growth-eyes-2025-growth-with-strong-tmd", "newsTitle": "PayPal Transaction Margins and Payment Volume Drive Growth, Eyes 2025 Growth With Strong TMD Ahead of Investor Day: Analyst", "newsBaseURL": "benzinga.com", "newsPublisher": "Benzinga", "newGrade": "Overweight", "previousGrade": "Overweight", "gradingCompany": "J.P. Morgan", "action": "hold", "priceWhenPosted": 77.725 } ]`
 
-Calendar
---------
+## Calendar
 
 [Dividends Company API](/developer/docs/stable/dividends-company)
 
@@ -814,8 +810,7 @@ to date 2025-04-10
 
 `[ { "symbol": "EYEN", "date": "2025-02-03", "numerator": 1, "denominator": 80 } ]`
 
-Chart
------
+## Chart
 
 [Stock Chart Light API](/developer/docs/stable/historical-price-eod-light)
 
@@ -1101,8 +1096,7 @@ false
 
 `[ { "date": "2025-02-04 12:30:00", "open": 231.79, "low": 231.37, "high": 233.13, "close": 232.37, "volume": 23781913 } ]`
 
-Company
--------
+## Company
 
 [Company Profile Data API](/developer/docs/stable/profile-symbol)
 
@@ -1516,8 +1510,7 @@ year string 2024
 
 `[ { "industryTitle": "ABRASIVE, ASBESTOS & MISC NONMETALLIC MINERAL PRODS", "year": 2023, "averageCompensation": 694313.1666666666 } ]`
 
-Commitment Of Traders
----------------------
+## Commitment Of Traders
 
 [COT Report API](/developer/docs/stable/cot-report)
 
@@ -1573,8 +1566,7 @@ Endpoint:
 
 `[ { "symbol": "NG", "name": "Natural Gas (NG)" } ]`
 
-Discounted Cash Flow
---------------------
+## Discounted Cash Flow
 
 [DCF Valuation API](/developer/docs/stable/dcf-advanced)
 
@@ -1696,8 +1688,7 @@ riskFreeRate number 3.64
 
 `[ { "year": "2029", "symbol": "AAPL", "revenue": 657173266965, "revenuePercentage": 10.94, "capitalExpenditure": 20111200574, "capitalExpenditurePercentage": 3.06, "price": 232.8, "beta": 1.244, "dilutedSharesOutstanding": 15408095000, "costofDebt": 3.64, "taxRate": 24.09, "afterTaxCostOfDebt": 2.76, "riskFreeRate": 3.64, "marketRiskPremium": 4.72, "costOfEquity": 9.51, "totalDebt": 106629000000, "totalEquity": 3587004516000, "totalCapital": 3693633516000, "debtWeighting": 2.89, "equityWeighting": 97.11, "wacc": 9.33, "operatingCashFlow": 189682120638, "pvLfcf": 134327365439, "sumPvLfcf": 652368547936, "longTermGrowthRate": 4, "freeCashFlow": 209793321212, "terminalValue": 4096220460472, "presentTerminalValue": 2622745564702, "enterpriseValue": 3275114112638, "netDebt": 76686000000, "equityValue": 3198428112638, "equityValuePerShare": 207.58, "freeCashFlowT1": 218185054060, "operatingCashFlowPercentage": 28.86 } ]`
 
-Economics
----------
+## Economics
 
 [Treasury Rates API](/developer/docs/stable/treasury-rates)
 
@@ -1772,8 +1763,7 @@ Endpoint:
 
 `[ { "country": "Zimbabwe", "continent": "Africa", "countryRiskPremium": 13.17, "totalEquityRiskPremium": 17.77 } ]`
 
-ESG
----
+## ESG
 
 [ESG Investment Search API](/developer/docs/stable/esg-search)
 
@@ -1838,8 +1828,7 @@ year string 2023
 
 `[ { "fiscalYear": 2023, "sector": "APPAREL RETAIL", "environmentalScore": 61.36, "socialScore": 67.44, "governanceScore": 68.1, "ESGScore": 65.63 } ]`
 
-Etf And Mutual Funds
---------------------
+## Etf And Mutual Funds
 
 [ETF & Fund Holdings API](/developer/docs/stable/holdings)
 
@@ -2034,8 +2023,7 @@ cik string 0000036405
 
 `[ { "date": "2024-10-31", "year": 2024, "quarter": 4 } ]`
 
-Commodity
----------
+## Commodity
 
 [Commodities List API](/developer/docs/stable/commodities-list)
 
@@ -2215,8 +2203,7 @@ to date 2024-03-01
 
 `[ { "date": "2025-02-04 19:00:00", "open": 2872.1, "low": 2872, "high": 2872.4, "close": 2872.4, "volume": 66 } ]`
 
-Fundraisers
------------
+## Fundraisers
 
 [Latest Crowdfunding Campaigns API](/developer/docs/stable/latest-crowdfunding)
 
@@ -2347,8 +2334,7 @@ cik\* string 0001547416
 
 `[ { "cik": "0001547416", "companyName": "NJOY INC", "date": "2014-02-28", "filingDate": "2014-02-28 00:00:00", "acceptedDate": "2014-02-28 16:00:25", "formType": "D", "formSignification": "Notice of Exempt Offering of Securities", "entityName": "NJOY INC", "issuerStreet": "15211 N. KIERLAND BLVD., SUITE 200", "issuerCity": "SCOTTSDALE", "issuerStateOrCountry": "AZ", "issuerStateOrCountryDescription": "ARIZONA", "issuerZipCode": "85254", "issuerPhoneNumber": "480-397-2300", "jurisdictionOfIncorporation": "DELAWARE", "entityType": "Corporation", "incorporatedWithinFiveYears": null, "yearOfIncorporation": "", "relatedPersonFirstName": "CRAIG", "relatedPersonLastName": "WEISS", "relatedPersonStreet": "c/o NJOY, INC.", "relatedPersonCity": "SCOTTSDALE", "relatedPersonStateOrCountry": "AZ", "relatedPersonStateOrCountryDescription": "ARIZONA", "relatedPersonZipCode": "85254", "relatedPersonRelationship": "Executive Officer, Director", "industryGroupType": "Other", "revenueRange": "Decline to Disclose", "federalExemptionsExclusions": "06b", "isAmendment": false, "dateOfFirstSale": "2014-02-14", "durationOfOfferingIsMoreThanYear": false, "securitiesOfferedAreOfEquityType": true, "isBusinessCombinationTransaction": false, "minimumInvestmentAccepted": 0, "totalOfferingAmount": 71999990, "totalAmountSold": 71999990, "totalAmountRemaining": 0, "hasNonAccreditedInvestors": false, "totalNumberAlreadyInvested": 24, "salesCommissions": 0, "findersFees": 0, "grossProceedsUsed": 0 } ]`
 
-Crypto
-------
+## Crypto
 
 [Cryptocurrency List API](/developer/docs/stable/cryptocurrency-list)
 
@@ -2524,8 +2510,7 @@ to date 2024-03-01
 
 `[ { "date": "2025-02-04 19:00:00", "open": 97795.06, "low": 97761, "high": 97919.26, "close": 97898.8, "volume": 1829413.547367432 } ]`
 
-Forex
------
+## Forex
 
 [Forex Currency Pairs API](/developer/docs/stable/forex-list)
 
@@ -2705,8 +2690,7 @@ to date 2024-03-01
 
 `[ { "date": "2025-02-04 19:00:00", "open": 1.03716, "low": 1.03715, "high": 1.03743, "close": 1.03737, "volume": 45 } ]`
 
-Statements
-----------
+## Statements
 
 [Income Statement API](/developer/docs/stable/income-statement)
 
@@ -3288,8 +3272,7 @@ period string annual,quarter
 
 `[ { "symbol": "AAPL", "fiscalYear": 2024, "period": "FY", "reportedCurrency": null, "date": "2024-09-27", "data": { "documenttype": "10-K", "documentannualreport": "true", "currentfiscalyearenddate": "--09-28", "documentperiodenddate": "2024-09-28", "documenttransitionreport": "false", "entityfilenumber": "001-36743", "entityregistrantname": "Apple Inc.", "entityincorporationstatecountrycode": "CA", "entitytaxidentificationnumber": "94-2404110", "entityaddressaddressline1": "One Apple Park Way", "entityaddresscityortown": "Cupertino", "entityaddressstateorprovince": "CA", "entityaddresspostalzipcode": 95014, "cityareacode": 408, "localphonenumber": "996-1010", "security12btitle": "3.600% Notes due 2042", "tradingsymbol": "AAPL", "notradingsymbolflag": "true", "securityexchangename": "NASDAQ", "entitywellknownseasonedissuer": "Yes", "entityvoluntaryfilers": "No", "entitycurrentreportingstatus": "Yes", "entityinteractivedatacurrent": "Yes", "entityfilercategory": "Large Accelerated Filer", "entitysmallbusiness": "false", "entityemerginggrowthcompany": "false", "icfrauditorattestationflag": "true", "documentfinstmterrorcorrectionflag": "false", "entityshellcompany": "false", "amendmentflag": "false", "documentfiscalyearfocus": 2024, "documentfiscalperiodfocus": "FY", "entitycentralindexkey": 320193, "auditorname": "Ernst & Young LLP", "auditorlocation": "San Jose, California", "auditorfirmid": 42, "revenuefromcontractwithcustomerexcludingassessedtax": 391035000000, "costofgoodsandservicessold": 210352000000, "grossprofit": 180683000000, "researchanddevelopmentexpense": 31370000000, "sellinggeneralandadministrativeexpense": 26097000000, "operatingexpenses": 57467000000, "operatingincomeloss": 123216000000, "nonoperatingincomeexpense": 269000000, "incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest": 123485000000, "incometaxexpensebenefit": 29749000000, "netincomeloss": 93736000000, "earningspersharebasic": 6.11, "earningspersharediluted": 6.08, "weightedaveragenumberofsharesoutstandingbasic": 15343783000, "weightedaveragenumberofdilutedsharesoutstanding": 15408095000, "othercomprehensiveincomelossforeigncurrencytransactionandtranslationadjustmentnetoftax": 395000000, "othercomprehensiveincomelossderivativeinstrumentgainlossbeforereclassificationaftertax": -832000000, "othercomprehensiveincomelossderivativeinstrumentgainlossreclassificationaftertax": 1337000000, "othercomprehensiveincomelossderivativeinstrumentgainlossafterreclassificationandtax": -2169000000, "othercomprehensiveincomeunrealizedholdinggainlossonsecuritiesarisingduringperiodnetoftax": 5850000000, "othercomprehensiveincomelossreclassificationadjustmentfromaociforsaleofsecuritiesnetoftax": -204000000, "othercomprehensiveincomelossavailableforsalesecuritiesadjustmentnetoftax": 6054000000, "othercomprehensiveincomelossnetoftaxportionattributabletoparent": 4280000000, "comprehensiveincomenetoftax": 98016000000, "cashandcashequivalentsatcarryingvalue": 29943000000, "marketablesecuritiescurrent": 35228000000, "accountsreceivablenetcurrent": 33410000000, "nontradereceivablescurrent": 32833000000, "inventorynet": 7286000000, "otherassetscurrent": 14287000000, "assetscurrent": 152987000000, "marketablesecuritiesnoncurrent": 91479000000, "propertyplantandequipmentnet": 45680000000, "otherassetsnoncurrent": 74834000000, "assetsnoncurrent": 211993000000, "assets": 364980000000, "accountspayablecurrent": 68960000000, "otherliabilitiescurrent": 78304000000, "contractwithcustomerliabilitycurrent": 8249000000, "commercialpaper": 10000000000, "longtermdebtcurrent": 10912000000, "liabilitiescurrent": 176392000000, "longtermdebtnoncurrent": 85750000000, "otherliabilitiesnoncurrent": 45888000000, "liabilitiesnoncurrent": 131638000000, "liabilities": 308030000000, "commonstocksharesoutstanding": 15116786000, "commonstocksharesissued": 15116786000, "commonstocksincludingadditionalpaidincapital": 83276000000, "retainedearningsaccumulateddeficit": -19154000000, "accumulatedothercomprehensiveincomelossnetoftax": -7172000000, "stockholdersequity": 56950000000, "liabilitiesandstockholdersequity": 364980000000, "commonstockparorstatedvaluepershare": 0.00001, "commonstocksharesauthorized": 50400000000, "stockissuedduringperiodvaluenewissues": 1423000000, "adjustmentsrelatedtotaxwithholdingforsharebasedcompensation": 1612000000, "adjustmentstoadditionalpaidincapitalsharebasedcompensationrequisiteserviceperiodrecognitionvalue": 12034000000, "dividends": 15218000000, "stockrepurchasedandretiredduringperiodvalue": 95000000000, "commonstockdividendspersharedeclared": 0.98, "cashcashequivalentsrestrictedcashandrestrictedcashequivalents": 29943000000, "depreciationdepletionandamortization": 11445000000, "sharebasedcompensation": 11688000000, "othernoncashincomeexpense": 2266000000, "increasedecreaseinaccountsreceivable": 3788000000, "increasedecreaseinotherreceivables": 1356000000, "increasedecreaseininventories": 1046000000, "increasedecreaseinotheroperatingassets": 11731000000, "increasedecreaseinaccountspayable": 6020000000, "increasedecreaseinotheroperatingliabilities": 15552000000, "netcashprovidedbyusedinoperatingactivities": 118254000000, "paymentstoacquireavailableforsalesecuritiesdebt": 48656000000, "proceedsfrommaturitiesprepaymentsandcallsofavailableforsalesecurities": 51211000000, "proceedsfromsaleofavailableforsalesecuritiesdebt": 11135000000, "paymentstoacquirepropertyplantandequipment": 9447000000, "paymentsforproceedsfromotherinvestingactivities": 1308000000, "netcashprovidedbyusedininvestingactivities": 2935000000, "paymentsrelatedtotaxwithholdingforsharebasedcompensation": 5600000000, "paymentsofdividends": 15234000000, "paymentsforrepurchaseofcommonstock": 94949000000, "repaymentsoflongtermdebt": 9958000000, "proceedsfromrepaymentsofcommercialpaper": 3960000000, "proceedsfrompaymentsforotherfinancingactivities": -361000000, "netcashprovidedbyusedinfinancingactivities": -121983000000, "cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect": -794000000, "incometaxespaidnet": 26102000000, "commercialpapercashflowsummarytabletextblock": "The following table provides a summary of cash flows associated with the issuance and maturities of commercial paper for 2024, 2023 and 2022 (in millions):", "contractwithcustomerliabilityrevenuerecognized": 7700000000, "contractwithcustomerliability": 12800000000, "revenueremainingperformanceobligationpercentage": 0.02, "revenueremainingperformanceobligationexpectedtimingofsatisfactionperiod1": "P1Y", "incrementalcommonsharesattributabletosharebasedpaymentarrangements": 64312000, "cash": 27199000000, "equitysecuritiesfvnicost": 1293000000, "equitysecuritiesfvniaccumulatedgrossunrealizedgainbeforetax": 105000000, "equitysecuritiesfvniaccumulatedgrossunrealizedlossbeforetax": 3000000, "equitysecuritiesfvnicurrentandnoncurrent": 1395000000, "availableforsaledebtsecuritiesamortizedcostbasis": 132108000000, "availableforsaledebtsecuritiesaccumulatedgrossunrealizedgainbeforetax": 583000000, "availableforsaledebtsecuritiesaccumulatedgrossunrealizedlossbeforetax": 4635000000, "availableforsalesecuritiesdebtsecurities": 128056000000, "cashcashequivalentsandmarketablesecuritiescost": 160600000000, "cashequivalentsandmarketablesecuritiesaccumulatedgrossunrealizedgainbeforetax": 688000000, "cashequivalentsandmarketablesecuritiesaccumulatedgrossunrealizedlossbeforetax": 4638000000, "cashcashequivalentsandmarketablesecurities": 156650000000, "restrictedcashandcashequivalents": 2600000000, "debtsecuritiesavailableforsalerestricted": 13200000000, "debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafteronethroughfiveyearspercentage": 0.14, "debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingafterfivethroughtenyearspercentage": 0.09, "debtsecuritiesavailableforsalematurityallocatedandsinglematuritydaterollingaftertenyearspercentage": 0.77, "maximumlengthoftimeforeigncurrencycashflowhedge": "P18Y", "concentrationriskpercentage1": 0.23, "numberofsignificantvendors": 2, "derivativenotionalamount": 91493000000, "hedgedassetstatementoffinancialpositionextensibleenumeration": "http://fasb.org/us-gaap/2024#MarketableSecuritiesCurrent http://fasb.org/us-gaap/2024#MarketableSecuritiesNoncurrent", "hedgedliabilityfairvaluehedge": 13505000000, "hedgedliabilitystatementoffinancialpositionextensibleenumeration": "http://fasb.org/us-gaap/2024#LongTermDebtCurrent http://fasb.org/us-gaap/2024#LongTermDebtNoncurrent", "propertyplantandequipmentgross": 119128000000, "accumulateddepreciationdepletionandamortizationpropertyplantandequipment": 73448000000, "depreciation": 8200000000, "deferredincometaxassetsnet": 19499000000, "otherassetsmiscellaneousnoncurrent": 55335000000, "accruedincometaxescurrent": 1200000000, "otheraccruedliabilitiescurrent": 51703000000, "accruedincometaxesnoncurrent": 9254000000, "otheraccruedliabilitiesnoncurrent": 36634000000, "totalrestrictedcashcashequivalentsandavailableforsaledebtsecurities": 15800000000, "currentforeigntaxexpensebenefit": 25483000000, "currentfederaltaxexpensebenefit": 5571000000, "unrecognizedtaxbenefitsdecreasesresultingfromsettlementswithtaxingauthorities": 1070000000, "incomelossfromcontinuingoperationsbeforeincometaxesforeign": 77300000000, "effectiveincometaxratereconciliationatfederalstatutoryincometaxrate": 0.21, "deferredtaxassetstaxcreditcarryforwardsforeign": 5100000000, "deferredtaxassetstaxcreditcarryforwardsresearch": 3600000000, "unrecognizedtaxbenefits": 22038000000, "unrecognizedtaxbenefitsthatwouldimpacteffectivetaxrate": 10800000000, "decreaseinunrecognizedtaxbenefitsisreasonablypossible": 13000000000, "deferredfederalincometaxexpensebenefit": -3080000000, "federalincometaxexpensebenefitcontinuingoperations": 2491000000, "currentstateandlocaltaxexpensebenefit": 1726000000, "deferredstateandlocalincometaxexpensebenefit": -298000000, "stateandlocalincometaxexpensebenefitcontinuingoperations": 1428000000, "deferredforeignincometaxexpensebenefit": 347000000, "foreignincometaxexpensebenefitcontinuingoperations": 25830000000, "incometaxreconciliationincometaxexpensebenefitatfederalstatutoryincometaxrate": 25932000000, "incometaxreconciliationstateandlocalincometaxes": 1162000000, "effectiveincometaxratereconciliationimpactofthestateaiddecisionamount": 10246000000, "incometaxreconciliationforeignincometaxratedifferential": -5311000000, "incometaxreconciliationtaxcreditsresearch": 1397000000, "effectiveincometaxratereconciliationsharebasedcompensationexcesstaxbenefitamount": -893000000, "incometaxreconciliationotheradjustments": 10000000, "effectiveincometaxratecontinuingoperations": 0.241, "deferredtaxassetscapitalizedresearchanddevelopment": 10739000000, "deferredtaxassetstaxcreditcarryforwards": 8856000000, "deferredtaxassetstaxdeferredexpensereservesandaccruals": 6114000000, "deferredtaxassetsdeferredincome": 3413000000, "deferredtaxassetsleaseliabilities": 2410000000, "deferredtaxassetsothercomprehensiveloss": 1173000000, "deferredtaxassetsother": 2168000000, "deferredtaxassetsgross": 34873000000, "deferredtaxassetsvaluationallowance": 8866000000, "deferredtaxassetsnet": 26007000000, "deferredtaxliabilitiespropertyplantandequipment": 2551000000, "deferredtaxliabilitiesleasingarrangements": 2125000000, "deferredtaxliabilitiesminimumtaxonforeignearnings": 1674000000, "deferredtaxliabilitiesother": 455000000, "deferredincometaxliabilities": 6805000000, "deferredtaxassetsliabilitiesnet": 19202000000, "unrecognizedtaxbenefitsincreasesresultingfrompriorperiodtaxpositions": 1727000000, "unrecognizedtaxbenefitsdecreasesresultingfrompriorperiodtaxpositions": 386000000, "unrecognizedtaxbenefitsincreasesresultingfromcurrentperiodtaxpositions": 2542000000, "unrecognizedtaxbenefitsreductionsresultingfromlapseofapplicablestatuteoflimitations": 229000000, "lesseeoperatingandfinanceleasetermofcontract": "P10Y", "operatingleasecost": 2000000000, "variableleasecost": 13800000000, "operatingleasepayments": 1900000000, "rightofuseassetsobtainedinexchangeforoperatingandfinanceleaseliabilities": 1000000000, "operatingandfinanceleaseweightedaverageremainingleaseterm": "P10Y3M18D", "operatingandfinanceleaseweightedaveragediscountratepercent": 0.031, "unrecordedunconditionalpurchaseobligationbalancesheetamount": 11226000000, "lesseeoperatingandfinanceleaseleasenotyetcommencedtermofcontract": "P21Y", "operatingleaserightofuseasset": 10234000000, "operatingleaserightofuseassetstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#OtherAssetsNoncurrent", "financeleaserightofuseasset": 1069000000, "financeleaserightofuseassetstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#PropertyPlantAndEquipmentNet", "operatingandfinanceleaserightofuseasset": 11303000000, "operatingleaseliabilitycurrent": 1488000000, "operatingleaseliabilitycurrentstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#OtherLiabilitiesCurrent", "operatingleaseliabilitynoncurrent": 10046000000, "operatingleaseliabilitynoncurrentstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#OtherLiabilitiesNoncurrent", "financeleaseliabilitycurrent": 144000000, "financeleaseliabilitycurrentstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#OtherLiabilitiesCurrent", "financeleaseliabilitynoncurrent": 752000000, "financeleaseliabilitynoncurrentstatementoffinancialpositionextensiblelist": "http://fasb.org/us-gaap/2024#OtherLiabilitiesNoncurrent", "operatingandfinanceleaseliability": 12430000000, "lesseeoperatingleaseliabilitypaymentsduenexttwelvemonths": 1820000000, "lesseeoperatingleaseliabilitypaymentsdueyeartwo": 1914000000, "lesseeoperatingleaseliabilitypaymentsdueyearthree": 1674000000, "lesseeoperatingleaseliabilitypaymentsdueyearfour": 1360000000, "lesseeoperatingleaseliabilitypaymentsdueyearfive": 1187000000, "lesseeoperatingleaseliabilitypaymentsdueafteryearfive": 5563000000, "lesseeoperatingleaseliabilitypaymentsdue": 13518000000, "lesseeoperatingleaseliabilityundiscountedexcessamount": 1984000000, "operatingleaseliability": 11534000000, "financeleaseliabilitypaymentsduenexttwelvemonths": 171000000, "financeleaseliabilitypaymentsdueyeartwo": 131000000, "financeleaseliabilitypaymentsdueyearthree": 59000000, "financeleaseliabilitypaymentsdueyearfour": 38000000, "financeleaseliabilitypaymentsdueyearfive": 36000000, "financeleaseliabilitypaymentsdueafteryearfive": 837000000, "financeleaseliabilitypaymentsdue": 1272000000, "financeleaseliabilityundiscountedexcessamount": 376000000, "financeleaseliability": 896000000, "lesseeoperatingandfinanceleaseliabilitytobepaidyearone": 1991000000, "lesseeoperatingandfinanceleaseliabilitytobepaidyeartwo": 2045000000, "lesseeoperatingandfinanceleaseliabilitytobepaidyearthree": 1733000000, "lesseeoperatingandfinanceleaseliabilitytobepaidyearfour": 1398000000, "lesseeoperatingandfinanceleaseliabilitytobepaidyearfive": 1223000000, "lesseeoperatingandfinanceleaseliabilitytobepaidafteryearfive": 6400000000, "lesseeoperatingandfinanceleaseliabilitytobepaid": 14790000000, "lesseeoperatingandfinanceleaseliabilityundiscountedexcessamount": 2360000000, "debtinstrumentterm": "P9M", "shorttermdebtweightedaverageinterestrate": 0.05, "longtermdebtfairvalue": 88400000000, "proceedsfromrepaymentsofshorttermdebtmaturinginthreemonthsorless": 3960000000, "debtinstrumentcarryingamount": 97341000000, "debtinstrumentunamortizeddiscountpremiumanddebtissuancecostsnet": 321000000, "hedgeaccountingadjustmentsrelatedtolongtermdebt": 358000000, "longtermdebt": 96662000000, "debtinstrumentmaturityyearrangestart": 2024, "debtinstrumentmaturityyearrangeend": 2062, "debtinstrumentinterestratestatedpercentage": 0.0485, "debtinstrumentinterestrateeffectivepercentage": 0.0665, "longtermdebtmaturitiesrepaymentsofprincipalinnexttwelvemonths": 10930000000, "longtermdebtmaturitiesrepaymentsofprincipalinyeartwo": 12342000000, "longtermdebtmaturitiesrepaymentsofprincipalinyearthree": 9936000000, "longtermdebtmaturitiesrepaymentsofprincipalinyearfour": 7800000000, "longtermdebtmaturitiesrepaymentsofprincipalinyearfive": 5153000000, "longtermdebtmaturitiesrepaymentsofprincipalafteryearfive": 51180000000, "stockrepurchasedandretiredduringperiodshares": 499372000, "stockissuedduringperiodsharessharebasedpaymentarrangementnetofshareswithheldfortaxes": 66097000, "sharebasedcompensationarrangementbysharebasedpaymentawardawardvestingperiod1": "P4Y", "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnumberofsharesofcommonstockissuedperunituponvesting": 1, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodtotalfairvalue": 15800000000, "sharespaidfortaxwithholdingforsharebasedcompensation": 31000000, "employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognized": 19400000000, "employeeservicesharebasedcompensationnonvestedawardstotalcompensationcostnotyetrecognizedperiodforrecognition1": "P2Y4M24D", "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestednumber": 163326000, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiod": 80456000, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiod": 87633000, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeitedinperiod": 9744000, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsnonvestedweightedaveragegrantdatefairvalue": 158.73, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsgrantsinperiodweightedaveragegrantdatefairvalue": 173.78, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsvestedinperiodweightedaveragegrantdatefairvalue": 127.59, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsforfeituresweightedaveragegrantdatefairvalue": 140.8, "sharebasedcompensationarrangementbysharebasedpaymentawardequityinstrumentsotherthanoptionsaggregateintrinsicvaluenonvested": 37204000000, "allocatedsharebasedcompensationexpense": 11688000000, "employeeservicesharebasedcompensationtaxbenefitfromcompensationexpense": 3350000000, "unrecordedunconditionalpurchaseobligationbalanceonfirstanniversary": 3206000000, "unrecordedunconditionalpurchaseobligationbalanceonsecondanniversary": 2440000000, "unrecordedunconditionalpurchaseobligationbalanceonthirdanniversary": 1156000000, "unrecordedunconditionalpurchaseobligationbalanceonfourthanniversary": 3121000000, "unrecordedunconditionalpurchaseobligationbalanceonfifthanniversary": 633000000, "unrecordedunconditionalpurchaseobligationdueafterfiveyears": 670000000, "othergeneralandadministrativeexpense": 7458000000, "noncurrentassets": 45680000000, "trdarrsecuritiesaggavailamt": 100000, "insidertrdpoliciesprocadoptedflag": "true" } } ]`
 
-Form 13F
---------
+## Form 13F
 
 [Institutional Ownership Filings API](/developer/docs/stable/latest-filings)
 
@@ -3472,8 +3455,7 @@ quarter\* string 3
 
 `[ { "industryTitle": "ABRASIVE, ASBESTOS & MISC NONMETALLIC MINERAL PRODS", "industryValue": 10979226300, "date": "2023-09-30" } ]`
 
-Indexes
--------
+## Indexes
 
 [Stock Market Indexes List API](/developer/docs/stable/indexes-list)
 
@@ -3725,8 +3707,7 @@ Endpoint:
 
 `[ { "dateAdded": "November 8, 2024", "addedSecurity": "Nvidia", "removedTicker": "INTC", "removedSecurity": "Intel Corporation", "date": "2024-11-07", "symbol": "NVDA", "reason": "Market capitalization change" } ]`
 
-Insider Trades
---------------
+## Insider Trades
 
 [Latest Insider Trading API](/developer/docs/stable/latest-insider-trade)
 
@@ -3855,8 +3836,7 @@ limit number 2000
 
 `[ { "cik": "0000320193", "symbol": "AAPL", "filingDate": "2024-02-14", "acceptedDate": "2024-02-14", "cusip": "037833100", "nameOfReportingPerson": "National Indemnity Company", "citizenshipOrPlaceOfOrganization": "State of Nebraska", "soleVotingPower": "0", "sharedVotingPower": "755059877", "soleDispositivePower": "0", "sharedDispositivePower": "755059877", "amountBeneficiallyOwned": "755059877", "percentOfClass": "4.8", "typeOfReportingPerson": "IC, EP, IN, CO", "url": "https://www.sec.gov/Archives/edgar/data/320193/000119312524036431/d751537dsc13ga.htm" } ]`
 
-Market Performance
-------------------
+## Market Performance
 
 [Market Sector Performance Snapshot API](/developer/docs/stable/sector-performance-snapshot)
 
@@ -4088,8 +4068,7 @@ Endpoint:
 
 `[ { "symbol": "LUCY", "price": 5.03, "name": "Innovative Eyewear, Inc.", "change": -0.01, "changesPercentage": -0.1984, "exchange": "NASDAQ" } ]`
 
-Market Hours
-------------
+## Market Hours
 
 [Global Exchange Market Hours API](/developer/docs/stable/exchange-market-hours)
 
@@ -4126,8 +4105,7 @@ Endpoint:
 
 `[ { "exchange": "ASX", "name": "Australian Stock Exchange", "openingHour": "10:00 AM +10:00", "closingHour": "04:00 PM +10:00", "timezone": "Australia/Sydney", "isMarketOpen": false } ]`
 
-News
-----
+## News
 
 [FMP Articles API](/developer/docs/stable/fmp-articles)
 
@@ -4359,8 +4337,7 @@ limit number 20
 
 `[ { "symbol": "EURUSD", "publishedDate": "2025-02-03 18:43:01", "publisher": "FX Street", "title": "EUR/USD trims losses but still sheds weight", "image": "https://images.financialmodelingprep.com/news/eurusd-trims-losses-but-still-sheds-weight-20250203.jpg", "site": "fxstreet.com", "text": "EUR/USD dropped sharply following fresh tariff threats from US President Donald Trump, impacting the markets. However, significant declines in global risk markets eased as the Trump administration offered 30-day concessions on impending tariffs for Canada and Mexico.", "url": "https://www.fxstreet.com/news/eur-usd-trims-losses-but-still-sheds-weight-202502032343" } ]`
 
-Technical Indicators
---------------------
+## Technical Indicators
 
 [Simple Moving Average API](/developer/docs/stable/simple-moving-average)
 
@@ -4569,8 +4546,7 @@ to date 2025-04-10
 
 `[ { "date": "2025-02-04 00:00:00", "open": 227.2, "high": 233.13, "low": 226.65, "close": 232.8, "volume": 44489128, "adx": 26.414065772772613 } ]`
 
-Quote
------
+## Quote
 
 [Stock Quote API](/developer/docs/stable/quote)
 
@@ -4901,8 +4877,7 @@ short boolean true
 
 `[ { "symbol": "^DJBGIE", "price": 4277.52, "change": -15.7, "volume": 0 } ]`
 
-Earnings Transcript
--------------------
+## Earnings Transcript
 
 [Latest Earning Transcripts API](/developer/docs/stable/latest-transcripts)
 
@@ -4985,8 +4960,7 @@ Endpoint:
 
 `[ { "symbol": "MCUJF", "companyName": "Medicure Inc.", "noOfTranscripts": "16" } ]`
 
-Sec Filings
------------
+## Sec Filings
 
 [Latest 8-K SEC Filings API](/developer/docs/stable/8k-latest)
 
@@ -5263,8 +5237,7 @@ limit number 100
 
 `[ { "symbol": "0Q16.L", "name": "BANK OF AMERICA CORP /DE/", "cik": "0000070858", "sicCode": "6021", "industryTitle": "NATIONAL COMMERCIAL BANKS", "businessAddress": "['BANK OF AMERICA CORPORATE CENTER', 'CHARLOTTE NC 28255']", "phoneNumber": "7043868486" } ]`
 
-Senate
-------
+## Senate
 
 [Latest Senate Financial Disclosures API](/developer/docs/stable/senate-latest)
 
@@ -5390,8 +5363,7 @@ name\* string James
 
 `[ { "symbol": "LUV", "disclosureDate": "2025-01-13", "transactionDate": "2024-12-31", "firstName": "James", "lastName": "Comer", "office": "James Comer", "district": "KY01", "owner": "", "assetDescription": "Southwest Airlines Co", "assetType": "Stock", "type": "Sale", "amount": "$1,001 - $15,000", "capitalGainsOver200USD": "False", "comment": "", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20018054.pdf" } ]`
 
-Bulk
-----
+## Bulk
 
 [Company Profile Bulk API](/developer/docs/stable/profile-bulk)
 

@@ -16,20 +16,23 @@ export const StatementPeriodOptionSchema = z.enum(['quarter', 'annual'])
 export const IntradayTimeframeSchema = z.enum(['1min', '5min', '15min', '30min', '1hour', '4hour'])
 export const ExtendedTimeframeSchema = z.enum(['1day', '1week', '1month'])
 export const IndicatorTimeframeSchema = z.union([IntradayTimeframeSchema, z.literal('1day')]) // As per docs
-export const RecommendationSchema = z.enum([
-	'Strong Sell',
-	'Sell',
-	'Hold',
-	'Underweight',
-	'Underperform',
-	'Neutral',
-	'Perform',
-	'Market Perform',
-	'Outperform',
-	'Overweight',
-	'Buy',
-	'Strong Buy',
-]).nullable().optional()
+export const RecommendationSchema = z
+	.enum([
+		'Strong Sell',
+		'Sell',
+		'Hold',
+		'Underweight',
+		'Underperform',
+		'Neutral',
+		'Perform',
+		'Market Perform',
+		'Outperform',
+		'Overweight',
+		'Buy',
+		'Strong Buy',
+	])
+	.nullable()
+	.optional()
 
 // --- SHARED BASE SCHEMAS ---
 export const BaseQuoteSchema = z.object({
@@ -604,7 +607,9 @@ export const ExecutiveCompensationBenchmarkSchema = z.object({
 	year: z.number(),
 	averageCompensation: z.number(),
 })
-export const ExecutiveCompensationBenchmarkArraySchema = z.array(ExecutiveCompensationBenchmarkSchema)
+export const ExecutiveCompensationBenchmarkArraySchema = z.array(
+	ExecutiveCompensationBenchmarkSchema,
+)
 
 // --- COT SCHEMAS ---
 export const CotReportSchema = z.object({
@@ -767,9 +772,9 @@ export const CotReportListItemArraySchema = z.array(CotReportListItemSchema)
 
 // --- DCF SCHEMAS ---
 export const DcfValuationSchema = z.object({
-	'symbol': z.string(),
-	'date': z.string(),
-	'dcf': z.number(),
+	symbol: z.string(),
+	date: z.string(),
+	dcf: z.number(),
 	'Stock Price': z.number(),
 })
 export const DcfValuationArraySchema = z.array(DcfValuationSchema)
@@ -1063,7 +1068,9 @@ export const FundDisclosureNameSearchResultSchema = z.object({
 	zipCode: zNullableString,
 	state: zNullableString,
 })
-export const FundDisclosureNameSearchResultArraySchema = z.array(FundDisclosureNameSearchResultSchema)
+export const FundDisclosureNameSearchResultArraySchema = z.array(
+	FundDisclosureNameSearchResultSchema,
+)
 
 export const FundDisclosureDateSchema = z.object({
 	date: z.string(),
@@ -1092,7 +1099,10 @@ export const CommodityQuoteShortSchema = z.object({
 	volume: zNullableNumber,
 })
 export const CommodityQuoteShortArraySchema = z.array(CommodityQuoteShortSchema)
-export const AllCommoditiesQuotesArraySchema = z.union([CommodityQuoteShortArraySchema, CommodityQuoteArraySchema])
+export const AllCommoditiesQuotesArraySchema = z.union([
+	CommodityQuoteShortArraySchema,
+	CommodityQuoteArraySchema,
+])
 
 // --- FUNDRAISERS SCHEMAS ---
 export const CrowdfundingCampaignSchema = z.object({
@@ -1152,7 +1162,9 @@ export const CrowdfundingCampaignSearchResultSchema = z.object({
 	name: z.string(),
 	date: zNullableString,
 })
-export const CrowdfundingCampaignSearchResultArraySchema = z.array(CrowdfundingCampaignSearchResultSchema)
+export const CrowdfundingCampaignSearchResultArraySchema = z.array(
+	CrowdfundingCampaignSearchResultSchema,
+)
 
 export const EquityOfferingUpdateSchema = z.object({
 	cik: z.string(),
@@ -1229,7 +1241,10 @@ export const CryptocurrencyQuoteShortSchema = z.object({
 	volume: zNullableNumber,
 })
 export const CryptocurrencyQuoteShortArraySchema = z.array(CryptocurrencyQuoteShortSchema)
-export const AllCryptocurrenciesQuotesArraySchema = z.union([CryptocurrencyQuoteShortArraySchema, CryptocurrencyQuoteArraySchema])
+export const AllCryptocurrenciesQuotesArraySchema = z.union([
+	CryptocurrencyQuoteShortArraySchema,
+	CryptocurrencyQuoteArraySchema,
+])
 
 // --- FOREX SCHEMAS ---
 export const ForexPairSchema = z.object({
@@ -1251,7 +1266,10 @@ export const ForexQuoteShortSchema = z.object({
 	volume: zNullableNumber,
 })
 export const ForexQuoteShortArraySchema = z.array(ForexQuoteShortSchema)
-export const AllForexQuotesArraySchema = z.union([ForexQuoteShortArraySchema, ForexQuoteArraySchema])
+export const AllForexQuotesArraySchema = z.union([
+	ForexQuoteShortArraySchema,
+	ForexQuoteArraySchema,
+])
 
 // --- STATEMENTS SCHEMAS ---
 const zStringOrNumberNullable = z.union([z.string(), z.number()]).nullable()
@@ -1895,11 +1913,13 @@ export const FinancialReportDateLinksSchema = z.object({
 })
 export const FinancialReportDateLinksArraySchema = z.array(FinancialReportDateLinksSchema)
 
-export const FinancialReportFullJsonSchema = z.object({
-	symbol: z.string(),
-	period: z.string(),
-	year: z.string(),
-}).catchall(z.any()) // For dynamic keys
+export const FinancialReportFullJsonSchema = z
+	.object({
+		symbol: z.string(),
+		period: z.string(),
+		year: z.string(),
+	})
+	.catchall(z.any()) // For dynamic keys
 export const FinancialReportFullJsonArraySchema = z.array(FinancialReportFullJsonSchema)
 
 export const RevenueSegmentationSchema = z.object({
@@ -1930,7 +1950,9 @@ export const FullAsReportedFinancialStatementSchema = z.object({
 	date: z.string(),
 	data: z.record(z.string(), z.any()),
 })
-export const FullAsReportedFinancialStatementArraySchema = z.array(FullAsReportedFinancialStatementSchema)
+export const FullAsReportedFinancialStatementArraySchema = z.array(
+	FullAsReportedFinancialStatementSchema,
+)
 
 // --- FORM 13F SCHEMAS ---
 export const InstitutionalOwnershipFilingSchema = z.object({
@@ -2132,7 +2154,10 @@ export const IndexQuoteShortSchema = z.object({
 	volume: zNullableNumber,
 })
 export const IndexQuoteShortArraySchema = z.array(IndexQuoteShortSchema)
-export const AllIndexQuotesArraySchema = z.union([IndexQuoteShortArraySchema, IndexQuoteArraySchema])
+export const AllIndexQuotesArraySchema = z.union([
+	IndexQuoteShortArraySchema,
+	IndexQuoteArraySchema,
+])
 
 export const IndexConstituentSchema = z.object({
 	symbol: z.string(),
@@ -2155,7 +2180,9 @@ export const HistoricalIndexConstituentChangeSchema = z.object({
 	symbol: z.string(),
 	reason: zNullableString,
 })
-export const HistoricalIndexConstituentChangeArraySchema = z.array(HistoricalIndexConstituentChangeSchema)
+export const HistoricalIndexConstituentChangeArraySchema = z.array(
+	HistoricalIndexConstituentChangeSchema,
+)
 
 // --- INSIDER TRADES SCHEMAS ---
 export const InsiderTradeSchema = z.object({
@@ -2315,7 +2342,9 @@ export const TemaPointSchema = BaseChartItemSchema.extend({ tema: z.number() })
 export const TemaPointArraySchema = z.array(TemaPointSchema)
 export const RsiPointSchema = BaseChartItemSchema.extend({ rsi: z.number() })
 export const RsiPointArraySchema = z.array(RsiPointSchema)
-export const StandardDeviationPointSchema = BaseChartItemSchema.extend({ standardDeviation: z.number() })
+export const StandardDeviationPointSchema = BaseChartItemSchema.extend({
+	standardDeviation: z.number(),
+})
 export const StandardDeviationPointArraySchema = z.array(StandardDeviationPointSchema)
 export const WilliamsPointSchema = BaseChartItemSchema.extend({ williams: z.number() })
 export const WilliamsPointArraySchema = z.array(WilliamsPointSchema)
@@ -2354,23 +2383,29 @@ export const AftermarketQuoteSchema = z.object({
 export const AftermarketQuoteArraySchema = z.array(AftermarketQuoteSchema)
 
 export const StockPriceChangeSchema = z.object({
-	'symbol': z.string(),
+	symbol: z.string(),
 	'1D': zOptionalNullableNumber,
 	'5D': zOptionalNullableNumber,
 	'1M': zOptionalNullableNumber,
 	'3M': zOptionalNullableNumber,
 	'6M': zOptionalNullableNumber,
-	'ytd': zOptionalNullableNumber,
+	ytd: zOptionalNullableNumber,
 	'1Y': zOptionalNullableNumber,
 	'3Y': zOptionalNullableNumber,
 	'5Y': zOptionalNullableNumber,
 	'10Y': zOptionalNullableNumber,
-	'max': zOptionalNullableNumber,
+	max: zOptionalNullableNumber,
 })
 export const StockPriceChangeArraySchema = z.array(StockPriceChangeSchema)
 
-export const ExchangeStockQuotesArraySchema = z.union([StockQuoteShortArraySchema, StockQuoteArraySchema])
-export const MutualFundQuotesArraySchema = z.union([StockQuoteShortArraySchema, StockQuoteArraySchema])
+export const ExchangeStockQuotesArraySchema = z.union([
+	StockQuoteShortArraySchema,
+	StockQuoteArraySchema,
+])
+export const MutualFundQuotesArraySchema = z.union([
+	StockQuoteShortArraySchema,
+	StockQuoteArraySchema,
+])
 export const EtfQuotesArraySchema = z.union([StockQuoteShortArraySchema, StockQuoteArraySchema])
 
 // --- EARNINGS TRANSCRIPT SCHEMAS ---
@@ -2477,7 +2512,9 @@ export const IndustryClassificationSearchResultSchema = z.object({
 	businessAddress: z.union([z.string(), z.array(z.string())]),
 	phoneNumber: zNullableString,
 })
-export const IndustryClassificationSearchResultArraySchema = z.array(IndustryClassificationSearchResultSchema)
+export const IndustryClassificationSearchResultArraySchema = z.array(
+	IndustryClassificationSearchResultSchema,
+)
 
 // --- SENATE & HOUSE TRADING SCHEMAS ---
 export const CongressionalDisclosureSchema = z.object({

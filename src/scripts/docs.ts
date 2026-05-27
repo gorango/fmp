@@ -28,7 +28,8 @@ function extractSubParameters(zodObjectString: string): string {
 	const propertiesString = objectContentMatch[1]
 	const subParams: string[] = []
 
-	const propRegex = /(\w+)\s*:\s*z\.\w+\(?[^)]*?\)?(?:\.optional\(\))?(?:\.describe\(['"].*?['"]\))?/g
+	const propRegex =
+		/(\w+)\s*:\s*z\.\w+\(?[^)]*?\)?(?:\.optional\(\))?(?:\.describe\(['"].*?['"]\))?/g
 	let match: RegExpExecArray | null
 
 	// eslint-disable-next-line no-cond-assign
@@ -51,9 +52,7 @@ function extractSubParameters(zodObjectString: string): string {
 function extractEnumValues(zodEnumString: string): string {
 	const enumMatch = zodEnumString.match(/z\.enum\(\s*\[(.*?)\]\s*\)/)
 	if (enumMatch && enumMatch[1]) {
-		const values = enumMatch[1]
-			.split(',')
-			.map(v => v.trim().replace(/^['"]|['"]$/g, ''))
+		const values = enumMatch[1].split(',').map((v) => v.trim().replace(/^['"]|['"]$/g, ''))
 
 		if (values.length > 0) {
 			return `(${values.join(', ')})`
@@ -72,31 +71,30 @@ function formatParameters(rawParams: any[]): string {
 		return 'No parameters.'
 	}
 
-	return rawParams.map((param) => {
-		if (param.zodTypeFragment.startsWith(`${param.name}: z.object`)) {
-			const subParamsSummary = extractSubParameters(param.zodTypeFragment)
-			return `${param.name} ${subParamsSummary}`
-		}
+	return rawParams
+		.map((param) => {
+			if (param.zodTypeFragment.startsWith(`${param.name}: z.object`)) {
+				const subParamsSummary = extractSubParameters(param.zodTypeFragment)
+				return `${param.name} ${subParamsSummary}`
+			}
 
-		const typeMatch = param.zodTypeFragment.match(/:\s*z\.(\w+)/)
-		let baseType = typeMatch ? typeMatch[1] : param.typeScriptType.split(':')[0].trim()
+			const typeMatch = param.zodTypeFragment.match(/:\s*z\.(\w+)/)
+			let baseType = typeMatch ? typeMatch[1] : param.typeScriptType.split(':')[0].trim()
 
-		if (param.zodTypeFragment.includes('string')) {
-			baseType = ``
-		}
-		else if (param.zodTypeFragment.includes('z.array(')) {
-			baseType = ` array of ${baseType}`
-		}
-		else if (param.zodTypeFragment.includes('z.enum(')) {
-			const enumSummary = extractEnumValues(param.zodTypeFragment)
-			baseType = ` enum ${enumSummary}`
-		}
-		else if (param.zodTypeFragment.includes('z.union(')) {
-			baseType = ` union`
-		}
+			if (param.zodTypeFragment.includes('string')) {
+				baseType = ``
+			} else if (param.zodTypeFragment.includes('z.array(')) {
+				baseType = ` array of ${baseType}`
+			} else if (param.zodTypeFragment.includes('z.enum(')) {
+				const enumSummary = extractEnumValues(param.zodTypeFragment)
+				baseType = ` enum ${enumSummary}`
+			} else if (param.zodTypeFragment.includes('z.union(')) {
+				baseType = ` union`
+			}
 
-		return `${param.name}${baseType}`
-	}).join('; ')
+			return `${param.name}${baseType}`
+		})
+		.join('; ')
 }
 
 /**
@@ -111,8 +109,7 @@ function formatReturnKeys(keys: string[]): string {
 
 	if (keys.length <= MAX_RETURN_KEYS) {
 		return keys.join(', ')
-	}
-	else {
+	} else {
 		const representativeKeys = keys.slice(0, MAX_RETURN_KEYS)
 		return `${representativeKeys.join(', ')}, and ${keys.length - MAX_RETURN_KEYS} more. Refer to tool schema for full list.`
 	}
@@ -125,7 +122,7 @@ async function generateToolDocumentation() {
 	try {
 		const schemas = buildToolSchemas()
 
-		const toolDocs: ToolDoc[] = schemas.map(schema => ({
+		const toolDocs: ToolDoc[] = schemas.map((schema) => ({
 			tool_name: schema.name,
 			description: schema.description,
 			parameters_summary: formatParameters(schema._raw_parameters),
@@ -133,9 +130,10 @@ async function generateToolDocumentation() {
 		}))
 
 		fs.writeFileSync(EXPORT_FILE_PATH, JSON.stringify(toolDocs, null, '\t'))
-		console.log(`Successfully generated ${EXPORT_FILE_PATH} with ${toolDocs.length} tool documents.`)
-	}
-	catch (error) {
+		console.log(
+			`Successfully generated ${EXPORT_FILE_PATH} with ${toolDocs.length} tool documents.`,
+		)
+	} catch (error) {
 		console.error('Error generating tool documentation:', error)
 		if (error instanceof Error && error.stack) {
 			console.error(error.stack)

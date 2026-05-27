@@ -5,16 +5,12 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
-		"types": [
-			"vitest/globals"
-		],
+		"types": ["vitest/globals"],
 		"strict": true,
 		"declaration": true,
 		"outDir": "dist",
 		"esModuleInterop": true,
 		"skipLibCheck": true
 	},
-	"include": [
-		"src/**/*"
-	]
+	"include": ["src/**/*"]
 }

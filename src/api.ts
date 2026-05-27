@@ -48,8 +48,13 @@ export interface SearchSymbolNameOptions extends OptionalLimitOption {
  * @returns A promise that resolves to an array of symbol search results.
  * @throws {Error} If the query parameter is not provided.
  */
-export async function searchSymbol(query: string, options: SearchSymbolNameOptions = {}): Promise<FMPTypes.SymbolSearchResult[]> {
-	if (!query) { throw new Error('Query parameter is required for searchSymbol') }
+export async function searchSymbol(
+	query: string,
+	options: SearchSymbolNameOptions = {},
+): Promise<FMPTypes.SymbolSearchResult[]> {
+	if (!query) {
+		throw new Error('Query parameter is required for searchSymbol')
+	}
 	const searchParams = cleanQuery({ query, ...options })
 	return fmpApi.get('search-symbol', { searchParams }).json<FMPTypes.SymbolSearchResult[]>()
 }
@@ -61,8 +66,13 @@ export async function searchSymbol(query: string, options: SearchSymbolNameOptio
  * @returns A promise that resolves to an array of name search results.
  * @throws {Error} If the query parameter is not provided.
  */
-export async function searchName(query: string, options: SearchSymbolNameOptions = {}): Promise<FMPTypes.NameSearchResult[]> {
-	if (!query) { throw new Error('Query parameter is required for searchName') }
+export async function searchName(
+	query: string,
+	options: SearchSymbolNameOptions = {},
+): Promise<FMPTypes.NameSearchResult[]> {
+	if (!query) {
+		throw new Error('Query parameter is required for searchName')
+	}
 	const searchParams = cleanQuery({ query, ...options })
 	return fmpApi.get('search-name', { searchParams }).json<FMPTypes.NameSearchResult[]>()
 }
@@ -70,7 +80,7 @@ export async function searchName(query: string, options: SearchSymbolNameOptions
 /**
  * Options for CIK search operations.
  */
-export interface SearchCikOptions extends OptionalLimitOption { }
+export interface SearchCikOptions extends OptionalLimitOption {}
 
 /**
  * Searches for companies by CIK (Central Index Key).
@@ -79,8 +89,13 @@ export interface SearchCikOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of CIK search results.
  * @throws {Error} If the CIK parameter is not provided.
  */
-export async function searchCik(cik: string, options: SearchCikOptions = {}): Promise<FMPTypes.CikSearchResult[]> {
-	if (!cik) { throw new Error('CIK parameter is required for searchCik') }
+export async function searchCik(
+	cik: string,
+	options: SearchCikOptions = {},
+): Promise<FMPTypes.CikSearchResult[]> {
+	if (!cik) {
+		throw new Error('CIK parameter is required for searchCik')
+	}
 	const searchParams = cleanQuery({ cik, ...options })
 	return fmpApi.get('search-cik', { searchParams }).json<FMPTypes.CikSearchResult[]>()
 }
@@ -92,7 +107,9 @@ export async function searchCik(cik: string, options: SearchCikOptions = {}): Pr
  * @throws {Error} If the CUSIP parameter is not provided.
  */
 export async function searchCusip(cusip: string): Promise<FMPTypes.CusipSearchResult[]> {
-	if (!cusip) { throw new Error('CUSIP parameter is required for searchCusip') }
+	if (!cusip) {
+		throw new Error('CUSIP parameter is required for searchCusip')
+	}
 	const searchParams = { cusip }
 	return fmpApi.get('search-cusip', { searchParams }).json<FMPTypes.CusipSearchResult[]>()
 }
@@ -104,7 +121,9 @@ export async function searchCusip(cusip: string): Promise<FMPTypes.CusipSearchRe
  * @throws {Error} If the ISIN parameter is not provided.
  */
 export async function searchIsin(isin: string): Promise<FMPTypes.IsinSearchResult[]> {
-	if (!isin) { throw new Error('ISIN parameter is required for searchIsin') }
+	if (!isin) {
+		throw new Error('ISIN parameter is required for searchIsin')
+	}
 	const searchParams = { isin }
 	return fmpApi.get('search-isin', { searchParams }).json<FMPTypes.IsinSearchResult[]>()
 }
@@ -159,7 +178,9 @@ export interface StockScreenerParams {
  * @param [params] Parameters for screening stocks.
  * @returns A promise that resolves to an array of companies matching the screening criteria.
  */
-export async function stockScreener(params: StockScreenerParams = {}): Promise<FMPTypes.StockScreenerResult[]> {
+export async function stockScreener(
+	params: StockScreenerParams = {},
+): Promise<FMPTypes.StockScreenerResult[]> {
 	const searchParams = cleanQuery(params)
 	return fmpApi.get('company-screener', { searchParams }).json<FMPTypes.StockScreenerResult[]>()
 }
@@ -171,7 +192,9 @@ export async function stockScreener(params: StockScreenerParams = {}): Promise<F
  * @throws {Error} If the symbol parameter is not provided.
  */
 export async function searchExchangeVariants(symbol: string): Promise<FMPTypes.ExchangeVariant[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for searchExchangeVariants') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for searchExchangeVariants')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('search-exchange-variants', { searchParams }).json<FMPTypes.ExchangeVariant[]>()
 }
@@ -194,14 +217,16 @@ export async function listCompanySymbols(): Promise<FMPTypes.CompanySymbol[]> {
  * Retrieves a list of symbols for companies that have financial statements available.
  * @returns A promise that resolves to an array of financial statement symbols.
  */
-export async function listFinancialStatementSymbols(): Promise<FMPTypes.FinancialStatementSymbol[]> {
+export async function listFinancialStatementSymbols(): Promise<
+	FMPTypes.FinancialStatementSymbol[]
+> {
 	return fmpApi.get('financial-statement-symbol-list').json<FMPTypes.FinancialStatementSymbol[]>()
 }
 
 /**
  * Options for CIK list.
  */
-export interface CikListOptions extends OptionalLimitOption { }
+export interface CikListOptions extends OptionalLimitOption {}
 /**
  * Retrieves a list of CIKs (Central Index Keys).
  * @param [options] Optional parameters.
@@ -225,7 +250,9 @@ export interface SymbolChangesListOptions extends OptionalLimitOption {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of symbol changes.
  */
-export async function listSymbolChanges(options: SymbolChangesListOptions = {}): Promise<FMPTypes.SymbolChange[]> {
+export async function listSymbolChanges(
+	options: SymbolChangesListOptions = {},
+): Promise<FMPTypes.SymbolChange[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('symbol-change', { searchParams }).json<FMPTypes.SymbolChange[]>()
 }
@@ -299,9 +326,16 @@ export interface FinancialEstimatesOptions extends OptionalPaginationOptions {
  * @returns A promise that resolves to an array of financial estimates.
  * @throws {Error} If symbol or period is not provided.
  */
-export async function financialEstimates(symbol: string, options: FinancialEstimatesOptions): Promise<FMPTypes.FinancialEstimate[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialEstimates') }
-	if (!options.period) { throw new Error('Period option is required for getFinancialEstimates') }
+export async function financialEstimates(
+	symbol: string,
+	options: FinancialEstimatesOptions,
+): Promise<FMPTypes.FinancialEstimate[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialEstimates')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getFinancialEstimates')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('analyst-estimates', { searchParams }).json<FMPTypes.FinancialEstimate[]>()
 }
@@ -309,7 +343,7 @@ export async function financialEstimates(symbol: string, options: FinancialEstim
 /**
  * Options for retrieving ratings snapshot.
  */
-export interface RatingsSnapshotOptions extends OptionalLimitOption { }
+export interface RatingsSnapshotOptions extends OptionalLimitOption {}
 
 /**
  * Retrieves a snapshot of financial ratings for a given stock symbol.
@@ -318,8 +352,13 @@ export interface RatingsSnapshotOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array containing the ratings snapshot.
  * @throws {Error} If symbol is not provided.
  */
-export async function ratingsSnapshot(symbol: string, options: RatingsSnapshotOptions = {}): Promise<FMPTypes.RatingSnapshot[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getRatingsSnapshot') }
+export async function ratingsSnapshot(
+	symbol: string,
+	options: RatingsSnapshotOptions = {},
+): Promise<FMPTypes.RatingSnapshot[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getRatingsSnapshot')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('ratings-snapshot', { searchParams }).json<FMPTypes.RatingSnapshot[]>()
 }
@@ -327,7 +366,7 @@ export async function ratingsSnapshot(symbol: string, options: RatingsSnapshotOp
 /**
  * Options for retrieving historical ratings.
  */
-export interface HistoricalRatingsOptions extends OptionalLimitOption { }
+export interface HistoricalRatingsOptions extends OptionalLimitOption {}
 /**
  * Retrieves historical financial ratings for a given stock symbol.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -335,8 +374,13 @@ export interface HistoricalRatingsOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of historical ratings.
  * @throws {Error} If symbol is not provided.
  */
-export async function historicalRatings(symbol: string, options: HistoricalRatingsOptions = {}): Promise<FMPTypes.HistoricalRating[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getHistoricalRatings') }
+export async function historicalRatings(
+	symbol: string,
+	options: HistoricalRatingsOptions = {},
+): Promise<FMPTypes.HistoricalRating[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getHistoricalRatings')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('ratings-historical', { searchParams }).json<FMPTypes.HistoricalRating[]>()
 }
@@ -348,7 +392,9 @@ export async function historicalRatings(symbol: string, options: HistoricalRatin
  * @throws {Error} If symbol is not provided.
  */
 export async function priceTargetSummary(symbol: string): Promise<FMPTypes.PriceTargetSummary[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getPriceTargetSummary') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getPriceTargetSummary')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('price-target-summary', { searchParams }).json<FMPTypes.PriceTargetSummary[]>()
 }
@@ -359,16 +405,22 @@ export async function priceTargetSummary(symbol: string): Promise<FMPTypes.Price
  * @returns A promise that resolves to an array containing the price target consensus.
  * @throws {Error} If symbol is not provided.
  */
-export async function priceTargetConsensus(symbol: string): Promise<FMPTypes.PriceTargetConsensus[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getPriceTargetConsensus') }
+export async function priceTargetConsensus(
+	symbol: string,
+): Promise<FMPTypes.PriceTargetConsensus[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getPriceTargetConsensus')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('price-target-consensus', { searchParams }).json<FMPTypes.PriceTargetConsensus[]>()
+	return fmpApi
+		.get('price-target-consensus', { searchParams })
+		.json<FMPTypes.PriceTargetConsensus[]>()
 }
 
 /**
  * Options for retrieving price target news.
  */
-export interface PriceTargetNewsOptions extends OptionalPaginationOptions { }
+export interface PriceTargetNewsOptions extends OptionalPaginationOptions {}
 
 /**
  * Retrieves news articles related to analyst price target changes for a given stock symbol.
@@ -377,8 +429,13 @@ export interface PriceTargetNewsOptions extends OptionalPaginationOptions { }
  * @returns A promise that resolves to an array of price target news items.
  * @throws {Error} If symbol is not provided.
  */
-export async function priceTargetNews(symbol: string, options: PriceTargetNewsOptions = {}): Promise<FMPTypes.PriceTargetNewsItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getPriceTargetNews') }
+export async function priceTargetNews(
+	symbol: string,
+	options: PriceTargetNewsOptions = {},
+): Promise<FMPTypes.PriceTargetNewsItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getPriceTargetNews')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('price-target-news', { searchParams }).json<FMPTypes.PriceTargetNewsItem[]>()
 }
@@ -386,15 +443,19 @@ export async function priceTargetNews(symbol: string, options: PriceTargetNewsOp
 /**
  * Options for retrieving latest price target news.
  */
-export interface LatestPriceTargetNewsOptions extends OptionalPaginationOptions { }
+export interface LatestPriceTargetNewsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest price target news across all stock symbols.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of price target news items.
  */
-export async function latestPriceTargetNews(options: LatestPriceTargetNewsOptions = {}): Promise<FMPTypes.PriceTargetNewsItem[]> {
+export async function latestPriceTargetNews(
+	options: LatestPriceTargetNewsOptions = {},
+): Promise<FMPTypes.PriceTargetNewsItem[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('price-target-latest-news', { searchParams }).json<FMPTypes.PriceTargetNewsItem[]>()
+	return fmpApi
+		.get('price-target-latest-news', { searchParams })
+		.json<FMPTypes.PriceTargetNewsItem[]>()
 }
 
 /**
@@ -404,7 +465,9 @@ export async function latestPriceTargetNews(options: LatestPriceTargetNewsOption
  * @throws {Error} If symbol is not provided.
  */
 export async function stockGrades(symbol: string): Promise<FMPTypes.StockGrade[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockGrades') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockGrades')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('grades', { searchParams }).json<FMPTypes.StockGrade[]>()
 }
@@ -412,7 +475,7 @@ export async function stockGrades(symbol: string): Promise<FMPTypes.StockGrade[]
 /**
  * Options for retrieving historical stock grades.
  */
-export interface HistoricalStockGradesOptions extends OptionalLimitOption { }
+export interface HistoricalStockGradesOptions extends OptionalLimitOption {}
 /**
  * Retrieves historical stock grades for a given stock symbol. This endpoint returns a summary of buy/hold/sell counts per date.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -420,10 +483,17 @@ export interface HistoricalStockGradesOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of historical stock grade summaries.
  * @throws {Error} If symbol is not provided.
  */
-export async function historicalStockGrades(symbol: string, options: HistoricalStockGradesOptions = {}): Promise<FMPTypes.HistoricalStockGradeSummary[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getHistoricalStockGrades') }
+export async function historicalStockGrades(
+	symbol: string,
+	options: HistoricalStockGradesOptions = {},
+): Promise<FMPTypes.HistoricalStockGradeSummary[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getHistoricalStockGrades')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('grades-historical', { searchParams }).json<FMPTypes.HistoricalStockGradeSummary[]>()
+	return fmpApi
+		.get('grades-historical', { searchParams })
+		.json<FMPTypes.HistoricalStockGradeSummary[]>()
 }
 
 /**
@@ -433,7 +503,9 @@ export async function historicalStockGrades(symbol: string, options: HistoricalS
  * @throws {Error} If symbol is not provided.
  */
 export async function stockGradeConsensus(symbol: string): Promise<FMPTypes.StockGradeConsensus[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockGradeConsensus') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockGradeConsensus')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('grades-consensus', { searchParams }).json<FMPTypes.StockGradeConsensus[]>()
 }
@@ -441,7 +513,7 @@ export async function stockGradeConsensus(symbol: string): Promise<FMPTypes.Stoc
 /**
  * Options for retrieving stock grade news.
  */
-export interface StockGradeNewsOptions extends OptionalPaginationOptions { }
+export interface StockGradeNewsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves news articles related to analyst stock grade changes for a given stock symbol.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -449,8 +521,13 @@ export interface StockGradeNewsOptions extends OptionalPaginationOptions { }
  * @returns A promise that resolves to an array of stock grade news items.
  * @throws {Error} If symbol is not provided.
  */
-export async function stockGradeNews(symbol: string, options: StockGradeNewsOptions = {}): Promise<FMPTypes.StockGradeNewsItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockGradeNews') }
+export async function stockGradeNews(
+	symbol: string,
+	options: StockGradeNewsOptions = {},
+): Promise<FMPTypes.StockGradeNewsItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockGradeNews')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('grades-news', { searchParams }).json<FMPTypes.StockGradeNewsItem[]>()
 }
@@ -458,13 +535,15 @@ export async function stockGradeNews(symbol: string, options: StockGradeNewsOpti
 /**
  * Options for retrieving latest stock grade news.
  */
-export interface LatestStockGradeNewsOptions extends OptionalPaginationOptions { }
+export interface LatestStockGradeNewsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest stock grade news across all stock symbols.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of stock grade news items.
  */
-export async function latestStockGradeNews(options: LatestStockGradeNewsOptions = {}): Promise<FMPTypes.StockGradeNewsItem[]> {
+export async function latestStockGradeNews(
+	options: LatestStockGradeNewsOptions = {},
+): Promise<FMPTypes.StockGradeNewsItem[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('grades-latest-news', { searchParams }).json<FMPTypes.StockGradeNewsItem[]>()
 }
@@ -478,7 +557,7 @@ export async function latestStockGradeNews(options: LatestStockGradeNewsOptions 
 /**
  * Options for retrieving company dividend history.
  */
-export interface CompanyDividendsOptions extends OptionalLimitOption { }
+export interface CompanyDividendsOptions extends OptionalLimitOption {}
 /**
  * Retrieves dividend history for a specific company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -486,8 +565,13 @@ export interface CompanyDividendsOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of company dividend records.
  * @throws {Error} If symbol is not provided.
  */
-export async function companyDividends(symbol: string, options: CompanyDividendsOptions = {}): Promise<FMPTypes.CompanyDividend[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyDividends') }
+export async function companyDividends(
+	symbol: string,
+	options: CompanyDividendsOptions = {},
+): Promise<FMPTypes.CompanyDividend[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyDividends')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('dividends', { searchParams }).json<FMPTypes.CompanyDividend[]>()
 }
@@ -495,16 +579,22 @@ export async function companyDividends(symbol: string, options: CompanyDividends
 /**
  * Options for retrieving the dividends calendar.
  */
-export interface DividendsCalendarOptions extends RequiredRangeOptions { }
+export interface DividendsCalendarOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a calendar of dividend events for all stocks within a date range.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of calendar dividend records.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function dividendsCalendar(options: DividendsCalendarOptions): Promise<FMPTypes.CalendarDividend[]> {
-	if (!options.from) { throw new Error('From date option is required for getDividendsCalendar') }
-	if (!options.to) { throw new Error('To date option is required for getDividendsCalendar') }
+export async function dividendsCalendar(
+	options: DividendsCalendarOptions,
+): Promise<FMPTypes.CalendarDividend[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getDividendsCalendar')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getDividendsCalendar')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('dividends-calendar', { searchParams }).json<FMPTypes.CalendarDividend[]>()
 }
@@ -512,7 +602,7 @@ export async function dividendsCalendar(options: DividendsCalendarOptions): Prom
 /**
  * Options for retrieving company earnings reports.
  */
-export interface CompanyEarningsReportsOptions extends OptionalLimitOption { }
+export interface CompanyEarningsReportsOptions extends OptionalLimitOption {}
 /**
  * Retrieves earnings report history for a specific company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -520,8 +610,13 @@ export interface CompanyEarningsReportsOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of company earnings reports.
  * @throws {Error} If symbol is not provided.
  */
-export async function companyEarningsReports(symbol: string, options: CompanyEarningsReportsOptions = {}): Promise<FMPTypes.CompanyEarningsReport[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyEarningsReports') }
+export async function companyEarningsReports(
+	symbol: string,
+	options: CompanyEarningsReportsOptions = {},
+): Promise<FMPTypes.CompanyEarningsReport[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyEarningsReports')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('earnings', { searchParams }).json<FMPTypes.CompanyEarningsReport[]>()
 }
@@ -529,16 +624,22 @@ export async function companyEarningsReports(symbol: string, options: CompanyEar
 /**
  * Options for retrieving the earnings calendar.
  */
-export interface EarningsCalendarOptions extends RequiredRangeOptions { }
+export interface EarningsCalendarOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a calendar of earnings announcements for all stocks within a date range.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of company earnings reports.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function earningsCalendar(options: EarningsCalendarOptions): Promise<FMPTypes.CompanyEarningsReport[]> {
-	if (!options.from) { throw new Error('From date option is required for getEarningsCalendar') }
-	if (!options.to) { throw new Error('To date option is required for getEarningsCalendar') }
+export async function earningsCalendar(
+	options: EarningsCalendarOptions,
+): Promise<FMPTypes.CompanyEarningsReport[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getEarningsCalendar')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getEarningsCalendar')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('earnings-calendar', { searchParams }).json<FMPTypes.CompanyEarningsReport[]>()
 }
@@ -546,16 +647,22 @@ export async function earningsCalendar(options: EarningsCalendarOptions): Promis
 /**
  * Options for retrieving the IPOs calendar.
  */
-export interface IposCalendarOptions extends RequiredRangeOptions { }
+export interface IposCalendarOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a calendar of upcoming Initial Public Offerings (IPOs).
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of IPO calendar items.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function iposCalendar(options: IposCalendarOptions): Promise<FMPTypes.IpoCalendarItem[]> {
-	if (!options.from) { throw new Error('From date option is required for getIposCalendar') }
-	if (!options.to) { throw new Error('To date option is required for getIposCalendar') }
+export async function iposCalendar(
+	options: IposCalendarOptions,
+): Promise<FMPTypes.IpoCalendarItem[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getIposCalendar')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getIposCalendar')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('ipos-calendar', { searchParams }).json<FMPTypes.IpoCalendarItem[]>()
 }
@@ -563,16 +670,22 @@ export async function iposCalendar(options: IposCalendarOptions): Promise<FMPTyp
 /**
  * Options for retrieving IPO disclosures.
  */
-export interface IpoDisclosuresOptions extends RequiredRangeOptions { }
+export interface IpoDisclosuresOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a list of disclosure filings for upcoming IPOs.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of IPO disclosures.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function ipoDisclosures(options: IpoDisclosuresOptions): Promise<FMPTypes.IpoDisclosure[]> {
-	if (!options.from) { throw new Error('From date option is required for getIpoDisclosures') }
-	if (!options.to) { throw new Error('To date option is required for getIpoDisclosures') }
+export async function ipoDisclosures(
+	options: IpoDisclosuresOptions,
+): Promise<FMPTypes.IpoDisclosure[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getIpoDisclosures')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getIpoDisclosures')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('ipos-disclosure', { searchParams }).json<FMPTypes.IpoDisclosure[]>()
 }
@@ -580,16 +693,22 @@ export async function ipoDisclosures(options: IpoDisclosuresOptions): Promise<FM
 /**
  * Options for retrieving IPO prospectuses.
  */
-export interface IpoProspectusOptions extends RequiredRangeOptions { }
+export interface IpoProspectusOptions extends RequiredRangeOptions {}
 /**
  * Retrieves information on IPO prospectuses.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of IPO prospectus details.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function ipoProspectus(options: IpoProspectusOptions): Promise<FMPTypes.IpoProspectus[]> {
-	if (!options.from) { throw new Error('From date option is required for getIpoProspectus') }
-	if (!options.to) { throw new Error('To date option is required for getIpoProspectus') }
+export async function ipoProspectus(
+	options: IpoProspectusOptions,
+): Promise<FMPTypes.IpoProspectus[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getIpoProspectus')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getIpoProspectus')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('ipos-prospectus', { searchParams }).json<FMPTypes.IpoProspectus[]>()
 }
@@ -597,7 +716,7 @@ export async function ipoProspectus(options: IpoProspectusOptions): Promise<FMPT
 /**
  * Options for retrieving stock split details for a company.
  */
-export interface StockSplitDetailsOptions extends OptionalLimitOption { }
+export interface StockSplitDetailsOptions extends OptionalLimitOption {}
 /**
  * Retrieves stock split details for a specific company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -605,8 +724,13 @@ export interface StockSplitDetailsOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of stock split details.
  * @throws {Error} If symbol is not provided.
  */
-export async function stockSplitDetails(symbol: string, options: StockSplitDetailsOptions = {}): Promise<FMPTypes.StockSplitDetail[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockSplitDetails') }
+export async function stockSplitDetails(
+	symbol: string,
+	options: StockSplitDetailsOptions = {},
+): Promise<FMPTypes.StockSplitDetail[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockSplitDetails')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('splits', { searchParams }).json<FMPTypes.StockSplitDetail[]>()
 }
@@ -614,16 +738,22 @@ export async function stockSplitDetails(symbol: string, options: StockSplitDetai
 /**
  * Options for retrieving the stock splits calendar.
  */
-export interface StockSplitsCalendarOptions extends RequiredRangeOptions { }
+export interface StockSplitsCalendarOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a calendar of upcoming stock splits.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of stock split details.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function stockSplitsCalendar(options: StockSplitsCalendarOptions): Promise<FMPTypes.StockSplitDetail[]> {
-	if (!options.from) { throw new Error('From date option is required for getStockSplitsCalendar') }
-	if (!options.to) { throw new Error('To date option is required for getStockSplitsCalendar') }
+export async function stockSplitsCalendar(
+	options: StockSplitsCalendarOptions,
+): Promise<FMPTypes.StockSplitDetail[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getStockSplitsCalendar')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getStockSplitsCalendar')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('splits-calendar', { searchParams }).json<FMPTypes.StockSplitDetail[]>()
 }
@@ -637,7 +767,7 @@ export async function stockSplitsCalendar(options: StockSplitsCalendarOptions): 
 /**
  * Options for historical EOD (End of Day) chart data.
  */
-export interface HistoricalEodChartOptions extends OptionalRangeOptions { }
+export interface HistoricalEodChartOptions extends OptionalRangeOptions {}
 
 /**
  * Retrieves simplified historical end-of-day stock chart data (date, price, volume).
@@ -646,10 +776,17 @@ export interface HistoricalEodChartOptions extends OptionalRangeOptions { }
  * @returns A promise that resolves to an array of light stock chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function stockChartLight(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartLightItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockChartLight') }
+export async function stockChartLight(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartLightItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockChartLight')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/light', { searchParams }).json<FMPTypes.StockChartLightItem[]>()
+	return fmpApi
+		.get('historical-price-eod/light', { searchParams })
+		.json<FMPTypes.StockChartLightItem[]>()
 }
 
 /**
@@ -659,10 +796,17 @@ export async function stockChartLight(symbol: string, options: HistoricalEodChar
  * @returns A promise that resolves to an array of full stock chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function stockChartFull(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartFullItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockChartFull') }
+export async function stockChartFull(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartFullItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockChartFull')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/full', { searchParams }).json<FMPTypes.StockChartFullItem[]>()
+	return fmpApi
+		.get('historical-price-eod/full', { searchParams })
+		.json<FMPTypes.StockChartFullItem[]>()
 }
 
 /**
@@ -672,10 +816,17 @@ export async function stockChartFull(symbol: string, options: HistoricalEodChart
  * @returns A promise that resolves to an array of unadjusted stock chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function unadjustedStockChart(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.UnadjustedStockChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getUnadjustedStockChart') }
+export async function unadjustedStockChart(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.UnadjustedStockChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getUnadjustedStockChart')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/non-split-adjusted', { searchParams }).json<FMPTypes.UnadjustedStockChartItem[]>()
+	return fmpApi
+		.get('historical-price-eod/non-split-adjusted', { searchParams })
+		.json<FMPTypes.UnadjustedStockChartItem[]>()
 }
 
 /**
@@ -685,10 +836,17 @@ export async function unadjustedStockChart(symbol: string, options: HistoricalEo
  * @returns A promise that resolves to an array of dividend-adjusted stock chart items (structure matches UnadjustedStockChartItem).
  * @throws {Error} If symbol is not provided.
  */
-export async function dividendAdjustedStockChart(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.UnadjustedStockChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getDividendAdjustedStockChart') }
+export async function dividendAdjustedStockChart(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.UnadjustedStockChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getDividendAdjustedStockChart')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/dividend-adjusted', { searchParams }).json<FMPTypes.UnadjustedStockChartItem[]>()
+	return fmpApi
+		.get('historical-price-eod/dividend-adjusted', { searchParams })
+		.json<FMPTypes.UnadjustedStockChartItem[]>()
 }
 
 /**
@@ -707,11 +865,21 @@ export interface HistoricalIntradayChartOptions extends OptionalRangeOptions {
  * @returns A promise that resolves to an array of base chart items.
  * @throws {Error} If symbol or timeframe is not provided.
  */
-export async function historicalIntradayChart(symbol: string, timeframe: FMPTypes.IntradayTimeframe, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for historicalIntradayChart') }
-	if (!timeframe) { throw new Error('Timeframe parameter is required for historicalIntradayChart') }
+export async function historicalIntradayChart(
+	symbol: string,
+	timeframe: FMPTypes.IntradayTimeframe,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for historicalIntradayChart')
+	}
+	if (!timeframe) {
+		throw new Error('Timeframe parameter is required for historicalIntradayChart')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get(`historical-chart/${timeframe}`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
+	return fmpApi
+		.get(`historical-chart/${timeframe}`, { searchParams })
+		.json<FMPTypes.BaseChartItem[]>()
 }
 
 /**
@@ -720,7 +888,10 @@ export async function historicalIntradayChart(symbol: string, timeframe: FMPType
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 1-minute chart items.
  */
-export async function stockChart1Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart1Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '1min', options)
 }
 
@@ -730,7 +901,10 @@ export async function stockChart1Min(symbol: string, options: HistoricalIntraday
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 5-minute chart items.
  */
-export async function stockChart5Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart5Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '5min', options)
 }
 
@@ -740,7 +914,10 @@ export async function stockChart5Min(symbol: string, options: HistoricalIntraday
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 15-minute chart items.
  */
-export async function stockChart15Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart15Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '15min', options)
 }
 
@@ -750,7 +927,10 @@ export async function stockChart15Min(symbol: string, options: HistoricalIntrada
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 30-minute chart items.
  */
-export async function stockChart30Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart30Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '30min', options)
 }
 
@@ -760,7 +940,10 @@ export async function stockChart30Min(symbol: string, options: HistoricalIntrada
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 1-hour chart items.
  */
-export async function stockChart1Hour(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart1Hour(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '1hour', options)
 }
 
@@ -770,7 +953,10 @@ export async function stockChart1Hour(symbol: string, options: HistoricalIntrada
  * @param [options] Optional date range and adjustment settings.
  * @returns A promise that resolves to an array of 4-hour chart items.
  */
-export async function stockChart4Hour(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
+export async function stockChart4Hour(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
 	return historicalIntradayChart(symbol, '4hour', options)
 }
 
@@ -787,7 +973,9 @@ export async function stockChart4Hour(symbol: string, options: HistoricalIntrada
  * @throws {Error} If symbol is not provided.
  */
 export async function companyProfile(symbol: string): Promise<FMPTypes.CompanyProfile[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyProfile') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyProfile')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('profile', { searchParams }).json<FMPTypes.CompanyProfile[]>()
 }
@@ -799,7 +987,9 @@ export async function companyProfile(symbol: string): Promise<FMPTypes.CompanyPr
  * @throws {Error} If CIK is not provided.
  */
 export async function companyProfileByCik(cik: string): Promise<FMPTypes.CompanyProfile[]> {
-	if (!cik) { throw new Error('CIK parameter is required for getCompanyProfileByCik') }
+	if (!cik) {
+		throw new Error('CIK parameter is required for getCompanyProfileByCik')
+	}
 	const searchParams = { cik }
 	return fmpApi.get('profile-cik', { searchParams }).json<FMPTypes.CompanyProfile[]>()
 }
@@ -811,7 +1001,9 @@ export async function companyProfileByCik(cik: string): Promise<FMPTypes.Company
  * @throws {Error} If symbol is not provided.
  */
 export async function companyNotes(symbol: string): Promise<FMPTypes.CompanyNote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyNotes') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyNotes')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('company-notes', { searchParams }).json<FMPTypes.CompanyNote[]>()
 }
@@ -823,7 +1015,9 @@ export async function companyNotes(symbol: string): Promise<FMPTypes.CompanyNote
  * @throws {Error} If symbol is not provided.
  */
 export async function stockPeers(symbol: string): Promise<FMPTypes.StockPeer[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockPeers') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockPeers')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('stock-peers', { searchParams }).json<FMPTypes.StockPeer[]>()
 }
@@ -831,13 +1025,15 @@ export async function stockPeers(symbol: string): Promise<FMPTypes.StockPeer[]> 
 /**
  * Options for retrieving delisted companies.
  */
-export interface DelistedCompaniesOptions extends OptionalPaginationOptions { }
+export interface DelistedCompaniesOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves a list of delisted companies.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of delisted companies.
  */
-export async function delistedCompanies(options: DelistedCompaniesOptions = {}): Promise<FMPTypes.DelistedCompany[]> {
+export async function delistedCompanies(
+	options: DelistedCompaniesOptions = {},
+): Promise<FMPTypes.DelistedCompany[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('delisted-companies', { searchParams }).json<FMPTypes.DelistedCompany[]>()
 }
@@ -845,7 +1041,7 @@ export async function delistedCompanies(options: DelistedCompaniesOptions = {}):
 /**
  * Options for retrieving company employee count.
  */
-export interface CompanyEmployeeCountOptions extends OptionalLimitOption { }
+export interface CompanyEmployeeCountOptions extends OptionalLimitOption {}
 /**
  * Retrieves employee count information for a given company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -853,8 +1049,13 @@ export interface CompanyEmployeeCountOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of company employee count records.
  * @throws {Error} If symbol is not provided.
  */
-export async function companyEmployeeCount(symbol: string, options: CompanyEmployeeCountOptions = {}): Promise<FMPTypes.CompanyEmployeeCount[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyEmployeeCount') }
+export async function companyEmployeeCount(
+	symbol: string,
+	options: CompanyEmployeeCountOptions = {},
+): Promise<FMPTypes.CompanyEmployeeCount[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyEmployeeCount')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('employee-count', { searchParams }).json<FMPTypes.CompanyEmployeeCount[]>()
 }
@@ -866,10 +1067,17 @@ export async function companyEmployeeCount(symbol: string, options: CompanyEmplo
  * @returns A promise that resolves to an array of historical company employee count records.
  * @throws {Error} If symbol is not provided.
  */
-export async function historicalCompanyEmployeeCount(symbol: string, options: CompanyEmployeeCountOptions = {}): Promise<FMPTypes.CompanyEmployeeCount[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getHistoricalCompanyEmployeeCount') }
+export async function historicalCompanyEmployeeCount(
+	symbol: string,
+	options: CompanyEmployeeCountOptions = {},
+): Promise<FMPTypes.CompanyEmployeeCount[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getHistoricalCompanyEmployeeCount')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-employee-count', { searchParams }).json<FMPTypes.CompanyEmployeeCount[]>()
+	return fmpApi
+		.get('historical-employee-count', { searchParams })
+		.json<FMPTypes.CompanyEmployeeCount[]>()
 }
 
 /**
@@ -879,7 +1087,9 @@ export async function historicalCompanyEmployeeCount(symbol: string, options: Co
  * @throws {Error} If symbol is not provided.
  */
 export async function companyMarketCap(symbol: string): Promise<FMPTypes.CompanyMarketCap[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyMarketCap') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyMarketCap')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('market-capitalization', { searchParams }).json<FMPTypes.CompanyMarketCap[]>()
 }
@@ -891,15 +1101,19 @@ export async function companyMarketCap(symbol: string): Promise<FMPTypes.Company
  * @throws {Error} If symbols array is not provided or is empty.
  */
 export async function batchMarketCap(symbols: string[]): Promise<FMPTypes.CompanyMarketCap[]> {
-	if (!symbols || symbols.length === 0) { throw new Error('Symbols array is required for getBatchMarketCap') }
+	if (!symbols || symbols.length === 0) {
+		throw new Error('Symbols array is required for getBatchMarketCap')
+	}
 	const searchParams = cleanQuery({ symbols }) // cleanQuery handles array to comma-separated string
-	return fmpApi.get('market-capitalization-batch', { searchParams }).json<FMPTypes.CompanyMarketCap[]>()
+	return fmpApi
+		.get('market-capitalization-batch', { searchParams })
+		.json<FMPTypes.CompanyMarketCap[]>()
 }
 
 /**
  * Options for retrieving historical market capitalization.
  */
-export interface HistoricalMarketCapOptions extends OptionalLimitOption, OptionalRangeOptions { }
+export interface HistoricalMarketCapOptions extends OptionalLimitOption, OptionalRangeOptions {}
 /**
  * Retrieves historical market capitalization data for a company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -907,10 +1121,17 @@ export interface HistoricalMarketCapOptions extends OptionalLimitOption, Optiona
  * @returns A promise that resolves to an array of historical market capitalizations.
  * @throws {Error} If symbol is not provided.
  */
-export async function historicalMarketCap(symbol: string, options: HistoricalMarketCapOptions = {}): Promise<FMPTypes.CompanyMarketCap[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getHistoricalMarketCap') }
+export async function historicalMarketCap(
+	symbol: string,
+	options: HistoricalMarketCapOptions = {},
+): Promise<FMPTypes.CompanyMarketCap[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getHistoricalMarketCap')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-market-capitalization', { searchParams }).json<FMPTypes.CompanyMarketCap[]>()
+	return fmpApi
+		.get('historical-market-capitalization', { searchParams })
+		.json<FMPTypes.CompanyMarketCap[]>()
 }
 
 /**
@@ -920,7 +1141,9 @@ export async function historicalMarketCap(symbol: string, options: HistoricalMar
  * @throws {Error} If symbol is not provided.
  */
 export async function companySharesFloat(symbol: string): Promise<FMPTypes.CompanySharesFloat[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanySharesFloat') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanySharesFloat')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('shares-float', { searchParams }).json<FMPTypes.CompanySharesFloat[]>()
 }
@@ -928,13 +1151,15 @@ export async function companySharesFloat(symbol: string): Promise<FMPTypes.Compa
 /**
  * Options for retrieving all shares float data.
  */
-export interface AllSharesFloatOptions extends OptionalPaginationOptions { }
+export interface AllSharesFloatOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves shares float data for all available companies.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of company shares float data.
  */
-export async function allSharesFloat(options: AllSharesFloatOptions = {}): Promise<FMPTypes.CompanySharesFloat[]> {
+export async function allSharesFloat(
+	options: AllSharesFloatOptions = {},
+): Promise<FMPTypes.CompanySharesFloat[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('shares-float-all', { searchParams }).json<FMPTypes.CompanySharesFloat[]>()
 }
@@ -942,15 +1167,19 @@ export async function allSharesFloat(options: AllSharesFloatOptions = {}): Promi
 /**
  * Options for retrieving latest mergers and acquisitions.
  */
-export interface LatestMergersAcquisitionsOptions extends OptionalPaginationOptions { }
+export interface LatestMergersAcquisitionsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest mergers and acquisitions data.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of merger and acquisition records.
  */
-export async function latestMergersAcquisitions(options: LatestMergersAcquisitionsOptions = {}): Promise<FMPTypes.MergerAcquisition[]> {
+export async function latestMergersAcquisitions(
+	options: LatestMergersAcquisitionsOptions = {},
+): Promise<FMPTypes.MergerAcquisition[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('mergers-acquisitions-latest', { searchParams }).json<FMPTypes.MergerAcquisition[]>()
+	return fmpApi
+		.get('mergers-acquisitions-latest', { searchParams })
+		.json<FMPTypes.MergerAcquisition[]>()
 }
 
 /**
@@ -959,10 +1188,16 @@ export async function latestMergersAcquisitions(options: LatestMergersAcquisitio
  * @returns A promise that resolves to an array of merger and acquisition records.
  * @throws {Error} If name is not provided.
  */
-export async function searchMergersAcquisitions(name: string): Promise<FMPTypes.MergerAcquisition[]> {
-	if (!name) { throw new Error('Name parameter is required for searchMergersAcquisitions') }
+export async function searchMergersAcquisitions(
+	name: string,
+): Promise<FMPTypes.MergerAcquisition[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for searchMergersAcquisitions')
+	}
 	const searchParams = { name }
-	return fmpApi.get('mergers-acquisitions-search', { searchParams }).json<FMPTypes.MergerAcquisition[]>()
+	return fmpApi
+		.get('mergers-acquisitions-search', { searchParams })
+		.json<FMPTypes.MergerAcquisition[]>()
 }
 
 /**
@@ -979,8 +1214,13 @@ export interface CompanyExecutivesOptions {
  * @returns A promise that resolves to an array of company executives.
  * @throws {Error} If symbol is not provided.
  */
-export async function companyExecutives(symbol: string, options: CompanyExecutivesOptions = {}): Promise<FMPTypes.CompanyExecutive[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCompanyExecutives') }
+export async function companyExecutives(
+	symbol: string,
+	options: CompanyExecutivesOptions = {},
+): Promise<FMPTypes.CompanyExecutive[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCompanyExecutives')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('key-executives', { searchParams }).json<FMPTypes.CompanyExecutive[]>()
 }
@@ -991,10 +1231,16 @@ export async function companyExecutives(symbol: string, options: CompanyExecutiv
  * @returns A promise that resolves to an array of executive compensation records.
  * @throws {Error} If symbol is not provided.
  */
-export async function executiveCompensation(symbol: string): Promise<FMPTypes.ExecutiveCompensation[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getExecutiveCompensation') }
+export async function executiveCompensation(
+	symbol: string,
+): Promise<FMPTypes.ExecutiveCompensation[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getExecutiveCompensation')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('governance-executive-compensation', { searchParams }).json<FMPTypes.ExecutiveCompensation[]>()
+	return fmpApi
+		.get('governance-executive-compensation', { searchParams })
+		.json<FMPTypes.ExecutiveCompensation[]>()
 }
 
 /**
@@ -1003,10 +1249,16 @@ export async function executiveCompensation(symbol: string): Promise<FMPTypes.Ex
  * @returns A promise that resolves to an array of executive compensation benchmarks.
  * @throws {Error} If year is not provided.
  */
-export async function executiveCompensationBenchmark(year: string | number): Promise<FMPTypes.ExecutiveCompensationBenchmark[]> {
-	if (!year) { throw new Error('Year parameter is required for getExecutiveCompensationBenchmark') }
+export async function executiveCompensationBenchmark(
+	year: string | number,
+): Promise<FMPTypes.ExecutiveCompensationBenchmark[]> {
+	if (!year) {
+		throw new Error('Year parameter is required for getExecutiveCompensationBenchmark')
+	}
 	const searchParams = { year }
-	return fmpApi.get('executive-compensation-benchmark', { searchParams }).json<FMPTypes.ExecutiveCompensationBenchmark[]>()
+	return fmpApi
+		.get('executive-compensation-benchmark', { searchParams })
+		.json<FMPTypes.ExecutiveCompensationBenchmark[]>()
 }
 
 /**
@@ -1045,9 +1297,13 @@ export interface CotAnalysisOptions extends OptionalRangeOptions {
  * @param [options] Optional parameters to filter analysis by symbol and date range.
  * @returns A promise that resolves to an array of COT analysis records.
  */
-export async function cotAnalysis(options: CotAnalysisOptions = {}): Promise<FMPTypes.CotAnalysis[]> {
+export async function cotAnalysis(
+	options: CotAnalysisOptions = {},
+): Promise<FMPTypes.CotAnalysis[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('commitment-of-traders-analysis', { searchParams }).json<FMPTypes.CotAnalysis[]>()
+	return fmpApi
+		.get('commitment-of-traders-analysis', { searchParams })
+		.json<FMPTypes.CotAnalysis[]>()
 }
 
 /**
@@ -1071,7 +1327,9 @@ export async function cotReportList(): Promise<FMPTypes.CotReportListItem[]> {
  * @throws {Error} If symbol is not provided.
  */
 export async function dcfValuation(symbol: string): Promise<FMPTypes.DcfValuation[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getDcfValuation') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getDcfValuation')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('discounted-cash-flow', { searchParams }).json<FMPTypes.DcfValuation[]>()
 }
@@ -1083,9 +1341,13 @@ export async function dcfValuation(symbol: string): Promise<FMPTypes.DcfValuatio
  * @throws {Error} If symbol is not provided.
  */
 export async function leveredDcfValuation(symbol: string): Promise<FMPTypes.DcfValuation[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getLeveredDcfValuation') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getLeveredDcfValuation')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('levered-discounted-cash-flow', { searchParams }).json<FMPTypes.DcfValuation[]>()
+	return fmpApi
+		.get('levered-discounted-cash-flow', { searchParams })
+		.json<FMPTypes.DcfValuation[]>()
 }
 
 /**
@@ -1138,10 +1400,17 @@ export interface CustomDcfParams {
  * @returns A promise that resolves to an array containing the custom DCF result.
  * @throws {Error} If symbol is not provided.
  */
-export async function dcfAnalysis(symbol: string, params: CustomDcfParams = {}): Promise<FMPTypes.CustomDcfAdvancedResult[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCustomDcfAdvanced') }
+export async function dcfAnalysis(
+	symbol: string,
+	params: CustomDcfParams = {},
+): Promise<FMPTypes.CustomDcfAdvancedResult[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCustomDcfAdvanced')
+	}
 	const searchParams = cleanQuery({ symbol, ...params })
-	return fmpApi.get('custom-discounted-cash-flow', { searchParams }).json<FMPTypes.CustomDcfAdvancedResult[]>()
+	return fmpApi
+		.get('custom-discounted-cash-flow', { searchParams })
+		.json<FMPTypes.CustomDcfAdvancedResult[]>()
 }
 
 /**
@@ -1151,10 +1420,17 @@ export async function dcfAnalysis(symbol: string, params: CustomDcfParams = {}):
  * @returns A promise that resolves to an array containing the custom levered DCF result.
  * @throws {Error} If symbol is not provided.
  */
-export async function dcfLeveredAnalysis(symbol: string, params: CustomDcfParams = {}): Promise<FMPTypes.CustomDcfLeveredResult[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCustomDcfLevered') }
+export async function dcfLeveredAnalysis(
+	symbol: string,
+	params: CustomDcfParams = {},
+): Promise<FMPTypes.CustomDcfLeveredResult[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCustomDcfLevered')
+	}
 	const searchParams = cleanQuery({ symbol, ...params })
-	return fmpApi.get('custom-levered-discounted-cash-flow', { searchParams }).json<FMPTypes.CustomDcfLeveredResult[]>()
+	return fmpApi
+		.get('custom-levered-discounted-cash-flow', { searchParams })
+		.json<FMPTypes.CustomDcfLeveredResult[]>()
 }
 
 /**
@@ -1166,16 +1442,22 @@ export async function dcfLeveredAnalysis(symbol: string, params: CustomDcfParams
 /**
  * Options for retrieving Treasury rates.
  */
-export interface TreasuryRatesOptions extends RequiredRangeOptions { }
+export interface TreasuryRatesOptions extends RequiredRangeOptions {}
 /**
  * Retrieves Treasury rates for various maturities within a date range.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of Treasury rates.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function treasuryRates(options: TreasuryRatesOptions): Promise<FMPTypes.TreasuryRate[]> {
-	if (!options.from) { throw new Error('From date option is required for getTreasuryRates') }
-	if (!options.to) { throw new Error('To date option is required for getTreasuryRates') }
+export async function treasuryRates(
+	options: TreasuryRatesOptions,
+): Promise<FMPTypes.TreasuryRate[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getTreasuryRates')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getTreasuryRates')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('treasury-rates', { searchParams }).json<FMPTypes.TreasuryRate[]>()
 }
@@ -1183,7 +1465,7 @@ export async function treasuryRates(options: TreasuryRatesOptions): Promise<FMPT
 /**
  * Options for retrieving economic indicators.
  */
-export interface EconomicIndicatorsOptions extends OptionalRangeOptions { }
+export interface EconomicIndicatorsOptions extends OptionalRangeOptions {}
 /**
  * Retrieves data for a specific economic indicator.
  * @param name The name of the economic indicator (e.g., "GDP", "CPI").
@@ -1191,8 +1473,13 @@ export interface EconomicIndicatorsOptions extends OptionalRangeOptions { }
  * @returns A promise that resolves to an array of economic indicator data points.
  * @throws {Error} If name is not provided.
  */
-export async function economicIndicators(name: FMPTypes.EconomicIndicatorName, options: EconomicIndicatorsOptions = {}): Promise<FMPTypes.EconomicIndicator[]> {
-	if (!name) { throw new Error('Name parameter is required for getEconomicIndicators') }
+export async function economicIndicators(
+	name: FMPTypes.EconomicIndicatorName,
+	options: EconomicIndicatorsOptions = {},
+): Promise<FMPTypes.EconomicIndicator[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for getEconomicIndicators')
+	}
 	const searchParams = cleanQuery({ name, ...options })
 	return fmpApi.get('economic-indicators', { searchParams }).json<FMPTypes.EconomicIndicator[]>()
 }
@@ -1200,18 +1487,26 @@ export async function economicIndicators(name: FMPTypes.EconomicIndicatorName, o
 /**
  * Options for retrieving the economic data releases calendar.
  */
-export interface EconomicCalendarOptions extends RequiredRangeOptions { }
+export interface EconomicCalendarOptions extends RequiredRangeOptions {}
 /**
  * Retrieves a calendar of upcoming economic data releases.
  * @param options Options specifying the date range.
  * @returns A promise that resolves to an array of economic calendar releases.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function economicCalendar(options: EconomicCalendarOptions): Promise<FMPTypes.EconomicCalendarRelease[]> {
-	if (!options.from) { throw new Error('From date option is required for getEconomicCalendar') }
-	if (!options.to) { throw new Error('To date option is required for getEconomicCalendar') }
+export async function economicCalendar(
+	options: EconomicCalendarOptions,
+): Promise<FMPTypes.EconomicCalendarRelease[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getEconomicCalendar')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getEconomicCalendar')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('economic-calendar', { searchParams }).json<FMPTypes.EconomicCalendarRelease[]>()
+	return fmpApi
+		.get('economic-calendar', { searchParams })
+		.json<FMPTypes.EconomicCalendarRelease[]>()
 }
 
 /**
@@ -1235,7 +1530,9 @@ export async function marketRiskPremium(): Promise<FMPTypes.MarketRiskPremiumInf
  * @throws {Error} If symbol is not provided.
  */
 export async function esgDisclosures(symbol: string): Promise<FMPTypes.EsgDisclosure[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEsgDisclosures') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEsgDisclosures')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('esg-disclosures', { searchParams }).json<FMPTypes.EsgDisclosure[]>()
 }
@@ -1247,7 +1544,9 @@ export async function esgDisclosures(symbol: string): Promise<FMPTypes.EsgDisclo
  * @throws {Error} If symbol is not provided.
  */
 export async function esgRatings(symbol: string): Promise<FMPTypes.EsgRating[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEsgRatings') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEsgRatings')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('esg-ratings', { searchParams }).json<FMPTypes.EsgRating[]>()
 }
@@ -1259,7 +1558,9 @@ export async function esgRatings(symbol: string): Promise<FMPTypes.EsgRating[]> 
  * @throws {Error} If year is not provided.
  */
 export async function esgBenchmark(year: string | number): Promise<FMPTypes.EsgBenchmark[]> {
-	if (!year) { throw new Error('Year parameter is required for getEsgBenchmark') }
+	if (!year) {
+		throw new Error('Year parameter is required for getEsgBenchmark')
+	}
 	const searchParams = { year }
 	return fmpApi.get('esg-benchmark', { searchParams }).json<FMPTypes.EsgBenchmark[]>()
 }
@@ -1277,7 +1578,9 @@ export async function esgBenchmark(year: string | number): Promise<FMPTypes.EsgB
  * @throws {Error} If symbol is not provided.
  */
 export async function etfFundHoldings(symbol: string): Promise<FMPTypes.EtfFundHolding[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEtfFundHoldings') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEtfFundHoldings')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('etf/holdings', { searchParams }).json<FMPTypes.EtfFundHolding[]>()
 }
@@ -1289,7 +1592,9 @@ export async function etfFundHoldings(symbol: string): Promise<FMPTypes.EtfFundH
  * @throws {Error} If symbol is not provided.
  */
 export async function etfFundInfo(symbol: string): Promise<FMPTypes.EtfFundInfo[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEtfFundInfo') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEtfFundInfo')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('etf/info', { searchParams }).json<FMPTypes.EtfFundInfo[]>()
 }
@@ -1300,10 +1605,16 @@ export async function etfFundInfo(symbol: string): Promise<FMPTypes.EtfFundInfo[
  * @returns A promise that resolves to an array of country weightings.
  * @throws {Error} If symbol is not provided.
  */
-export async function etfFundCountryAllocation(symbol: string): Promise<FMPTypes.EtfCountryWeighting[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEtfFundCountryAllocation') }
+export async function etfFundCountryAllocation(
+	symbol: string,
+): Promise<FMPTypes.EtfCountryWeighting[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEtfFundCountryAllocation')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('etf/country-weightings', { searchParams }).json<FMPTypes.EtfCountryWeighting[]>()
+	return fmpApi
+		.get('etf/country-weightings', { searchParams })
+		.json<FMPTypes.EtfCountryWeighting[]>()
 }
 
 /**
@@ -1313,7 +1624,9 @@ export async function etfFundCountryAllocation(symbol: string): Promise<FMPTypes
  * @throws {Error} If symbol is not provided.
  */
 export async function etfAssetExposure(symbol: string): Promise<FMPTypes.EtfAssetExposureItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEtfAssetExposure') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEtfAssetExposure')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('etf/asset-exposure', { searchParams }).json<FMPTypes.EtfAssetExposureItem[]>()
 }
@@ -1325,7 +1638,9 @@ export async function etfAssetExposure(symbol: string): Promise<FMPTypes.EtfAsse
  * @throws {Error} If symbol is not provided.
  */
 export async function etfSectorWeighting(symbol: string): Promise<FMPTypes.EtfSectorWeighting[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEtfSectorWeighting') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEtfSectorWeighting')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('etf/sector-weightings', { searchParams }).json<FMPTypes.EtfSectorWeighting[]>()
 }
@@ -1336,10 +1651,16 @@ export async function etfSectorWeighting(symbol: string): Promise<FMPTypes.EtfSe
  * @returns A promise that resolves to an array of fund disclosure holders.
  * @throws {Error} If symbol is not provided.
  */
-export async function mutualFundEtfLatestDisclosures(symbol: string): Promise<FMPTypes.FundDisclosureHolder[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getMutualFundEtfLatestDisclosures') }
+export async function mutualFundEtfLatestDisclosures(
+	symbol: string,
+): Promise<FMPTypes.FundDisclosureHolder[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getMutualFundEtfLatestDisclosures')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('funds/disclosure-holders-latest', { searchParams }).json<FMPTypes.FundDisclosureHolder[]>()
+	return fmpApi
+		.get('funds/disclosure-holders-latest', { searchParams })
+		.json<FMPTypes.FundDisclosureHolder[]>()
 }
 
 /**
@@ -1360,12 +1681,23 @@ export interface MutualFundDisclosuresOptions {
  * @returns A promise that resolves to an array of mutual fund disclosure items.
  * @throws {Error} If symbol, year, or quarter is not provided.
  */
-export async function mutualFundDisclosures(symbol: string, options: MutualFundDisclosuresOptions): Promise<FMPTypes.MutualFundDisclosureItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getMutualFundDisclosures') }
-	if (!options.year) { throw new Error('Year option is required for getMutualFundDisclosures') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getMutualFundDisclosures') }
+export async function mutualFundDisclosures(
+	symbol: string,
+	options: MutualFundDisclosuresOptions,
+): Promise<FMPTypes.MutualFundDisclosureItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getMutualFundDisclosures')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getMutualFundDisclosures')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getMutualFundDisclosures')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('funds/disclosure', { searchParams }).json<FMPTypes.MutualFundDisclosureItem[]>()
+	return fmpApi
+		.get('funds/disclosure', { searchParams })
+		.json<FMPTypes.MutualFundDisclosureItem[]>()
 }
 
 /**
@@ -1374,10 +1706,16 @@ export async function mutualFundDisclosures(symbol: string, options: MutualFundD
  * @returns A promise that resolves to an array of fund disclosure name search results.
  * @throws {Error} If name is not provided.
  */
-export async function searchMutualFundEtfDisclosuresByName(name: string): Promise<FMPTypes.FundDisclosureNameSearchResult[]> {
-	if (!name) { throw new Error('Name parameter is required for searchMutualFundEtfDisclosuresByName') }
+export async function searchMutualFundEtfDisclosuresByName(
+	name: string,
+): Promise<FMPTypes.FundDisclosureNameSearchResult[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for searchMutualFundEtfDisclosuresByName')
+	}
 	const searchParams = { name }
-	return fmpApi.get('funds/disclosure-holders-search', { searchParams }).json<FMPTypes.FundDisclosureNameSearchResult[]>()
+	return fmpApi
+		.get('funds/disclosure-holders-search', { searchParams })
+		.json<FMPTypes.FundDisclosureNameSearchResult[]>()
 }
 
 /**
@@ -1394,10 +1732,17 @@ export interface FundEtfDisclosuresByDateOptions {
  * @returns A promise that resolves to an array of fund disclosure dates.
  * @throws {Error} If symbol is not provided.
  */
-export async function fundEtfDisclosuresByDate(symbol: string, options: FundEtfDisclosuresByDateOptions = {}): Promise<FMPTypes.FundDisclosureDate[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFundEtfDisclosuresByDate') }
+export async function fundEtfDisclosuresByDate(
+	symbol: string,
+	options: FundEtfDisclosuresByDateOptions = {},
+): Promise<FMPTypes.FundDisclosureDate[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFundEtfDisclosuresByDate')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('funds/disclosure-dates', { searchParams }).json<FMPTypes.FundDisclosureDate[]>()
+	return fmpApi
+		.get('funds/disclosure-dates', { searchParams })
+		.json<FMPTypes.FundDisclosureDate[]>()
 }
 
 /**
@@ -1421,7 +1766,9 @@ export async function commoditiesList(): Promise<FMPTypes.CommodityListItem[]> {
  * @throws {Error} If symbol is not provided.
  */
 export async function commodityQuote(symbol: string): Promise<FMPTypes.CommodityQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityQuote')
+	}
 	const searchParams = { symbol } // The endpoint is /quote, same as stock quote
 	return fmpApi.get('quote', { searchParams }).json<FMPTypes.CommodityQuote[]>()
 }
@@ -1433,7 +1780,9 @@ export async function commodityQuote(symbol: string): Promise<FMPTypes.Commodity
  * @throws {Error} If symbol is not provided.
  */
 export async function commodityQuoteShort(symbol: string): Promise<FMPTypes.CommodityQuoteShort[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityQuoteShort') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityQuoteShort')
+	}
 	const searchParams = { symbol } // The endpoint is /quote-short, same as stock quote short
 	return fmpApi.get('quote-short', { searchParams }).json<FMPTypes.CommodityQuoteShort[]>()
 }
@@ -1450,10 +1799,14 @@ export interface AllCommoditiesQuotesOptions {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of commodity quotes (short or full based on options).
  */
-export async function allCommoditiesQuotes(options: AllCommoditiesQuotesOptions = {}): Promise<(FMPTypes.CommodityQuoteShort | FMPTypes.CommodityQuote)[]> {
+export async function allCommoditiesQuotes(
+	options: AllCommoditiesQuotesOptions = {},
+): Promise<(FMPTypes.CommodityQuoteShort | FMPTypes.CommodityQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
-		return fmpApi.get('batch-commodity-quotes', { searchParams }).json<FMPTypes.CommodityQuoteShort[]>()
+		return fmpApi
+			.get('batch-commodity-quotes', { searchParams })
+			.json<FMPTypes.CommodityQuoteShort[]>()
 	}
 	return fmpApi.get('batch-commodity-quotes', { searchParams }).json<FMPTypes.CommodityQuote[]>()
 }
@@ -1465,10 +1818,17 @@ export async function allCommoditiesQuotes(options: AllCommoditiesQuotesOptions 
  * @returns A promise that resolves to an array of light commodity chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function commodityChartLight(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartLightItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityChartLight') }
+export async function commodityChartLight(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartLightItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityChartLight')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/light', { searchParams }).json<FMPTypes.StockChartLightItem[]>()
+	return fmpApi
+		.get('historical-price-eod/light', { searchParams })
+		.json<FMPTypes.StockChartLightItem[]>()
 }
 
 /**
@@ -1478,10 +1838,17 @@ export async function commodityChartLight(symbol: string, options: HistoricalEod
  * @returns A promise that resolves to an array of full commodity chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function commodityChartFull(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartFullItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityChartFull') }
+export async function commodityChartFull(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartFullItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityChartFull')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/full', { searchParams }).json<FMPTypes.StockChartFullItem[]>()
+	return fmpApi
+		.get('historical-price-eod/full', { searchParams })
+		.json<FMPTypes.StockChartFullItem[]>()
 }
 
 /**
@@ -1490,8 +1857,13 @@ export async function commodityChartFull(symbol: string, options: HistoricalEodC
  * @param [options] Optional date range.
  * @returns A promise that resolves to an array of 1-minute commodity chart items.
  */
-export async function commodityChart1Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityChart1Min') }
+export async function commodityChart1Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityChart1Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1502,8 +1874,13 @@ export async function commodityChart1Min(symbol: string, options: HistoricalIntr
  * @param [options] Optional date range.
  * @returns A promise that resolves to an array of 5-minute commodity chart items.
  */
-export async function commodityChart5Min(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityChart5Min') }
+export async function commodityChart5Min(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityChart5Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/5min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1514,8 +1891,13 @@ export async function commodityChart5Min(symbol: string, options: HistoricalIntr
  * @param [options] Optional date range.
  * @returns A promise that resolves to an array of 1-hour commodity chart items.
  */
-export async function commodityChart1Hour(symbol: string, options: HistoricalIntradayChartOptions = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCommodityChart1Hour') }
+export async function commodityChart1Hour(
+	symbol: string,
+	options: HistoricalIntradayChartOptions = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCommodityChart1Hour')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1hour`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1529,15 +1911,19 @@ export async function commodityChart1Hour(symbol: string, options: HistoricalInt
 /**
  * Options for retrieving latest crowdfunding campaigns.
  */
-export interface LatestCrowdfundingCampaignsOptions extends OptionalPaginationOptions { }
+export interface LatestCrowdfundingCampaignsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest crowdfunding campaigns.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of crowdfunding campaigns.
  */
-export async function latestCrowdfundingCampaigns(options: LatestCrowdfundingCampaignsOptions = {}): Promise<FMPTypes.CrowdfundingCampaign[]> {
+export async function latestCrowdfundingCampaigns(
+	options: LatestCrowdfundingCampaignsOptions = {},
+): Promise<FMPTypes.CrowdfundingCampaign[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('crowdfunding-offerings-latest', { searchParams }).json<FMPTypes.CrowdfundingCampaign[]>()
+	return fmpApi
+		.get('crowdfunding-offerings-latest', { searchParams })
+		.json<FMPTypes.CrowdfundingCampaign[]>()
 }
 
 /**
@@ -1546,10 +1932,16 @@ export async function latestCrowdfundingCampaigns(options: LatestCrowdfundingCam
  * @returns A promise that resolves to an array of crowdfunding campaign search results.
  * @throws {Error} If name is not provided.
  */
-export async function searchCrowdfundingCampaigns(name: string): Promise<FMPTypes.CrowdfundingCampaignSearchResult[]> {
-	if (!name) { throw new Error('Name parameter is required for searchCrowdfundingCampaigns') }
+export async function searchCrowdfundingCampaigns(
+	name: string,
+): Promise<FMPTypes.CrowdfundingCampaignSearchResult[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for searchCrowdfundingCampaigns')
+	}
 	const searchParams = { name }
-	return fmpApi.get('crowdfunding-offerings-search', { searchParams }).json<FMPTypes.CrowdfundingCampaignSearchResult[]>()
+	return fmpApi
+		.get('crowdfunding-offerings-search', { searchParams })
+		.json<FMPTypes.CrowdfundingCampaignSearchResult[]>()
 }
 
 /**
@@ -1558,10 +1950,16 @@ export async function searchCrowdfundingCampaigns(name: string): Promise<FMPType
  * @returns A promise that resolves to an array of crowdfunding campaigns.
  * @throws {Error} If CIK is not provided.
  */
-export async function crowdfundingCampaignsByCik(cik: string): Promise<FMPTypes.CrowdfundingCampaign[]> {
-	if (!cik) { throw new Error('CIK parameter is required for getCrowdfundingCampaignsByCik') }
+export async function crowdfundingCampaignsByCik(
+	cik: string,
+): Promise<FMPTypes.CrowdfundingCampaign[]> {
+	if (!cik) {
+		throw new Error('CIK parameter is required for getCrowdfundingCampaignsByCik')
+	}
 	const searchParams = { cik }
-	return fmpApi.get('crowdfunding-offerings', { searchParams }).json<FMPTypes.CrowdfundingCampaign[]>()
+	return fmpApi
+		.get('crowdfunding-offerings', { searchParams })
+		.json<FMPTypes.CrowdfundingCampaign[]>()
 }
 
 /**
@@ -1576,7 +1974,9 @@ export interface LatestEquityOfferingUpdatesOptions extends OptionalPaginationOp
  * @param [options] Optional parameters for pagination and CIK filter.
  * @returns A promise that resolves to an array of equity offering updates.
  */
-export async function latestEquityOfferingUpdates(options: LatestEquityOfferingUpdatesOptions = {}): Promise<FMPTypes.EquityOfferingUpdate[]> {
+export async function latestEquityOfferingUpdates(
+	options: LatestEquityOfferingUpdatesOptions = {},
+): Promise<FMPTypes.EquityOfferingUpdate[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('fundraising-latest', { searchParams }).json<FMPTypes.EquityOfferingUpdate[]>()
 }
@@ -1587,10 +1987,16 @@ export async function latestEquityOfferingUpdates(options: LatestEquityOfferingU
  * @returns A promise that resolves to an array of equity offering search results.
  * @throws {Error} If name is not provided.
  */
-export async function searchEquityOfferings(name: string): Promise<FMPTypes.EquityOfferingSearchResult[]> {
-	if (!name) { throw new Error('Name parameter is required for searchEquityOfferings') }
+export async function searchEquityOfferings(
+	name: string,
+): Promise<FMPTypes.EquityOfferingSearchResult[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for searchEquityOfferings')
+	}
 	const searchParams = { name }
-	return fmpApi.get('fundraising-search', { searchParams }).json<FMPTypes.EquityOfferingSearchResult[]>()
+	return fmpApi
+		.get('fundraising-search', { searchParams })
+		.json<FMPTypes.EquityOfferingSearchResult[]>()
 }
 
 /**
@@ -1600,7 +2006,9 @@ export async function searchEquityOfferings(name: string): Promise<FMPTypes.Equi
  * @throws {Error} If CIK is not provided.
  */
 export async function equityOfferingsByCik(cik: string): Promise<FMPTypes.EquityOfferingUpdate[]> {
-	if (!cik) { throw new Error('CIK parameter is required for getEquityOfferingsByCik') }
+	if (!cik) {
+		throw new Error('CIK parameter is required for getEquityOfferingsByCik')
+	}
 	const searchParams = { cik }
 	return fmpApi.get('fundraising', { searchParams }).json<FMPTypes.EquityOfferingUpdate[]>()
 }
@@ -1626,7 +2034,9 @@ export async function cryptocurrencyList(): Promise<FMPTypes.CryptocurrencyListI
  * @throws {Error} If symbol is not provided.
  */
 export async function cryptocurrencyQuote(symbol: string): Promise<FMPTypes.CryptocurrencyQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyQuote')
+	}
 	const searchParams = { symbol } // Endpoint is /quote
 	return fmpApi.get('quote', { searchParams }).json<FMPTypes.CryptocurrencyQuote[]>()
 }
@@ -1637,8 +2047,12 @@ export async function cryptocurrencyQuote(symbol: string): Promise<FMPTypes.Cryp
  * @returns A promise that resolves to an array containing the short cryptocurrency quote.
  * @throws {Error} If symbol is not provided.
  */
-export async function cryptocurrencyQuoteShort(symbol: string): Promise<FMPTypes.CryptocurrencyQuoteShort[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyQuoteShort') }
+export async function cryptocurrencyQuoteShort(
+	symbol: string,
+): Promise<FMPTypes.CryptocurrencyQuoteShort[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyQuoteShort')
+	}
 	const searchParams = { symbol } // Endpoint is /quote-short
 	return fmpApi.get('quote-short', { searchParams }).json<FMPTypes.CryptocurrencyQuoteShort[]>()
 }
@@ -1655,10 +2069,14 @@ export interface AllCryptocurrenciesQuotesOptions {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of cryptocurrency quotes (short or full based on options).
  */
-export async function allCryptocurrenciesQuotes(options: AllCryptocurrenciesQuotesOptions = {}): Promise<(FMPTypes.CryptocurrencyQuoteShort | FMPTypes.CryptocurrencyQuote)[]> {
+export async function allCryptocurrenciesQuotes(
+	options: AllCryptocurrenciesQuotesOptions = {},
+): Promise<(FMPTypes.CryptocurrencyQuoteShort | FMPTypes.CryptocurrencyQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
-		return fmpApi.get('batch-crypto-quotes', { searchParams }).json<FMPTypes.CryptocurrencyQuoteShort[]>()
+		return fmpApi
+			.get('batch-crypto-quotes', { searchParams })
+			.json<FMPTypes.CryptocurrencyQuoteShort[]>()
 	}
 	return fmpApi.get('batch-crypto-quotes', { searchParams }).json<FMPTypes.CryptocurrencyQuote[]>()
 }
@@ -1670,10 +2088,17 @@ export async function allCryptocurrenciesQuotes(options: AllCryptocurrenciesQuot
  * @returns A promise that resolves to an array of light crypto chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function cryptocurrencyChartLight(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartLightItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyChartLight') }
+export async function cryptocurrencyChartLight(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartLightItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyChartLight')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/light', { searchParams }).json<FMPTypes.StockChartLightItem[]>()
+	return fmpApi
+		.get('historical-price-eod/light', { searchParams })
+		.json<FMPTypes.StockChartLightItem[]>()
 }
 
 /**
@@ -1683,10 +2108,17 @@ export async function cryptocurrencyChartLight(symbol: string, options: Historic
  * @returns A promise that resolves to an array of full crypto chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function cryptocurrencyChartFull(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartFullItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyChartFull') }
+export async function cryptocurrencyChartFull(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartFullItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyChartFull')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/full', { searchParams }).json<FMPTypes.StockChartFullItem[]>()
+	return fmpApi
+		.get('historical-price-eod/full', { searchParams })
+		.json<FMPTypes.StockChartFullItem[]>()
 }
 
 /**
@@ -1695,8 +2127,13 @@ export async function cryptocurrencyChartFull(symbol: string, options: Historica
  * @param [options] Optional date range. Note: `nonadjusted` is not in crypto chart docs.
  * @returns A promise that resolves to an array of 1-minute crypto chart items.
  */
-export async function cryptocurrencyChart1Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyChart1Min') }
+export async function cryptocurrencyChart1Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyChart1Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1707,8 +2144,13 @@ export async function cryptocurrencyChart1Min(symbol: string, options: Omit<Hist
  * @param [options] Optional date range. Note: `nonadjusted` is not in crypto chart docs.
  * @returns A promise that resolves to an array of 5-minute crypto chart items.
  */
-export async function cryptocurrencyChart5Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyChart5Min') }
+export async function cryptocurrencyChart5Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyChart5Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/5min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1719,8 +2161,13 @@ export async function cryptocurrencyChart5Min(symbol: string, options: Omit<Hist
  * @param [options] Optional date range. Note: `nonadjusted` is not in crypto chart docs.
  * @returns A promise that resolves to an array of 1-hour crypto chart items.
  */
-export async function cryptocurrencyChart1Hour(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCryptocurrencyChart1Hour') }
+export async function cryptocurrencyChart1Hour(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCryptocurrencyChart1Hour')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1hour`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1746,7 +2193,9 @@ export async function forexList(): Promise<FMPTypes.ForexPair[]> {
  * @throws {Error} If symbol is not provided.
  */
 export async function forexQuote(symbol: string): Promise<FMPTypes.ForexQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexQuote')
+	}
 	const searchParams = { symbol } // Endpoint is /quote
 	return fmpApi.get('quote', { searchParams }).json<FMPTypes.ForexQuote[]>()
 }
@@ -1758,7 +2207,9 @@ export async function forexQuote(symbol: string): Promise<FMPTypes.ForexQuote[]>
  * @throws {Error} If symbol is not provided.
  */
 export async function forexQuoteShort(symbol: string): Promise<FMPTypes.ForexQuoteShort[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexQuoteShort') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexQuoteShort')
+	}
 	const searchParams = { symbol } // Endpoint is /quote-short
 	return fmpApi.get('quote-short', { searchParams }).json<FMPTypes.ForexQuoteShort[]>()
 }
@@ -1775,7 +2226,9 @@ export interface AllForexQuotesOptions {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of Forex quotes (short or full based on options).
  */
-export async function allForexQuotes(options: AllForexQuotesOptions = {}): Promise<(FMPTypes.ForexQuoteShort | FMPTypes.ForexQuote)[]> {
+export async function allForexQuotes(
+	options: AllForexQuotesOptions = {},
+): Promise<(FMPTypes.ForexQuoteShort | FMPTypes.ForexQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
 		return fmpApi.get('batch-forex-quotes', { searchParams }).json<FMPTypes.ForexQuoteShort[]>()
@@ -1790,10 +2243,17 @@ export async function allForexQuotes(options: AllForexQuotesOptions = {}): Promi
  * @returns A promise that resolves to an array of light Forex chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function forexChartLight(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartLightItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexChartLight') }
+export async function forexChartLight(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartLightItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexChartLight')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/light', { searchParams }).json<FMPTypes.StockChartLightItem[]>()
+	return fmpApi
+		.get('historical-price-eod/light', { searchParams })
+		.json<FMPTypes.StockChartLightItem[]>()
 }
 
 /**
@@ -1803,10 +2263,17 @@ export async function forexChartLight(symbol: string, options: HistoricalEodChar
  * @returns A promise that resolves to an array of full Forex chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function forexChartFull(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartFullItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexChartFull') }
+export async function forexChartFull(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartFullItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexChartFull')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/full', { searchParams }).json<FMPTypes.StockChartFullItem[]>()
+	return fmpApi
+		.get('historical-price-eod/full', { searchParams })
+		.json<FMPTypes.StockChartFullItem[]>()
 }
 
 /**
@@ -1815,8 +2282,13 @@ export async function forexChartFull(symbol: string, options: HistoricalEodChart
  * @param [options] Optional date range. Note: `nonadjusted` is not in Forex chart docs.
  * @returns A promise that resolves to an array of 1-minute Forex chart items.
  */
-export async function forexChart1Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexChart1Min') }
+export async function forexChart1Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexChart1Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1827,8 +2299,13 @@ export async function forexChart1Min(symbol: string, options: Omit<HistoricalInt
  * @param [options] Optional date range. Note: `nonadjusted` is not in Forex chart docs.
  * @returns A promise that resolves to an array of 5-minute Forex chart items.
  */
-export async function forexChart5Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexChart5Min') }
+export async function forexChart5Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexChart5Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/5min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1839,8 +2316,13 @@ export async function forexChart5Min(symbol: string, options: Omit<HistoricalInt
  * @param [options] Optional date range. Note: `nonadjusted` is not in Forex chart docs.
  * @returns A promise that resolves to an array of 1-hour Forex chart items.
  */
-export async function forexChart1Hour(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getForexChart1Hour') }
+export async function forexChart1Hour(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getForexChart1Hour')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1hour`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -1868,8 +2350,14 @@ export interface FinancialStatementOptions extends OptionalLimitOption {
  * @returns A promise that resolves to an array of the requested statement type.
  * @private
  */
-async function getFinancialStatement<T extends { date: string }>(endpoint: string, symbol: string, options: FinancialStatementOptions = {}): Promise<T[]> {
-	if (!symbol) { throw new Error(`Symbol parameter is required for the API call to ${endpoint}`) }
+async function getFinancialStatement<T extends { date: string }>(
+	endpoint: string,
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<T[]> {
+	if (!symbol) {
+		throw new Error(`Symbol parameter is required for the API call to ${endpoint}`)
+	}
 	const { period, limit, ...restOptions } = options
 	if (period === 'quarter') {
 		const quarters: FMPTypes.FinancialPeriod[] = ['Q1', 'Q2', 'Q3', 'Q4']
@@ -1897,7 +2385,10 @@ async function getFinancialStatement<T extends { date: string }>(endpoint: strin
  * @returns A promise that resolves to an array of income statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function incomeStatement(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.IncomeStatement[]> {
+export async function incomeStatement(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.IncomeStatement[]> {
 	return getFinancialStatement<FMPTypes.IncomeStatement>('income-statement', symbol, options)
 }
 
@@ -1908,8 +2399,15 @@ export async function incomeStatement(symbol: string, options: FinancialStatemen
  * @returns A promise that resolves to an array of balance sheet statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function balanceSheetStatement(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.BalanceSheetStatement[]> {
-	return getFinancialStatement<FMPTypes.BalanceSheetStatement>('balance-sheet-statement', symbol, options)
+export async function balanceSheetStatement(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.BalanceSheetStatement[]> {
+	return getFinancialStatement<FMPTypes.BalanceSheetStatement>(
+		'balance-sheet-statement',
+		symbol,
+		options,
+	)
 }
 
 /**
@@ -1919,28 +2417,35 @@ export async function balanceSheetStatement(symbol: string, options: FinancialSt
  * @returns A promise that resolves to an array of cash flow statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function cashFlowStatement(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.CashFlowStatement[]> {
+export async function cashFlowStatement(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.CashFlowStatement[]> {
 	return getFinancialStatement<FMPTypes.CashFlowStatement>('cash-flow-statement', symbol, options)
 }
 
 /**
  * Options for retrieving latest financial statements metadata.
  */
-export interface LatestFinancialStatementsOptions extends OptionalPaginationOptions { }
+export interface LatestFinancialStatementsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves metadata for the latest available financial statements.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of latest financial statement metadata.
  */
-export async function latestFinancialStatements(options: LatestFinancialStatementsOptions = {}): Promise<FMPTypes.LatestFinancialStatementMeta[]> {
+export async function latestFinancialStatements(
+	options: LatestFinancialStatementsOptions = {},
+): Promise<FMPTypes.LatestFinancialStatementMeta[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('latest-financial-statements', { searchParams }).json<FMPTypes.LatestFinancialStatementMeta[]>()
+	return fmpApi
+		.get('latest-financial-statements', { searchParams })
+		.json<FMPTypes.LatestFinancialStatementMeta[]>()
 }
 
 /**
  * Options for retrieving TTM financial statements.
  */
-export interface TtmFinancialStatementOptions extends OptionalLimitOption { }
+export interface TtmFinancialStatementOptions extends OptionalLimitOption {}
 /**
  * Retrieves Trailing Twelve Months (TTM) income statements for a company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -1948,8 +2453,13 @@ export interface TtmFinancialStatementOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of TTM income statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function incomeStatementTtm(symbol: string, options: TtmFinancialStatementOptions = {}): Promise<FMPTypes.IncomeStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIncomeStatementTtm') }
+export async function incomeStatementTtm(
+	symbol: string,
+	options: TtmFinancialStatementOptions = {},
+): Promise<FMPTypes.IncomeStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIncomeStatementTtm')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('income-statement-ttm', { searchParams }).json<FMPTypes.IncomeStatement[]>()
 }
@@ -1961,10 +2471,17 @@ export async function incomeStatementTtm(symbol: string, options: TtmFinancialSt
  * @returns A promise that resolves to an array of TTM balance sheet statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function balanceSheetStatementTtm(symbol: string, options: TtmFinancialStatementOptions = {}): Promise<FMPTypes.BalanceSheetStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getBalanceSheetStatementTtm') }
+export async function balanceSheetStatementTtm(
+	symbol: string,
+	options: TtmFinancialStatementOptions = {},
+): Promise<FMPTypes.BalanceSheetStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getBalanceSheetStatementTtm')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('balance-sheet-statement-ttm', { searchParams }).json<FMPTypes.BalanceSheetStatement[]>()
+	return fmpApi
+		.get('balance-sheet-statement-ttm', { searchParams })
+		.json<FMPTypes.BalanceSheetStatement[]>()
 }
 
 /**
@@ -1974,10 +2491,17 @@ export async function balanceSheetStatementTtm(symbol: string, options: TtmFinan
  * @returns A promise that resolves to an array of TTM cash flow statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function cashFlowStatementTtm(symbol: string, options: TtmFinancialStatementOptions = {}): Promise<FMPTypes.CashFlowStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getCashFlowStatementTtm') }
+export async function cashFlowStatementTtm(
+	symbol: string,
+	options: TtmFinancialStatementOptions = {},
+): Promise<FMPTypes.CashFlowStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getCashFlowStatementTtm')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('cash-flow-statement-ttm', { searchParams }).json<FMPTypes.CashFlowStatement[]>()
+	return fmpApi
+		.get('cash-flow-statement-ttm', { searchParams })
+		.json<FMPTypes.CashFlowStatement[]>()
 }
 
 /**
@@ -1987,7 +2511,10 @@ export async function cashFlowStatementTtm(symbol: string, options: TtmFinancial
  * @returns A promise that resolves to an array of key metrics.
  * @throws {Error} If symbol is not provided.
  */
-export async function keyMetrics(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.KeyMetrics[]> {
+export async function keyMetrics(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.KeyMetrics[]> {
 	return getFinancialStatement<FMPTypes.KeyMetrics>('key-metrics', symbol, options)
 }
 
@@ -1998,7 +2525,10 @@ export async function keyMetrics(symbol: string, options: FinancialStatementOpti
  * @returns A promise that resolves to an array of financial ratios.
  * @throws {Error} If symbol is not provided.
  */
-export async function financialRatios(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.FinancialRatios[]> {
+export async function financialRatios(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.FinancialRatios[]> {
 	return getFinancialStatement<FMPTypes.FinancialRatios>('ratios', symbol, options)
 }
 
@@ -2009,7 +2539,9 @@ export async function financialRatios(symbol: string, options: FinancialStatemen
  * @throws {Error} If symbol is not provided.
  */
 export async function keyMetricsTtm(symbol: string): Promise<FMPTypes.KeyMetricsTTM[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getKeyMetricsTtm') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getKeyMetricsTtm')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('key-metrics-ttm', { searchParams }).json<FMPTypes.KeyMetricsTTM[]>()
 }
@@ -2021,7 +2553,9 @@ export async function keyMetricsTtm(symbol: string): Promise<FMPTypes.KeyMetrics
  * @throws {Error} If symbol is not provided.
  */
 export async function financialRatiosTtm(symbol: string): Promise<FMPTypes.FinancialRatiosTTM[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialRatiosTtm') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialRatiosTtm')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('ratios-ttm', { searchParams }).json<FMPTypes.FinancialRatiosTTM[]>()
 }
@@ -2033,7 +2567,9 @@ export async function financialRatiosTtm(symbol: string): Promise<FMPTypes.Finan
  * @throws {Error} If symbol is not provided.
  */
 export async function financialScores(symbol: string): Promise<FMPTypes.FinancialScores[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialScores') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialScores')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('financial-scores', { searchParams }).json<FMPTypes.FinancialScores[]>()
 }
@@ -2041,7 +2577,7 @@ export async function financialScores(symbol: string): Promise<FMPTypes.Financia
 /**
  * Options for retrieving owner earnings.
  */
-export interface OwnerEarningsOptions extends OptionalLimitOption { }
+export interface OwnerEarningsOptions extends OptionalLimitOption {}
 /**
  * Retrieves owner earnings for a company.
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -2049,8 +2585,13 @@ export interface OwnerEarningsOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of owner earnings records.
  * @throws {Error} If symbol is not provided.
  */
-export async function ownerEarnings(symbol: string, options: OwnerEarningsOptions = {}): Promise<FMPTypes.OwnerEarnings[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getOwnerEarnings') }
+export async function ownerEarnings(
+	symbol: string,
+	options: OwnerEarningsOptions = {},
+): Promise<FMPTypes.OwnerEarnings[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getOwnerEarnings')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('owner-earnings', { searchParams }).json<FMPTypes.OwnerEarnings[]>()
 }
@@ -2062,7 +2603,10 @@ export async function ownerEarnings(symbol: string, options: OwnerEarningsOption
  * @returns A promise that resolves to an array of enterprise values.
  * @throws {Error} If symbol is not provided.
  */
-export async function enterpriseValues(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.EnterpriseValue[]> {
+export async function enterpriseValues(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.EnterpriseValue[]> {
 	return getFinancialStatement<FMPTypes.EnterpriseValue>('enterprise-values', symbol, options)
 }
 
@@ -2073,8 +2617,15 @@ export async function enterpriseValues(symbol: string, options: FinancialStateme
  * @returns A promise that resolves to an array of income statement growth metrics.
  * @throws {Error} If symbol is not provided.
  */
-export async function incomeStatementGrowth(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.IncomeStatementGrowth[]> {
-	return getFinancialStatement<FMPTypes.IncomeStatementGrowth>('income-statement-growth', symbol, options)
+export async function incomeStatementGrowth(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.IncomeStatementGrowth[]> {
+	return getFinancialStatement<FMPTypes.IncomeStatementGrowth>(
+		'income-statement-growth',
+		symbol,
+		options,
+	)
 }
 
 /**
@@ -2084,8 +2635,15 @@ export async function incomeStatementGrowth(symbol: string, options: FinancialSt
  * @returns A promise that resolves to an array of balance sheet statement growth metrics.
  * @throws {Error} If symbol is not provided.
  */
-export async function balanceSheetStatementGrowth(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.BalanceSheetStatementGrowth[]> {
-	return getFinancialStatement<FMPTypes.BalanceSheetStatementGrowth>('balance-sheet-statement-growth', symbol, options)
+export async function balanceSheetStatementGrowth(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.BalanceSheetStatementGrowth[]> {
+	return getFinancialStatement<FMPTypes.BalanceSheetStatementGrowth>(
+		'balance-sheet-statement-growth',
+		symbol,
+		options,
+	)
 }
 
 /**
@@ -2095,8 +2653,15 @@ export async function balanceSheetStatementGrowth(symbol: string, options: Finan
  * @returns A promise that resolves to an array of cash flow statement growth metrics.
  * @throws {Error} If symbol is not provided.
  */
-export async function cashFlowStatementGrowth(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.CashFlowStatementGrowth[]> {
-	return getFinancialStatement<FMPTypes.CashFlowStatementGrowth>('cash-flow-statement-growth', symbol, options)
+export async function cashFlowStatementGrowth(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.CashFlowStatementGrowth[]> {
+	return getFinancialStatement<FMPTypes.CashFlowStatementGrowth>(
+		'cash-flow-statement-growth',
+		symbol,
+		options,
+	)
 }
 
 /**
@@ -2106,8 +2671,15 @@ export async function cashFlowStatementGrowth(symbol: string, options: Financial
  * @returns A promise that resolves to an array of financial statement growth metrics.
  * @throws {Error} If symbol is not provided.
  */
-export async function financialStatementGrowth(symbol: string, options: FinancialStatementOptions = {}): Promise<FMPTypes.FinancialStatementGrowth[]> {
-	return getFinancialStatement<FMPTypes.FinancialStatementGrowth>('financial-growth', symbol, options)
+export async function financialStatementGrowth(
+	symbol: string,
+	options: FinancialStatementOptions = {},
+): Promise<FMPTypes.FinancialStatementGrowth[]> {
+	return getFinancialStatement<FMPTypes.FinancialStatementGrowth>(
+		'financial-growth',
+		symbol,
+		options,
+	)
 }
 
 /**
@@ -2116,10 +2688,16 @@ export async function financialStatementGrowth(symbol: string, options: Financia
  * @returns A promise that resolves to an array of financial report date links.
  * @throws {Error} If symbol is not provided.
  */
-export async function financialReportsDates(symbol: string): Promise<FMPTypes.FinancialReportDateLinks[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialReportsDates') }
+export async function financialReportsDates(
+	symbol: string,
+): Promise<FMPTypes.FinancialReportDateLinks[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialReportsDates')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('financial-reports-dates', { searchParams }).json<FMPTypes.FinancialReportDateLinks[]>()
+	return fmpApi
+		.get('financial-reports-dates', { searchParams })
+		.json<FMPTypes.FinancialReportDateLinks[]>()
 }
 
 /**
@@ -2138,12 +2716,23 @@ export interface FinancialReportOptions {
  * @returns A promise that resolves to an array containing the full financial report JSON.
  * @throws {Error} If symbol, year, or period is not provided.
  */
-export async function financialReportJson(symbol: string, options: FinancialReportOptions): Promise<FMPTypes.FinancialReportFullJson[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialReportJson') }
-	if (!options.year) { throw new Error('Year option is required for getFinancialReportJson') }
-	if (!options.period) { throw new Error('Period option is required for getFinancialReportJson') }
+export async function financialReportJson(
+	symbol: string,
+	options: FinancialReportOptions,
+): Promise<FMPTypes.FinancialReportFullJson[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialReportJson')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getFinancialReportJson')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getFinancialReportJson')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('financial-reports-json', { searchParams }).json<FMPTypes.FinancialReportFullJson[]>()
+	return fmpApi
+		.get('financial-reports-json', { searchParams })
+		.json<FMPTypes.FinancialReportFullJson[]>()
 }
 
 /**
@@ -2153,13 +2742,24 @@ export async function financialReportJson(symbol: string, options: FinancialRepo
  * @returns A promise that resolves to an array containing metadata for the XLSX financial report.
  * @throws {Error} If symbol, year, or period is not provided.
  */
-export async function financialReportXlsx(symbol: string, options: FinancialReportOptions): Promise<FMPTypes.FinancialReportFullJson[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFinancialReportXlsx') }
-	if (!options.year) { throw new Error('Year option is required for getFinancialReportXlsx') }
-	if (!options.period) { throw new Error('Period option is required for getFinancialReportXlsx') }
+export async function financialReportXlsx(
+	symbol: string,
+	options: FinancialReportOptions,
+): Promise<FMPTypes.FinancialReportFullJson[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFinancialReportXlsx')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getFinancialReportXlsx')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getFinancialReportXlsx')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	// The example response is JSON, not an XLSX file directly.
-	return fmpApi.get('financial-reports-xlsx', { searchParams }).json<FMPTypes.FinancialReportFullJson[]>()
+	return fmpApi
+		.get('financial-reports-xlsx', { searchParams })
+		.json<FMPTypes.FinancialReportFullJson[]>()
 }
 
 /**
@@ -2178,10 +2778,17 @@ export interface RevenueSegmentationOptions {
  * @returns A promise that resolves to an array of revenue product segmentations.
  * @throws {Error} If symbol is not provided.
  */
-export async function revenueProductSegmentation(symbol: string, options: RevenueSegmentationOptions = {}): Promise<FMPTypes.RevenueSegmentation[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getRevenueProductSegmentation') }
+export async function revenueProductSegmentation(
+	symbol: string,
+	options: RevenueSegmentationOptions = {},
+): Promise<FMPTypes.RevenueSegmentation[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getRevenueProductSegmentation')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('revenue-product-segmentation', { searchParams }).json<FMPTypes.RevenueSegmentation[]>()
+	return fmpApi
+		.get('revenue-product-segmentation', { searchParams })
+		.json<FMPTypes.RevenueSegmentation[]>()
 }
 
 /**
@@ -2191,10 +2798,17 @@ export async function revenueProductSegmentation(symbol: string, options: Revenu
  * @returns A promise that resolves to an array of revenue geographic segmentations.
  * @throws {Error} If symbol is not provided.
  */
-export async function revenueGeographicSegmentation(symbol: string, options: RevenueSegmentationOptions = {}): Promise<FMPTypes.RevenueSegmentation[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getRevenueGeographicSegmentation') }
+export async function revenueGeographicSegmentation(
+	symbol: string,
+	options: RevenueSegmentationOptions = {},
+): Promise<FMPTypes.RevenueSegmentation[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getRevenueGeographicSegmentation')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('revenue-geographic-segmentation', { searchParams }).json<FMPTypes.RevenueSegmentation[]>()
+	return fmpApi
+		.get('revenue-geographic-segmentation', { searchParams })
+		.json<FMPTypes.RevenueSegmentation[]>()
 }
 
 /**
@@ -2211,10 +2825,17 @@ export interface AsReportedStatementOptions extends OptionalLimitOption {
  * @returns A promise that resolves to an array of "as reported" income statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function asReportedIncomeStatements(symbol: string, options: AsReportedStatementOptions = {}): Promise<FMPTypes.AsReportedFinancialStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAsReportedIncomeStatements') }
+export async function asReportedIncomeStatements(
+	symbol: string,
+	options: AsReportedStatementOptions = {},
+): Promise<FMPTypes.AsReportedFinancialStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAsReportedIncomeStatements')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('income-statement-as-reported', { searchParams }).json<FMPTypes.AsReportedFinancialStatement[]>()
+	return fmpApi
+		.get('income-statement-as-reported', { searchParams })
+		.json<FMPTypes.AsReportedFinancialStatement[]>()
 }
 
 /**
@@ -2224,10 +2845,17 @@ export async function asReportedIncomeStatements(symbol: string, options: AsRepo
  * @returns A promise that resolves to an array of "as reported" balance sheet statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function asReportedBalanceStatements(symbol: string, options: AsReportedStatementOptions = {}): Promise<FMPTypes.AsReportedFinancialStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAsReportedBalanceStatements') }
+export async function asReportedBalanceStatements(
+	symbol: string,
+	options: AsReportedStatementOptions = {},
+): Promise<FMPTypes.AsReportedFinancialStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAsReportedBalanceStatements')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('balance-sheet-statement-as-reported', { searchParams }).json<FMPTypes.AsReportedFinancialStatement[]>()
+	return fmpApi
+		.get('balance-sheet-statement-as-reported', { searchParams })
+		.json<FMPTypes.AsReportedFinancialStatement[]>()
 }
 
 /**
@@ -2237,10 +2865,17 @@ export async function asReportedBalanceStatements(symbol: string, options: AsRep
  * @returns A promise that resolves to an array of "as reported" cash flow statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function asReportedCashFlowStatements(symbol: string, options: AsReportedStatementOptions = {}): Promise<FMPTypes.AsReportedFinancialStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAsReportedCashFlowStatements') }
+export async function asReportedCashFlowStatements(
+	symbol: string,
+	options: AsReportedStatementOptions = {},
+): Promise<FMPTypes.AsReportedFinancialStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAsReportedCashFlowStatements')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('cash-flow-statement-as-reported', { searchParams }).json<FMPTypes.AsReportedFinancialStatement[]>()
+	return fmpApi
+		.get('cash-flow-statement-as-reported', { searchParams })
+		.json<FMPTypes.AsReportedFinancialStatement[]>()
 }
 
 /**
@@ -2250,10 +2885,17 @@ export async function asReportedCashFlowStatements(symbol: string, options: AsRe
  * @returns A promise that resolves to an array of full "as reported" financial statements.
  * @throws {Error} If symbol is not provided.
  */
-export async function fullAsReportedFinancialStatements(symbol: string, options: AsReportedStatementOptions = {}): Promise<FMPTypes.FullAsReportedFinancialStatement[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getFullAsReportedFinancialStatements') }
+export async function fullAsReportedFinancialStatements(
+	symbol: string,
+	options: AsReportedStatementOptions = {},
+): Promise<FMPTypes.FullAsReportedFinancialStatement[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getFullAsReportedFinancialStatements')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('financial-statement-full-as-reported', { searchParams }).json<FMPTypes.FullAsReportedFinancialStatement[]>()
+	return fmpApi
+		.get('financial-statement-full-as-reported', { searchParams })
+		.json<FMPTypes.FullAsReportedFinancialStatement[]>()
 }
 
 /**
@@ -2265,15 +2907,19 @@ export async function fullAsReportedFinancialStatements(symbol: string, options:
 /**
  * Options for retrieving latest institutional ownership filings.
  */
-export interface LatestInstitutionalFilingsOptions extends OptionalPaginationOptions { }
+export interface LatestInstitutionalFilingsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest institutional ownership (Form 13F) filings.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of institutional ownership filings.
  */
-export async function latestInstitutionalOwnershipFilings(options: LatestInstitutionalFilingsOptions = {}): Promise<FMPTypes.InstitutionalOwnershipFiling[]> {
+export async function latestInstitutionalOwnershipFilings(
+	options: LatestInstitutionalFilingsOptions = {},
+): Promise<FMPTypes.InstitutionalOwnershipFiling[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/latest', { searchParams }).json<FMPTypes.InstitutionalOwnershipFiling[]>()
+	return fmpApi
+		.get('institutional-ownership/latest', { searchParams })
+		.json<FMPTypes.InstitutionalOwnershipFiling[]>()
 }
 
 /**
@@ -2293,12 +2939,22 @@ export interface SecFilingsExtractOptions {
  * @returns A promise that resolves to an array of SEC filing extracts.
  * @throws {Error} If CIK, year, or quarter is not provided.
  */
-export async function secFilingsExtract(options: SecFilingsExtractOptions): Promise<FMPTypes.SecFilingExtract[]> {
-	if (!options.cik) { throw new Error('CIK option is required for getSecFilingsExtract') }
-	if (!options.year) { throw new Error('Year option is required for getSecFilingsExtract') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getSecFilingsExtract') }
+export async function secFilingsExtract(
+	options: SecFilingsExtractOptions,
+): Promise<FMPTypes.SecFilingExtract[]> {
+	if (!options.cik) {
+		throw new Error('CIK option is required for getSecFilingsExtract')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getSecFilingsExtract')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getSecFilingsExtract')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/extract', { searchParams }).json<FMPTypes.SecFilingExtract[]>()
+	return fmpApi
+		.get('institutional-ownership/extract', { searchParams })
+		.json<FMPTypes.SecFilingExtract[]>()
 }
 
 /**
@@ -2308,9 +2964,13 @@ export async function secFilingsExtract(options: SecFilingsExtractOptions): Prom
  * @throws {Error} If CIK is not provided.
  */
 export async function form13FFilingDates(cik: string): Promise<FMPTypes.Form13FFilingDate[]> {
-	if (!cik) { throw new Error('CIK parameter is required for getForm13FFilingDates') }
+	if (!cik) {
+		throw new Error('CIK parameter is required for getForm13FFilingDates')
+	}
 	const searchParams = { cik }
-	return fmpApi.get('institutional-ownership/dates', { searchParams }).json<FMPTypes.Form13FFilingDate[]>()
+	return fmpApi
+		.get('institutional-ownership/dates', { searchParams })
+		.json<FMPTypes.Form13FFilingDate[]>()
 }
 
 /**
@@ -2330,12 +2990,22 @@ export interface FilingsExtractAnalyticsHolderOptions extends OptionalPagination
  * @returns A promise that resolves to an array of holder analytics.
  * @throws {Error} If symbol, year, or quarter is not provided.
  */
-export async function filingsExtractAnalyticsByHolder(options: FilingsExtractAnalyticsHolderOptions): Promise<FMPTypes.HolderAnalytics[]> {
-	if (!options.symbol) { throw new Error('Symbol option is required for getFilingsExtractAnalyticsByHolder') }
-	if (!options.year) { throw new Error('Year option is required for getFilingsExtractAnalyticsByHolder') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getFilingsExtractAnalyticsByHolder') }
+export async function filingsExtractAnalyticsByHolder(
+	options: FilingsExtractAnalyticsHolderOptions,
+): Promise<FMPTypes.HolderAnalytics[]> {
+	if (!options.symbol) {
+		throw new Error('Symbol option is required for getFilingsExtractAnalyticsByHolder')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getFilingsExtractAnalyticsByHolder')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getFilingsExtractAnalyticsByHolder')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/extract-analytics/holder', { searchParams }).json<FMPTypes.HolderAnalytics[]>()
+	return fmpApi
+		.get('institutional-ownership/extract-analytics/holder', { searchParams })
+		.json<FMPTypes.HolderAnalytics[]>()
 }
 
 /**
@@ -2353,10 +3023,16 @@ export interface HolderPerformanceSummaryOptions {
  * @returns A promise that resolves to an array of holder performance summaries.
  * @throws {Error} If CIK is not provided.
  */
-export async function holderPerformanceSummary(options: HolderPerformanceSummaryOptions): Promise<FMPTypes.HolderPerformanceSummary[]> {
-	if (!options.cik) { throw new Error('CIK option is required for getHolderPerformanceSummary') }
+export async function holderPerformanceSummary(
+	options: HolderPerformanceSummaryOptions,
+): Promise<FMPTypes.HolderPerformanceSummary[]> {
+	if (!options.cik) {
+		throw new Error('CIK option is required for getHolderPerformanceSummary')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/holder-performance-summary', { searchParams }).json<FMPTypes.HolderPerformanceSummary[]>()
+	return fmpApi
+		.get('institutional-ownership/holder-performance-summary', { searchParams })
+		.json<FMPTypes.HolderPerformanceSummary[]>()
 }
 
 /**
@@ -2376,12 +3052,22 @@ export interface HoldersIndustryBreakdownOptions {
  * @returns A promise that resolves to an array of holder industry breakdowns.
  * @throws {Error} If CIK, year, or quarter is not provided.
  */
-export async function holdersIndustryBreakdown(options: HoldersIndustryBreakdownOptions): Promise<FMPTypes.HolderIndustryBreakdown[]> {
-	if (!options.cik) { throw new Error('CIK option is required for getHoldersIndustryBreakdown') }
-	if (!options.year) { throw new Error('Year option is required for getHoldersIndustryBreakdown') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getHoldersIndustryBreakdown') }
+export async function holdersIndustryBreakdown(
+	options: HoldersIndustryBreakdownOptions,
+): Promise<FMPTypes.HolderIndustryBreakdown[]> {
+	if (!options.cik) {
+		throw new Error('CIK option is required for getHoldersIndustryBreakdown')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getHoldersIndustryBreakdown')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getHoldersIndustryBreakdown')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/holder-industry-breakdown', { searchParams }).json<FMPTypes.HolderIndustryBreakdown[]>()
+	return fmpApi
+		.get('institutional-ownership/holder-industry-breakdown', { searchParams })
+		.json<FMPTypes.HolderIndustryBreakdown[]>()
 }
 
 /**
@@ -2401,12 +3087,22 @@ export interface PositionsSummaryOptions {
  * @returns A promise that resolves to an array containing the positions summary.
  * @throws {Error} If symbol, year, or quarter is not provided.
  */
-export async function positionsSummary(options: PositionsSummaryOptions): Promise<FMPTypes.SymbolPositionSummary[]> {
-	if (!options.symbol) { throw new Error('Symbol option is required for getPositionsSummary') }
-	if (!options.year) { throw new Error('Year option is required for getPositionsSummary') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getPositionsSummary') }
+export async function positionsSummary(
+	options: PositionsSummaryOptions,
+): Promise<FMPTypes.SymbolPositionSummary[]> {
+	if (!options.symbol) {
+		throw new Error('Symbol option is required for getPositionsSummary')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getPositionsSummary')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getPositionsSummary')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/symbol-positions-summary', { searchParams }).json<FMPTypes.SymbolPositionSummary[]>()
+	return fmpApi
+		.get('institutional-ownership/symbol-positions-summary', { searchParams })
+		.json<FMPTypes.SymbolPositionSummary[]>()
 }
 
 /**
@@ -2424,11 +3120,19 @@ export interface IndustryPerformanceSummaryOptions {
  * @returns A promise that resolves to an array of industry performance summaries.
  * @throws {Error} If year or quarter is not provided.
  */
-export async function industryPerformanceSummary(options: IndustryPerformanceSummaryOptions): Promise<FMPTypes.IndustryPerformanceSummary[]> {
-	if (!options.year) { throw new Error('Year option is required for getIndustryPerformanceSummary') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getIndustryPerformanceSummary') }
+export async function industryPerformanceSummary(
+	options: IndustryPerformanceSummaryOptions,
+): Promise<FMPTypes.IndustryPerformanceSummary[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getIndustryPerformanceSummary')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getIndustryPerformanceSummary')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('institutional-ownership/industry-summary', { searchParams }).json<FMPTypes.IndustryPerformanceSummary[]>()
+	return fmpApi
+		.get('institutional-ownership/industry-summary', { searchParams })
+		.json<FMPTypes.IndustryPerformanceSummary[]>()
 }
 
 /**
@@ -2452,7 +3156,9 @@ export async function indexesList(): Promise<FMPTypes.IndexListItem[]> {
  * @throws {Error} If symbol is not provided.
  */
 export async function indexQuote(symbol: string): Promise<FMPTypes.IndexQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexQuote')
+	}
 	const searchParams = { symbol } // Endpoint is /quote
 	return fmpApi.get('quote', { searchParams }).json<FMPTypes.IndexQuote[]>()
 }
@@ -2464,7 +3170,9 @@ export async function indexQuote(symbol: string): Promise<FMPTypes.IndexQuote[]>
  * @throws {Error} If symbol is not provided.
  */
 export async function indexQuoteShort(symbol: string): Promise<FMPTypes.IndexQuoteShort[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexQuoteShort') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexQuoteShort')
+	}
 	const searchParams = { symbol } // Endpoint is /quote-short
 	return fmpApi.get('quote-short', { searchParams }).json<FMPTypes.IndexQuoteShort[]>()
 }
@@ -2481,7 +3189,9 @@ export interface AllIndexQuotesOptions {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of index quotes (short or full based on options).
  */
-export async function allIndexQuotes(options: AllIndexQuotesOptions = {}): Promise<(FMPTypes.IndexQuoteShort | FMPTypes.IndexQuote)[]> {
+export async function allIndexQuotes(
+	options: AllIndexQuotesOptions = {},
+): Promise<(FMPTypes.IndexQuoteShort | FMPTypes.IndexQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
 		return fmpApi.get('batch-index-quotes', { searchParams }).json<FMPTypes.IndexQuoteShort[]>()
@@ -2496,10 +3206,17 @@ export async function allIndexQuotes(options: AllIndexQuotesOptions = {}): Promi
  * @returns A promise that resolves to an array of light index chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function indexChartLight(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartLightItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexChartLight') }
+export async function indexChartLight(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartLightItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexChartLight')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/light', { searchParams }).json<FMPTypes.StockChartLightItem[]>()
+	return fmpApi
+		.get('historical-price-eod/light', { searchParams })
+		.json<FMPTypes.StockChartLightItem[]>()
 }
 
 /**
@@ -2509,10 +3226,17 @@ export async function indexChartLight(symbol: string, options: HistoricalEodChar
  * @returns A promise that resolves to an array of full index chart items.
  * @throws {Error} If symbol is not provided.
  */
-export async function indexChartFull(symbol: string, options: HistoricalEodChartOptions = {}): Promise<FMPTypes.StockChartFullItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexChartFull') }
+export async function indexChartFull(
+	symbol: string,
+	options: HistoricalEodChartOptions = {},
+): Promise<FMPTypes.StockChartFullItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexChartFull')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('historical-price-eod/full', { searchParams }).json<FMPTypes.StockChartFullItem[]>()
+	return fmpApi
+		.get('historical-price-eod/full', { searchParams })
+		.json<FMPTypes.StockChartFullItem[]>()
 }
 
 /**
@@ -2521,8 +3245,13 @@ export async function indexChartFull(symbol: string, options: HistoricalEodChart
  * @param [options] Optional date range. Note: `nonadjusted` is not in index chart docs.
  * @returns A promise that resolves to an array of 1-minute index chart items.
  */
-export async function indexChart1Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexChart1Min') }
+export async function indexChart1Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexChart1Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -2533,8 +3262,13 @@ export async function indexChart1Min(symbol: string, options: Omit<HistoricalInt
  * @param [options] Optional date range. Note: `nonadjusted` is not in index chart docs.
  * @returns A promise that resolves to an array of 5-minute index chart items.
  */
-export async function indexChart5Min(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexChart5Min') }
+export async function indexChart5Min(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexChart5Min')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/5min`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -2545,8 +3279,13 @@ export async function indexChart5Min(symbol: string, options: Omit<HistoricalInt
  * @param [options] Optional date range. Note: `nonadjusted` is not in index chart docs.
  * @returns A promise that resolves to an array of 1-hour index chart items.
  */
-export async function indexChart1Hour(symbol: string, options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {}): Promise<FMPTypes.BaseChartItem[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getIndexChart1Hour') }
+export async function indexChart1Hour(
+	symbol: string,
+	options: Omit<HistoricalIntradayChartOptions, 'nonadjusted'> = {},
+): Promise<FMPTypes.BaseChartItem[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getIndexChart1Hour')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get(`historical-chart/1hour`, { searchParams }).json<FMPTypes.BaseChartItem[]>()
 }
@@ -2579,24 +3318,36 @@ export async function dowJonesConstituents(): Promise<FMPTypes.IndexConstituent[
  * Retrieves historical changes to the S&P 500 index constituents.
  * @returns A promise that resolves to an array of historical S&P 500 constituent changes.
  */
-export async function historicalSp500Constituents(): Promise<FMPTypes.HistoricalIndexConstituentChange[]> {
-	return fmpApi.get('historical-sp500-constituent').json<FMPTypes.HistoricalIndexConstituentChange[]>()
+export async function historicalSp500Constituents(): Promise<
+	FMPTypes.HistoricalIndexConstituentChange[]
+> {
+	return fmpApi
+		.get('historical-sp500-constituent')
+		.json<FMPTypes.HistoricalIndexConstituentChange[]>()
 }
 
 /**
  * Retrieves historical changes to the Nasdaq index constituents.
  * @returns A promise that resolves to an array of historical Nasdaq constituent changes.
  */
-export async function historicalNasdaqConstituents(): Promise<FMPTypes.HistoricalIndexConstituentChange[]> {
-	return fmpApi.get('historical-nasdaq-constituent').json<FMPTypes.HistoricalIndexConstituentChange[]>()
+export async function historicalNasdaqConstituents(): Promise<
+	FMPTypes.HistoricalIndexConstituentChange[]
+> {
+	return fmpApi
+		.get('historical-nasdaq-constituent')
+		.json<FMPTypes.HistoricalIndexConstituentChange[]>()
 }
 
 /**
  * Retrieves historical changes to the Dow Jones Industrial Average constituents.
  * @returns A promise that resolves to an array of historical Dow Jones constituent changes.
  */
-export async function historicalDowJonesConstituents(): Promise<FMPTypes.HistoricalIndexConstituentChange[]> {
-	return fmpApi.get('historical-dowjones-constituent').json<FMPTypes.HistoricalIndexConstituentChange[]>()
+export async function historicalDowJonesConstituents(): Promise<
+	FMPTypes.HistoricalIndexConstituentChange[]
+> {
+	return fmpApi
+		.get('historical-dowjones-constituent')
+		.json<FMPTypes.HistoricalIndexConstituentChange[]>()
 }
 
 /**
@@ -2617,7 +3368,9 @@ export interface LatestInsiderTradesOptions extends OptionalPaginationOptions {
  * @param [options] Optional parameters for date filter and pagination.
  * @returns A promise that resolves to an array of insider trades.
  */
-export async function latestInsiderTrades(options: LatestInsiderTradesOptions = {}): Promise<FMPTypes.InsiderTrade[]> {
+export async function latestInsiderTrades(
+	options: LatestInsiderTradesOptions = {},
+): Promise<FMPTypes.InsiderTrade[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('insider-trading/latest', { searchParams }).json<FMPTypes.InsiderTrade[]>()
 }
@@ -2640,7 +3393,9 @@ export interface SearchInsiderTradesOptions extends OptionalPaginationOptions {
  * @param [options] Optional parameters for filtering and pagination.
  * @returns A promise that resolves to an array of insider trades.
  */
-export async function searchInsiderTrades(options: SearchInsiderTradesOptions = {}): Promise<FMPTypes.InsiderTrade[]> {
+export async function searchInsiderTrades(
+	options: SearchInsiderTradesOptions = {},
+): Promise<FMPTypes.InsiderTrade[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('insider-trading/search', { searchParams }).json<FMPTypes.InsiderTrade[]>()
 }
@@ -2651,10 +3406,16 @@ export async function searchInsiderTrades(options: SearchInsiderTradesOptions = 
  * @returns A promise that resolves to an array of insider reporting names and CIKs.
  * @throws {Error} If name is not provided.
  */
-export async function searchInsiderTradesByReportingName(name: string): Promise<FMPTypes.InsiderReportingName[]> {
-	if (!name) { throw new Error('Name parameter is required for searchInsiderTradesByReportingName') }
+export async function searchInsiderTradesByReportingName(
+	name: string,
+): Promise<FMPTypes.InsiderReportingName[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for searchInsiderTradesByReportingName')
+	}
 	const searchParams = { name }
-	return fmpApi.get('insider-trading/reporting-name', { searchParams }).json<FMPTypes.InsiderReportingName[]>()
+	return fmpApi
+		.get('insider-trading/reporting-name', { searchParams })
+		.json<FMPTypes.InsiderReportingName[]>()
 }
 
 /**
@@ -2671,16 +3432,22 @@ export async function allInsiderTransactionTypes(): Promise<FMPTypes.InsiderTran
  * @returns A promise that resolves to an array of insider trade statistics.
  * @throws {Error} If symbol is not provided.
  */
-export async function insiderTradeStatistics(symbol: string): Promise<FMPTypes.InsiderTradeStatistics[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getInsiderTradeStatistics') }
+export async function insiderTradeStatistics(
+	symbol: string,
+): Promise<FMPTypes.InsiderTradeStatistics[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getInsiderTradeStatistics')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('insider-trading/statistics', { searchParams }).json<FMPTypes.InsiderTradeStatistics[]>()
+	return fmpApi
+		.get('insider-trading/statistics', { searchParams })
+		.json<FMPTypes.InsiderTradeStatistics[]>()
 }
 
 /**
  * Options for retrieving acquisition of beneficial ownership filings (SC 13D/G).
  */
-export interface AcquisitionOwnershipOptions extends OptionalLimitOption { }
+export interface AcquisitionOwnershipOptions extends OptionalLimitOption {}
 /**
  * Tracks changes in stock ownership during acquisitions (SC 13D/G filings).
  * @param symbol The stock symbol (e.g., "AAPL").
@@ -2688,10 +3455,17 @@ export interface AcquisitionOwnershipOptions extends OptionalLimitOption { }
  * @returns A promise that resolves to an array of acquisition ownership records.
  * @throws {Error} If symbol is not provided.
  */
-export async function acquisitionOwnership(symbol: string, options: AcquisitionOwnershipOptions = {}): Promise<FMPTypes.AcquisitionOwnership[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAcquisitionOwnership') }
+export async function acquisitionOwnership(
+	symbol: string,
+	options: AcquisitionOwnershipOptions = {},
+): Promise<FMPTypes.AcquisitionOwnership[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAcquisitionOwnership')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('acquisition-of-beneficial-ownership', { searchParams }).json<FMPTypes.AcquisitionOwnership[]>()
+	return fmpApi
+		.get('acquisition-of-beneficial-ownership', { searchParams })
+		.json<FMPTypes.AcquisitionOwnership[]>()
 }
 
 /**
@@ -2719,10 +3493,16 @@ export interface MarketPerformanceSnapshotOptions {
  * @returns A promise that resolves to an array of market sector performance data.
  * @throws {Error} If date is not provided.
  */
-export async function marketSectorPerformanceSnapshot(options: MarketPerformanceSnapshotOptions): Promise<FMPTypes.MarketSectorPerformance[]> {
-	if (!options.date) { throw new Error('Date option is required for getMarketSectorPerformanceSnapshot') }
+export async function marketSectorPerformanceSnapshot(
+	options: MarketPerformanceSnapshotOptions,
+): Promise<FMPTypes.MarketSectorPerformance[]> {
+	if (!options.date) {
+		throw new Error('Date option is required for getMarketSectorPerformanceSnapshot')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('sector-performance-snapshot', { searchParams }).json<FMPTypes.MarketSectorPerformance[]>()
+	return fmpApi
+		.get('sector-performance-snapshot', { searchParams })
+		.json<FMPTypes.MarketSectorPerformance[]>()
 }
 
 /**
@@ -2731,10 +3511,16 @@ export async function marketSectorPerformanceSnapshot(options: MarketPerformance
  * @returns A promise that resolves to an array of market industry performance data.
  * @throws {Error} If date is not provided.
  */
-export async function marketIndustryPerformanceSnapshot(options: MarketPerformanceSnapshotOptions): Promise<FMPTypes.MarketIndustryPerformance[]> {
-	if (!options.date) { throw new Error('Date option is required for getMarketIndustryPerformanceSnapshot') }
+export async function marketIndustryPerformanceSnapshot(
+	options: MarketPerformanceSnapshotOptions,
+): Promise<FMPTypes.MarketIndustryPerformance[]> {
+	if (!options.date) {
+		throw new Error('Date option is required for getMarketIndustryPerformanceSnapshot')
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('industry-performance-snapshot', { searchParams }).json<FMPTypes.MarketIndustryPerformance[]>()
+	return fmpApi
+		.get('industry-performance-snapshot', { searchParams })
+		.json<FMPTypes.MarketIndustryPerformance[]>()
 }
 
 /**
@@ -2751,10 +3537,17 @@ export interface HistoricalMarketPerformanceOptions extends OptionalRangeOptions
  * @returns A promise that resolves to an array of historical market sector performance data.
  * @throws {Error} If sector is not provided.
  */
-export async function historicalMarketSectorPerformance(sector: string, options: HistoricalMarketPerformanceOptions = {}): Promise<FMPTypes.MarketSectorPerformance[]> {
-	if (!sector) { throw new Error('Sector parameter is required for getHistoricalMarketSectorPerformance') }
+export async function historicalMarketSectorPerformance(
+	sector: string,
+	options: HistoricalMarketPerformanceOptions = {},
+): Promise<FMPTypes.MarketSectorPerformance[]> {
+	if (!sector) {
+		throw new Error('Sector parameter is required for getHistoricalMarketSectorPerformance')
+	}
 	const searchParams = cleanQuery({ sector, ...options })
-	return fmpApi.get('historical-sector-performance', { searchParams }).json<FMPTypes.MarketSectorPerformance[]>()
+	return fmpApi
+		.get('historical-sector-performance', { searchParams })
+		.json<FMPTypes.MarketSectorPerformance[]>()
 }
 
 /**
@@ -2764,10 +3557,17 @@ export async function historicalMarketSectorPerformance(sector: string, options:
  * @returns A promise that resolves to an array of historical market industry performance data.
  * @throws {Error} If industry is not provided.
  */
-export async function historicalMarketIndustryPerformance(industry: string, options: HistoricalMarketPerformanceOptions = {}): Promise<FMPTypes.MarketIndustryPerformance[]> {
-	if (!industry) { throw new Error('Industry parameter is required for getHistoricalMarketIndustryPerformance') }
+export async function historicalMarketIndustryPerformance(
+	industry: string,
+	options: HistoricalMarketPerformanceOptions = {},
+): Promise<FMPTypes.MarketIndustryPerformance[]> {
+	if (!industry) {
+		throw new Error('Industry parameter is required for getHistoricalMarketIndustryPerformance')
+	}
 	const searchParams = cleanQuery({ industry, ...options })
-	return fmpApi.get('historical-industry-performance', { searchParams }).json<FMPTypes.MarketIndustryPerformance[]>()
+	return fmpApi
+		.get('historical-industry-performance', { searchParams })
+		.json<FMPTypes.MarketIndustryPerformance[]>()
 }
 
 /**
@@ -2789,8 +3589,12 @@ export interface MarketPESnapshotOptions {
  * @returns A promise that resolves to an array of market sector P/E data.
  * @throws {Error} If date is not provided.
  */
-export async function marketSectorPESnapshot(options: MarketPESnapshotOptions): Promise<FMPTypes.MarketSectorPE[]> {
-	if (!options.date) { throw new Error('Date option is required for getMarketSectorPESnapshot') }
+export async function marketSectorPESnapshot(
+	options: MarketPESnapshotOptions,
+): Promise<FMPTypes.MarketSectorPE[]> {
+	if (!options.date) {
+		throw new Error('Date option is required for getMarketSectorPESnapshot')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sector-pe-snapshot', { searchParams }).json<FMPTypes.MarketSectorPE[]>()
 }
@@ -2801,8 +3605,12 @@ export async function marketSectorPESnapshot(options: MarketPESnapshotOptions): 
  * @returns A promise that resolves to an array of market industry P/E data.
  * @throws {Error} If date is not provided.
  */
-export async function marketIndustryPESnapshot(options: MarketPESnapshotOptions): Promise<FMPTypes.MarketIndustryPE[]> {
-	if (!options.date) { throw new Error('Date option is required for getMarketIndustryPESnapshot') }
+export async function marketIndustryPESnapshot(
+	options: MarketPESnapshotOptions,
+): Promise<FMPTypes.MarketIndustryPE[]> {
+	if (!options.date) {
+		throw new Error('Date option is required for getMarketIndustryPESnapshot')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('industry-pe-snapshot', { searchParams }).json<FMPTypes.MarketIndustryPE[]>()
 }
@@ -2821,8 +3629,13 @@ export interface HistoricalMarketPEOptions extends OptionalRangeOptions {
  * @returns A promise that resolves to an array of historical market sector P/E data.
  * @throws {Error} If sector is not provided.
  */
-export async function historicalMarketSectorPE(sector: string, options: HistoricalMarketPEOptions = {}): Promise<FMPTypes.MarketSectorPE[]> {
-	if (!sector) { throw new Error('Sector parameter is required for getHistoricalMarketSectorPE') }
+export async function historicalMarketSectorPE(
+	sector: string,
+	options: HistoricalMarketPEOptions = {},
+): Promise<FMPTypes.MarketSectorPE[]> {
+	if (!sector) {
+		throw new Error('Sector parameter is required for getHistoricalMarketSectorPE')
+	}
 	const searchParams = cleanQuery({ sector, ...options })
 	return fmpApi.get('historical-sector-pe', { searchParams }).json<FMPTypes.MarketSectorPE[]>()
 }
@@ -2834,8 +3647,13 @@ export async function historicalMarketSectorPE(sector: string, options: Historic
  * @returns A promise that resolves to an array of historical market industry P/E data.
  * @throws {Error} If industry is not provided.
  */
-export async function historicalMarketIndustryPE(industry: string, options: HistoricalMarketPEOptions = {}): Promise<FMPTypes.MarketIndustryPE[]> {
-	if (!industry) { throw new Error('Industry parameter is required for getHistoricalMarketIndustryPE') }
+export async function historicalMarketIndustryPE(
+	industry: string,
+	options: HistoricalMarketPEOptions = {},
+): Promise<FMPTypes.MarketIndustryPE[]> {
+	if (!industry) {
+		throw new Error('Industry parameter is required for getHistoricalMarketIndustryPE')
+	}
 	const searchParams = cleanQuery({ industry, ...options })
 	return fmpApi.get('historical-industry-pe', { searchParams }).json<FMPTypes.MarketIndustryPE[]>()
 }
@@ -2876,10 +3694,16 @@ export async function topTradedStocks(): Promise<FMPTypes.MarketMover[]> {
  * @returns A promise that resolves to an array containing the exchange market hours.
  * @throws {Error} If exchange is not provided.
  */
-export async function exchangeMarketHours(exchange: string): Promise<FMPTypes.ExchangeMarketHours[]> {
-	if (!exchange) { throw new Error('Exchange parameter is required for getExchangeMarketHours') }
+export async function exchangeMarketHours(
+	exchange: string,
+): Promise<FMPTypes.ExchangeMarketHours[]> {
+	if (!exchange) {
+		throw new Error('Exchange parameter is required for getExchangeMarketHours')
+	}
 	const searchParams = { exchange }
-	return fmpApi.get('exchange-market-hours', { searchParams }).json<FMPTypes.ExchangeMarketHours[]>()
+	return fmpApi
+		.get('exchange-market-hours', { searchParams })
+		.json<FMPTypes.ExchangeMarketHours[]>()
 }
 
 /**
@@ -2899,13 +3723,15 @@ export async function allExchangeMarketHours(): Promise<FMPTypes.ExchangeMarketH
 /**
  * Options for retrieving FMP articles.
  */
-export interface FmpArticlesOptions extends OptionalPaginationOptions { }
+export interface FmpArticlesOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest articles from Financial Modeling Prep.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of FMP articles.
  */
-export async function fmpArticles(options: FmpArticlesOptions = {}): Promise<FMPTypes.FmpArticle[]> {
+export async function fmpArticles(
+	options: FmpArticlesOptions = {},
+): Promise<FMPTypes.FmpArticle[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('fmp-articles', { searchParams }).json<FMPTypes.FmpArticle[]>()
 }
@@ -2913,13 +3739,15 @@ export async function fmpArticles(options: FmpArticlesOptions = {}): Promise<FMP
 /**
  * Options for retrieving general, press releases, stock, crypto, or forex news.
  */
-export interface GeneralNewsOptions extends OptionalRangeOptions, OptionalPaginationOptions { }
+export interface GeneralNewsOptions extends OptionalRangeOptions, OptionalPaginationOptions {}
 /**
  * Retrieves the latest general news articles.
  * @param [options] Optional parameters for date range and pagination.
  * @returns A promise that resolves to an array of general news articles.
  */
-export async function generalNews(options: GeneralNewsOptions = {}): Promise<FMPTypes.GeneralNewsArticle[]> {
+export async function generalNews(
+	options: GeneralNewsOptions = {},
+): Promise<FMPTypes.GeneralNewsArticle[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/general-latest', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -2929,9 +3757,13 @@ export async function generalNews(options: GeneralNewsOptions = {}): Promise<FMP
  * @param [options] Optional parameters for date range and pagination.
  * @returns A promise that resolves to an array of press release articles.
  */
-export async function pressReleases(options: GeneralNewsOptions = {}): Promise<FMPTypes.GeneralNewsArticle[]> {
+export async function pressReleases(
+	options: GeneralNewsOptions = {},
+): Promise<FMPTypes.GeneralNewsArticle[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('news/press-releases-latest', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
+	return fmpApi
+		.get('news/press-releases-latest', { searchParams })
+		.json<FMPTypes.GeneralNewsArticle[]>()
 }
 
 /**
@@ -2939,7 +3771,9 @@ export async function pressReleases(options: GeneralNewsOptions = {}): Promise<F
  * @param [options] Optional parameters for date range and pagination.
  * @returns A promise that resolves to an array of stock news articles.
  */
-export async function stockNews(options: GeneralNewsOptions = {}): Promise<FMPTypes.GeneralNewsArticle[]> {
+export async function stockNews(
+	options: GeneralNewsOptions = {},
+): Promise<FMPTypes.GeneralNewsArticle[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/stock-latest', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -2949,7 +3783,9 @@ export async function stockNews(options: GeneralNewsOptions = {}): Promise<FMPTy
  * @param [options] Optional parameters for date range and pagination.
  * @returns A promise that resolves to an array of crypto news articles.
  */
-export async function cryptoNews(options: GeneralNewsOptions = {}): Promise<FMPTypes.GeneralNewsArticle[]> {
+export async function cryptoNews(
+	options: GeneralNewsOptions = {},
+): Promise<FMPTypes.GeneralNewsArticle[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/crypto-latest', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -2959,7 +3795,9 @@ export async function cryptoNews(options: GeneralNewsOptions = {}): Promise<FMPT
  * @param [options] Optional parameters for date range and pagination.
  * @returns A promise that resolves to an array of Forex news articles.
  */
-export async function forexNews(options: GeneralNewsOptions = {}): Promise<FMPTypes.GeneralNewsArticle[]> {
+export async function forexNews(
+	options: GeneralNewsOptions = {},
+): Promise<FMPTypes.GeneralNewsArticle[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/forex-latest', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -2977,8 +3815,12 @@ export interface SearchNewsBySymbolsOptions extends GeneralNewsOptions {
  * @returns A promise that resolves to an array of press release articles.
  * @throws {Error} If symbols are not provided.
  */
-export async function searchPressReleases(options: SearchNewsBySymbolsOptions): Promise<FMPTypes.GeneralNewsArticle[]> {
-	if (!options.symbols) { throw new Error('Symbols option is required for searchPressReleases') }
+export async function searchPressReleases(
+	options: SearchNewsBySymbolsOptions,
+): Promise<FMPTypes.GeneralNewsArticle[]> {
+	if (!options.symbols) {
+		throw new Error('Symbols option is required for searchPressReleases')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/press-releases', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -2989,8 +3831,12 @@ export async function searchPressReleases(options: SearchNewsBySymbolsOptions): 
  * @returns A promise that resolves to an array of stock news articles.
  * @throws {Error} If symbols are not provided.
  */
-export async function searchStockNews(options: SearchNewsBySymbolsOptions): Promise<FMPTypes.GeneralNewsArticle[]> {
-	if (!options.symbols) { throw new Error('Symbols option is required for searchStockNews') }
+export async function searchStockNews(
+	options: SearchNewsBySymbolsOptions,
+): Promise<FMPTypes.GeneralNewsArticle[]> {
+	if (!options.symbols) {
+		throw new Error('Symbols option is required for searchStockNews')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/stock', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -3001,8 +3847,12 @@ export async function searchStockNews(options: SearchNewsBySymbolsOptions): Prom
  * @returns A promise that resolves to an array of crypto news articles.
  * @throws {Error} If symbols are not provided.
  */
-export async function searchCryptoNews(options: SearchNewsBySymbolsOptions): Promise<FMPTypes.GeneralNewsArticle[]> {
-	if (!options.symbols) { throw new Error('Symbols option is required for searchCryptoNews') }
+export async function searchCryptoNews(
+	options: SearchNewsBySymbolsOptions,
+): Promise<FMPTypes.GeneralNewsArticle[]> {
+	if (!options.symbols) {
+		throw new Error('Symbols option is required for searchCryptoNews')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/crypto', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -3013,8 +3863,12 @@ export async function searchCryptoNews(options: SearchNewsBySymbolsOptions): Pro
  * @returns A promise that resolves to an array of Forex news articles.
  * @throws {Error} If symbols are not provided.
  */
-export async function searchForexNews(options: SearchNewsBySymbolsOptions): Promise<FMPTypes.GeneralNewsArticle[]> {
-	if (!options.symbols) { throw new Error('Symbols option is required for searchForexNews') }
+export async function searchForexNews(
+	options: SearchNewsBySymbolsOptions,
+): Promise<FMPTypes.GeneralNewsArticle[]> {
+	if (!options.symbols) {
+		throw new Error('Symbols option is required for searchForexNews')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('news/forex', { searchParams }).json<FMPTypes.GeneralNewsArticle[]>()
 }
@@ -3042,10 +3896,19 @@ export interface TechnicalIndicatorOptions extends OptionalRangeOptions {
  * @returns A promise that resolves to an array of SMA data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function simpleMovingAverage(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.SmaPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getSimpleMovingAverage') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getSimpleMovingAverage') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getSimpleMovingAverage') }
+export async function simpleMovingAverage(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.SmaPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getSimpleMovingAverage')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getSimpleMovingAverage')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getSimpleMovingAverage')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/sma', { searchParams }).json<FMPTypes.SmaPoint[]>()
 }
@@ -3057,10 +3920,19 @@ export async function simpleMovingAverage(symbol: string, options: TechnicalIndi
  * @returns A promise that resolves to an array of EMA data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function exponentialMovingAverage(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.EmaPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getExponentialMovingAverage') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getExponentialMovingAverage') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getExponentialMovingAverage') }
+export async function exponentialMovingAverage(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.EmaPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getExponentialMovingAverage')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getExponentialMovingAverage')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getExponentialMovingAverage')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/ema', { searchParams }).json<FMPTypes.EmaPoint[]>()
 }
@@ -3072,10 +3944,19 @@ export async function exponentialMovingAverage(symbol: string, options: Technica
  * @returns A promise that resolves to an array of WMA data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function weightedMovingAverage(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.WmaPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getWeightedMovingAverage') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getWeightedMovingAverage') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getWeightedMovingAverage') }
+export async function weightedMovingAverage(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.WmaPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getWeightedMovingAverage')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getWeightedMovingAverage')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getWeightedMovingAverage')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/wma', { searchParams }).json<FMPTypes.WmaPoint[]>()
 }
@@ -3087,10 +3968,19 @@ export async function weightedMovingAverage(symbol: string, options: TechnicalIn
  * @returns A promise that resolves to an array of DEMA data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function doubleExponentialMovingAverage(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.DemaPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getDoubleExponentialMovingAverage') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getDoubleExponentialMovingAverage') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getDoubleExponentialMovingAverage') }
+export async function doubleExponentialMovingAverage(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.DemaPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getDoubleExponentialMovingAverage')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getDoubleExponentialMovingAverage')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getDoubleExponentialMovingAverage')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/dema', { searchParams }).json<FMPTypes.DemaPoint[]>()
 }
@@ -3102,10 +3992,19 @@ export async function doubleExponentialMovingAverage(symbol: string, options: Te
  * @returns A promise that resolves to an array of TEMA data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function tripleExponentialMovingAverage(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.TemaPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getTripleExponentialMovingAverage') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getTripleExponentialMovingAverage') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getTripleExponentialMovingAverage') }
+export async function tripleExponentialMovingAverage(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.TemaPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getTripleExponentialMovingAverage')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getTripleExponentialMovingAverage')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getTripleExponentialMovingAverage')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/tema', { searchParams }).json<FMPTypes.TemaPoint[]>()
 }
@@ -3117,10 +4016,19 @@ export async function tripleExponentialMovingAverage(symbol: string, options: Te
  * @returns A promise that resolves to an array of RSI data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function relativeStrengthIndex(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.RsiPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getRelativeStrengthIndex') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getRelativeStrengthIndex') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getRelativeStrengthIndex') }
+export async function relativeStrengthIndex(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.RsiPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getRelativeStrengthIndex')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getRelativeStrengthIndex')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getRelativeStrengthIndex')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/rsi', { searchParams }).json<FMPTypes.RsiPoint[]>()
 }
@@ -3132,12 +4040,23 @@ export async function relativeStrengthIndex(symbol: string, options: TechnicalIn
  * @returns A promise that resolves to an array of Standard Deviation data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function standardDeviation(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.StandardDeviationPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStandardDeviation') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getStandardDeviation') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getStandardDeviation') }
+export async function standardDeviation(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.StandardDeviationPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStandardDeviation')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getStandardDeviation')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getStandardDeviation')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('technical-indicators/standarddeviation', { searchParams }).json<FMPTypes.StandardDeviationPoint[]>()
+	return fmpApi
+		.get('technical-indicators/standarddeviation', { searchParams })
+		.json<FMPTypes.StandardDeviationPoint[]>()
 }
 
 /**
@@ -3147,12 +4066,23 @@ export async function standardDeviation(symbol: string, options: TechnicalIndica
  * @returns A promise that resolves to an array of Williams %R data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function williamsPercentR(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.WilliamsPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getWilliamsPercentR') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getWilliamsPercentR') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getWilliamsPercentR') }
+export async function williamsPercentR(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.WilliamsPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getWilliamsPercentR')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getWilliamsPercentR')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getWilliamsPercentR')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('technical-indicators/williams', { searchParams }).json<FMPTypes.WilliamsPoint[]>()
+	return fmpApi
+		.get('technical-indicators/williams', { searchParams })
+		.json<FMPTypes.WilliamsPoint[]>()
 }
 
 /**
@@ -3162,10 +4092,19 @@ export async function williamsPercentR(symbol: string, options: TechnicalIndicat
  * @returns A promise that resolves to an array of ADX data points.
  * @throws {Error} If symbol, periodLength, or timeframe is not provided.
  */
-export async function averageDirectionalIndex(symbol: string, options: TechnicalIndicatorOptions): Promise<FMPTypes.AdxPoint[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAverageDirectionalIndex') }
-	if (!options.periodLength) { throw new Error('PeriodLength option is required for getAverageDirectionalIndex') }
-	if (!options.timeframe) { throw new Error('Timeframe option is required for getAverageDirectionalIndex') }
+export async function averageDirectionalIndex(
+	symbol: string,
+	options: TechnicalIndicatorOptions,
+): Promise<FMPTypes.AdxPoint[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAverageDirectionalIndex')
+	}
+	if (!options.periodLength) {
+		throw new Error('PeriodLength option is required for getAverageDirectionalIndex')
+	}
+	if (!options.timeframe) {
+		throw new Error('Timeframe option is required for getAverageDirectionalIndex')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
 	return fmpApi.get('technical-indicators/adx', { searchParams }).json<FMPTypes.AdxPoint[]>()
 }
@@ -3183,7 +4122,9 @@ export async function averageDirectionalIndex(symbol: string, options: Technical
  * @throws {Error} If symbol is not provided.
  */
 export async function stockQuote(symbol: string): Promise<FMPTypes.StockQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockQuote')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('quote', { searchParams }).json<FMPTypes.StockQuote[]>()
 }
@@ -3195,7 +4136,9 @@ export async function stockQuote(symbol: string): Promise<FMPTypes.StockQuote[]>
  * @throws {Error} If symbol is not provided.
  */
 export async function stockQuoteShort(symbol: string): Promise<FMPTypes.StockQuoteShort[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockQuoteShort') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockQuoteShort')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('quote-short', { searchParams }).json<FMPTypes.StockQuoteShort[]>()
 }
@@ -3207,7 +4150,9 @@ export async function stockQuoteShort(symbol: string): Promise<FMPTypes.StockQuo
  * @throws {Error} If symbol is not provided.
  */
 export async function aftermarketTrade(symbol: string): Promise<FMPTypes.AftermarketTrade[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAftermarketTrade') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAftermarketTrade')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('aftermarket-trade', { searchParams }).json<FMPTypes.AftermarketTrade[]>()
 }
@@ -3219,7 +4164,9 @@ export async function aftermarketTrade(symbol: string): Promise<FMPTypes.Afterma
  * @throws {Error} If symbol is not provided.
  */
 export async function aftermarketQuote(symbol: string): Promise<FMPTypes.AftermarketQuote[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getAftermarketQuote') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getAftermarketQuote')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('aftermarket-quote', { searchParams }).json<FMPTypes.AftermarketQuote[]>()
 }
@@ -3231,7 +4178,9 @@ export async function aftermarketQuote(symbol: string): Promise<FMPTypes.Afterma
  * @throws {Error} If symbol is not provided.
  */
 export async function stockPriceChange(symbol: string): Promise<FMPTypes.StockPriceChange[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getStockPriceChange') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getStockPriceChange')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('stock-price-change', { searchParams }).json<FMPTypes.StockPriceChange[]>()
 }
@@ -3243,7 +4192,9 @@ export async function stockPriceChange(symbol: string): Promise<FMPTypes.StockPr
  * @throws {Error} If symbols array is not provided or is empty.
  */
 export async function stockBatchQuote(symbols: string[]): Promise<FMPTypes.StockQuote[]> {
-	if (!symbols || symbols.length === 0) { throw new Error('Symbols array is required for getStockBatchQuote') }
+	if (!symbols || symbols.length === 0) {
+		throw new Error('Symbols array is required for getStockBatchQuote')
+	}
 	const searchParams = cleanQuery({ symbols })
 	return fmpApi.get('batch-quote', { searchParams }).json<FMPTypes.StockQuote[]>()
 }
@@ -3255,7 +4206,9 @@ export async function stockBatchQuote(symbols: string[]): Promise<FMPTypes.Stock
  * @throws {Error} If symbols array is not provided or is empty.
  */
 export async function stockBatchQuoteShort(symbols: string[]): Promise<FMPTypes.StockQuoteShort[]> {
-	if (!symbols || symbols.length === 0) { throw new Error('Symbols array is required for getStockBatchQuoteShort') }
+	if (!symbols || symbols.length === 0) {
+		throw new Error('Symbols array is required for getStockBatchQuoteShort')
+	}
 	const searchParams = cleanQuery({ symbols })
 	return fmpApi.get('batch-quote-short', { searchParams }).json<FMPTypes.StockQuoteShort[]>()
 }
@@ -3266,8 +4219,12 @@ export async function stockBatchQuoteShort(symbols: string[]): Promise<FMPTypes.
  * @returns A promise that resolves to an array of aftermarket trades.
  * @throws {Error} If symbols array is not provided or is empty.
  */
-export async function batchAftermarketTrade(symbols: string[]): Promise<FMPTypes.AftermarketTrade[]> {
-	if (!symbols || symbols.length === 0) { throw new Error('Symbols array is required for getBatchAftermarketTrade') }
+export async function batchAftermarketTrade(
+	symbols: string[],
+): Promise<FMPTypes.AftermarketTrade[]> {
+	if (!symbols || symbols.length === 0) {
+		throw new Error('Symbols array is required for getBatchAftermarketTrade')
+	}
 	const searchParams = cleanQuery({ symbols })
 	return fmpApi.get('batch-aftermarket-trade', { searchParams }).json<FMPTypes.AftermarketTrade[]>()
 }
@@ -3278,8 +4235,12 @@ export async function batchAftermarketTrade(symbols: string[]): Promise<FMPTypes
  * @returns A promise that resolves to an array of aftermarket quotes.
  * @throws {Error} If symbols array is not provided or is empty.
  */
-export async function batchAftermarketQuote(symbols: string[]): Promise<FMPTypes.AftermarketQuote[]> {
-	if (!symbols || symbols.length === 0) { throw new Error('Symbols array is required for getBatchAftermarketQuote') }
+export async function batchAftermarketQuote(
+	symbols: string[],
+): Promise<FMPTypes.AftermarketQuote[]> {
+	if (!symbols || symbols.length === 0) {
+		throw new Error('Symbols array is required for getBatchAftermarketQuote')
+	}
 	const searchParams = cleanQuery({ symbols })
 	return fmpApi.get('batch-aftermarket-quote', { searchParams }).json<FMPTypes.AftermarketQuote[]>()
 }
@@ -3298,8 +4259,13 @@ export interface ExchangeStockQuotesOptions {
  * @returns A promise that resolves to an array of stock quotes (short or full based on options).
  * @throws {Error} If exchange is not provided.
  */
-export async function exchangeStockQuotes(exchange: string, options: ExchangeStockQuotesOptions = {}): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
-	if (!exchange) { throw new Error('Exchange parameter is required for getExchangeStockQuotes') }
+export async function exchangeStockQuotes(
+	exchange: string,
+	options: ExchangeStockQuotesOptions = {},
+): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
+	if (!exchange) {
+		throw new Error('Exchange parameter is required for getExchangeStockQuotes')
+	}
 	const searchParams = cleanQuery({ exchange, ...options })
 	if (options.short) {
 		return fmpApi.get('batch-exchange-quote', { searchParams }).json<FMPTypes.StockQuoteShort[]>()
@@ -3320,10 +4286,14 @@ export interface BatchAssetQuotesOptions {
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of mutual fund quotes (short or full based on options).
  */
-export async function mutualFundQuotes(options: BatchAssetQuotesOptions = {}): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
+export async function mutualFundQuotes(
+	options: BatchAssetQuotesOptions = {},
+): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
-		return fmpApi.get('batch-mutualfund-quotes', { searchParams }).json<FMPTypes.StockQuoteShort[]>()
+		return fmpApi
+			.get('batch-mutualfund-quotes', { searchParams })
+			.json<FMPTypes.StockQuoteShort[]>()
 	}
 	return fmpApi.get('batch-mutualfund-quotes', { searchParams }).json<FMPTypes.StockQuote[]>()
 }
@@ -3333,7 +4303,9 @@ export async function mutualFundQuotes(options: BatchAssetQuotesOptions = {}): P
  * @param [options] Optional parameters.
  * @returns A promise that resolves to an array of ETF quotes (short or full based on options).
  */
-export async function etfQuotes(options: BatchAssetQuotesOptions = {}): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
+export async function etfQuotes(
+	options: BatchAssetQuotesOptions = {},
+): Promise<(FMPTypes.StockQuoteShort | FMPTypes.StockQuote)[]> {
 	const searchParams = cleanQuery(options)
 	if (options.short) {
 		return fmpApi.get('batch-etf-quotes', { searchParams }).json<FMPTypes.StockQuoteShort[]>()
@@ -3353,15 +4325,19 @@ export async function etfQuotes(options: BatchAssetQuotesOptions = {}): Promise<
 /**
  * Options for retrieving latest earning transcripts metadata.
  */
-export interface LatestEarningTranscriptsOptions extends OptionalPaginationOptions { }
+export interface LatestEarningTranscriptsOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves metadata for the latest available earnings transcripts.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of latest earnings transcript metadata.
  */
-export async function latestEarningTranscripts(options: LatestEarningTranscriptsOptions = {}): Promise<FMPTypes.LatestEarningsTranscriptMeta[]> {
+export async function latestEarningTranscripts(
+	options: LatestEarningTranscriptsOptions = {},
+): Promise<FMPTypes.LatestEarningsTranscriptMeta[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('earning-call-transcript-latest', { searchParams }).json<FMPTypes.LatestEarningsTranscriptMeta[]>()
+	return fmpApi
+		.get('earning-call-transcript-latest', { searchParams })
+		.json<FMPTypes.LatestEarningsTranscriptMeta[]>()
 }
 
 /**
@@ -3380,12 +4356,23 @@ export interface EarningsTranscriptOptions extends OptionalLimitOption {
  * @returns A promise that resolves to an array containing the earnings transcript.
  * @throws {Error} If symbol, year, or quarter is not provided.
  */
-export async function earningsTranscript(symbol: string, options: EarningsTranscriptOptions): Promise<FMPTypes.EarningsTranscript[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEarningsTranscript') }
-	if (!options.year) { throw new Error('Year option is required for getEarningsTranscript') }
-	if (!options.quarter) { throw new Error('Quarter option is required for getEarningsTranscript') }
+export async function earningsTranscript(
+	symbol: string,
+	options: EarningsTranscriptOptions,
+): Promise<FMPTypes.EarningsTranscript[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEarningsTranscript')
+	}
+	if (!options.year) {
+		throw new Error('Year option is required for getEarningsTranscript')
+	}
+	if (!options.quarter) {
+		throw new Error('Quarter option is required for getEarningsTranscript')
+	}
 	const searchParams = cleanQuery({ symbol, ...options })
-	return fmpApi.get('earning-call-transcript', { searchParams }).json<FMPTypes.EarningsTranscript[]>()
+	return fmpApi
+		.get('earning-call-transcript', { searchParams })
+		.json<FMPTypes.EarningsTranscript[]>()
 }
 
 /**
@@ -3394,10 +4381,16 @@ export async function earningsTranscript(symbol: string, options: EarningsTransc
  * @returns A promise that resolves to an array of earnings transcript dates.
  * @throws {Error} If symbol is not provided.
  */
-export async function earningsTranscriptDatesBySymbol(symbol: string): Promise<FMPTypes.EarningsTranscriptDate[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getEarningsTranscriptDatesBySymbol') }
+export async function earningsTranscriptDatesBySymbol(
+	symbol: string,
+): Promise<FMPTypes.EarningsTranscriptDate[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getEarningsTranscriptDatesBySymbol')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('earning-call-transcript-dates', { searchParams }).json<FMPTypes.EarningsTranscriptDate[]>()
+	return fmpApi
+		.get('earning-call-transcript-dates', { searchParams })
+		.json<FMPTypes.EarningsTranscriptDate[]>()
 }
 
 /**
@@ -3417,16 +4410,23 @@ export async function earningsTranscriptList(): Promise<FMPTypes.EarningsTranscr
 /**
  * Options for retrieving SEC filings by date range and pagination.
  */
-export interface SecFilingsDateRangeOptions extends RequiredRangeOptions, OptionalPaginationOptions { }
+export interface SecFilingsDateRangeOptions
+	extends RequiredRangeOptions, OptionalPaginationOptions {}
 /**
  * Retrieves the latest 8-K SEC filings within a date range.
  * @param options Options specifying date range and pagination.
  * @returns A promise that resolves to an array of SEC filings.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function latest8kSecFilings(options: SecFilingsDateRangeOptions): Promise<FMPTypes.SecFiling[]> {
-	if (!options.from) { throw new Error('From date option is required for getLatest8kSecFilings') }
-	if (!options.to) { throw new Error('To date option is required for getLatest8kSecFilings') }
+export async function latest8kSecFilings(
+	options: SecFilingsDateRangeOptions,
+): Promise<FMPTypes.SecFiling[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getLatest8kSecFilings')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getLatest8kSecFilings')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sec-filings-8k', { searchParams }).json<FMPTypes.SecFiling[]>()
 }
@@ -3437,9 +4437,15 @@ export async function latest8kSecFilings(options: SecFilingsDateRangeOptions): P
  * @returns A promise that resolves to an array of SEC filings.
  * @throws {Error} If 'from' or 'to' date is not provided.
  */
-export async function latestSecFilingsWithFinancials(options: SecFilingsDateRangeOptions): Promise<FMPTypes.SecFiling[]> {
-	if (!options.from) { throw new Error('From date option is required for getLatestSecFilingsWithFinancials') }
-	if (!options.to) { throw new Error('To date option is required for getLatestSecFilingsWithFinancials') }
+export async function latestSecFilingsWithFinancials(
+	options: SecFilingsDateRangeOptions,
+): Promise<FMPTypes.SecFiling[]> {
+	if (!options.from) {
+		throw new Error('From date option is required for getLatestSecFilingsWithFinancials')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for getLatestSecFilingsWithFinancials')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sec-filings-financials', { searchParams }).json<FMPTypes.SecFiling[]>()
 }
@@ -3457,10 +4463,18 @@ export interface SecFilingsByFormTypeOptions extends SecFilingsDateRangeOptions 
  * @returns A promise that resolves to an array of SEC filings.
  * @throws {Error} If formType, 'from', or 'to' date is not provided.
  */
-export async function searchSecFilingsByFormType(options: SecFilingsByFormTypeOptions): Promise<FMPTypes.SecFiling[]> {
-	if (!options.formType) { throw new Error('FormType option is required for searchSecFilingsByFormType') }
-	if (!options.from) { throw new Error('From date option is required for searchSecFilingsByFormType') }
-	if (!options.to) { throw new Error('To date option is required for searchSecFilingsByFormType') }
+export async function searchSecFilingsByFormType(
+	options: SecFilingsByFormTypeOptions,
+): Promise<FMPTypes.SecFiling[]> {
+	if (!options.formType) {
+		throw new Error('FormType option is required for searchSecFilingsByFormType')
+	}
+	if (!options.from) {
+		throw new Error('From date option is required for searchSecFilingsByFormType')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for searchSecFilingsByFormType')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sec-filings-search/form-type', { searchParams }).json<FMPTypes.SecFiling[]>()
 }
@@ -3480,17 +4494,26 @@ export interface SecFilingsBySymbolOptions extends Omit<SecFilingsDateRangeOptio
  * @returns A promise that resolves to an array of SEC filings.
  * @throws {Error} If symbol, 'from', or 'to' date is not provided.
  */
-export async function searchSecFilingsBySymbol(options: SecFilingsBySymbolOptions): Promise<FMPTypes.SecFiling[]> {
-	if (!options.symbol) { throw new Error('Symbol option is required for searchSecFilingsBySymbol') }
-	if (!options.from) { throw new Error('From date option is required for searchSecFilingsBySymbol') }
-	if (!options.to) { throw new Error('To date option is required for searchSecFilingsBySymbol') }
+export async function searchSecFilingsBySymbol(
+	options: SecFilingsBySymbolOptions,
+): Promise<FMPTypes.SecFiling[]> {
+	if (!options.symbol) {
+		throw new Error('Symbol option is required for searchSecFilingsBySymbol')
+	}
+	if (!options.from) {
+		throw new Error('From date option is required for searchSecFilingsBySymbol')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for searchSecFilingsBySymbol')
+	}
 	const searchParams = cleanQuery(options)
-	const result = await fmpApi.get('sec-filings-search/symbol', { searchParams }).json<FMPTypes.SecFiling[]>()
+	const result = await fmpApi
+		.get('sec-filings-search/symbol', { searchParams })
+		.json<FMPTypes.SecFiling[]>()
 	if (!options.formType) {
 		return result
 	}
-	return result
-		.filter(filing => filing.formType === options.formType)
+	return result.filter((filing) => filing.formType === options.formType)
 }
 
 /**
@@ -3506,10 +4529,18 @@ export interface SecFilingsByCikOptions extends SecFilingsDateRangeOptions {
  * @returns A promise that resolves to an array of SEC filings.
  * @throws {Error} If CIK, 'from', or 'to' date is not provided.
  */
-export async function searchSecFilingsByCik(options: SecFilingsByCikOptions): Promise<FMPTypes.SecFiling[]> {
-	if (!options.cik) { throw new Error('CIK option is required for searchSecFilingsByCik') }
-	if (!options.from) { throw new Error('From date option is required for searchSecFilingsByCik') }
-	if (!options.to) { throw new Error('To date option is required for searchSecFilingsByCik') }
+export async function searchSecFilingsByCik(
+	options: SecFilingsByCikOptions,
+): Promise<FMPTypes.SecFiling[]> {
+	if (!options.cik) {
+		throw new Error('CIK option is required for searchSecFilingsByCik')
+	}
+	if (!options.from) {
+		throw new Error('From date option is required for searchSecFilingsByCik')
+	}
+	if (!options.to) {
+		throw new Error('To date option is required for searchSecFilingsByCik')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sec-filings-search/cik', { searchParams }).json<FMPTypes.SecFiling[]>()
 }
@@ -3520,10 +4551,16 @@ export async function searchSecFilingsByCik(options: SecFilingsByCikOptions): Pr
  * @returns A promise that resolves to an array of SEC company search results.
  * @throws {Error} If company name is not provided.
  */
-export async function searchSecFilingsCompanyName(company: string): Promise<FMPTypes.SecCompanySearchResult[]> {
-	if (!company) { throw new Error('Company name parameter is required for searchSecFilingsCompanyName') }
+export async function searchSecFilingsCompanyName(
+	company: string,
+): Promise<FMPTypes.SecCompanySearchResult[]> {
+	if (!company) {
+		throw new Error('Company name parameter is required for searchSecFilingsCompanyName')
+	}
 	const searchParams = { company }
-	return fmpApi.get('sec-filings-company-search/name', { searchParams }).json<FMPTypes.SecCompanySearchResult[]>()
+	return fmpApi
+		.get('sec-filings-company-search/name', { searchParams })
+		.json<FMPTypes.SecCompanySearchResult[]>()
 }
 
 /**
@@ -3532,10 +4569,16 @@ export async function searchSecFilingsCompanyName(company: string): Promise<FMPT
  * @returns A promise that resolves to an array of SEC company search results.
  * @throws {Error} If symbol is not provided.
  */
-export async function searchSecFilingsCompanyBySymbol(symbol: string): Promise<FMPTypes.SecCompanySearchResult[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for searchSecFilingsCompanyBySymbol') }
+export async function searchSecFilingsCompanyBySymbol(
+	symbol: string,
+): Promise<FMPTypes.SecCompanySearchResult[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for searchSecFilingsCompanyBySymbol')
+	}
 	const searchParams = { symbol }
-	return fmpApi.get('sec-filings-company-search/symbol', { searchParams }).json<FMPTypes.SecCompanySearchResult[]>()
+	return fmpApi
+		.get('sec-filings-company-search/symbol', { searchParams })
+		.json<FMPTypes.SecCompanySearchResult[]>()
 }
 
 /**
@@ -3544,10 +4587,16 @@ export async function searchSecFilingsCompanyBySymbol(symbol: string): Promise<F
  * @returns A promise that resolves to an array of SEC company search results.
  * @throws {Error} If CIK is not provided.
  */
-export async function searchSecFilingsCompanyByCik(cik: string): Promise<FMPTypes.SecCompanySearchResult[]> {
-	if (!cik) { throw new Error('CIK parameter is required for searchSecFilingsCompanyByCik') }
+export async function searchSecFilingsCompanyByCik(
+	cik: string,
+): Promise<FMPTypes.SecCompanySearchResult[]> {
+	if (!cik) {
+		throw new Error('CIK parameter is required for searchSecFilingsCompanyByCik')
+	}
 	const searchParams = { cik }
-	return fmpApi.get('sec-filings-company-search/cik', { searchParams }).json<FMPTypes.SecCompanySearchResult[]>()
+	return fmpApi
+		.get('sec-filings-company-search/cik', { searchParams })
+		.json<FMPTypes.SecCompanySearchResult[]>()
 }
 
 /**
@@ -3566,8 +4615,12 @@ export interface SecCompanyFullProfileOptions {
  * @returns A promise that resolves to an array containing the SEC company full profile.
  * @throws {Error} If neither symbol nor CIK is provided.
  */
-export async function secCompanyFullProfile(options: SecCompanyFullProfileOptions): Promise<FMPTypes.SecCompanyFullProfile[]> {
-	if (!options.symbol && !options.cik) { throw new Error('Either symbol or CIK parameter is required for getSecCompanyFullProfile') }
+export async function secCompanyFullProfile(
+	options: SecCompanyFullProfileOptions,
+): Promise<FMPTypes.SecCompanyFullProfile[]> {
+	if (!options.symbol && !options.cik) {
+		throw new Error('Either symbol or CIK parameter is required for getSecCompanyFullProfile')
+	}
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('sec-profile', { searchParams }).json<FMPTypes.SecCompanyFullProfile[]>()
 }
@@ -3588,10 +4641,18 @@ export interface IndustryClassificationListOptions {
  * @returns A promise that resolves to an array of SIC list items.
  * @throws {Error} If neither industryTitle nor sicCode is provided.
  */
-export async function industryClassificationList(options: IndustryClassificationListOptions): Promise<FMPTypes.SicListItem[]> {
-	if (!options.industryTitle && !options.sicCode) { throw new Error('Either industryTitle or sicCode parameter is required for getIndustryClassificationList') }
+export async function industryClassificationList(
+	options: IndustryClassificationListOptions,
+): Promise<FMPTypes.SicListItem[]> {
+	if (!options.industryTitle && !options.sicCode) {
+		throw new Error(
+			'Either industryTitle or sicCode parameter is required for getIndustryClassificationList',
+		)
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('standard-industrial-classification-list', { searchParams }).json<FMPTypes.SicListItem[]>()
+	return fmpApi
+		.get('standard-industrial-classification-list', { searchParams })
+		.json<FMPTypes.SicListItem[]>()
 }
 
 /**
@@ -3612,24 +4673,36 @@ export interface IndustryClassificationSearchOptions {
  * @returns A promise that resolves to an array of industry classification search results.
  * @throws {Error} If none of symbol, CIK, or sicCode is provided.
  */
-export async function searchIndustryClassification(options: IndustryClassificationSearchOptions): Promise<FMPTypes.IndustryClassificationSearchResult[]> {
-	if (!options.symbol && !options.cik && !options.sicCode) { throw new Error('One of symbol, CIK, or sicCode parameter is required for searchIndustryClassification') }
+export async function searchIndustryClassification(
+	options: IndustryClassificationSearchOptions,
+): Promise<FMPTypes.IndustryClassificationSearchResult[]> {
+	if (!options.symbol && !options.cik && !options.sicCode) {
+		throw new Error(
+			'One of symbol, CIK, or sicCode parameter is required for searchIndustryClassification',
+		)
+	}
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('industry-classification-search', { searchParams }).json<FMPTypes.IndustryClassificationSearchResult[]>()
+	return fmpApi
+		.get('industry-classification-search', { searchParams })
+		.json<FMPTypes.IndustryClassificationSearchResult[]>()
 }
 
 /**
  * Options for retrieving all industry classifications.
  */
-export interface AllIndustryClassificationOptions extends OptionalPaginationOptions { }
+export interface AllIndustryClassificationOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves all industry classification data for companies.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of industry classification search results.
  */
-export async function allIndustryClassification(options: AllIndustryClassificationOptions = {}): Promise<FMPTypes.IndustryClassificationSearchResult[]> {
+export async function allIndustryClassification(
+	options: AllIndustryClassificationOptions = {},
+): Promise<FMPTypes.IndustryClassificationSearchResult[]> {
 	const searchParams = cleanQuery(options)
-	return fmpApi.get('all-industry-classification', { searchParams }).json<FMPTypes.IndustryClassificationSearchResult[]>()
+	return fmpApi
+		.get('all-industry-classification', { searchParams })
+		.json<FMPTypes.IndustryClassificationSearchResult[]>()
 }
 
 /**
@@ -3641,13 +4714,15 @@ export async function allIndustryClassification(options: AllIndustryClassificati
 /**
  * Options for retrieving latest congressional financial disclosures.
  */
-export interface LatestCongressionalDisclosuresOptions extends OptionalPaginationOptions { }
+export interface LatestCongressionalDisclosuresOptions extends OptionalPaginationOptions {}
 /**
  * Retrieves the latest financial disclosures from U.S. Senate members.
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of Senate financial disclosures.
  */
-export async function latestSenateFinancialDisclosures(options: LatestCongressionalDisclosuresOptions = {}): Promise<FMPTypes.CongressionalDisclosure[]> {
+export async function latestSenateFinancialDisclosures(
+	options: LatestCongressionalDisclosuresOptions = {},
+): Promise<FMPTypes.CongressionalDisclosure[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('senate-latest', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
 }
@@ -3657,7 +4732,9 @@ export async function latestSenateFinancialDisclosures(options: LatestCongressio
  * @param [options] Optional parameters for pagination.
  * @returns A promise that resolves to an array of House financial disclosures.
  */
-export async function latestHouseFinancialDisclosures(options: LatestCongressionalDisclosuresOptions = {}): Promise<FMPTypes.CongressionalDisclosure[]> {
+export async function latestHouseFinancialDisclosures(
+	options: LatestCongressionalDisclosuresOptions = {},
+): Promise<FMPTypes.CongressionalDisclosure[]> {
 	const searchParams = cleanQuery(options)
 	return fmpApi.get('house-latest', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
 }
@@ -3668,8 +4745,12 @@ export async function latestHouseFinancialDisclosures(options: LatestCongression
  * @returns A promise that resolves to an array of Senate trading activities.
  * @throws {Error} If symbol is not provided.
  */
-export async function senateTradingActivity(symbol: string): Promise<FMPTypes.CongressionalDisclosure[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getSenateTradingActivity') }
+export async function senateTradingActivity(
+	symbol: string,
+): Promise<FMPTypes.CongressionalDisclosure[]> {
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getSenateTradingActivity')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('senate-trades', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
 }
@@ -3680,10 +4761,16 @@ export async function senateTradingActivity(symbol: string): Promise<FMPTypes.Co
  * @returns A promise that resolves to an array of Senate trading activities.
  * @throws {Error} If name is not provided.
  */
-export async function senateTradesByName(name: string): Promise<FMPTypes.CongressionalDisclosure[]> {
-	if (!name) { throw new Error('Name parameter is required for getSenateTradesByName') }
+export async function senateTradesByName(
+	name: string,
+): Promise<FMPTypes.CongressionalDisclosure[]> {
+	if (!name) {
+		throw new Error('Name parameter is required for getSenateTradesByName')
+	}
 	const searchParams = { name }
-	return fmpApi.get('senate-trades-by-name', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
+	return fmpApi
+		.get('senate-trades-by-name', { searchParams })
+		.json<FMPTypes.CongressionalDisclosure[]>()
 }
 
 /**
@@ -3693,7 +4780,9 @@ export async function senateTradesByName(name: string): Promise<FMPTypes.Congres
  * @throws {Error} If symbol is not provided.
  */
 export async function houseTrades(symbol: string): Promise<FMPTypes.CongressionalDisclosure[]> {
-	if (!symbol) { throw new Error('Symbol parameter is required for getHouseTrades') }
+	if (!symbol) {
+		throw new Error('Symbol parameter is required for getHouseTrades')
+	}
 	const searchParams = { symbol }
 	return fmpApi.get('house-trades', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
 }
@@ -3705,9 +4794,13 @@ export async function houseTrades(symbol: string): Promise<FMPTypes.Congressiona
  * @throws {Error} If name is not provided.
  */
 export async function houseTradesByName(name: string): Promise<FMPTypes.CongressionalDisclosure[]> {
-	if (!name) { throw new Error('Name parameter is required for getHouseTradesByName') }
+	if (!name) {
+		throw new Error('Name parameter is required for getHouseTradesByName')
+	}
 	const searchParams = { name }
-	return fmpApi.get('house-trades-by-name', { searchParams }).json<FMPTypes.CongressionalDisclosure[]>()
+	return fmpApi
+		.get('house-trades-by-name', { searchParams })
+		.json<FMPTypes.CongressionalDisclosure[]>()
 }
 
 /**
@@ -3722,8 +4815,12 @@ export async function houseTradesByName(name: string): Promise<FMPTypes.Congress
  * @returns A promise that resolves to an array of company profiles.
  * @throws {Error} If part is not provided.
  */
-export async function bulkCompanyProfile(part: string | number): Promise<FMPTypes.CompanyProfile[]> {
-	if (part === undefined || part === null) { throw new Error('Part parameter is required for getCompanyProfileBulk') }
+export async function bulkCompanyProfile(
+	part: string | number,
+): Promise<FMPTypes.CompanyProfile[]> {
+	if (part === undefined || part === null) {
+		throw new Error('Part parameter is required for getCompanyProfileBulk')
+	}
 	const searchParams = { part }
 	const csvText = await fmpApi.get('profile-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.CompanyProfile>(csvText)
@@ -3735,8 +4832,12 @@ export async function bulkCompanyProfile(part: string | number): Promise<FMPType
  * @param part The part number for bulk data (0-3).
  * @returns A promise that resolves to an async iterable of company profiles.
  */
-export async function bulkCompanyProfileStream(part: string | number): Promise<AsyncIterable<FMPTypes.CompanyProfile>> {
-	if (part === undefined || part === null) { throw new Error('Part parameter is required for getCompanyProfileBulk') }
+export async function bulkCompanyProfileStream(
+	part: string | number,
+): Promise<AsyncIterable<FMPTypes.CompanyProfile>> {
+	if (part === undefined || part === null) {
+		throw new Error('Part parameter is required for getCompanyProfileBulk')
+	}
 	const searchParams = { part }
 	const response = await fmpApiStream.get('profile-bulk', { searchParams })
 
@@ -3796,7 +4897,9 @@ export async function bulkPriceTargetSummary(): Promise<FMPTypes.BulkPriceTarget
  * @throws {Error} If part is not provided.
  */
 export async function bulkEtfHolder(part: string | number): Promise<FMPTypes.EtfFundHolding[]> {
-	if (part === undefined || part === null) { throw new Error('Part parameter is required for getEtfHolderBulk') }
+	if (part === undefined || part === null) {
+		throw new Error('Part parameter is required for getEtfHolderBulk')
+	}
 	const searchParams = { part }
 	const csvText = await fmpApi.get('etf-holder-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.EtfFundHolding>(csvText)
@@ -3849,8 +4952,12 @@ export async function bulkStockPeers(): Promise<FMPTypes.BulkStockPeers[]> {
  * @returns A promise that resolves to an array of bulk earnings surprises.
  * @throws {Error} If year is not provided.
  */
-export async function bulkEarningsSurprises(year: string | number): Promise<FMPTypes.BulkEarningsSurprise[]> {
-	if (!year) { throw new Error('Year parameter is required for getEarningsSurprisesBulk') }
+export async function bulkEarningsSurprises(
+	year: string | number,
+): Promise<FMPTypes.BulkEarningsSurprise[]> {
+	if (!year) {
+		throw new Error('Year parameter is required for getEarningsSurprisesBulk')
+	}
 	const searchParams = { year }
 	const csvText = await fmpApi.get('earnings-surprises-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.BulkEarningsSurprise>(csvText)
@@ -3872,9 +4979,15 @@ export interface BulkFinancialStatementOptions {
  * @returns A promise that resolves to an array of income statements.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkIncomeStatement(options: BulkFinancialStatementOptions): Promise<FMPTypes.IncomeStatement[]> {
-	if (!options.year) { throw new Error('Year option is required for getIncomeStatementBulk') }
-	if (!options.period) { throw new Error('Period option is required for getIncomeStatementBulk') }
+export async function bulkIncomeStatement(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.IncomeStatement[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getIncomeStatementBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getIncomeStatementBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('income-statement-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.IncomeStatement>(csvText)
@@ -3887,9 +5000,15 @@ export async function bulkIncomeStatement(options: BulkFinancialStatementOptions
  * @returns A promise that resolves to an array of income statement growth data.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkIncomeStatementGrowth(options: BulkFinancialStatementOptions): Promise<FMPTypes.IncomeStatementGrowth[]> {
-	if (!options.year) { throw new Error('Year option is required for getIncomeStatementGrowthBulk') }
-	if (!options.period) { throw new Error('Period option is required for getIncomeStatementGrowthBulk') }
+export async function bulkIncomeStatementGrowth(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.IncomeStatementGrowth[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getIncomeStatementGrowthBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getIncomeStatementGrowthBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('income-statement-growth-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.IncomeStatementGrowth>(csvText)
@@ -3902,9 +5021,15 @@ export async function bulkIncomeStatementGrowth(options: BulkFinancialStatementO
  * @returns A promise that resolves to an array of balance sheet statements.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkBalanceSheetStatement(options: BulkFinancialStatementOptions): Promise<FMPTypes.BalanceSheetStatement[]> {
-	if (!options.year) { throw new Error('Year option is required for getBalanceSheetStatementBulk') }
-	if (!options.period) { throw new Error('Period option is required for getBalanceSheetStatementBulk') }
+export async function bulkBalanceSheetStatement(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.BalanceSheetStatement[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getBalanceSheetStatementBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getBalanceSheetStatementBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('balance-sheet-statement-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.BalanceSheetStatement>(csvText)
@@ -3917,9 +5042,15 @@ export async function bulkBalanceSheetStatement(options: BulkFinancialStatementO
  * @returns A promise that resolves to an array of balance sheet statement growth data.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkBalanceSheetStatementGrowth(options: BulkFinancialStatementOptions): Promise<FMPTypes.BalanceSheetStatementGrowth[]> {
-	if (!options.year) { throw new Error('Year option is required for getBalanceSheetStatementGrowthBulk') }
-	if (!options.period) { throw new Error('Period option is required for getBalanceSheetStatementGrowthBulk') }
+export async function bulkBalanceSheetStatementGrowth(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.BalanceSheetStatementGrowth[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getBalanceSheetStatementGrowthBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getBalanceSheetStatementGrowthBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('balance-sheet-statement-growth-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.BalanceSheetStatementGrowth>(csvText)
@@ -3932,9 +5063,15 @@ export async function bulkBalanceSheetStatementGrowth(options: BulkFinancialStat
  * @returns A promise that resolves to an array of cash flow statements.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkCashFlowStatement(options: BulkFinancialStatementOptions): Promise<FMPTypes.CashFlowStatement[]> {
-	if (!options.year) { throw new Error('Year option is required for getCashFlowStatementBulk') }
-	if (!options.period) { throw new Error('Period option is required for getCashFlowStatementBulk') }
+export async function bulkCashFlowStatement(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.CashFlowStatement[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getCashFlowStatementBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getCashFlowStatementBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('cash-flow-statement-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.CashFlowStatement>(csvText)
@@ -3947,9 +5084,15 @@ export async function bulkCashFlowStatement(options: BulkFinancialStatementOptio
  * @returns A promise that resolves to an array of cash flow statement growth data.
  * @throws {Error} If year or period is not provided.
  */
-export async function bulkCashFlowStatementGrowth(options: BulkFinancialStatementOptions): Promise<FMPTypes.CashFlowStatementGrowth[]> {
-	if (!options.year) { throw new Error('Year option is required for getCashFlowStatementGrowthBulk') }
-	if (!options.period) { throw new Error('Period option is required for getCashFlowStatementGrowthBulk') }
+export async function bulkCashFlowStatementGrowth(
+	options: BulkFinancialStatementOptions,
+): Promise<FMPTypes.CashFlowStatementGrowth[]> {
+	if (!options.year) {
+		throw new Error('Year option is required for getCashFlowStatementGrowthBulk')
+	}
+	if (!options.period) {
+		throw new Error('Period option is required for getCashFlowStatementGrowthBulk')
+	}
 	const searchParams = cleanQuery(options)
 	const csvText = await fmpApi.get('cash-flow-statement-growth-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.CashFlowStatementGrowth>(csvText)
@@ -3963,7 +5106,9 @@ export async function bulkCashFlowStatementGrowth(options: BulkFinancialStatemen
  * @throws {Error} If date is not provided.
  */
 export async function bulkEod(date: string): Promise<FMPTypes.EodBulkItem[]> {
-	if (!date) { throw new Error('Date parameter is required for getEodBulk') }
+	if (!date) {
+		throw new Error('Date parameter is required for getEodBulk')
+	}
 	const searchParams = { date }
 	const csvText = await fmpApi.get('eod-bulk', { searchParams }).text()
 	const jsonData = csvToJson<FMPTypes.EodBulkItem>(csvText)
@@ -3976,7 +5121,9 @@ export async function bulkEod(date: string): Promise<FMPTypes.EodBulkItem[]> {
  * @returns A promise that resolves to an async iterable of EOD bulk items.
  */
 export async function bulkEodStream(date: string): Promise<AsyncIterable<FMPTypes.EodBulkItem>> {
-	if (!date) { throw new Error('Date parameter is required for getEodBulk') }
+	if (!date) {
+		throw new Error('Date parameter is required for getEodBulk')
+	}
 	const searchParams = { date }
 	const response = await fmpApiStream.get('eod-bulk', { searchParams })
 

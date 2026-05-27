@@ -67,7 +67,7 @@ function prepareToolParametersZod(schema: ToolSchema): string {
  * @returns Comma-separated list of argument names
  */
 function getSdkCallArgs(schema: ToolSchema): string {
-	return schema._raw_parameters.map(param => param.name).join(', ')
+	return schema._raw_parameters.map((param) => param.name).join(', ')
 }
 
 /**
@@ -77,7 +77,7 @@ function getSdkCallArgs(schema: ToolSchema): string {
  * @returns Destructuring pattern string or empty string if no parameters
  */
 function getExecuteDestructuredArgs(schema: ToolSchema): string {
-	const executeArgNames = schema._raw_parameters.map(p => p.name)
+	const executeArgNames = schema._raw_parameters.map((p) => p.name)
 
 	if (schema.available_return_keys && schema.available_return_keys.length > 0) {
 		executeArgNames.push('values')
@@ -139,7 +139,7 @@ function generateExecuteFunction(schema: ToolSchema): string {
  */
 function generateTool(schema: ToolSchema): string {
 	const functionName = schema.name
-	const description = schema.description.replace(/'/g, '\\\'') // Escape single quotes
+	const description = schema.description.replace(/'/g, "\\'") // Escape single quotes
 
 	const valueConstants = generateValueConstants(schema)
 	const toolParamsZodContent = prepareToolParametersZod(schema)
@@ -225,11 +225,11 @@ export function applyFieldSelection<T extends Record<string, any>>(
  * @returns String containing the exports
  */
 function generateExports(schemas: ToolSchema[]): string {
-	const toolNames = schemas.map(s => s.name)
+	const toolNames = schemas.map((s) => s.name)
 
 	return `
 export const tools = {
-${toolNames.map(name => `\t${name},`).join('\n')}
+${toolNames.map((name) => `\t${name},`).join('\n')}
 }
 
 export default tools
@@ -266,16 +266,14 @@ async function main() {
 		const toolsFileContent = generateToolsFile(schemas)
 		fs.writeFileSync(EXPORT_FILE_PATH, toolsFileContent)
 		console.log(`Successfully generated tools.ts with ${schemas.length} tools.`)
-	}
-	catch (error) {
+	} catch (error) {
 		console.error('Error generating tools:')
 		if (error instanceof Error) {
 			console.error(`	${error.message}`)
 			if (error.stack) {
 				console.error(error.stack)
 			}
-		}
-		else {
+		} else {
 			console.error(error)
 		}
 		process.exit(1)

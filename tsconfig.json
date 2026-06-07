@@ -1,16 +1,14 @@
 {
 	"compilerOptions": {
 		"target": "esnext",
-		"rootDir": "src",
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 		"strict": true,
-		"declaration": true,
-		"outDir": "dist",
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"noEmit": true
 	},
 	"include": ["src/**/*"]
 }

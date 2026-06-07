@@ -6,50 +6,26 @@
 		"type": "git",
 		"url": "https://github.com/gorango/fmp.git"
 	},
-	"files": [
-		"dist"
-	],
 	"type": "module",
 	"exports": {
-		".": {
-			"types": "./dist/api.d.ts",
-			"import": "./dist/api.js"
-		},
-		"./types": {
-			"types": "./dist/types.d.ts"
-		},
-		"./tools": {
-			"types": "./dist/generated/tools.d.ts",
-			"import": "./dist/generated/tools.js"
-		},
-		"./constants": {
-			"types": "./dist/constants/index.d.ts",
-			"import": "./dist/constants/index.js"
-		},
-		"./constants/returns": {
-			"types": "./dist/constants/returns.d.ts",
-			"import": "./dist/constants/returns.js"
-		},
-		"./constants/categories": {
-			"types": "./dist/constants/categories.d.ts",
-			"import": "./dist/constants/categories.js"
-		},
-		"./sec": {
-			"types": "./dist/sec/index.d.ts",
-			"import": "./dist/sec/index.js"
-		}
+		".": "./src/api.ts",
+		"./types": "./src/types.ts",
+		"./tools": "./src/generated/tools.ts",
+		"./constants": "./src/constants/index.ts",
+		"./constants/returns": "./src/constants/returns.ts",
+		"./constants/categories": "./src/constants/categories.ts",
+		"./sec": "./src/sec/index.ts"
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
 		"typecheck": "tsc --noEmit",
 		"test:api": "vitest run",
 		"coverage": "vitest run --coverage",
-		"build": "tsc --project tsconfig.json",
-		"generate:tools": "npx tsx ./src/scripts/tools.ts",
-		"generate:docs": "npx tsx ./src/scripts/docs.ts",
-		"generate:embeddings": "npx tsx ./src/scripts/embed.ts",
-		"generate:stocks": "npx tsx ./src/scripts/stocks.ts",
-		"retrieve": "npx tsx ./src/retrieve.ts",
+		"generate:tools": "bunx tsx ./src/scripts/tools.ts",
+		"generate:docs": "bunx tsx ./src/scripts/docs.ts",
+		"generate:embeddings": "bunx tsx ./src/scripts/embed.ts",
+		"generate:stocks": "bunx tsx ./src/scripts/stocks.ts",
+		"retrieve": "bunx tsx ./src/retrieve.ts",
 		"sandbox": "tsx --watch-path=sandbox/ --env-file .env sandbox/index.ts",
 		"seed:filings": "tsx --env-file .env seed/filings.ts"
 	},

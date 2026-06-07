@@ -33,6 +33,10 @@
 		"./constants/categories": {
 			"types": "./dist/constants/categories.d.ts",
 			"import": "./dist/constants/categories.js"
+		},
+		"./sec": {
+			"types": "./dist/sec/index.d.ts",
+			"import": "./dist/sec/index.js"
 		}
 	},
 	"scripts": {

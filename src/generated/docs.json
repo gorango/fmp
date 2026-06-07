@@ -552,6 +552,12 @@
 		"return_keys_summary": "quarter, fiscalYear, date"
 	},
 	{
+		"tool_name": "getSecFiling",
+		"description": "Fetches the raw HTML/text content of an SEC filing from the SEC's EDGAR system directly — useful when you need the full filing text, unlike the structured metadata from the FMP API.",
+		"parameters_summary": "url",
+		"return_keys_summary": "No specific return fields selectable, returns full object/array."
+	},
+	{
 		"tool_name": "latestSenateFinancialDisclosures",
 		"description": "Retrieves the latest financial disclosures from U.S. Senate members.",
 		"parameters_summary": "options (page, limit)",

@@ -276,6 +276,7 @@ export const INCLUDED_API_FUNCTIONS: Set<string> = new Set([
 	// 'earningsTranscriptList', // Retrieves a list of companies with available earnings transcripts. (No parameters.) -> symbol, companyName, noOfTranscripts
 
 	// SEC FILINGS
+	'getSecFiling', // Fetches the raw HTML/text content of an SEC filing from the SEC's EDGAR system directly. (url) -> Returns the raw text content of the SEC filing.
 	// 'latest8kSecFilings', // Retrieves the latest 8-K SEC filings within a date range. (options (from, to, page, limit)) -> symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link, finalLink
 	// 'latestSecFilingsWithFinancials', // Retrieves the latest SEC filings with financials (e.g., 10-K, 10-Q) within a date range. (options (from, to, page, limit)) -> symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link, finalLink
 	// 'searchSecFilingsByFormType', // Searches SEC filings by form type within a date range. (options (formType, from, to, page, limit)) -> symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link, finalLink

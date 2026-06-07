@@ -2046,6 +2046,16 @@ export const earningsTranscriptDatesBySymbol = tool({
 	},
 })
 
+export const getSecFiling = tool({
+	description: 'Fetches the raw HTML/text content of an SEC filing from the SEC\'s EDGAR system directly — useful when you need the full filing text, unlike the structured metadata from the FMP API.',
+	inputSchema: z.object({
+		url: z.string().describe('The full URL to the SEC filing (e.g., "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm").'),
+	}),
+	execute: async ({ url }) => {
+		return fmp.getSecFiling(url)
+	},
+})
+
 const LATEST_SENATE_FINANCIAL_DISCLOSURES_RESULT_VALUES = ['symbol', 'disclosureDate', 'transactionDate', 'firstName', 'lastName', 'office', 'district', 'owner', 'assetDescription', 'assetType', 'type', 'amount', 'comment', 'link', 'capitalGainsOver200USD'] as const
 export const latestSenateFinancialDisclosures = tool({
 	description: 'Retrieves the latest financial disclosures from U.S. Senate members.',
@@ -2259,6 +2269,7 @@ export const tools = {
 	mutualFundQuotes,
 	etfQuotes,
 	earningsTranscriptDatesBySymbol,
+	getSecFiling,
 	latestSenateFinancialDisclosures,
 	latestHouseFinancialDisclosures,
 	senateTradingActivity,

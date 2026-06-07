@@ -2,6 +2,7 @@
 import type * as FMPTypes from './types.js'
 import { Readable } from 'node:stream'
 import { cleanQuery, csvStreamToJson, csvToJson, fmpApi, fmpApiStream } from './utils/index.js'
+import { getSecFiling as getSecFilingFromEdgar } from './sec/filings.js'
 
 interface OptionalLimitOption {
 	/** The maximum number of results to return. E.g., 50. */
@@ -4703,6 +4704,15 @@ export async function allIndustryClassification(
 	return fmpApi
 		.get('all-industry-classification', { searchParams })
 		.json<FMPTypes.IndustryClassificationSearchResult[]>()
+}
+
+/**
+ * Fetches the raw HTML/text content of an SEC filing from the SEC's EDGAR system directly — useful when you need the full filing text, unlike the structured metadata from the FMP API.
+ * @param url The full URL to the SEC filing (e.g., "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm").
+ * @returns A promise that resolves to the raw text content of the filing.
+ */
+export async function getSecFiling(url: string): Promise<string> {
+	return getSecFilingFromEdgar(url)
 }
 
 /**

@@ -21,13 +21,8 @@
 		"typecheck": "tsc --noEmit",
 		"test:api": "vitest run",
 		"coverage": "vitest run --coverage",
-		"generate:tools": "bunx tsx ./src/scripts/tools.ts",
-		"generate:docs": "bunx tsx ./src/scripts/docs.ts",
-		"generate:embeddings": "bunx tsx ./src/scripts/embed.ts",
-		"generate:stocks": "bunx tsx ./src/scripts/stocks.ts",
-		"retrieve": "bunx tsx ./src/retrieve.ts",
-		"sandbox": "tsx --watch-path=sandbox/ --env-file .env sandbox/index.ts",
-		"seed:filings": "tsx --env-file .env seed/filings.ts"
+		"generate:tools": "bun run ./src/scripts/tools.ts",
+		"generate:docs": "bun run ./src/scripts/docs.ts"
 	},
 	"dependencies": {
 		"ai": "^6.0.191",

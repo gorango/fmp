@@ -264,6 +264,7 @@ async function main() {
 	try {
 		const schemas = buildToolSchemas()
 		const toolsFileContent = generateToolsFile(schemas)
+		fs.mkdirSync(path.dirname(EXPORT_FILE_PATH), { recursive: true })
 		fs.writeFileSync(EXPORT_FILE_PATH, toolsFileContent)
 		console.log(`Successfully generated tools.ts with ${schemas.length} tools.`)
 	} catch (error) {

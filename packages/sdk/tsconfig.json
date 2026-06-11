@@ -4,11 +4,9 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
-		"types": ["vitest/globals"],
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"noEmit": true
-	},
-	"include": ["src/**/*"]
+	}
 }

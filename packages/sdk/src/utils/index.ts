@@ -1,2 +1,2 @@
 export * from './csv.js'
-export * from './ky.js'
+export * from './fmp-ky.js'

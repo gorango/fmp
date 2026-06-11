@@ -129,6 +129,7 @@ async function generateToolDocumentation() {
 			return_keys_summary: formatReturnKeys(schema.available_return_keys),
 		}))
 
+		fs.mkdirSync(path.dirname(EXPORT_FILE_PATH), { recursive: true })
 		fs.writeFileSync(EXPORT_FILE_PATH, JSON.stringify(toolDocs, null, '\t'))
 		console.log(
 			`Successfully generated ${EXPORT_FILE_PATH} with ${toolDocs.length} tool documents.`,

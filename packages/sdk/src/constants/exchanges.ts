@@ -1,14 +1,14 @@
 export const exchanges = [
 	'AMEX', // New York Stock Exchange Arca
 	'CBOE', // Chicago Board Options Exchange
-	// 'HKSE', // Hong Kong Stock Exchange
-	// 'JPX', // Tokyo Stock Exchange
-	// 'LSE', // London Stock Exchange
+	'HKSE', // Hong Kong Stock Exchange
+	'JPX', // Tokyo Stock Exchange
+	'LSE', // London Stock Exchange
 	'NASDAQ', // NASDAQ Capital Market
 	'NYSE', // New York Stock Exchange
-	// 'SHH', // Shanghai Stock Exchange
-	// 'SHZ', // Shenzhen Stock Exchange
-	// 'TSX', // Toronto Stock Exchange
+	'SHH', // Shanghai Stock Exchange
+	'SHZ', // Shenzhen Stock Exchange
+	'TSX', // Toronto Stock Exchange
 ]
 
 export const map = {

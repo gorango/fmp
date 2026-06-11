@@ -1,9 +1,16 @@
 {
 	"name": "fmp-tools",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"type": "module",
 	"private": true,
+	"exports": {
+		".": "./src/tools.ts",
+		"./docs": "./src/docs.json"
+	},
 	"scripts": {},
-	"dependencies": {},
-	"devDependencies": {}
+	"dependencies": {
+		"ai": "^6.0.191",
+		"fmp-sdk": "workspace:*",
+		"zod": "^4.4.3"
+	}
 }

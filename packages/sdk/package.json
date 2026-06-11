@@ -1,6 +1,6 @@
 {
 	"name": "fmp-sdk",
-	"version": "1.0.0-beta.1",
+	"version": "0.0.1",
 	"description": "Financial Modeling Prep (FMP) SDK",
 	"repository": {
 		"type": "git",
@@ -9,12 +9,11 @@
 	"type": "module",
 	"exports": {
 		".": "./src/api.ts",
+		"./sec": "./src/sec/index.ts",
 		"./types": "./src/types.ts",
-		"./tools": "./src/generated/tools.ts",
 		"./constants": "./src/constants/index.ts",
 		"./constants/returns": "./src/constants/returns.ts",
-		"./constants/categories": "./src/constants/categories.ts",
-		"./sec": "./src/sec/index.ts"
+		"./constants/categories": "./src/constants/categories.ts"
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
@@ -23,7 +22,6 @@
 		"coverage": "vitest run --coverage"
 	},
 	"dependencies": {
-		"ai": "^6.0.191",
 		"ioredis": "^5.11.0",
 		"ky": "^2.0.2",
 		"papaparse": "^5.5.3",

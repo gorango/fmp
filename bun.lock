@@ -14,14 +14,15 @@
         "typescript": "^5",
       },
     },
-    "packages/compiler": {
-      "name": "fmp-compiler",
+    "packages/codegen": {
+      "name": "fmp-codegen",
       "version": "0.0.0",
       "dependencies": {
         "fmp-sdk": "workspace:*",
         "ts-morph": "^28.0.0",
       },
       "devDependencies": {
+        "@types/node": "^25.9.1",
         "puppeteer": "^25.1.0",
       },
     },
@@ -29,7 +30,6 @@
       "name": "fmp-sdk",
       "version": "1.0.0-beta.1",
       "dependencies": {
-        "ai": "^6.0.191",
         "ioredis": "^5.11.0",
         "ky": "^2.0.2",
         "papaparse": "^5.5.3",
@@ -54,6 +54,11 @@
     "packages/tools": {
       "name": "fmp-tools",
       "version": "0.0.0",
+      "dependencies": {
+        "ai": "^6.0.191",
+        "fmp-sdk": "workspace:*",
+        "zod": "^4.4.3",
+      },
     },
   },
   "packages": {
@@ -299,7 +304,7 @@
 
     "fdir": ["fdir@6.5.0", "", { "peerDependencies": { "picomatch": "^3 || ^4" }, "optionalPeers": ["picomatch"] }, "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg=="],
 
-    "fmp-compiler": ["fmp-compiler@workspace:packages/compiler"],
+    "fmp-codegen": ["fmp-codegen@workspace:packages/codegen"],
 
     "fmp-sdk": ["fmp-sdk@workspace:packages/sdk"],
 

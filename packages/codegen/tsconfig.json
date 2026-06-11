@@ -7,7 +7,12 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"noEmit": true
+		"noEmit": true,
+		"types": [
+			"bun"
+		],
 	},
-	"include": ["src/**/*"]
+	"include": [
+		"src/**/*"
+	]
 }

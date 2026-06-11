@@ -1,15 +1,15 @@
 # Financial Modeling Prep (FMP) SDK
 
-A powerful and comprehensive TypeScript SDK for accessing real-time and historical financial data from the Financial Modeling Prep API. Unlock insights into stocks, commodities, cryptocurrencies, forex, economic indicators, and more with ease.
+A powerful TypeScript SDK for accessing real-time and historical financial data from the Financial Modeling Prep API — stocks, commodities, crypto, forex, economic indicators, and more.
 
 ## Features
 
-- **Comprehensive Data Access**: Fetch stock quotes, historical charts, financial statements, analyst ratings, ESG data, and economic indicators.
-- **Multi-Asset Support**: Stocks, ETFs, mutual funds, commodities, cryptocurrencies, and forex pairs.
-- **Advanced Search & Screening**: Search by symbol, name, CIK, or use powerful stock screeners.
-- **Calendar & Events**: Track dividends, earnings, IPOs, stock splits, and economic releases.
-- **AI-Ready Tools**: Auto-generated tool schemas for seamless integration with AI frameworks like Vercel's AI SDK.
-- **Type-Safe**: Full TypeScript support with Zod validation for reliable data handling.
+- **Comprehensive Data Access**: Stock quotes, historical charts, financial statements, analyst ratings, ESG data, economic indicators.
+- **Multi-Asset Support**: Stocks, ETFs, mutual funds, commodities, cryptocurrencies, forex pairs.
+- **Advanced Search & Screening**: Symbol, name, CIK search; stock screeners.
+- **Calendar & Events**: Dividends, earnings, IPOs, stock splits, economic releases.
+- **Type-Safe**: Full TypeScript with Zod validation.
+- **AI-Ready Tools**: Auto-generated Vercel AI SDK tool wrappers via `fmp-tools`.
 
 ## Installation
 
@@ -20,44 +20,35 @@ npm install fmp-sdk
 ## Quick Start
 
 ```typescript
-import * as fmp from 'fmp'
+import * as fmp from 'fmp-sdk'
 
-async function example() {
-	// Search for a stock symbol
-	const results = await fmp.searchSymbol('AAPL', { exchange: 'NASDAQ' })
-	console.log(results)
-
-	// Get company profile
-	const profile = await fmp.companyProfile('AAPL')
-	console.log(profile)
-
-	// Fetch historical stock data
-	const chart = await fmp.stockChartFull('AAPL', {
-		from: '2023-01-01',
-		to: '2023-12-31',
-	})
-	console.log(chart)
-}
+const results = await fmp.searchSymbol('AAPL', { exchange: 'NASDAQ' })
+const profile = await fmp.companyProfile('AAPL')
 ```
 
-## API Coverage
+## Exports
 
-- **Search & Directory**: Symbol/name/CIK/CUSIP/ISIN search, stock lists, exchanges, sectors.
-- **Analyst Data**: Estimates, ratings, price targets, grades.
-- **Market Data**: Real-time quotes, historical charts (EOD, intraday).
-- **Company Insights**: Profiles, peers, executives, financial statements, key metrics.
-- **Economic & ESG**: Treasury rates, indicators, ESG ratings.
-- **Alternative Assets**: ETFs, funds, commodities, crypto, forex.
-- **Events**: Dividends, earnings, IPOs, splits, M&A.
+| Path                | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `fmp-sdk`           | Main API client                                |
+| `fmp-sdk/types`     | TypeScript type definitions                    |
+| `fmp-sdk/constants` | Shared constants                               |
+| `fmp-sdk/sec`       | SEC filing utilities                           |
+| `fmp-tools`         | Vercel AI SDK tool wrappers (separate package) |
+
+## Monorepo
+
+This repo is a [bun workspace](https://bun.sh/docs/install/workspaces) containing:
+
+- `fmp-sdk` — raw API client (this package)
+- `fmp-codegen` — codegen that reads SDK source and produces tools/docs
+- `fmp-tools` — generated Vercel AI SDK tool definitions
+- `fmp-skills` — AI skill definitions
 
 ## Documentation
 
-Explore the full API reference in the [FMP Documentation](https://financialmodelingprep.com/developer/docs). All functions include detailed JSDoc comments with parameter descriptions and examples.
-
-## Contributing
-
-If you insist...
+Full API reference at [financialmodelingprep.com/developer/docs](https://financialmodelingprep.com/developer/docs).
 
 ## License
 
-MIT License - see LICENSE file for details.
+MIT

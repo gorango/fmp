@@ -20,9 +20,7 @@
 		"lint": "oxlint --fix & oxfmt",
 		"typecheck": "tsc --noEmit",
 		"test:api": "vitest run",
-		"coverage": "vitest run --coverage",
-		"generate:tools": "bun run ./src/scripts/tools.ts",
-		"generate:docs": "bun run ./src/scripts/docs.ts"
+		"coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"ai": "^6.0.191",
@@ -39,7 +37,6 @@
 		"dotenv": "^17.4.2",
 		"oxfmt": "^0.52.0",
 		"oxlint": "^1.67.0",
-		"ts-morph": "^28.0.0",
 		"typescript": "^6.0.3",
 		"vitest": "^4.1.7"
 	}

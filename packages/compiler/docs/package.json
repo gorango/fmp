@@ -1,6 +1,7 @@
 {
-	"name": "fmp-docs",
+	"name": "fmp-compiler-docs",
 	"type": "module",
+	"private": true,
 	"dependencies": {
 		"puppeteer": "^25.1.0"
 	}

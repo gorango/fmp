@@ -27,8 +27,8 @@ export interface ToolSchema {
 }
 
 const project = new Project()
-project.addSourceFilesAtPaths(['src/api.ts', 'src/types.ts'])
-const apiSourceFile = project.getSourceFileOrThrow('src/api.ts')
+project.addSourceFilesAtPaths(['../sdk/src/api.ts', '../sdk/src/types.ts'])
+const apiSourceFile = project.getSourceFileOrThrow('../sdk/src/api.ts')
 const processedTypes = new Map<string, string>()
 
 /**

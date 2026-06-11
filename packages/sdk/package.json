@@ -1,0 +1,46 @@
+{
+	"name": "fmp-sdk",
+	"version": "1.0.0-beta.1",
+	"description": "Financial Modeling Prep (FMP) SDK",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gorango/fmp.git"
+	},
+	"type": "module",
+	"exports": {
+		".": "./src/api.ts",
+		"./types": "./src/types.ts",
+		"./tools": "./src/generated/tools.ts",
+		"./constants": "./src/constants/index.ts",
+		"./constants/returns": "./src/constants/returns.ts",
+		"./constants/categories": "./src/constants/categories.ts",
+		"./sec": "./src/sec/index.ts"
+	},
+	"scripts": {
+		"lint": "oxlint --fix & oxfmt",
+		"typecheck": "tsc --noEmit",
+		"test:api": "vitest run",
+		"coverage": "vitest run --coverage",
+		"generate:tools": "bun run ./src/scripts/tools.ts",
+		"generate:docs": "bun run ./src/scripts/docs.ts"
+	},
+	"dependencies": {
+		"ai": "^6.0.191",
+		"ioredis": "^5.11.0",
+		"ky": "^2.0.2",
+		"papaparse": "^5.5.3",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@ai-sdk/openai": "^3.0.65",
+		"@types/node": "^25.9.1",
+		"@types/papaparse": "^5.5.2",
+		"@vitest/coverage-v8": "4.1.7",
+		"dotenv": "^17.4.2",
+		"oxfmt": "^0.52.0",
+		"oxlint": "^1.67.0",
+		"ts-morph": "^28.0.0",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.7"
+	}
+}

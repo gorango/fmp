@@ -5,7 +5,8 @@
 	"private": true,
 	"scripts": {
 		"generate:tools": "bun run ./src/tools.ts",
-		"generate:docs": "bun run ./src/docs.ts"
+		"generate:docs": "bun run ./src/docs.ts",
+		"generate:returns": "bun run ./src/returns.ts"
 	},
 	"dependencies": {
 		"fmp-sdk": "workspace:*",

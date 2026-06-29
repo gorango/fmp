@@ -5,7 +5,7 @@ Auto-generated [Vercel AI SDK](https://sdk.vercel.ai) tool definitions wrapping 
 ## Installation
 
 ```bash
-npm install fmp-tools
+bun add fmp-tools
 ```
 
 Requires `fmp-sdk` as a peer dependency.

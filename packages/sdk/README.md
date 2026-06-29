@@ -14,7 +14,7 @@ A powerful TypeScript SDK for accessing real-time and historical financial data 
 ## Installation
 
 ```bash
-npm install fmp-sdk
+bun add fmp-sdk
 ```
 
 ## Quick Start

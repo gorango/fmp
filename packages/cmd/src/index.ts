@@ -16,6 +16,9 @@ function showHelp() {
 
 Call a financial data tool and print the result as JSON.
 
+Flags:
+  --mcp    Start the MCP server for AI tool integration (stdio)
+
 Tools:
 ${toolNames.map((name) => `  ${name}`).join('\n')}
 
@@ -31,6 +34,12 @@ async function main() {
 
 	if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
 		showHelp()
+	}
+
+	if (args[0] === '--mcp') {
+		const { startMCPServer } = await import('fmp-mcp')
+		await startMCPServer()
+		return
 	}
 
 	if (args[0] === '--list' || args[0] === '-l') {

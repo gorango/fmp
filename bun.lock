@@ -21,6 +21,7 @@
         "fmp": "./src/index.ts",
       },
       "dependencies": {
+        "fmp-mcp": "workspace:*",
         "fmp-tools": "workspace:*",
         "zod": "^4.4.3",
       },

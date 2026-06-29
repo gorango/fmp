@@ -14,6 +14,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"fmp-mcp": "workspace:*",
 		"fmp-tools": "workspace:*",
 		"zod": "^4.4.3"
 	},

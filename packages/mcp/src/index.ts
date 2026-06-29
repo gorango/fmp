@@ -12,30 +12,42 @@ type FmpTool = {
 
 const tools = toolDefs as unknown as Record<string, FmpTool>
 
-const server = new McpServer({ name: 'fmp-mcp', version: '0.0.1' }, { capabilities: { tools: {} } })
-
-for (const [name, toolDef] of Object.entries(tools)) {
-	server.registerTool(
-		name,
-		{
-			description: toolDef.description,
-			inputSchema: toolDef.inputSchema,
-		},
-		async (args) => {
-			try {
-				const result = await toolDef.execute(args as Record<string, unknown>)
-				return {
-					content: [{ type: 'text', text: JSON.stringify(result) }],
-				}
-			} catch (error: any) {
-				return {
-					content: [{ type: 'text', text: error.message || 'An unexpected error occurred' }],
-					isError: true,
-				}
-			}
-		},
+function createServer() {
+	const server = new McpServer(
+		{ name: 'fmp-mcp', version: '0.0.1' },
+		{ capabilities: { tools: {} } },
 	)
+
+	for (const [name, toolDef] of Object.entries(tools)) {
+		server.registerTool(
+			name,
+			{
+				description: toolDef.description,
+				inputSchema: toolDef.inputSchema,
+			},
+			async (args) => {
+				try {
+					const result = await toolDef.execute(args as Record<string, unknown>)
+					return {
+						content: [{ type: 'text', text: JSON.stringify(result) }],
+					}
+				} catch (error: any) {
+					return {
+						content: [{ type: 'text', text: error.message || 'An unexpected error occurred' }],
+						isError: true,
+					}
+				}
+			},
+		)
+	}
+
+	return server
 }
 
-const transport = new StdioServerTransport()
-await server.connect(transport)
+export async function startMCPServer() {
+	const server = createServer()
+	const transport = new StdioServerTransport()
+	await server.connect(transport)
+}
+
+await startMCPServer()

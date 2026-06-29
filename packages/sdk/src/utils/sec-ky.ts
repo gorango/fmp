@@ -53,7 +53,7 @@ export const secApi = ky.create({
 				const cacheKey = `${CACHE_PREFIX}${request.url}`
 				const cachedData = await redis.get(cacheKey)
 				if (cachedData) {
-					console.log(`[CACHE HIT] ${request.url}`)
+					console.error(`[CACHE HIT] ${request.url}`)
 					const cacheEntry: CacheEntry = JSON.parse(cachedData)
 					return new Response(cacheEntry.body, {
 						headers: { 'content-type': cacheEntry.contentType },

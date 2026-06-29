@@ -91,7 +91,7 @@ export const fmpApi = ky.create({
 					if (cachedDataString) {
 						try {
 							const cachedEntry: CacheEntry = JSON.parse(cachedDataString)
-							console.log(`[CACHE HIT] ${finalRequestUrl.split('/').pop()}`)
+							console.error(`[CACHE HIT] ${finalRequestUrl.split('/').pop()}`)
 							return new Response(cachedEntry.body, {
 								status: 200,
 								headers: {

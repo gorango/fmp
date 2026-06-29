@@ -51,9 +51,7 @@ async function fetchAllFilings(symbol: string) {
 
 	for (let year = START_YEAR; year <= currentYear; year++) {
 		const from = `${year}-01-01`
-		const to = year === currentYear
-			? new Date().toISOString().split('T')[0]
-			: `${year}-12-31`
+		const to = year === currentYear ? new Date().toISOString().split('T')[0] : `${year}-12-31`
 
 		for (let page = 0; page <= MAX_PAGES; page++) {
 			const filings = await fetchFilingsRetry(symbol, from, to, page)
@@ -85,7 +83,7 @@ async function fetchFilingsRetry(
 	} catch (error) {
 		if (attempt < MAX_RETRIES) {
 			console.log(`🔄 Retry ${symbol} pg${page} (${attempt + 1}/${MAX_RETRIES})`)
-			await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * (attempt + 1)))
+			await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY * (attempt + 1)))
 			return fetchFilingsRetry(symbol, from, to, page, attempt + 1)
 		}
 		throw error

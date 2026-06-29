@@ -1,13 +1,13 @@
 {
 	"name": "fmp-mcp",
 	"version": "0.0.1",
-	"type": "module",
 	"private": true,
-	"exports": {
-		".": "./src/index.ts"
-	},
 	"bin": {
 		"fmp-mcp": "./src/index.ts"
+	},
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts"
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",

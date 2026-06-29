@@ -11,7 +11,7 @@ function generateReturnsFileContent(schemas: ToolSchema[]): string {
 		"import type * as api from '../api.js'",
 		'',
 		'type ApiFunctionNames = {',
-		"\t[K in keyof typeof api]: (typeof api)[K] extends (...args: any[]) => any ? K : never",
+		'\t[K in keyof typeof api]: (typeof api)[K] extends (...args: any[]) => any ? K : never',
 		'}[keyof typeof api]',
 		'',
 	]
@@ -23,7 +23,7 @@ function generateReturnsFileContent(schemas: ToolSchema[]): string {
 			continue
 		}
 
-		const keys = schema.available_return_keys.map(k => `'${k}'`).join(', ')
+		const keys = schema.available_return_keys.map((k) => `'${k}'`).join(', ')
 		lines.push(`const ${schema.name} = [${keys}] as const`)
 		lines.push('')
 		entries.push(schema.name)
@@ -44,7 +44,7 @@ async function main() {
 		const content = generateReturnsFileContent(schemas)
 		fs.mkdirSync(path.dirname(EXPORT_FILE_PATH), { recursive: true })
 		fs.writeFileSync(EXPORT_FILE_PATH, content)
-		const count = schemas.filter(s => s.available_return_keys.length > 0).length
+		const count = schemas.filter((s) => s.available_return_keys.length > 0).length
 		console.log(`Successfully generated returns.ts with ${count} entries.`)
 	} catch (error) {
 		console.error('Error generating returns:')

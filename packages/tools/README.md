@@ -35,7 +35,7 @@ bun run --filter fmp-codegen generate:tools
 
 ## Exports
 
-| Path | Description |
-|---|---|
-| `fmp-tools` | All tool definitions as a named export |
+| Path             | Description                                  |
+| ---------------- | -------------------------------------------- |
+| `fmp-tools`      | All tool definitions as a named export       |
 | `fmp-tools/docs` | Structured JSON documentation for every tool |

@@ -12,10 +12,7 @@ type FmpTool = {
 
 const tools = toolDefs as unknown as Record<string, FmpTool>
 
-const server = new McpServer(
-	{ name: 'fmp-mcp', version: '0.0.1' },
-	{ capabilities: { tools: {} } },
-)
+const server = new McpServer({ name: 'fmp-mcp', version: '0.0.1' }, { capabilities: { tools: {} } })
 
 for (const [name, toolDef] of Object.entries(tools)) {
 	server.registerTool(
@@ -30,8 +27,7 @@ for (const [name, toolDef] of Object.entries(tools)) {
 				return {
 					content: [{ type: 'text', text: JSON.stringify(result) }],
 				}
-			}
-			catch (error: any) {
+			} catch (error: any) {
 				return {
 					content: [{ type: 'text', text: error.message || 'An unexpected error occurred' }],
 					isError: true,

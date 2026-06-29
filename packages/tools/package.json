@@ -1,8 +1,8 @@
 {
 	"name": "fmp-tools",
 	"version": "0.0.1",
-	"type": "module",
 	"private": true,
+	"type": "module",
 	"exports": {
 		".": "./src/tools.ts",
 		"./docs": "./src/docs.json"

@@ -28,26 +28,11 @@ const profile = await fmp.companyProfile('AAPL')
 
 ## Exports
 
-| Path                | Description                                    |
-| ------------------- | ---------------------------------------------- |
-| `fmp-sdk`           | Main API client                                |
-| `fmp-sdk/types`     | TypeScript type definitions                    |
-| `fmp-sdk/constants` | Shared constants                               |
-| `fmp-sdk/sec`       | SEC filing utilities                           |
-| `fmp-tools`         | Vercel AI SDK tool wrappers (separate package) |
-
-## Monorepo
-
-This repo is a [bun workspace](https://bun.sh/docs/install/workspaces) containing:
-
-- `fmp-sdk` — raw API client (this package)
-- `fmp-codegen` — codegen that reads SDK source and produces tools/docs
-- `fmp-tools` — generated Vercel AI SDK tool definitions
-- `fmp-skills` — AI skill definitions
-
-## Documentation
-
-Full API reference at [financialmodelingprep.com/developer/docs](https://financialmodelingprep.com/developer/docs).
+| Path                | Description                 |
+| ------------------- | --------------------------- |
+| `fmp-sdk`           | Main API client             |
+| `fmp-sdk/types`     | TypeScript type definitions |
+| `fmp-sdk/constants` | Shared constants            |
 
 ## License
 

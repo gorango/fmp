@@ -12,10 +12,88 @@
 		"return_keys_summary": "symbol, name, currency, exchangeFullName, exchange"
 	},
 	{
+		"tool_name": "searchCik",
+		"description": "Searches for companies by CIK (Central Index Key).",
+		"parameters_summary": "cik; options (limit)",
+		"return_keys_summary": "symbol, companyName, cik, exchangeFullName, exchange, currency"
+	},
+	{
+		"tool_name": "searchCusip",
+		"description": "Searches for financial instruments by CUSIP.",
+		"parameters_summary": "cusip",
+		"return_keys_summary": "symbol, companyName, cusip, marketCap"
+	},
+	{
+		"tool_name": "searchIsin",
+		"description": "Searches for financial instruments by ISIN.",
+		"parameters_summary": "isin",
+		"return_keys_summary": "symbol, name, isin, marketCap"
+	},
+	{
+		"tool_name": "stockScreener",
+		"description": "Screens for companies based on a wide range of financial and market criteria.",
+		"parameters_summary": "params (marketCapMoreThan, marketCapLowerThan, priceMoreThan, priceLowerThan, betaMoreThan, betaLowerThan, volumeMoreThan, volumeLowerThan, dividendMoreThan, dividendLowerThan, isEtf, isFund, isActivelyTrading, sector, industry, country, exchange, limit, includeAllShareClasses)",
+		"return_keys_summary": "symbol, companyName, marketCap, sector, industry, beta, price, lastAnnualDividend, volume, exchange, exchangeShortName, country, isEtf, isFund, isActivelyTrading"
+	},
+	{
+		"tool_name": "searchExchangeVariants",
+		"description": "Searches for different exchange listings (variants) of a given stock symbol.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, price, beta, volAvg, mktCap, lastDiv, range, changes, companyName, currency, cik, isin, cusip, exchange, exchangeShortName, industry, website, description, ceo, sector, country, fullTimeEmployees, phone, address, city, state, zip, dcfDiff, dcf, image, ipoDate, defaultImage, isEtf, isActivelyTrading, isAdr, isFund"
+	},
+	{
+		"tool_name": "listCompanySymbols",
+		"description": "Retrieves a comprehensive list of company symbols.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, companyName"
+	},
+	{
+		"tool_name": "listFinancialStatementSymbols",
+		"description": "Retrieves a list of symbols for companies that have financial statements available.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, companyName, tradingCurrency, reportingCurrency"
+	},
+	{
+		"tool_name": "listCik",
+		"description": "Retrieves a list of CIKs (Central Index Keys).",
+		"parameters_summary": "options (limit)",
+		"return_keys_summary": "cik, companyName"
+	},
+	{
+		"tool_name": "listSymbolChanges",
+		"description": "Retrieves a list of stock symbol changes.",
+		"parameters_summary": "options (invalid, limit)",
+		"return_keys_summary": "date, companyName, oldSymbol, newSymbol"
+	},
+	{
+		"tool_name": "listEtfSymbol",
+		"description": "Retrieves a list of ETF symbols.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name"
+	},
+	{
+		"tool_name": "listActivelyTrading",
+		"description": "Retrieves a list of actively trading companies and financial instruments.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name"
+	},
+	{
 		"tool_name": "financialEstimates",
 		"description": "Retrieves analyst financial estimates for a given stock symbol.",
 		"parameters_summary": "symbol; options (period, page, limit)",
 		"return_keys_summary": "symbol, date, revenueLow, revenueHigh, revenueAvg, ebitdaLow, ebitdaHigh, ebitdaAvg, ebitLow, ebitHigh, ebitAvg, netIncomeLow, netIncomeHigh, netIncomeAvg, sgaExpenseLow, sgaExpenseHigh, sgaExpenseAvg, epsAvg, epsHigh, epsLow, numAnalystsRevenue, numAnalystsEps"
+	},
+	{
+		"tool_name": "ratingsSnapshot",
+		"description": "Retrieves a snapshot of financial ratings for a given stock symbol.",
+		"parameters_summary": "symbol; options (limit)",
+		"return_keys_summary": "symbol, rating, overallScore, discountedCashFlowScore, returnOnEquityScore, returnOnAssetsScore, debtToEquityScore, priceToEarningsScore, priceToBookScore"
+	},
+	{
+		"tool_name": "historicalRatings",
+		"description": "Retrieves historical financial ratings for a given stock symbol.",
+		"parameters_summary": "symbol; options (limit)",
+		"return_keys_summary": "date, symbol, rating, overallScore, discountedCashFlowScore, returnOnEquityScore, returnOnAssetsScore, debtToEquityScore, priceToEarningsScore, priceToBookScore"
 	},
 	{
 		"tool_name": "priceTargetSummary",
@@ -36,10 +114,22 @@
 		"return_keys_summary": "symbol, publishedDate, newsURL, newsTitle, analystName, priceTarget, adjPriceTarget, priceWhenPosted, newsPublisher, newsBaseURL, analystCompany"
 	},
 	{
+		"tool_name": "latestPriceTargetNews",
+		"description": "Retrieves the latest price target news across all stock symbols.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, publishedDate, newsURL, newsTitle, analystName, priceTarget, adjPriceTarget, priceWhenPosted, newsPublisher, newsBaseURL, analystCompany"
+	},
+	{
 		"tool_name": "stockGrades",
 		"description": "Retrieves current stock grades (e.g., buy, sell, hold) from analysts for a given stock symbol.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "symbol, date, gradingCompany, previousGrade, newGrade, action"
+	},
+	{
+		"tool_name": "historicalStockGrades",
+		"description": "Retrieves historical stock grades for a given stock symbol. This endpoint returns a summary of buy/hold/sell counts per date.",
+		"parameters_summary": "symbol; options (limit)",
+		"return_keys_summary": "symbol, date, analystRatingsBuy, analystRatingsHold, analystRatingsSell, analystRatingsStrongSell"
 	},
 	{
 		"tool_name": "stockGradeConsensus",
@@ -54,9 +144,21 @@
 		"return_keys_summary": "symbol, publishedDate, newsURL, newsTitle, newsBaseURL, newsPublisher, newGrade, previousGrade, gradingCompany, action, priceWhenPosted"
 	},
 	{
+		"tool_name": "latestStockGradeNews",
+		"description": "Retrieves the latest stock grade news across all stock symbols.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, publishedDate, newsURL, newsTitle, newsBaseURL, newsPublisher, newGrade, previousGrade, gradingCompany, action, priceWhenPosted"
+	},
+	{
 		"tool_name": "companyDividends",
 		"description": "Retrieves dividend history for a specific company.",
 		"parameters_summary": "symbol; options (limit)",
+		"return_keys_summary": "symbol, date, recordDate, paymentDate, declarationDate, adjDividend, dividend, yield, frequency"
+	},
+	{
+		"tool_name": "dividendsCalendar",
+		"description": "Retrieves a calendar of dividend events for all stocks within a date range.",
+		"parameters_summary": "options (from, to)",
 		"return_keys_summary": "symbol, date, recordDate, paymentDate, declarationDate, adjDividend, dividend, yield, frequency"
 	},
 	{
@@ -66,10 +168,100 @@
 		"return_keys_summary": "symbol, date, epsActual, epsEstimated, revenueActual, revenueEstimated, lastUpdated"
 	},
 	{
+		"tool_name": "earningsCalendar",
+		"description": "Retrieves a calendar of earnings announcements for all stocks within a date range.",
+		"parameters_summary": "options (from, to)",
+		"return_keys_summary": "symbol, date, epsActual, epsEstimated, revenueActual, revenueEstimated, lastUpdated"
+	},
+	{
+		"tool_name": "iposCalendar",
+		"description": "Retrieves a calendar of upcoming Initial Public Offerings (IPOs).",
+		"parameters_summary": "options (from, to)",
+		"return_keys_summary": "symbol, date, daa, company, exchange, actions, shares, priceRange, marketCap"
+	},
+	{
+		"tool_name": "ipoDisclosures",
+		"description": "Retrieves a list of disclosure filings for upcoming IPOs.",
+		"parameters_summary": "options (from, to)",
+		"return_keys_summary": "symbol, filingDate, acceptedDate, effectivenessDate, cik, form, url"
+	},
+	{
+		"tool_name": "ipoProspectus",
+		"description": "Retrieves information on IPO prospectuses.",
+		"parameters_summary": "options (from, to)",
+		"return_keys_summary": "symbol, acceptedDate, filingDate, ipoDate, cik, pricePublicPerShare, pricePublicTotal, discountsAndCommissionsPerShare, discountsAndCommissionsTotal, proceedsBeforeExpensesPerShare, proceedsBeforeExpensesTotal, form, url"
+	},
+	{
+		"tool_name": "stockSplitDetails",
+		"description": "Retrieves stock split details for a specific company.",
+		"parameters_summary": "symbol; options (limit)",
+		"return_keys_summary": "symbol, date, numerator, denominator"
+	},
+	{
+		"tool_name": "stockSplitsCalendar",
+		"description": "Retrieves a calendar of upcoming stock splits.",
+		"parameters_summary": "options (from, to)",
+		"return_keys_summary": "symbol, date, numerator, denominator"
+	},
+	{
 		"tool_name": "stockChartFull",
 		"description": "Retrieves full historical end-of-day stock price and volume data.",
 		"parameters_summary": "symbol; options (from, to)",
 		"return_keys_summary": "symbol, change, changePercent, vwap, date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "unadjustedStockChart",
+		"description": "Retrieves unadjusted historical end-of-day stock price data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "symbol, date, adjOpen, adjHigh, adjLow, adjClose, volume"
+	},
+	{
+		"tool_name": "dividendAdjustedStockChart",
+		"description": "Retrieves dividend-adjusted historical end-of-day stock price data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "symbol, date, adjOpen, adjHigh, adjLow, adjClose, volume"
+	},
+	{
+		"tool_name": "historicalIntradayChart",
+		"description": "Retrieves historical intraday stock chart data for a specific timeframe.",
+		"parameters_summary": "symbol; timeframe enum (1min, 5min, 15min, 30min, 1hour, 4hour); options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart1Min",
+		"description": "Retrieves 1-minute interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart5Min",
+		"description": "Retrieves 5-minute interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart15Min",
+		"description": "Retrieves 15-minute interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart30Min",
+		"description": "Retrieves 30-minute interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart1Hour",
+		"description": "Retrieves 1-hour interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "stockChart4Hour",
+		"description": "Retrieves 4-hour interval historical stock chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
 	},
 	{
 		"tool_name": "companyProfile",
@@ -78,10 +270,28 @@
 		"return_keys_summary": "symbol, price, marketCap, beta, lastDividend, range, change, changePercentage, volume, averageVolume, companyName, currency, cik, isin, cusip, exchangeFullName, exchange, industry, website, description, ceo, sector, country, fullTimeEmployees, phone, address, city, state, zip, image, ipoDate, defaultImage, isEtf, isActivelyTrading, isAdr, isFund"
 	},
 	{
+		"tool_name": "companyProfileByCik",
+		"description": "Retrieves detailed company profile data by CIK.",
+		"parameters_summary": "cik",
+		"return_keys_summary": "symbol, price, marketCap, beta, lastDividend, range, change, changePercentage, volume, averageVolume, companyName, currency, cik, isin, cusip, exchangeFullName, exchange, industry, website, description, ceo, sector, country, fullTimeEmployees, phone, address, city, state, zip, image, ipoDate, defaultImage, isEtf, isActivelyTrading, isAdr, isFund"
+	},
+	{
+		"tool_name": "companyNotes",
+		"description": "Retrieves information about company-issued notes for a given stock symbol.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "cik, symbol, title, exchange"
+	},
+	{
 		"tool_name": "stockPeers",
 		"description": "Retrieves a list of peer companies for a given stock symbol.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "symbol, companyName, price, mktCap"
+	},
+	{
+		"tool_name": "delistedCompanies",
+		"description": "Retrieves a list of delisted companies.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, companyName, exchange, ipoDate, delistedDate"
 	},
 	{
 		"tool_name": "companyEmployeeCount",
@@ -102,6 +312,12 @@
 		"return_keys_summary": "symbol, date, marketCap"
 	},
 	{
+		"tool_name": "batchMarketCap",
+		"description": "Retrieves market capitalization data for multiple companies in a single request.",
+		"parameters_summary": "symbols",
+		"return_keys_summary": "symbol, date, marketCap"
+	},
+	{
 		"tool_name": "historicalMarketCap",
 		"description": "Retrieves historical market capitalization data for a company.",
 		"parameters_summary": "symbol; options (limit, from, to)",
@@ -112,6 +328,18 @@
 		"description": "Retrieves share float and liquidity data for a company.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "symbol, date, freeFloat, floatShares, outstandingShares"
+	},
+	{
+		"tool_name": "allSharesFloat",
+		"description": "Retrieves shares float data for all available companies.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, date, freeFloat, floatShares, outstandingShares"
+	},
+	{
+		"tool_name": "latestMergersAcquisitions",
+		"description": "Retrieves the latest mergers and acquisitions data.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, companyName, cik, targetedCompanyName, targetedCik, targetedSymbol, transactionDate, acceptedDate, link"
 	},
 	{
 		"tool_name": "searchMergersAcquisitions",
@@ -198,6 +426,30 @@
 		"return_keys_summary": "date, country, event, currency, previous, estimate, actual, change, impact, changePercentage"
 	},
 	{
+		"tool_name": "marketRiskPremium",
+		"description": "Retrieves market risk premium data.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "country, continent, countryRiskPremium, totalEquityRiskPremium"
+	},
+	{
+		"tool_name": "esgDisclosures",
+		"description": "Retrieves ESG (Environmental, Social, Governance) disclosure data for a company.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "date, acceptedDate, symbol, cik, companyName, formType, environmentalScore, socialScore, governanceScore, ESGScore, url"
+	},
+	{
+		"tool_name": "esgRatings",
+		"description": "Retrieves ESG ratings for a company.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, cik, companyName, industry, fiscalYear, ESGRiskRating, industryRank"
+	},
+	{
+		"tool_name": "esgBenchmark",
+		"description": "Retrieves ESG benchmark comparison data for a specific year.",
+		"parameters_summary": "year",
+		"return_keys_summary": "fiscalYear, sector, environmentalScore, socialScore, governanceScore, ESGScore"
+	},
+	{
 		"tool_name": "etfFundHoldings",
 		"description": "Retrieves the holdings of an ETF or mutual fund.",
 		"parameters_summary": "symbol",
@@ -214,6 +466,18 @@
 		"description": "Retrieves the country allocation/weightings for an ETF or mutual fund.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "country, weightPercentage"
+	},
+	{
+		"tool_name": "etfAssetExposure",
+		"description": "Retrieves which ETFs hold a specific stock asset.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, asset, sharesNumber, weightPercentage, marketValue"
+	},
+	{
+		"tool_name": "etfSectorWeighting",
+		"description": "Retrieves the sector weightings for an ETF.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, sector, weightPercentage"
 	},
 	{
 		"tool_name": "mutualFundEtfLatestDisclosures",
@@ -240,6 +504,12 @@
 		"return_keys_summary": "date, year, quarter"
 	},
 	{
+		"tool_name": "commoditiesList",
+		"description": "Retrieves a list of tracked commodities.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, exchange, tradeMonth, currency"
+	},
+	{
 		"tool_name": "commodityQuote",
 		"description": "Retrieves a real-time price quote for a commodity.",
 		"parameters_summary": "symbol",
@@ -250,6 +520,144 @@
 		"description": "Retrieves full historical end-of-day price data for a commodity.",
 		"parameters_summary": "symbol; options (from, to)",
 		"return_keys_summary": "symbol, change, changePercent, vwap, date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "commodityChart1Min",
+		"description": "Retrieves 1-minute interval historical commodity chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "commodityChart5Min",
+		"description": "Retrieves 5-minute interval historical commodity chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "commodityChart1Hour",
+		"description": "Retrieves 1-hour interval historical commodity chart data.",
+		"parameters_summary": "symbol; options (nonadjusted, from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "latestCrowdfundingCampaigns",
+		"description": "Retrieves the latest crowdfunding campaigns.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "cik, companyName, date, filingDate, acceptedDate, formType, formSignification, nameOfIssuer, legalStatusForm, jurisdictionOrganization, issuerStreet, issuerCity, issuerStateOrCountry, issuerZipCode, issuerWebsite, intermediaryCompanyName, intermediaryCommissionCik, intermediaryCommissionFileNumber, compensationAmount, financialInterest, securityOfferedType, securityOfferedOtherDescription, numberOfSecurityOffered, offeringPrice, offeringAmount, overSubscriptionAccepted, overSubscriptionAllocationType, maximumOfferingAmount, offeringDeadlineDate, currentNumberOfEmployees, totalAssetMostRecentFiscalYear, totalAssetPriorFiscalYear, cashAndCashEquiValentMostRecentFiscalYear, cashAndCashEquiValentPriorFiscalYear, accountsReceivableMostRecentFiscalYear, accountsReceivablePriorFiscalYear, shortTermDebtMostRecentFiscalYear, shortTermDebtPriorFiscalYear, longTermDebtMostRecentFiscalYear, longTermDebtPriorFiscalYear, revenueMostRecentFiscalYear, revenuePriorFiscalYear, costGoodsSoldMostRecentFiscalYear, costGoodsSoldPriorFiscalYear, taxesPaidMostRecentFiscalYear, taxesPaidPriorFiscalYear, netIncomeMostRecentFiscalYear, netIncomePriorFiscalYear"
+	},
+	{
+		"tool_name": "searchCrowdfundingCampaigns",
+		"description": "Searches for crowdfunding campaigns by name.",
+		"parameters_summary": "name",
+		"return_keys_summary": "cik, name, date"
+	},
+	{
+		"tool_name": "crowdfundingCampaignsByCik",
+		"description": "Retrieves crowdfunding campaigns by CIK.",
+		"parameters_summary": "cik",
+		"return_keys_summary": "cik, companyName, date, filingDate, acceptedDate, formType, formSignification, nameOfIssuer, legalStatusForm, jurisdictionOrganization, issuerStreet, issuerCity, issuerStateOrCountry, issuerZipCode, issuerWebsite, intermediaryCompanyName, intermediaryCommissionCik, intermediaryCommissionFileNumber, compensationAmount, financialInterest, securityOfferedType, securityOfferedOtherDescription, numberOfSecurityOffered, offeringPrice, offeringAmount, overSubscriptionAccepted, overSubscriptionAllocationType, maximumOfferingAmount, offeringDeadlineDate, currentNumberOfEmployees, totalAssetMostRecentFiscalYear, totalAssetPriorFiscalYear, cashAndCashEquiValentMostRecentFiscalYear, cashAndCashEquiValentPriorFiscalYear, accountsReceivableMostRecentFiscalYear, accountsReceivablePriorFiscalYear, shortTermDebtMostRecentFiscalYear, shortTermDebtPriorFiscalYear, longTermDebtMostRecentFiscalYear, longTermDebtPriorFiscalYear, revenueMostRecentFiscalYear, revenuePriorFiscalYear, costGoodsSoldMostRecentFiscalYear, costGoodsSoldPriorFiscalYear, taxesPaidMostRecentFiscalYear, taxesPaidPriorFiscalYear, netIncomeMostRecentFiscalYear, netIncomePriorFiscalYear"
+	},
+	{
+		"tool_name": "latestEquityOfferingUpdates",
+		"description": "Retrieves the latest equity offering updates.",
+		"parameters_summary": "options (cik, page, limit)",
+		"return_keys_summary": "cik, companyName, date, filingDate, acceptedDate, formType, formSignification, entityName, issuerStreet, issuerCity, issuerStateOrCountry, issuerStateOrCountryDescription, issuerZipCode, issuerPhoneNumber, jurisdictionOfIncorporation, entityType, incorporatedWithinFiveYears, yearOfIncorporation, relatedPersonFirstName, relatedPersonLastName, relatedPersonStreet, relatedPersonCity, relatedPersonStateOrCountry, relatedPersonStateOrCountryDescription, relatedPersonZipCode, relatedPersonRelationship, industryGroupType, revenueRange, federalExemptionsExclusions, isAmendment, dateOfFirstSale, durationOfOfferingIsMoreThanYear, securitiesOfferedAreOfEquityType, isBusinessCombinationTransaction, minimumInvestmentAccepted, totalOfferingAmount, totalAmountSold, totalAmountRemaining, hasNonAccreditedInvestors, totalNumberAlreadyInvested, salesCommissions, findersFees, grossProceedsUsed"
+	},
+	{
+		"tool_name": "searchEquityOfferings",
+		"description": "Searches for equity offerings by name.",
+		"parameters_summary": "name",
+		"return_keys_summary": "cik, name, date"
+	},
+	{
+		"tool_name": "equityOfferingsByCik",
+		"description": "Retrieves equity offerings by CIK.",
+		"parameters_summary": "cik",
+		"return_keys_summary": "cik, companyName, date, filingDate, acceptedDate, formType, formSignification, entityName, issuerStreet, issuerCity, issuerStateOrCountry, issuerStateOrCountryDescription, issuerZipCode, issuerPhoneNumber, jurisdictionOfIncorporation, entityType, incorporatedWithinFiveYears, yearOfIncorporation, relatedPersonFirstName, relatedPersonLastName, relatedPersonStreet, relatedPersonCity, relatedPersonStateOrCountry, relatedPersonStateOrCountryDescription, relatedPersonZipCode, relatedPersonRelationship, industryGroupType, revenueRange, federalExemptionsExclusions, isAmendment, dateOfFirstSale, durationOfOfferingIsMoreThanYear, securitiesOfferedAreOfEquityType, isBusinessCombinationTransaction, minimumInvestmentAccepted, totalOfferingAmount, totalAmountSold, totalAmountRemaining, hasNonAccreditedInvestors, totalNumberAlreadyInvested, salesCommissions, findersFees, grossProceedsUsed"
+	},
+	{
+		"tool_name": "cryptocurrencyList",
+		"description": "Retrieves a list of all cryptocurrencies.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, exchange, icoDate, circulatingSupply, totalSupply"
+	},
+	{
+		"tool_name": "cryptocurrencyQuote",
+		"description": "Retrieves a full real-time quote for a cryptocurrency.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, name, price, changesPercentage, change, dayLow, dayHigh, yearHigh, yearLow, marketCap, priceAvg50, priceAvg200, exchange, volume, avgVolume, open, previousClose, eps, pe, earningsAnnouncement, sharesOutstanding, timestamp"
+	},
+	{
+		"tool_name": "allCryptocurrenciesQuotes",
+		"description": "Retrieves real-time quotes for multiple cryptocurrencies.",
+		"parameters_summary": "options (short)",
+		"return_keys_summary": "No specific return fields selectable, returns full object/array."
+	},
+	{
+		"tool_name": "cryptocurrencyChartFull",
+		"description": "Retrieves full historical end-of-day price data for a cryptocurrency.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "symbol, change, changePercent, vwap, date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "cryptocurrencyChart1Min",
+		"description": "Retrieves 1-minute interval historical cryptocurrency chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "cryptocurrencyChart5Min",
+		"description": "Retrieves 5-minute interval historical cryptocurrency chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "cryptocurrencyChart1Hour",
+		"description": "Retrieves 1-hour interval historical cryptocurrency chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "forexList",
+		"description": "Retrieves a list of all Forex currency pairs.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, fromCurrency, toCurrency, fromName, toName"
+	},
+	{
+		"tool_name": "forexQuote",
+		"description": "Retrieves a real-time quote for a Forex currency pair.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, name, price, changesPercentage, change, dayLow, dayHigh, yearHigh, yearLow, marketCap, priceAvg50, priceAvg200, exchange, volume, avgVolume, open, previousClose, eps, pe, earningsAnnouncement, sharesOutstanding, timestamp"
+	},
+	{
+		"tool_name": "allForexQuotes",
+		"description": "Retrieves real-time quotes for multiple Forex pairs.",
+		"parameters_summary": "options (short)",
+		"return_keys_summary": "No specific return fields selectable, returns full object/array."
+	},
+	{
+		"tool_name": "forexChartFull",
+		"description": "Retrieves full historical end-of-day price data for a Forex pair.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "symbol, change, changePercent, vwap, date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "forexChart1Min",
+		"description": "Retrieves 1-minute interval historical Forex chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "forexChart5Min",
+		"description": "Retrieves 5-minute interval historical Forex chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "forexChart1Hour",
+		"description": "Retrieves 1-hour interval historical Forex chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
 	},
 	{
 		"tool_name": "incomeStatement",
@@ -268,6 +676,12 @@
 		"description": "Retrieves cash flow statements for a company.",
 		"parameters_summary": "symbol; options (period, limit)",
 		"return_keys_summary": "date, symbol, reportedCurrency, cik, filingDate, acceptedDate, fiscalYear, period, netIncome, depreciationAndAmortization, deferredIncomeTax, stockBasedCompensation, changeInWorkingCapital, accountsReceivables, inventory, accountsPayables, otherWorkingCapital, otherNonCashItems, netCashProvidedByOperatingActivities, investmentsInPropertyPlantAndEquipment, acquisitionsNet, purchasesOfInvestments, salesMaturitiesOfInvestments, otherInvestingActivities, netCashProvidedByInvestingActivities, netDebtIssuance, longTermNetDebtIssuance, shortTermNetDebtIssuance, netStockIssuance, netCommonStockIssuance, commonStockIssuance, commonStockRepurchased, netPreferredStockIssuance, netDividendsPaid, commonDividendsPaid, preferredDividendsPaid, otherFinancingActivities, netCashProvidedByFinancingActivities, effectOfForexChangesOnCash, netChangeInCash, cashAtEndOfPeriod, cashAtBeginningOfPeriod, operatingCashFlow, capitalExpenditure, freeCashFlow, incomeTaxesPaid, interestPaid"
+	},
+	{
+		"tool_name": "latestFinancialStatements",
+		"description": "Retrieves metadata for the latest available financial statements.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, calendarYear, period, date, dateAdded"
 	},
 	{
 		"tool_name": "incomeStatementTtm",
@@ -354,6 +768,12 @@
 		"return_keys_summary": "symbol, date, fiscalYear, period, reportedCurrency, revenueGrowth, grossProfitGrowth, ebitgrowth, operatingIncomeGrowth, netIncomeGrowth, epsgrowth, epsdilutedGrowth, weightedAverageSharesGrowth, weightedAverageSharesDilutedGrowth, dividendsPerShareGrowth, operatingCashFlowGrowth, receivablesGrowth, inventoryGrowth, assetGrowth, bookValueperShareGrowth, debtGrowth, rdexpenseGrowth, sgaexpensesGrowth, freeCashFlowGrowth, tenYRevenueGrowthPerShare, fiveYRevenueGrowthPerShare, threeYRevenueGrowthPerShare, tenYOperatingCFGrowthPerShare, fiveYOperatingCFGrowthPerShare, threeYOperatingCFGrowthPerShare, tenYNetIncomeGrowthPerShare, fiveYNetIncomeGrowthPerShare, threeYNetIncomeGrowthPerShare, tenYShareholdersEquityGrowthPerShare, fiveYShareholdersEquityGrowthPerShare, threeYShareholdersEquityGrowthPerShare, tenYDividendperShareGrowthPerShare, fiveYDividendperShareGrowthPerShare, threeYDividendperShareGrowthPerShare, ebitdaGrowth, growthCapitalExpenditure, tenYBottomLineNetIncomeGrowthPerShare, fiveYBottomLineNetIncomeGrowthPerShare, threeYBottomLineNetIncomeGrowthPerShare"
 	},
 	{
+		"tool_name": "financialReportJson",
+		"description": "Retrieves a company's annual (10-K) or quarterly (10-Q) report in JSON format.",
+		"parameters_summary": "symbol; options (year, period)",
+		"return_keys_summary": "symbol, period, year, data"
+	},
+	{
 		"tool_name": "revenueProductSegmentation",
 		"description": "Retrieves revenue breakdown by product line for a company.",
 		"parameters_summary": "symbol; options (period, structure)",
@@ -364,6 +784,24 @@
 		"description": "Retrieves revenue breakdown by geographic region for a company.",
 		"parameters_summary": "symbol; options (period, structure)",
 		"return_keys_summary": "symbol, fiscalYear, period, reportedCurrency, date, data"
+	},
+	{
+		"tool_name": "latestInstitutionalOwnershipFilings",
+		"description": "Retrieves the latest institutional ownership (Form 13F) filings.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "cik, name, date, filingDate, acceptedDate, formType, link"
+	},
+	{
+		"tool_name": "secFilingsExtract",
+		"description": "Extracts detailed data from SEC Form 13F filings.",
+		"parameters_summary": "options (cik, year, quarter)",
+		"return_keys_summary": "date, filingDate, acceptedDate, cik, securityCusip, symbol, nameOfIssuer, shares, titleOfClass, sharesType, putCallShare, value, link"
+	},
+	{
+		"tool_name": "form13FFilingDates",
+		"description": "Retrieves dates associated with Form 13F filings by an institutional investor.",
+		"parameters_summary": "cik",
+		"return_keys_summary": "date, year, quarter"
 	},
 	{
 		"tool_name": "filingsExtractAnalyticsByHolder",
@@ -396,16 +834,82 @@
 		"return_keys_summary": "industryTitle, industryValue, date"
 	},
 	{
+		"tool_name": "indexesList",
+		"description": "Retrieves a list of stock market indexes.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, exchange, currency"
+	},
+	{
 		"tool_name": "indexQuote",
 		"description": "Retrieves a real-time quote for a stock market index.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "symbol, name, price, changesPercentage, change, dayLow, dayHigh, yearHigh, yearLow, marketCap, priceAvg50, priceAvg200, exchange, volume, avgVolume, open, previousClose, eps, pe, earningsAnnouncement, sharesOutstanding, timestamp"
 	},
 	{
+		"tool_name": "allIndexQuotes",
+		"description": "Retrieves real-time quotes for multiple stock market indexes.",
+		"parameters_summary": "options (short)",
+		"return_keys_summary": "No specific return fields selectable, returns full object/array."
+	},
+	{
 		"tool_name": "indexChartFull",
 		"description": "Retrieves full historical end-of-day price data for an index.",
 		"parameters_summary": "symbol; options (from, to)",
 		"return_keys_summary": "symbol, change, changePercent, vwap, date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "indexChart1Min",
+		"description": "Retrieves 1-minute interval historical index chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "indexChart5Min",
+		"description": "Retrieves 5-minute interval historical index chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "indexChart1Hour",
+		"description": "Retrieves 1-hour interval historical index chart data.",
+		"parameters_summary": "symbol; options (from, to)",
+		"return_keys_summary": "date, open, high, low, close, volume"
+	},
+	{
+		"tool_name": "sp500Constituents",
+		"description": "Retrieves the current constituents of the S&P 500 index.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, sector, subSector, headQuarter, dateFirstAdded, cik, founded"
+	},
+	{
+		"tool_name": "nasdaqConstituents",
+		"description": "Retrieves the current constituents of the Nasdaq index.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, sector, subSector, headQuarter, dateFirstAdded, cik, founded"
+	},
+	{
+		"tool_name": "dowJonesConstituents",
+		"description": "Retrieves the current constituents of the Dow Jones Industrial Average.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, name, sector, subSector, headQuarter, dateFirstAdded, cik, founded"
+	},
+	{
+		"tool_name": "historicalSp500Constituents",
+		"description": "Retrieves historical changes to the S&P 500 index constituents.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "dateAdded, addedSecurity, removedTicker, removedSecurity, date, symbol, reason"
+	},
+	{
+		"tool_name": "historicalNasdaqConstituents",
+		"description": "Retrieves historical changes to the Nasdaq index constituents.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "dateAdded, addedSecurity, removedTicker, removedSecurity, date, symbol, reason"
+	},
+	{
+		"tool_name": "historicalDowJonesConstituents",
+		"description": "Retrieves historical changes to the Dow Jones Industrial Average constituents.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "dateAdded, addedSecurity, removedTicker, removedSecurity, date, symbol, reason"
 	},
 	{
 		"tool_name": "latestInsiderTrades",
@@ -442,6 +946,144 @@
 		"description": "Tracks changes in stock ownership during acquisitions (SC 13D/G filings).",
 		"parameters_summary": "symbol; options (limit)",
 		"return_keys_summary": "cik, symbol, filingDate, acceptedDate, cusip, nameOfReportingPerson, citizenshipOrPlaceOfOrganization, soleVotingPower, sharedVotingPower, soleDispositivePower, sharedDispositivePower, amountBeneficiallyOwned, percentOfClass, typeOfReportingPerson, url"
+	},
+	{
+		"tool_name": "marketSectorPerformanceSnapshot",
+		"description": "Retrieves a snapshot of market sector performance for a specific date.",
+		"parameters_summary": "options (date, exchange, sector, industry)",
+		"return_keys_summary": "date, sector, exchange, averageChange"
+	},
+	{
+		"tool_name": "marketIndustryPerformanceSnapshot",
+		"description": "Retrieves a snapshot of market industry performance for a specific date.",
+		"parameters_summary": "options (date, exchange, sector, industry)",
+		"return_keys_summary": "date, industry, exchange, averageChange"
+	},
+	{
+		"tool_name": "historicalMarketSectorPerformance",
+		"description": "Retrieves historical market sector performance data.",
+		"parameters_summary": "sector; options (exchange, from, to)",
+		"return_keys_summary": "date, sector, exchange, averageChange"
+	},
+	{
+		"tool_name": "historicalMarketIndustryPerformance",
+		"description": "Retrieves historical market industry performance data.",
+		"parameters_summary": "industry; options (exchange, from, to)",
+		"return_keys_summary": "date, industry, exchange, averageChange"
+	},
+	{
+		"tool_name": "marketSectorPESnapshot",
+		"description": "Retrieves a snapshot of Price-to-Earnings (P/E) ratios for market sectors.",
+		"parameters_summary": "options (date, exchange, sector, industry)",
+		"return_keys_summary": "date, sector, exchange, pe"
+	},
+	{
+		"tool_name": "marketIndustryPESnapshot",
+		"description": "Retrieves a snapshot of Price-to-Earnings (P/E) ratios for market industries.",
+		"parameters_summary": "options (date, exchange, sector, industry)",
+		"return_keys_summary": "date, industry, exchange, pe"
+	},
+	{
+		"tool_name": "historicalMarketSectorPE",
+		"description": "Retrieves historical Price-to-Earnings (P/E) ratios for market sectors.",
+		"parameters_summary": "sector; options (exchange, from, to)",
+		"return_keys_summary": "date, sector, exchange, pe"
+	},
+	{
+		"tool_name": "historicalMarketIndustryPE",
+		"description": "Retrieves historical Price-to-Earnings (P/E) ratios for market industries.",
+		"parameters_summary": "industry; options (exchange, from, to)",
+		"return_keys_summary": "date, industry, exchange, pe"
+	},
+	{
+		"tool_name": "biggestStockGainers",
+		"description": "Retrieves a list of the biggest stock gainers for the current trading day.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, price, name, change, changesPercentage, exchange"
+	},
+	{
+		"tool_name": "biggestStockLosers",
+		"description": "Retrieves a list of the biggest stock losers for the current trading day.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, price, name, change, changesPercentage, exchange"
+	},
+	{
+		"tool_name": "topTradedStocks",
+		"description": "Retrieves a list of the most actively traded stocks for the current trading day.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, price, name, change, changesPercentage, exchange"
+	},
+	{
+		"tool_name": "exchangeMarketHours",
+		"description": "Retrieves trading hours for a specific stock exchange.",
+		"parameters_summary": "exchange",
+		"return_keys_summary": "exchange, name, openingHour, closingHour, timezone, isMarketOpen"
+	},
+	{
+		"tool_name": "allExchangeMarketHours",
+		"description": "Retrieves trading hours for all supported stock exchanges.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "exchange, name, openingHour, closingHour, timezone, isMarketOpen"
+	},
+	{
+		"tool_name": "fmpArticles",
+		"description": "Retrieves the latest articles from Financial Modeling Prep.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "title, date, content, tickers, image, link, author, site"
+	},
+	{
+		"tool_name": "generalNews",
+		"description": "Retrieves the latest general news articles.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "pressReleases",
+		"description": "Retrieves the latest press releases from companies.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "stockNews",
+		"description": "Retrieves the latest stock market news.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "cryptoNews",
+		"description": "Retrieves the latest cryptocurrency news.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "forexNews",
+		"description": "Retrieves the latest Forex news.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "searchPressReleases",
+		"description": "Searches for press releases related to specific stock symbols.",
+		"parameters_summary": "options (symbols, from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "searchStockNews",
+		"description": "Searches for stock news related to specific stock symbols.",
+		"parameters_summary": "options (symbols, from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "searchCryptoNews",
+		"description": "Searches for cryptocurrency news related to specific crypto symbols.",
+		"parameters_summary": "options (symbols, from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
+	},
+	{
+		"tool_name": "searchForexNews",
+		"description": "Searches for Forex news related to specific currency pairs.",
+		"parameters_summary": "options (symbols, from, to, page, limit)",
+		"return_keys_summary": "symbol, publishedDate, publisher, title, image, site, text, url"
 	},
 	{
 		"tool_name": "simpleMovingAverage",
@@ -504,12 +1146,6 @@
 		"return_keys_summary": "symbol, name, price, changesPercentage, change, dayLow, dayHigh, yearHigh, yearLow, marketCap, priceAvg50, priceAvg200, exchange, volume, avgVolume, open, previousClose, eps, pe, earningsAnnouncement, sharesOutstanding, timestamp"
 	},
 	{
-		"tool_name": "stockQuoteShort",
-		"description": "Retrieves a short real-time stock quote.",
-		"parameters_summary": "symbol",
-		"return_keys_summary": "symbol, price, change, volume"
-	},
-	{
 		"tool_name": "aftermarketTrade",
 		"description": "Retrieves real-time aftermarket trade data for a stock.",
 		"parameters_summary": "symbol",
@@ -526,6 +1162,24 @@
 		"description": "Retrieves stock price change percentages over various time periods.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "symbol, 1D, 5D, 1M, 3M, 6M, ytd, 1Y, 3Y, 5Y, 10Y, max"
+	},
+	{
+		"tool_name": "stockBatchQuote",
+		"description": "Retrieves real-time stock quotes for multiple symbols.",
+		"parameters_summary": "symbols",
+		"return_keys_summary": "symbol, name, price, changesPercentage, change, dayLow, dayHigh, yearHigh, yearLow, marketCap, priceAvg50, priceAvg200, exchange, volume, avgVolume, open, previousClose, eps, pe, earningsAnnouncement, sharesOutstanding, timestamp"
+	},
+	{
+		"tool_name": "batchAftermarketTrade",
+		"description": "Retrieves real-time aftermarket trade data for multiple stocks.",
+		"parameters_summary": "symbols",
+		"return_keys_summary": "symbol, price, tradeSize, timestamp"
+	},
+	{
+		"tool_name": "batchAftermarketQuote",
+		"description": "Retrieves real-time aftermarket quote data for multiple stocks.",
+		"parameters_summary": "symbols",
+		"return_keys_summary": "symbol, bidSize, bidPrice, askSize, askPrice, volume, timestamp"
 	},
 	{
 		"tool_name": "exchangeStockQuotes",
@@ -546,10 +1200,100 @@
 		"return_keys_summary": "No specific return fields selectable, returns full object/array."
 	},
 	{
+		"tool_name": "latestEarningTranscripts",
+		"description": "Retrieves metadata for the latest available earnings transcripts.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, period, fiscalYear, date"
+	},
+	{
+		"tool_name": "earningsTranscript",
+		"description": "Retrieves the full transcript of a company's earnings call.",
+		"parameters_summary": "symbol; options (year, quarter, limit)",
+		"return_keys_summary": "symbol, period, year, date, content"
+	},
+	{
 		"tool_name": "earningsTranscriptDatesBySymbol",
 		"description": "Retrieves available earnings call transcript dates for a specific company.",
 		"parameters_summary": "symbol",
 		"return_keys_summary": "quarter, fiscalYear, date"
+	},
+	{
+		"tool_name": "earningsTranscriptList",
+		"description": "Retrieves a list of companies with available earnings transcripts.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, companyName, noOfTranscripts"
+	},
+	{
+		"tool_name": "latest8kSecFilings",
+		"description": "Retrieves the latest 8-K SEC filings within a date range.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link"
+	},
+	{
+		"tool_name": "latestSecFilingsWithFinancials",
+		"description": "Retrieves the latest SEC filings with financials (e.g., 10-K, 10-Q) within a date range.",
+		"parameters_summary": "options (from, to, page, limit)",
+		"return_keys_summary": "symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link"
+	},
+	{
+		"tool_name": "searchSecFilingsByFormType",
+		"description": "Searches SEC filings by form type within a date range.",
+		"parameters_summary": "options (formType, from, to, page, limit)",
+		"return_keys_summary": "symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link"
+	},
+	{
+		"tool_name": "searchSecFilingsBySymbol",
+		"description": "Searches SEC filings by company symbol within a date range.",
+		"parameters_summary": "options (symbol, formType, from, to, page)",
+		"return_keys_summary": "symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link"
+	},
+	{
+		"tool_name": "searchSecFilingsByCik",
+		"description": "Searches SEC filings by CIK within a date range.",
+		"parameters_summary": "options (cik, from, to, page, limit)",
+		"return_keys_summary": "symbol, cik, filingDate, acceptedDate, formType, hasFinancials, link"
+	},
+	{
+		"tool_name": "searchSecFilingsCompanyName",
+		"description": "Searches for SEC filing company information by company name.",
+		"parameters_summary": "company",
+		"return_keys_summary": "symbol, name, cik, sicCode, industryTitle, businessAddress, phoneNumber"
+	},
+	{
+		"tool_name": "searchSecFilingsCompanyBySymbol",
+		"description": "Searches for SEC filing company information by stock symbol.",
+		"parameters_summary": "symbol",
+		"return_keys_summary": "symbol, name, cik, sicCode, industryTitle, businessAddress, phoneNumber"
+	},
+	{
+		"tool_name": "searchSecFilingsCompanyByCik",
+		"description": "Searches for SEC filing company information by CIK.",
+		"parameters_summary": "cik",
+		"return_keys_summary": "symbol, name, cik, sicCode, industryTitle, businessAddress, phoneNumber"
+	},
+	{
+		"tool_name": "secCompanyFullProfile",
+		"description": "Retrieves a full SEC company profile.",
+		"parameters_summary": "options (symbol, cik)",
+		"return_keys_summary": "symbol, cik, registrantName, sicCode, sicDescription, sicGroup, isin, businessAddress, mailingAddress, phoneNumber, postalCode, city, state, country, description, ceo, website, exchange, stateLocation, stateOfIncorporation, fiscalYearEnd, ipoDate, employees, secFilingsUrl, taxIdentificationNumber, fiftyTwoWeekRange, isActive, assetType, openFigiComposite, priceCurrency, marketSector, securityType, isEtf, isAdr, isFund"
+	},
+	{
+		"tool_name": "industryClassificationList",
+		"description": "Retrieves a list of industry classifications (SIC codes and titles).",
+		"parameters_summary": "options (industryTitle, sicCode)",
+		"return_keys_summary": "office, sicCode, industryTitle"
+	},
+	{
+		"tool_name": "searchIndustryClassification",
+		"description": "Searches for industry classification details for companies.",
+		"parameters_summary": "options (symbol, cik, sicCode)",
+		"return_keys_summary": "symbol, name, cik, sicCode, industryTitle, businessAddress, phoneNumber"
+	},
+	{
+		"tool_name": "allIndustryClassification",
+		"description": "Retrieves all industry classification data for companies.",
+		"parameters_summary": "options (page, limit)",
+		"return_keys_summary": "symbol, name, cik, sicCode, industryTitle, businessAddress, phoneNumber"
 	},
 	{
 		"tool_name": "getSecFiling",
@@ -592,5 +1336,113 @@
 		"description": "Retrieves trading activity by U.S. House members filtered by member's name.",
 		"parameters_summary": "name",
 		"return_keys_summary": "symbol, disclosureDate, transactionDate, firstName, lastName, office, district, owner, assetDescription, assetType, type, amount, comment, link, capitalGainsOver200USD"
+	},
+	{
+		"tool_name": "bulkCompanyProfile",
+		"description": "Retrieves company profile data in bulk.",
+		"parameters_summary": "part",
+		"return_keys_summary": "symbol, price, marketCap, beta, lastDividend, range, change, changePercentage, volume, averageVolume, companyName, currency, cik, isin, cusip, exchangeFullName, exchange, industry, website, description, ceo, sector, country, fullTimeEmployees, phone, address, city, state, zip, image, ipoDate, defaultImage, isEtf, isActivelyTrading, isAdr, isFund"
+	},
+	{
+		"tool_name": "bulkStockRating",
+		"description": "Retrieves stock rating data in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, date, rating, ratingRecommendation, ratingDetailsDCFRecommendation, ratingDetailsROERecommendation, ratingDetailsROARecommendation, ratingDetailsDERecommendation, ratingDetailsPERecommendation, ratingDetailsPBRecommendation"
+	},
+	{
+		"tool_name": "bulkDcfValuations",
+		"description": "Retrieves DCF valuations in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, date, discountedCashFlow, dcfPercentDiff"
+	},
+	{
+		"tool_name": "bulkFinancialScores",
+		"description": "Retrieves financial scores in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, reportedCurrency, altmanZScore, piotroskiScore, workingCapital, totalAssets, retainedEarnings, ebit, marketCap, totalLiabilities, revenue"
+	},
+	{
+		"tool_name": "bulkPriceTargetSummary",
+		"description": "Retrieves price target summaries in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, lastMonth, lastMonthAvgPT, lastMonthAvgPTPercentDif, lastQuarter, lastQuarterAvgPT, lastQuarterAvgPTPercentDif, lastYear, lastYearAvgPT, lastYearAvgPTPercentDif, allTime, allTimeAvgPT, allTimeAvgPTPercentDif, publishers"
+	},
+	{
+		"tool_name": "bulkEtfHolder",
+		"description": "Retrieves ETF holder data in bulk.",
+		"parameters_summary": "part",
+		"return_keys_summary": "symbol, asset, name, isin, securityCusip, sharesNumber, weightPercentage, marketValue, updatedAt, updated"
+	},
+	{
+		"tool_name": "bulkUpgradesDowngradesConsensus",
+		"description": "Retrieves upgrades/downgrades consensus data in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, strongBuy, buy, hold, sell, strongSell, consensus"
+	},
+	{
+		"tool_name": "bulkKeyMetricsTtm",
+		"description": "Retrieves Key Metrics TTM data in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, marketCap, marketCapTTM, enterpriseValueTTM, evToSalesTTM, evToOperatingCashFlowTTM, evToFreeCashFlowTTM, evToEBITDATTM, netDebtToEBITDATTM, currentRatioTTM, incomeQualityTTM, grahamNumberTTM, grahamNetNetTTM, taxBurdenTTM, interestBurdenTTM, workingCapitalTTM, investedCapitalTTM, returnOnAssetsTTM, operatingReturnOnAssetsTTM, returnOnTangibleAssetsTTM, returnOnEquityTTM, returnOnInvestedCapitalTTM, returnOnCapitalEmployedTTM, earningsYieldTTM, freeCashFlowYieldTTM, capexToOperatingCashFlowTTM, capexToDepreciationTTM, capexToRevenueTTM, salesGeneralAndAdministrativeToRevenueTTM, researchAndDevelopementToRevenueTTM, stockBasedCompensationToRevenueTTM, intangiblesToTotalAssetsTTM, averageReceivablesTTM, averagePayablesTTM, averageInventoryTTM, daysOfSalesOutstandingTTM, daysOfPayablesOutstandingTTM, daysOfInventoryOutstandingTTM, operatingCycleTTM, cashConversionCycleTTM, freeCashFlowToEquityTTM, freeCashFlowToFirmTTM, tangibleAssetValueTTM, netCurrentAssetValueTTM"
+	},
+	{
+		"tool_name": "bulkRatiosTtm",
+		"description": "Retrieves Ratios TTM data in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, grossProfitMarginTTM, ebitMarginTTM, ebitdaMarginTTM, operatingProfitMarginTTM, pretaxProfitMarginTTM, continuousOperationsProfitMarginTTM, netProfitMarginTTM, bottomLineProfitMarginTTM, receivablesTurnoverTTM, payablesTurnoverTTM, inventoryTurnoverTTM, fixedAssetTurnoverTTM, assetTurnoverTTM, currentRatioTTM, quickRatioTTM, solvencyRatioTTM, cashRatioTTM, priceToEarningsRatioTTM, priceToEarningsGrowthRatioTTM, forwardPriceToEarningsGrowthRatioTTM, priceToBookRatioTTM, priceToSalesRatioTTM, priceToFreeCashFlowRatioTTM, priceToOperatingCashFlowRatioTTM, debtToAssetsRatioTTM, debtToEquityRatioTTM, debtToCapitalRatioTTM, longTermDebtToCapitalRatioTTM, financialLeverageRatioTTM, workingCapitalTurnoverRatioTTM, operatingCashFlowRatioTTM, operatingCashFlowSalesRatioTTM, freeCashFlowOperatingCashFlowRatioTTM, debtServiceCoverageRatioTTM, interestCoverageRatioTTM, shortTermOperatingCashFlowCoverageRatioTTM, operatingCashFlowCoverageRatioTTM, capitalExpenditureCoverageRatioTTM, dividendPaidAndCapexCoverageRatioTTM, dividendPayoutRatioTTM, dividendYieldTTM, dividendYieldPercentageTTM, enterpriseValueTTM, revenuePerShareTTM, netIncomePerShareTTM, interestDebtPerShareTTM, cashPerShareTTM, bookValuePerShareTTM, tangibleBookValuePerShareTTM, shareholdersEquityPerShareTTM, operatingCashFlowPerShareTTM, capexPerShareTTM, freeCashFlowPerShareTTM, netIncomePerEBTTTM, ebtPerEbitTTM, priceToFairValueTTM, debtToMarketCapTTM, effectiveTaxRateTTM, enterpriseValueMultipleTTM"
+	},
+	{
+		"tool_name": "bulkStockPeers",
+		"description": "Retrieves stock peers data in bulk.",
+		"parameters_summary": "No parameters.",
+		"return_keys_summary": "symbol, peers"
+	},
+	{
+		"tool_name": "bulkEarningsSurprises",
+		"description": "Retrieves earnings surprises data in bulk for a specific year.",
+		"parameters_summary": "year",
+		"return_keys_summary": "symbol, date, epsActual, epsEstimated, lastUpdated"
+	},
+	{
+		"tool_name": "bulkIncomeStatement",
+		"description": "Retrieves income statements in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "date, symbol, reportedCurrency, cik, filingDate, acceptedDate, fiscalYear, period, revenue, costOfRevenue, grossProfit, researchAndDevelopmentExpenses, generalAndAdministrativeExpenses, sellingAndMarketingExpenses, sellingGeneralAndAdministrativeExpenses, otherExpenses, operatingExpenses, costAndExpenses, netInterestIncome, interestIncome, interestExpense, depreciationAndAmortization, ebitda, ebit, nonOperatingIncomeExcludingInterest, operatingIncome, totalOtherIncomeExpensesNet, incomeBeforeTax, incomeTaxExpense, netIncomeFromContinuingOperations, netIncomeFromDiscontinuedOperations, otherAdjustmentsToNetIncome, netIncome, netIncomeDeductions, bottomLineNetIncome, eps, epsDiluted, weightedAverageShsOut, weightedAverageShsOutDil"
+	},
+	{
+		"tool_name": "bulkIncomeStatementGrowth",
+		"description": "Retrieves income statement growth data in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "symbol, date, fiscalYear, period, reportedCurrency, growthRevenue, growthCostOfRevenue, growthGrossProfit, growthGrossProfitRatio, growthResearchAndDevelopmentExpenses, growthGeneralAndAdministrativeExpenses, growthSellingAndMarketingExpenses, growthOtherExpenses, growthOperatingExpenses, growthCostAndExpenses, growthInterestIncome, growthInterestExpense, growthDepreciationAndAmortization, growthEBITDA, growthOperatingIncome, growthIncomeBeforeTax, growthIncomeTaxExpense, growthNetIncome, growthEPS, growthEPSDiluted, growthWeightedAverageShsOut, growthWeightedAverageShsOutDil, growthEBIT, growthNonOperatingIncomeExcludingInterest, growthNetInterestIncome, growthTotalOtherIncomeExpensesNet, growthNetIncomeFromContinuingOperations, growthOtherAdjustmentsToNetIncome, growthNetIncomeDeductions"
+	},
+	{
+		"tool_name": "bulkBalanceSheetStatement",
+		"description": "Retrieves balance sheet statements in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "date, symbol, reportedCurrency, cik, filingDate, acceptedDate, fiscalYear, period, cashAndCashEquivalents, shortTermInvestments, cashAndShortTermInvestments, netReceivables, accountsReceivables, otherReceivables, inventory, prepaids, otherCurrentAssets, totalCurrentAssets, propertyPlantEquipmentNet, goodwill, intangibleAssets, goodwillAndIntangibleAssets, longTermInvestments, taxAssets, otherNonCurrentAssets, totalNonCurrentAssets, otherAssets, totalAssets, totalPayables, accountPayables, otherPayables, accruedExpenses, shortTermDebt, capitalLeaseObligationsCurrent, taxPayables, deferredRevenue, otherCurrentLiabilities, totalCurrentLiabilities, longTermDebt, deferredRevenueNonCurrent, deferredTaxLiabilitiesNonCurrent, otherNonCurrentLiabilities, totalNonCurrentLiabilities, otherLiabilities, capitalLeaseObligations, totalLiabilities, treasuryStock, preferredStock, commonStock, retainedEarnings, additionalPaidInCapital, accumulatedOtherComprehensiveIncomeLoss, otherTotalStockholdersEquity, totalStockholdersEquity, totalEquity, minorityInterest, totalLiabilitiesAndTotalEquity, totalInvestments, totalDebt, netDebt"
+	},
+	{
+		"tool_name": "bulkBalanceSheetStatementGrowth",
+		"description": "Retrieves balance sheet statement growth data in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "symbol, date, fiscalYear, period, reportedCurrency, growthCashAndCashEquivalents, growthShortTermInvestments, growthCashAndShortTermInvestments, growthNetReceivables, growthInventory, growthOtherCurrentAssets, growthTotalCurrentAssets, growthPropertyPlantEquipmentNet, growthGoodwill, growthIntangibleAssets, growthGoodwillAndIntangibleAssets, growthLongTermInvestments, growthTaxAssets, growthOtherNonCurrentAssets, growthTotalNonCurrentAssets, growthOtherAssets, growthTotalAssets, growthAccountPayables, growthShortTermDebt, growthTaxPayables, growthDeferredRevenue, growthOtherCurrentLiabilities, growthTotalCurrentLiabilities, growthLongTermDebt, growthDeferredRevenueNonCurrent, growthDeferredTaxLiabilitiesNonCurrent, growthOtherNonCurrentLiabilities, growthTotalNonCurrentLiabilities, growthOtherLiabilities, growthTotalLiabilities, growthPreferredStock, growthCommonStock, growthRetainedEarnings, growthAccumulatedOtherComprehensiveIncomeLoss, growthOthertotalStockholdersEquity, growthTotalStockholdersEquity, growthMinorityInterest, growthTotalEquity, growthTotalLiabilitiesAndStockholdersEquity, growthTotalInvestments, growthTotalDebt, growthNetDebt, growthAccountsReceivables, growthOtherReceivables, growthPrepaids, growthTotalPayables, growthOtherPayables, growthAccruedExpenses, growthCapitalLeaseObligationsCurrent, growthAdditionalPaidInCapital, growthTreasuryStock"
+	},
+	{
+		"tool_name": "bulkCashFlowStatement",
+		"description": "Retrieves cash flow statements in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "date, symbol, reportedCurrency, cik, filingDate, acceptedDate, fiscalYear, period, netIncome, depreciationAndAmortization, deferredIncomeTax, stockBasedCompensation, changeInWorkingCapital, accountsReceivables, inventory, accountsPayables, otherWorkingCapital, otherNonCashItems, netCashProvidedByOperatingActivities, investmentsInPropertyPlantAndEquipment, acquisitionsNet, purchasesOfInvestments, salesMaturitiesOfInvestments, otherInvestingActivities, netCashProvidedByInvestingActivities, netDebtIssuance, longTermNetDebtIssuance, shortTermNetDebtIssuance, netStockIssuance, netCommonStockIssuance, commonStockIssuance, commonStockRepurchased, netPreferredStockIssuance, netDividendsPaid, commonDividendsPaid, preferredDividendsPaid, otherFinancingActivities, netCashProvidedByFinancingActivities, effectOfForexChangesOnCash, netChangeInCash, cashAtEndOfPeriod, cashAtBeginningOfPeriod, operatingCashFlow, capitalExpenditure, freeCashFlow, incomeTaxesPaid, interestPaid"
+	},
+	{
+		"tool_name": "bulkCashFlowStatementGrowth",
+		"description": "Retrieves cash flow statement growth data in bulk for a specific year and period.",
+		"parameters_summary": "options (year, period)",
+		"return_keys_summary": "symbol, date, fiscalYear, period, reportedCurrency, growthNetIncome, growthDepreciationAndAmortization, growthDeferredIncomeTax, growthStockBasedCompensation, growthChangeInWorkingCapital, growthAccountsReceivables, growthInventory, growthAccountsPayables, growthOtherWorkingCapital, growthOtherNonCashItems, growthNetCashProvidedByOperatingActivites, growthInvestmentsInPropertyPlantAndEquipment, growthAcquisitionsNet, growthPurchasesOfInvestments, growthSalesMaturitiesOfInvestments, growthOtherInvestingActivites, growthNetCashUsedForInvestingActivites, growthDebtRepayment, growthCommonStockIssued, growthCommonStockRepurchased, growthDividendsPaid, growthOtherFinancingActivites, growthNetCashUsedProvidedByFinancingActivities, growthEffectOfForexChangesOnCash, growthNetChangeInCash, growthCashAtEndOfPeriod, growthCashAtBeginningOfPeriod, growthOperatingCashFlow, growthCapitalExpenditure, growthFreeCashFlow, growthNetDebtIssuance, growthLongTermNetDebtIssuance, growthShortTermNetDebtIssuance, growthNetStockIssuance, growthPreferredDividendsPaid, growthIncomeTaxesPaid, growthInterestPaid"
+	},
+	{
+		"tool_name": "bulkEod",
+		"description": "Retrieves end-of-day (EOD) stock price data in bulk for a specific date.",
+		"parameters_summary": "date",
+		"return_keys_summary": "symbol, date, open, low, high, close, adjClose, volume"
 	}
 ]

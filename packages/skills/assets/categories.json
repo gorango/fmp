@@ -1,0 +1,356 @@
+[
+	{
+		"name": "Search",
+		"tools": [
+			"searchSymbol",
+			"searchName",
+			"searchCik",
+			"searchCusip",
+			"searchIsin",
+			"stockScreener",
+			"searchExchangeVariants"
+		]
+	},
+	{
+		"name": "Directory",
+		"tools": [
+			"listCompanySymbols",
+			"listFinancialStatementSymbols",
+			"listCik",
+			"listSymbolChanges",
+			"listEtfSymbol",
+			"listActivelyTrading",
+			"availableExchanges",
+			"availableSectors",
+			"availableIndustries",
+			"availableCountries"
+		]
+	},
+	{
+		"name": "Analyst",
+		"tools": [
+			"financialEstimates",
+			"ratingsSnapshot",
+			"historicalRatings",
+			"priceTargetSummary",
+			"priceTargetConsensus",
+			"priceTargetNews",
+			"latestPriceTargetNews",
+			"historicalStockGrades",
+			"stockGrades",
+			"stockGradeConsensus",
+			"stockGradeNews",
+			"latestStockGradeNews"
+		]
+	},
+	{
+		"name": "Calendar",
+		"tools": [
+			"companyDividends",
+			"dividendsCalendar",
+			"companyEarningsReports",
+			"earningsCalendar",
+			"iposCalendar",
+			"ipoDisclosures",
+			"ipoProspectus",
+			"stockSplitDetails",
+			"stockSplitsCalendar"
+		]
+	},
+	{
+		"name": "Chart",
+		"tools": [
+			"stockChartFull",
+			"unadjustedStockChart",
+			"dividendAdjustedStockChart",
+			"historicalIntradayChart",
+			"stockChart1Min",
+			"stockChart5Min",
+			"stockChart15Min",
+			"stockChart30Min",
+			"stockChart1Hour",
+			"stockChart4Hour"
+		]
+	},
+	{
+		"name": "Company",
+		"tools": [
+			"companyProfile",
+			"companyProfileByCik",
+			"companyNotes",
+			"stockPeers",
+			"delistedCompanies",
+			"companyEmployeeCount",
+			"historicalCompanyEmployeeCount",
+			"companyMarketCap",
+			"batchMarketCap",
+			"historicalMarketCap",
+			"companySharesFloat",
+			"allSharesFloat",
+			"latestMergersAcquisitions",
+			"searchMergersAcquisitions",
+			"companyExecutives",
+			"executiveCompensation",
+			"executiveCompensationBenchmark"
+		]
+	},
+	{
+		"name": "Commitment of Traders (COT)",
+		"tools": ["cotReport", "cotAnalysis", "cotReportList"]
+	},
+	{
+		"name": "Discounted Cash Flow (DCF)",
+		"tools": ["dcfValuation", "leveredDcfValuation", "dcfAnalysis", "dcfLeveredAnalysis"]
+	},
+	{
+		"name": "Economics",
+		"tools": ["treasuryRates", "economicIndicators", "economicCalendar", "marketRiskPremium"]
+	},
+	{
+		"name": "ESG",
+		"tools": ["esgDisclosures", "esgRatings", "esgBenchmark"]
+	},
+	{
+		"name": "ETF and Mutual Fund",
+		"tools": [
+			"etfFundHoldings",
+			"etfFundInfo",
+			"etfFundCountryAllocation",
+			"etfAssetExposure",
+			"etfSectorWeighting",
+			"mutualFundEtfLatestDisclosures",
+			"mutualFundDisclosures",
+			"searchMutualFundEtfDisclosuresByName",
+			"fundEtfDisclosuresByDate"
+		]
+	},
+	{
+		"name": "Commodity",
+		"tools": [
+			"commoditiesList",
+			"commodityQuote",
+			"commodityChartFull",
+			"commodityChart1Min",
+			"commodityChart5Min",
+			"commodityChart1Hour"
+		]
+	},
+	{
+		"name": "Crowdfunding",
+		"tools": [
+			"latestCrowdfundingCampaigns",
+			"searchCrowdfundingCampaigns",
+			"crowdfundingCampaignsByCik",
+			"latestEquityOfferingUpdates",
+			"searchEquityOfferings",
+			"equityOfferingsByCik"
+		]
+	},
+	{
+		"name": "Crypto",
+		"tools": [
+			"cryptocurrencyList",
+			"cryptocurrencyQuote",
+			"allCryptocurrenciesQuotes",
+			"cryptocurrencyChartFull",
+			"cryptocurrencyChart1Min",
+			"cryptocurrencyChart5Min",
+			"cryptocurrencyChart1Hour"
+		]
+	},
+	{
+		"name": "Forex",
+		"tools": [
+			"forexList",
+			"forexQuote",
+			"allForexQuotes",
+			"forexChartFull",
+			"forexChart1Min",
+			"forexChart5Min",
+			"forexChart1Hour"
+		]
+	},
+	{
+		"name": "Financial Statements",
+		"tools": [
+			"incomeStatement",
+			"balanceSheetStatement",
+			"cashFlowStatement",
+			"latestFinancialStatements",
+			"incomeStatementTtm",
+			"balanceSheetStatementTtm",
+			"cashFlowStatementTtm",
+			"keyMetrics",
+			"financialRatios",
+			"keyMetricsTtm",
+			"financialRatiosTtm",
+			"financialScores",
+			"ownerEarnings",
+			"enterpriseValues",
+			"incomeStatementGrowth",
+			"balanceSheetStatementGrowth",
+			"cashFlowStatementGrowth",
+			"financialStatementGrowth",
+			"financialReportJson",
+			"revenueProductSegmentation",
+			"revenueGeographicSegmentation"
+		]
+	},
+	{
+		"name": "Form 13F",
+		"tools": [
+			"latestInstitutionalOwnershipFilings",
+			"secFilingsExtract",
+			"form13FFilingDates",
+			"filingsExtractAnalyticsByHolder",
+			"holderPerformanceSummary",
+			"holdersIndustryBreakdown",
+			"positionsSummary",
+			"industryPerformanceSummary"
+		]
+	},
+	{
+		"name": "Indexes",
+		"tools": [
+			"indexesList",
+			"indexQuote",
+			"allIndexQuotes",
+			"indexChartFull",
+			"indexChart1Min",
+			"indexChart5Min",
+			"indexChart1Hour",
+			"sp500Constituents",
+			"nasdaqConstituents",
+			"dowJonesConstituents",
+			"historicalSp500Constituents",
+			"historicalNasdaqConstituents",
+			"historicalDowJonesConstituents"
+		]
+	},
+	{
+		"name": "Insider Trades",
+		"tools": [
+			"latestInsiderTrades",
+			"searchInsiderTrades",
+			"searchInsiderTradesByReportingName",
+			"allInsiderTransactionTypes",
+			"insiderTradeStatistics",
+			"acquisitionOwnership"
+		]
+	},
+	{
+		"name": "Market Performance",
+		"tools": [
+			"marketSectorPerformanceSnapshot",
+			"marketIndustryPerformanceSnapshot",
+			"historicalMarketSectorPerformance",
+			"historicalMarketIndustryPerformance",
+			"marketSectorPESnapshot",
+			"marketIndustryPESnapshot",
+			"historicalMarketSectorPE",
+			"historicalMarketIndustryPE",
+			"biggestStockGainers",
+			"biggestStockLosers",
+			"topTradedStocks"
+		]
+	},
+	{
+		"name": "Market Hours",
+		"tools": ["exchangeMarketHours", "allExchangeMarketHours"]
+	},
+	{
+		"name": "News",
+		"tools": [
+			"fmpArticles",
+			"generalNews",
+			"pressReleases",
+			"stockNews",
+			"cryptoNews",
+			"forexNews",
+			"searchPressReleases",
+			"searchStockNews",
+			"searchCryptoNews",
+			"searchForexNews"
+		]
+	},
+	{
+		"name": "Technical Indicators",
+		"tools": [
+			"simpleMovingAverage",
+			"exponentialMovingAverage",
+			"weightedMovingAverage",
+			"doubleExponentialMovingAverage",
+			"tripleExponentialMovingAverage",
+			"relativeStrengthIndex",
+			"standardDeviation",
+			"williamsPercentR",
+			"averageDirectionalIndex"
+		]
+	},
+	{
+		"name": "Quote",
+		"tools": [
+			"stockQuote",
+			"aftermarketTrade",
+			"aftermarketQuote",
+			"stockPriceChange",
+			"stockBatchQuote",
+			"batchAftermarketTrade",
+			"batchAftermarketQuote",
+			"exchangeStockQuotes",
+			"mutualFundQuotes",
+			"etfQuotes"
+		]
+	},
+	{
+		"name": "Earnings Transcript",
+		"tools": [
+			"latestEarningTranscripts",
+			"earningsTranscript",
+			"earningsTranscriptDatesBySymbol",
+			"earningsTranscriptList"
+		]
+	},
+	{
+		"name": "SEC Filings",
+		"tools": [
+			"getSecFiling",
+			"latest8kSecFilings",
+			"latestSecFilingsWithFinancials",
+			"searchSecFilingsByFormType",
+			"searchSecFilingsBySymbol",
+			"searchSecFilingsByCik",
+			"searchSecFilingsCompanyName",
+			"searchSecFilingsCompanyBySymbol",
+			"searchSecFilingsCompanyByCik",
+			"secCompanyFullProfile",
+			"industryClassificationList",
+			"searchIndustryClassification",
+			"allIndustryClassification",
+			"latestSenateFinancialDisclosures",
+			"latestHouseFinancialDisclosures",
+			"senateTradingActivity",
+			"senateTradesByName",
+			"houseTrades",
+			"houseTradesByName",
+			"bulkCompanyProfile",
+			"bulkStockRating",
+			"bulkDcfValuations",
+			"bulkFinancialScores",
+			"bulkPriceTargetSummary",
+			"bulkEtfHolder",
+			"bulkUpgradesDowngradesConsensus",
+			"bulkKeyMetricsTtm",
+			"bulkRatiosTtm",
+			"bulkStockPeers",
+			"bulkEarningsSurprises",
+			"bulkIncomeStatement",
+			"bulkIncomeStatementGrowth",
+			"bulkBalanceSheetStatement",
+			"bulkBalanceSheetStatementGrowth",
+			"bulkCashFlowStatement",
+			"bulkCashFlowStatementGrowth",
+			"bulkEod"
+		]
+	}
+]

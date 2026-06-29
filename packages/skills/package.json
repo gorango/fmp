@@ -2,6 +2,9 @@
 	"name": "fmp-skills",
 	"version": "0.0.1",
 	"private": true,
-	"type": "module",
-	"scripts": {}
+	"files": [
+		"SKILL.md",
+		"assets/"
+	],
+	"type": "module"
 }

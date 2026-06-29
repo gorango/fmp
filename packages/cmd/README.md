@@ -1,4 +1,4 @@
-# fmp-cli
+# FMP CLI
 
 Terminal interface for all Financial Modeling Prep tools. Wraps `fmp-tools` for command-line execution.
 

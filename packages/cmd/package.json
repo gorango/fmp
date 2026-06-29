@@ -1,5 +1,5 @@
 {
-	"name": "fmp-cli",
+	"name": "fmp-cmd",
 	"version": "0.0.1",
 	"private": true,
 	"bin": {

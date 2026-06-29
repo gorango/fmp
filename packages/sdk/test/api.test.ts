@@ -1,6 +1,7 @@
+import { describe, it, beforeAll, expect } from 'bun:test'
 import type { z } from 'zod'
-import type * as FMPTypes from '../types'
-import * as fmp from '../api'
+import type * as FMPTypes from '../src/types'
+import * as fmp from '../src/api'
 import * as validate from './validate'
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

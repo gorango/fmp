@@ -18,8 +18,8 @@
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
 		"typecheck": "tsc --noEmit",
-		"test:api": "vitest run",
-		"coverage": "vitest run --coverage"
+		"test:api": "bun test",
+		"test:watch": "bun test --watch"
 	},
 	"dependencies": {
 		"ioredis": "^5.11.0",
@@ -31,11 +31,10 @@
 		"@ai-sdk/openai": "^3.0.65",
 		"@types/node": "^25.9.1",
 		"@types/papaparse": "^5.5.2",
-		"@vitest/coverage-v8": "4.1.7",
+		"bun-types": "^1.2.0",
 		"dotenv": "^17.4.2",
 		"oxfmt": "^0.52.0",
 		"oxlint": "^1.67.0",
-		"typescript": "^6.0.3",
-		"vitest": "^4.1.7"
+		"typescript": "^6.0.3"
 	}
 }

@@ -7,7 +7,7 @@ const allCategories = {
 		// 'searchIsin',
 		// 'stockScreener',
 		// 'searchExchangeVariants',
-		'latestWebSearch', // NOTE: internal
+		'latestWebSearch', // TODO: nice-to-have
 	],
 	directory: [
 		// 'listCompanySymbols',
@@ -85,7 +85,7 @@ const allCategories = {
 		// 'earningsTranscript',
 		'earningsTranscriptDatesBySymbol',
 		// 'earningsTranscriptList',
-		'queryEarningsTranscript', // NOTE: internal
+		'queryEarningsTranscript', // TODO: nice-to-have
 	],
 	secFilings: [
 		// 'latest8kSecFilings',
@@ -100,8 +100,8 @@ const allCategories = {
 		// 'industryClassificationList',
 		// 'searchIndustryClassification',
 		// 'allIndustryClassification',
-		'searchSecFilings', // NOTE: internal
-		'queryFilingDocument', // NOTE: internal
+		'searchSecFilings', // TODO: nice-to-have
+		'queryFilingDocument', // TODO: nice-to-have
 	],
 	discountedCashFlow: ['dcfValuation', 'leveredDcfValuation', 'dcfAnalysis', 'dcfLeveredAnalysis'],
 	chart: [

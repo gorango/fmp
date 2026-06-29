@@ -12,6 +12,7 @@ export interface ProcessedParameter {
 	typeScriptType: string
 	zodTypeFragment: string
 	description: string
+	isOptional: boolean
 }
 
 /**
@@ -342,8 +343,9 @@ export function buildToolSchemas(includeAll: boolean = false): ToolSchema[] {
 				return {
 					name: paramName,
 					typeScriptType: param.getTypeNode()?.getText() || paramType.getText(contextNode),
-					zodTypeFragment: `${paramName}: ${paramZodSchemaItself}.describe('${paramDescriptionText.replace(/'/g, "\\'")}')`,
+					zodTypeFragment: `${paramName}: ${paramZodSchemaItself}${isParamOptional ? '.optional()' : ''}.describe('${paramDescriptionText.replace(/'/g, "\\'")}')`,
 					description: paramDescriptionText,
+					isOptional: isParamOptional,
 				}
 			})
 
@@ -375,7 +377,7 @@ export function buildToolSchemas(includeAll: boolean = false): ToolSchema[] {
 			const parameterZodEntries = rawParameters.map((p) => p.zodTypeFragment)
 			if (availableReturnKeys.length > 0) {
 				const keysEnum = `z.enum([${availableReturnKeys.map((k) => `'${k.replace(/'/g, "\\'")}'`).join(', ')}])`
-				const valuesParamZod = `values: z.array(${keysEnum}).nullable().describe('Specific fields to return from the result. Available fields: ${availableReturnKeys.join(', ')}')`
+				const valuesParamZod = `values: z.array(${keysEnum}).nullable().optional().describe('Specific fields to return from the result. Available fields: ${availableReturnKeys.join(', ')}')`
 				parameterZodEntries.push(valuesParamZod)
 			}
 

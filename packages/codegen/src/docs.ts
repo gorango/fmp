@@ -3,7 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { buildToolSchemas } from './schema'
 
-const EXPORT_FILE_PATH = path.join(process.cwd(), '../tools/src/generated', 'docs.json')
+const EXPORT_FILE_PATH = path.join(process.cwd(), '../tools/src', 'docs.json')
 const MAX_RETURN_KEYS = 64
 
 export interface ToolDoc {

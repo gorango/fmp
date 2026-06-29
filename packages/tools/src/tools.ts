@@ -61,12 +61,12 @@ export const searchSymbol = tool({
 		options: z.object({
 			exchange: z.string().nullable().describe('The stock exchange to limit the search to (e.g., "NASDAQ", "NYSE").'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters to refine the search.'),
-		values: z.array(z.enum(SEARCH_SYMBOL_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters to refine the search.'),
+		values: z.array(z.enum(SEARCH_SYMBOL_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ query, options, values }) => {
 		try {
-			const results = await fmp.searchSymbol(query, options)
+			const results = await fmp.searchSymbol(query, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -84,12 +84,12 @@ export const searchName = tool({
 		options: z.object({
 			exchange: z.string().nullable().describe('The stock exchange to limit the search to (e.g., "NASDAQ", "NYSE").'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters to refine the search.'),
-		values: z.array(z.enum(SEARCH_NAME_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters to refine the search.'),
+		values: z.array(z.enum(SEARCH_NAME_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ query, options, values }) => {
 		try {
-			const results = await fmp.searchName(query, options)
+			const results = await fmp.searchName(query, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -109,7 +109,7 @@ export const financialEstimates = tool({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
 		}).describe('Options for period, pagination, and limit.'),
-		values: z.array(z.enum(FINANCIAL_ESTIMATES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(FINANCIAL_ESTIMATES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -128,7 +128,7 @@ export const priceTargetSummary = tool({
 	description: 'Retrieves a summary of analyst price targets for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(PRICE_TARGET_SUMMARY_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(PRICE_TARGET_SUMMARY_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -147,7 +147,7 @@ export const priceTargetConsensus = tool({
 	description: 'Retrieves the consensus price targets (high, low, consensus, median) for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(PRICE_TARGET_CONSENSUS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(PRICE_TARGET_CONSENSUS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -169,12 +169,12 @@ export const priceTargetNews = tool({
 		options: z.object({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for pagination.'),
-		values: z.array(z.enum(PRICE_TARGET_NEWS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for pagination.'),
+		values: z.array(z.enum(PRICE_TARGET_NEWS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.priceTargetNews(symbol, options)
+			const results = await fmp.priceTargetNews(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -189,7 +189,7 @@ export const stockGrades = tool({
 	description: 'Retrieves current stock grades (e.g., buy, sell, hold) from analysts for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_GRADES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_GRADES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -208,7 +208,7 @@ export const stockGradeConsensus = tool({
 	description: 'Retrieves a summary of analyst stock grade consensus (strong buy, buy, hold, sell, strong sell) for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_GRADE_CONSENSUS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_GRADE_CONSENSUS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -230,12 +230,12 @@ export const stockGradeNews = tool({
 		options: z.object({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for pagination.'),
-		values: z.array(z.enum(STOCK_GRADE_NEWS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for pagination.'),
+		values: z.array(z.enum(STOCK_GRADE_NEWS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.stockGradeNews(symbol, options)
+			const results = await fmp.stockGradeNews(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -252,12 +252,12 @@ export const companyDividends = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters.'),
-		values: z.array(z.enum(COMPANY_DIVIDENDS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters.'),
+		values: z.array(z.enum(COMPANY_DIVIDENDS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.companyDividends(symbol, options)
+			const results = await fmp.companyDividends(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -274,12 +274,12 @@ export const companyEarningsReports = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters.'),
-		values: z.array(z.enum(COMPANY_EARNINGS_REPORTS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters.'),
+		values: z.array(z.enum(COMPANY_EARNINGS_REPORTS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.companyEarningsReports(symbol, options)
+			const results = await fmp.companyEarningsReports(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -297,12 +297,12 @@ export const stockChartFull = tool({
 		options: z.object({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional date range.'),
-		values: z.array(z.enum(STOCK_CHART_FULL_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional date range.'),
+		values: z.array(z.enum(STOCK_CHART_FULL_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.stockChartFull(symbol, options)
+			const results = await fmp.stockChartFull(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -317,7 +317,7 @@ export const companyProfile = tool({
 	description: 'Retrieves detailed company profile data for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(COMPANY_PROFILE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(COMPANY_PROFILE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -336,7 +336,7 @@ export const stockPeers = tool({
 	description: 'Retrieves a list of peer companies for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_PEERS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_PEERS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -357,12 +357,12 @@ export const companyEmployeeCount = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters.'),
-		values: z.array(z.enum(COMPANY_EMPLOYEE_COUNT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters.'),
+		values: z.array(z.enum(COMPANY_EMPLOYEE_COUNT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.companyEmployeeCount(symbol, options)
+			const results = await fmp.companyEmployeeCount(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -379,12 +379,12 @@ export const historicalCompanyEmployeeCount = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters (same as CompanyEmployeeCountOptions).'),
-		values: z.array(z.enum(HISTORICAL_COMPANY_EMPLOYEE_COUNT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters (same as CompanyEmployeeCountOptions).'),
+		values: z.array(z.enum(HISTORICAL_COMPANY_EMPLOYEE_COUNT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.historicalCompanyEmployeeCount(symbol, options)
+			const results = await fmp.historicalCompanyEmployeeCount(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -399,7 +399,7 @@ export const companyMarketCap = tool({
 	description: 'Retrieves the market capitalization for a specific company on the current date.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(COMPANY_MARKET_CAP_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(COMPANY_MARKET_CAP_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -422,12 +422,12 @@ export const historicalMarketCap = tool({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional parameters for limit and date range.'),
-		values: z.array(z.enum(HISTORICAL_MARKET_CAP_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and date range.'),
+		values: z.array(z.enum(HISTORICAL_MARKET_CAP_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.historicalMarketCap(symbol, options)
+			const results = await fmp.historicalMarketCap(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -442,7 +442,7 @@ export const companySharesFloat = tool({
 	description: 'Retrieves share float and liquidity data for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(COMPANY_SHARES_FLOAT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(COMPANY_SHARES_FLOAT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -461,7 +461,7 @@ export const searchMergersAcquisitions = tool({
 	description: 'Searches for mergers and acquisitions data by name.',
 	inputSchema: z.object({
 		name: z.string().describe('The name to search for (e.g., "Apple").'),
-		values: z.array(z.enum(SEARCH_MERGERS_ACQUISITIONS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SEARCH_MERGERS_ACQUISITIONS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, values }) => {
 		try {
@@ -482,12 +482,12 @@ export const companyExecutives = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			active: z.union([z.string(), z.boolean()]).nullable().describe('Filter for active executives if "true". E.g., "true".'),
-		}).describe('Optional parameters.'),
-		values: z.array(z.enum(COMPANY_EXECUTIVES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters.'),
+		values: z.array(z.enum(COMPANY_EXECUTIVES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.companyExecutives(symbol, options)
+			const results = await fmp.companyExecutives(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -502,7 +502,7 @@ export const executiveCompensation = tool({
 	description: 'Retrieves executive compensation data for a given stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(EXECUTIVE_COMPENSATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(EXECUTIVE_COMPENSATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -521,7 +521,7 @@ export const executiveCompensationBenchmark = tool({
 	description: 'Retrieves average executive compensation data across various industries for a specific year.',
 	inputSchema: z.object({
 		year: z.union([z.string(), z.number()]).describe('The year to retrieve benchmark data for (e.g., "2024").'),
-		values: z.array(z.enum(EXECUTIVE_COMPENSATION_BENCHMARK_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(EXECUTIVE_COMPENSATION_BENCHMARK_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ year, values }) => {
 		try {
@@ -543,12 +543,12 @@ export const cotReport = tool({
 			symbol: z.string().nullable().describe('The symbol for the report (e.g., "AAPL", "KC").'),
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional parameters to filter reports by symbol and date range.'),
-		values: z.array(z.enum(COT_REPORT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters to filter reports by symbol and date range.'),
+		values: z.array(z.enum(COT_REPORT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.cotReport(options)
+			const results = await fmp.cotReport(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -566,12 +566,12 @@ export const cotAnalysis = tool({
 			symbol: z.string().nullable().describe('The symbol for the analysis (e.g., "AAPL", "B6").'),
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional parameters to filter analysis by symbol and date range.'),
-		values: z.array(z.enum(COT_ANALYSIS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters to filter analysis by symbol and date range.'),
+		values: z.array(z.enum(COT_ANALYSIS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.cotAnalysis(options)
+			const results = await fmp.cotAnalysis(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -585,7 +585,7 @@ const COT_REPORT_LIST_RESULT_VALUES = ['symbol', 'name'] as const
 export const cotReportList = tool({
 	description: 'Retrieves a list of available Commitment of Traders (COT) report symbols.',
 	inputSchema: z.object({
-		values: z.array(z.enum(COT_REPORT_LIST_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(COT_REPORT_LIST_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ values }) => {
 		try {
@@ -604,7 +604,7 @@ export const dcfValuation = tool({
 	description: 'Retrieves a Discounted Cash Flow (DCF) valuation for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(DCF_VALUATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(DCF_VALUATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -623,7 +623,7 @@ export const leveredDcfValuation = tool({
 	description: 'Retrieves a Levered Discounted Cash Flow (DCF) valuation for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(LEVERED_DCF_VALUATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(LEVERED_DCF_VALUATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -661,12 +661,12 @@ export const dcfAnalysis = tool({
 			marketRiskPremium: z.number().nullable().describe('Market risk premium. E.g., 4.72 (for 4.72%).'),
 			beta: z.number().nullable().describe('Beta of the stock. E.g., 1.244.'),
 			riskFreeRate: z.number().nullable().describe('Risk-free rate. E.g., 3.64 (for 3.64%).'),
-		}).describe('Custom parameters for the DCF calculation.'),
-		values: z.array(z.enum(DCF_ANALYSIS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Custom parameters for the DCF calculation.'),
+		values: z.array(z.enum(DCF_ANALYSIS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, params, values }) => {
 		try {
-			const results = await fmp.dcfAnalysis(symbol, params)
+			const results = await fmp.dcfAnalysis(symbol, params ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -700,12 +700,12 @@ export const dcfLeveredAnalysis = tool({
 			marketRiskPremium: z.number().nullable().describe('Market risk premium. E.g., 4.72 (for 4.72%).'),
 			beta: z.number().nullable().describe('Beta of the stock. E.g., 1.244.'),
 			riskFreeRate: z.number().nullable().describe('Risk-free rate. E.g., 3.64 (for 3.64%).'),
-		}).describe('Custom parameters for the DCF calculation (same as CustomDcfParams).'),
-		values: z.array(z.enum(DCF_LEVERED_ANALYSIS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Custom parameters for the DCF calculation (same as CustomDcfParams).'),
+		values: z.array(z.enum(DCF_LEVERED_ANALYSIS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, params, values }) => {
 		try {
-			const results = await fmp.dcfLeveredAnalysis(symbol, params)
+			const results = await fmp.dcfLeveredAnalysis(symbol, params ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -723,7 +723,7 @@ export const treasuryRates = tool({
 			from: z.string().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying the date range.'),
-		values: z.array(z.enum(TREASURY_RATES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(TREASURY_RATES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -745,12 +745,12 @@ export const economicIndicators = tool({
 		options: z.object({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional date range.'),
-		values: z.array(z.enum(ECONOMIC_INDICATORS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional date range.'),
+		values: z.array(z.enum(ECONOMIC_INDICATORS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, options, values }) => {
 		try {
-			const results = await fmp.economicIndicators(name, options)
+			const results = await fmp.economicIndicators(name, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -768,7 +768,7 @@ export const economicCalendar = tool({
 			from: z.string().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying the date range.'),
-		values: z.array(z.enum(ECONOMIC_CALENDAR_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(ECONOMIC_CALENDAR_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -787,7 +787,7 @@ export const etfFundHoldings = tool({
 	description: 'Retrieves the holdings of an ETF or mutual fund.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The symbol of the ETF or fund (e.g., "SPY").'),
-		values: z.array(z.enum(ETF_FUND_HOLDINGS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(ETF_FUND_HOLDINGS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -806,7 +806,7 @@ export const etfFundInfo = tool({
 	description: 'Retrieves information about an ETF or mutual fund.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The symbol of the ETF or fund (e.g., "SPY").'),
-		values: z.array(z.enum(ETF_FUND_INFO_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(ETF_FUND_INFO_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -825,7 +825,7 @@ export const etfFundCountryAllocation = tool({
 	description: 'Retrieves the country allocation/weightings for an ETF or mutual fund.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The symbol of the ETF or fund (e.g., "SPY").'),
-		values: z.array(z.enum(ETF_FUND_COUNTRY_ALLOCATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(ETF_FUND_COUNTRY_ALLOCATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -844,7 +844,7 @@ export const mutualFundEtfLatestDisclosures = tool({
 	description: 'Retrieves the latest disclosures from mutual funds and ETFs for a specific holding.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol of the holding (e.g., "AAPL").'),
-		values: z.array(z.enum(MUTUAL_FUND_ETF_LATEST_DISCLOSURES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(MUTUAL_FUND_ETF_LATEST_DISCLOSURES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -868,7 +868,7 @@ export const mutualFundDisclosures = tool({
 			quarter: z.union([z.string(), z.number()]).describe('The quarter of the disclosure. E.g., "4".'),
 			cik: z.string().nullable().describe('The CIK of the fund. E.g., "0000857489".'),
 		}).describe('Options specifying year, quarter, and optionally CIK.'),
-		values: z.array(z.enum(MUTUAL_FUND_DISCLOSURES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(MUTUAL_FUND_DISCLOSURES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -887,7 +887,7 @@ export const searchMutualFundEtfDisclosuresByName = tool({
 	description: 'Searches for mutual fund and ETF disclosures by name.',
 	inputSchema: z.object({
 		name: z.string().describe('The name of the fund or ETF. E.g., "Federated Hermes Government Income Securities, Inc.".'),
-		values: z.array(z.enum(SEARCH_MUTUAL_FUND_ETF_DISCLOSURES_BY_NAME_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SEARCH_MUTUAL_FUND_ETF_DISCLOSURES_BY_NAME_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, values }) => {
 		try {
@@ -908,12 +908,12 @@ export const fundEtfDisclosuresByDate = tool({
 		symbol: z.string().describe('The symbol of the fund or ETF (e.g., "VWO").'),
 		options: z.object({
 			cik: z.string().nullable().describe('The CIK of the fund or ETF. E.g., "0000036405".'),
-		}).describe('Optional CIK.'),
-		values: z.array(z.enum(FUND_ETF_DISCLOSURES_BY_DATE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional CIK.'),
+		values: z.array(z.enum(FUND_ETF_DISCLOSURES_BY_DATE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.fundEtfDisclosuresByDate(symbol, options)
+			const results = await fmp.fundEtfDisclosuresByDate(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -928,7 +928,7 @@ export const commodityQuote = tool({
 	description: 'Retrieves a real-time price quote for a commodity.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The commodity symbol (e.g., "GCUSD").'),
-		values: z.array(z.enum(COMMODITY_QUOTE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(COMMODITY_QUOTE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -950,12 +950,12 @@ export const commodityChartFull = tool({
 		options: z.object({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional date range.'),
-		values: z.array(z.enum(COMMODITY_CHART_FULL_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional date range.'),
+		values: z.array(z.enum(COMMODITY_CHART_FULL_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.commodityChartFull(symbol, options)
+			const results = await fmp.commodityChartFull(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -973,12 +973,12 @@ export const incomeStatement = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period.'),
-		values: z.array(z.enum(INCOME_STATEMENT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period.'),
+		values: z.array(z.enum(INCOME_STATEMENT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.incomeStatement(symbol, options)
+			const results = await fmp.incomeStatement(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -996,12 +996,12 @@ export const balanceSheetStatement = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period.'),
-		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period.'),
+		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.balanceSheetStatement(symbol, options)
+			const results = await fmp.balanceSheetStatement(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1019,12 +1019,12 @@ export const cashFlowStatement = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period.'),
-		values: z.array(z.enum(CASH_FLOW_STATEMENT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period.'),
+		values: z.array(z.enum(CASH_FLOW_STATEMENT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.cashFlowStatement(symbol, options)
+			const results = await fmp.cashFlowStatement(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1041,12 +1041,12 @@ export const incomeStatementTtm = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit.'),
-		values: z.array(z.enum(INCOME_STATEMENT_TTM_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit.'),
+		values: z.array(z.enum(INCOME_STATEMENT_TTM_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.incomeStatementTtm(symbol, options)
+			const results = await fmp.incomeStatementTtm(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1063,12 +1063,12 @@ export const balanceSheetStatementTtm = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit.'),
-		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_TTM_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit.'),
+		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_TTM_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.balanceSheetStatementTtm(symbol, options)
+			const results = await fmp.balanceSheetStatementTtm(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1085,12 +1085,12 @@ export const cashFlowStatementTtm = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit.'),
-		values: z.array(z.enum(CASH_FLOW_STATEMENT_TTM_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit.'),
+		values: z.array(z.enum(CASH_FLOW_STATEMENT_TTM_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.cashFlowStatementTtm(symbol, options)
+			const results = await fmp.cashFlowStatementTtm(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1108,12 +1108,12 @@ export const keyMetrics = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(KEY_METRICS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(KEY_METRICS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.keyMetrics(symbol, options)
+			const results = await fmp.keyMetrics(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1131,12 +1131,12 @@ export const financialRatios = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(FINANCIAL_RATIOS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(FINANCIAL_RATIOS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.financialRatios(symbol, options)
+			const results = await fmp.financialRatios(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1151,7 +1151,7 @@ export const keyMetricsTtm = tool({
 	description: 'Retrieves Trailing Twelve Months (TTM) key financial metrics for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(KEY_METRICS_TTM_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(KEY_METRICS_TTM_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1170,7 +1170,7 @@ export const financialRatiosTtm = tool({
 	description: 'Retrieves Trailing Twelve Months (TTM) financial ratios for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(FINANCIAL_RATIOS_TTM_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(FINANCIAL_RATIOS_TTM_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1189,7 +1189,7 @@ export const financialScores = tool({
 	description: 'Retrieves financial health scores (Altman Z-Score, Piotroski Score) for a company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(FINANCIAL_SCORES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(FINANCIAL_SCORES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1210,12 +1210,12 @@ export const ownerEarnings = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit.'),
-		values: z.array(z.enum(OWNER_EARNINGS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit.'),
+		values: z.array(z.enum(OWNER_EARNINGS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.ownerEarnings(symbol, options)
+			const results = await fmp.ownerEarnings(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1233,12 +1233,12 @@ export const enterpriseValues = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(ENTERPRISE_VALUES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(ENTERPRISE_VALUES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.enterpriseValues(symbol, options)
+			const results = await fmp.enterpriseValues(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1256,12 +1256,12 @@ export const incomeStatementGrowth = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(INCOME_STATEMENT_GROWTH_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(INCOME_STATEMENT_GROWTH_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.incomeStatementGrowth(symbol, options)
+			const results = await fmp.incomeStatementGrowth(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1279,12 +1279,12 @@ export const balanceSheetStatementGrowth = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_GROWTH_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(BALANCE_SHEET_STATEMENT_GROWTH_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.balanceSheetStatementGrowth(symbol, options)
+			const results = await fmp.balanceSheetStatementGrowth(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1302,12 +1302,12 @@ export const cashFlowStatementGrowth = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(CASH_FLOW_STATEMENT_GROWTH_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(CASH_FLOW_STATEMENT_GROWTH_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.cashFlowStatementGrowth(symbol, options)
+			const results = await fmp.cashFlowStatementGrowth(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1325,12 +1325,12 @@ export const financialStatementGrowth = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual', 'Q1', 'Q2', 'Q3', 'Q4', 'FY']).nullable().describe('The financial period (\'quarter\', \'annual\', \'Q1\', \'Q2\', \'Q3\', \'Q4\', \'FY\').'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
-		values: z.array(z.enum(FINANCIAL_STATEMENT_GROWTH_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for limit and period (same as FinancialStatementOptions).'),
+		values: z.array(z.enum(FINANCIAL_STATEMENT_GROWTH_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.financialStatementGrowth(symbol, options)
+			const results = await fmp.financialStatementGrowth(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1348,12 +1348,12 @@ export const revenueProductSegmentation = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual']).nullable().describe('The reporting period, \'annual\' or \'quarter\'.'),
 			structure: z.string().nullable().describe('The structure of the response, e.g., \'flat\'.'),
-		}).describe('Optional parameters for period and structure.'),
-		values: z.array(z.enum(REVENUE_PRODUCT_SEGMENTATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for period and structure.'),
+		values: z.array(z.enum(REVENUE_PRODUCT_SEGMENTATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.revenueProductSegmentation(symbol, options)
+			const results = await fmp.revenueProductSegmentation(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1371,12 +1371,12 @@ export const revenueGeographicSegmentation = tool({
 		options: z.object({
 			period: z.enum(['quarter', 'annual']).nullable().describe('The reporting period, \'annual\' or \'quarter\'.'),
 			structure: z.string().nullable().describe('The structure of the response, e.g., \'flat\'.'),
-		}).describe('Optional parameters for period and structure (same as RevenueSegmentationOptions).'),
-		values: z.array(z.enum(REVENUE_GEOGRAPHIC_SEGMENTATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for period and structure (same as RevenueSegmentationOptions).'),
+		values: z.array(z.enum(REVENUE_GEOGRAPHIC_SEGMENTATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.revenueGeographicSegmentation(symbol, options)
+			const results = await fmp.revenueGeographicSegmentation(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1397,7 +1397,7 @@ export const filingsExtractAnalyticsByHolder = tool({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
 		}).describe('Options specifying symbol, year, quarter, and pagination.'),
-		values: z.array(z.enum(FILINGS_EXTRACT_ANALYTICS_BY_HOLDER_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(FILINGS_EXTRACT_ANALYTICS_BY_HOLDER_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -1419,7 +1419,7 @@ export const holderPerformanceSummary = tool({
 			cik: z.string().describe('The CIK of the institutional investor. E.g., "0001067983".'),
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 		}).describe('Options specifying CIK and pagination.'),
-		values: z.array(z.enum(HOLDER_PERFORMANCE_SUMMARY_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(HOLDER_PERFORMANCE_SUMMARY_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -1442,7 +1442,7 @@ export const holdersIndustryBreakdown = tool({
 			year: z.union([z.string(), z.number()]).describe('The year of the filing. E.g., "2023".'),
 			quarter: z.union([z.string(), z.number()]).describe('The quarter of the filing. E.g., "3".'),
 		}).describe('Options specifying CIK, year, and quarter.'),
-		values: z.array(z.enum(HOLDERS_INDUSTRY_BREAKDOWN_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(HOLDERS_INDUSTRY_BREAKDOWN_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -1465,7 +1465,7 @@ export const positionsSummary = tool({
 			year: z.union([z.string(), z.number()]).describe('The year of the filing. E.g., "2023".'),
 			quarter: z.union([z.string(), z.number()]).describe('The quarter of the filing. E.g., "3".'),
 		}).describe('Options specifying symbol, year, and quarter.'),
-		values: z.array(z.enum(POSITIONS_SUMMARY_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(POSITIONS_SUMMARY_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -1487,7 +1487,7 @@ export const industryPerformanceSummary = tool({
 			year: z.union([z.string(), z.number()]).describe('The year of the summary. E.g., "2023".'),
 			quarter: z.union([z.string(), z.number()]).describe('The quarter of the summary. E.g., "3".'),
 		}).describe('Options specifying year and quarter.'),
-		values: z.array(z.enum(INDUSTRY_PERFORMANCE_SUMMARY_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(INDUSTRY_PERFORMANCE_SUMMARY_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
@@ -1506,7 +1506,7 @@ export const indexQuote = tool({
 	description: 'Retrieves a real-time quote for a stock market index.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The index symbol (e.g., "^GSPC").'),
-		values: z.array(z.enum(INDEX_QUOTE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(INDEX_QUOTE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1528,12 +1528,12 @@ export const indexChartFull = tool({
 		options: z.object({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
-		}).describe('Optional date range.'),
-		values: z.array(z.enum(INDEX_CHART_FULL_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional date range.'),
+		values: z.array(z.enum(INDEX_CHART_FULL_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.indexChartFull(symbol, options)
+			const results = await fmp.indexChartFull(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1551,12 +1551,12 @@ export const latestInsiderTrades = tool({
 			date: z.string().nullable().describe('Filter by specific date (YYYY-MM-DD). E.g., "2025-01-10".'),
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for date filter and pagination.'),
-		values: z.array(z.enum(LATEST_INSIDER_TRADES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for date filter and pagination.'),
+		values: z.array(z.enum(LATEST_INSIDER_TRADES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.latestInsiderTrades(options)
+			const results = await fmp.latestInsiderTrades(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1577,12 +1577,12 @@ export const searchInsiderTrades = tool({
 			transactionType: z.string().nullable().describe('Filter by transaction type (e.g., "S-Sale", "P-Purchase", "A-Award").'),
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for filtering and pagination.'),
-		values: z.array(z.enum(SEARCH_INSIDER_TRADES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for filtering and pagination.'),
+		values: z.array(z.enum(SEARCH_INSIDER_TRADES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.searchInsiderTrades(options)
+			const results = await fmp.searchInsiderTrades(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1597,7 +1597,7 @@ export const searchInsiderTradesByReportingName = tool({
 	description: 'Searches for insider trading activity by reporting name.',
 	inputSchema: z.object({
 		name: z.string().describe('The name of the reporting person/entity (e.g., "Zuckerberg").'),
-		values: z.array(z.enum(SEARCH_INSIDER_TRADES_BY_REPORTING_NAME_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SEARCH_INSIDER_TRADES_BY_REPORTING_NAME_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, values }) => {
 		try {
@@ -1615,7 +1615,7 @@ const ALL_INSIDER_TRANSACTION_TYPES_RESULT_VALUES = ['transactionType'] as const
 export const allInsiderTransactionTypes = tool({
 	description: 'Retrieves a list of all insider transaction types.',
 	inputSchema: z.object({
-		values: z.array(z.enum(ALL_INSIDER_TRANSACTION_TYPES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(ALL_INSIDER_TRANSACTION_TYPES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ values }) => {
 		try {
@@ -1634,7 +1634,7 @@ export const insiderTradeStatistics = tool({
 	description: 'Retrieves statistics on insider trading activity for a specific company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(INSIDER_TRADE_STATISTICS_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(INSIDER_TRADE_STATISTICS_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1655,12 +1655,12 @@ export const acquisitionOwnership = tool({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
 		options: z.object({
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters.'),
-		values: z.array(z.enum(ACQUISITION_OWNERSHIP_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters.'),
+		values: z.array(z.enum(ACQUISITION_OWNERSHIP_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
-			const results = await fmp.acquisitionOwnership(symbol, options)
+			const results = await fmp.acquisitionOwnership(symbol, options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -1681,7 +1681,7 @@ export const simpleMovingAverage = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(SIMPLE_MOVING_AVERAGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SIMPLE_MOVING_AVERAGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1706,7 +1706,7 @@ export const exponentialMovingAverage = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1731,7 +1731,7 @@ export const weightedMovingAverage = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(WEIGHTED_MOVING_AVERAGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(WEIGHTED_MOVING_AVERAGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1756,7 +1756,7 @@ export const doubleExponentialMovingAverage = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(DOUBLE_EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(DOUBLE_EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1781,7 +1781,7 @@ export const tripleExponentialMovingAverage = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(TRIPLE_EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(TRIPLE_EXPONENTIAL_MOVING_AVERAGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1806,7 +1806,7 @@ export const relativeStrengthIndex = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(RELATIVE_STRENGTH_INDEX_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(RELATIVE_STRENGTH_INDEX_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1831,7 +1831,7 @@ export const standardDeviation = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(STANDARD_DEVIATION_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STANDARD_DEVIATION_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1856,7 +1856,7 @@ export const williamsPercentR = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(WILLIAMS_PERCENT_R_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(WILLIAMS_PERCENT_R_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1881,7 +1881,7 @@ export const averageDirectionalIndex = tool({
 			from: z.string().nullable().describe('Start date for the calendar (YYYY-MM-DD). E.g., "2025-01-10".'),
 			to: z.string().nullable().describe('End date for the calendar (YYYY-MM-DD). E.g., "2025-04-10". Max 90-day range.'),
 		}).describe('Options specifying period length, timeframe, and optionally date range.'),
-		values: z.array(z.enum(AVERAGE_DIRECTIONAL_INDEX_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(AVERAGE_DIRECTIONAL_INDEX_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, options, values }) => {
 		try {
@@ -1900,7 +1900,7 @@ export const stockQuote = tool({
 	description: 'Retrieves a real-time stock quote.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_QUOTE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_QUOTE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1919,7 +1919,7 @@ export const stockQuoteShort = tool({
 	description: 'Retrieves a short real-time stock quote.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_QUOTE_SHORT_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_QUOTE_SHORT_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1938,7 +1938,7 @@ export const aftermarketTrade = tool({
 	description: 'Retrieves real-time aftermarket trade data for a stock.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(AFTERMARKET_TRADE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(AFTERMARKET_TRADE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1957,7 +1957,7 @@ export const aftermarketQuote = tool({
 	description: 'Retrieves real-time aftermarket quote data for a stock.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(AFTERMARKET_QUOTE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(AFTERMARKET_QUOTE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1976,7 +1976,7 @@ export const stockPriceChange = tool({
 	description: 'Retrieves stock price change percentages over various time periods.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(STOCK_PRICE_CHANGE_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(STOCK_PRICE_CHANGE_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -1996,10 +1996,10 @@ export const exchangeStockQuotes = tool({
 		exchange: z.string().describe('The stock exchange symbol (e.g., "NASDAQ").'),
 		options: z.object({
 			short: z.boolean().nullable().describe('If true, returns short quotes. E.g., true.'),
-		}).describe('Optional parameters.'),
+		}).optional().describe('Optional parameters.'),
 	}),
 	execute: async ({ exchange, options }) => {
-		return fmp.exchangeStockQuotes(exchange, options)
+		return fmp.exchangeStockQuotes(exchange, options ?? undefined)
 	},
 })
 
@@ -2008,10 +2008,10 @@ export const mutualFundQuotes = tool({
 	inputSchema: z.object({
 		options: z.object({
 			short: z.boolean().nullable().describe('If true, returns short quotes. E.g., true.'),
-		}).describe('Optional parameters.'),
+		}).optional().describe('Optional parameters.'),
 	}),
 	execute: async ({ options }) => {
-		return fmp.mutualFundQuotes(options)
+		return fmp.mutualFundQuotes(options ?? undefined)
 	},
 })
 
@@ -2020,10 +2020,10 @@ export const etfQuotes = tool({
 	inputSchema: z.object({
 		options: z.object({
 			short: z.boolean().nullable().describe('If true, returns short quotes. E.g., true.'),
-		}).describe('Optional parameters.'),
+		}).optional().describe('Optional parameters.'),
 	}),
 	execute: async ({ options }) => {
-		return fmp.etfQuotes(options)
+		return fmp.etfQuotes(options ?? undefined)
 	},
 })
 
@@ -2032,7 +2032,7 @@ export const earningsTranscriptDatesBySymbol = tool({
 	description: 'Retrieves available earnings call transcript dates for a specific company.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(EARNINGS_TRANSCRIPT_DATES_BY_SYMBOL_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(EARNINGS_TRANSCRIPT_DATES_BY_SYMBOL_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -2063,12 +2063,12 @@ export const latestSenateFinancialDisclosures = tool({
 		options: z.object({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for pagination.'),
-		values: z.array(z.enum(LATEST_SENATE_FINANCIAL_DISCLOSURES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for pagination.'),
+		values: z.array(z.enum(LATEST_SENATE_FINANCIAL_DISCLOSURES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.latestSenateFinancialDisclosures(options)
+			const results = await fmp.latestSenateFinancialDisclosures(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -2085,12 +2085,12 @@ export const latestHouseFinancialDisclosures = tool({
 		options: z.object({
 			page: z.number().nullable().describe('The page number for pagination. E.g., 0.'),
 			limit: z.number().nullable().describe('The maximum number of results to return. E.g., 50.'),
-		}).describe('Optional parameters for pagination.'),
-		values: z.array(z.enum(LATEST_HOUSE_FINANCIAL_DISCLOSURES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		}).optional().describe('Optional parameters for pagination.'),
+		values: z.array(z.enum(LATEST_HOUSE_FINANCIAL_DISCLOSURES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ options, values }) => {
 		try {
-			const results = await fmp.latestHouseFinancialDisclosures(options)
+			const results = await fmp.latestHouseFinancialDisclosures(options ?? undefined)
 			return applyFieldSelection(results, values)
 		}
 		catch (error: any) {
@@ -2105,7 +2105,7 @@ export const senateTradingActivity = tool({
 	description: 'Retrieves trading activity by U.S. Senators for a specific stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(SENATE_TRADING_ACTIVITY_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SENATE_TRADING_ACTIVITY_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -2124,7 +2124,7 @@ export const senateTradesByName = tool({
 	description: 'Retrieves trading activity by U.S. Senators filtered by Senator\'s name.',
 	inputSchema: z.object({
 		name: z.string().describe('The name of the Senator (e.g., "Jerry").'),
-		values: z.array(z.enum(SENATE_TRADES_BY_NAME_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(SENATE_TRADES_BY_NAME_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, values }) => {
 		try {
@@ -2143,7 +2143,7 @@ export const houseTrades = tool({
 	description: 'Retrieves trading activity by U.S. House members for a specific stock symbol.',
 	inputSchema: z.object({
 		symbol: z.string().describe('The stock symbol (e.g., "AAPL").'),
-		values: z.array(z.enum(HOUSE_TRADES_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(HOUSE_TRADES_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ symbol, values }) => {
 		try {
@@ -2162,7 +2162,7 @@ export const houseTradesByName = tool({
 	description: 'Retrieves trading activity by U.S. House members filtered by member\'s name.',
 	inputSchema: z.object({
 		name: z.string().describe('The name of the House member (e.g., "James").'),
-		values: z.array(z.enum(HOUSE_TRADES_BY_NAME_RESULT_VALUES)).nullable().describe('Specific fields to return from the results.'),
+		values: z.array(z.enum(HOUSE_TRADES_BY_NAME_RESULT_VALUES)).nullable().optional().describe('Specific fields to return from the results.'),
 	}),
 	execute: async ({ name, values }) => {
 		try {

@@ -5,7 +5,7 @@ import process from 'node:process'
 import { buildToolSchemas } from './schema'
 
 // Path to the generated output file
-const EXPORT_FILE_PATH = path.join(process.cwd(), '../tools/src/generated', 'tools.ts')
+const EXPORT_FILE_PATH = path.join(process.cwd(), '../tools/src', 'tools.ts')
 
 /**
  * Converts camelCase to SNAKE_UPPER_CASE for constant naming
@@ -53,7 +53,7 @@ function prepareToolParametersZod(schema: ToolSchema): string {
 	if (schema.available_return_keys && schema.available_return_keys.length > 0) {
 		const constName = `${camelToSnakeUpperCase(schema.name)}_RESULT_VALUES`
 		toolParams.push(
-			`values: z.array(z.enum(${constName})).nullable().describe('Specific fields to return from the results.')`,
+			`values: z.array(z.enum(${constName})).nullable().optional().describe('Specific fields to return from the results.')`,
 		)
 	}
 
@@ -67,7 +67,9 @@ function prepareToolParametersZod(schema: ToolSchema): string {
  * @returns Comma-separated list of argument names
  */
 function getSdkCallArgs(schema: ToolSchema): string {
-	return schema._raw_parameters.map((param) => param.name).join(', ')
+	return schema._raw_parameters
+		.map((param) => (param.isOptional ? `${param.name} ?? undefined` : param.name))
+		.join(', ')
 }
 
 /**

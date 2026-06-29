@@ -1,5 +1,5 @@
 {
-	"name": "fmp-codegen",
+	"name": "fmp-gen",
 	"private": true,
 	"type": "module",
 	"scripts": {

@@ -1,6 +1,8 @@
+import { describe, it, expect } from 'bun:test'
 import { spawn, type ChildProcess } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { once } from 'node:events'
 
 const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -13,37 +15,67 @@ const describeIf = (condition: boolean, title: string, fn: () => void) => {
 	else describe.skip(title, fn)
 }
 
-function request(server: ChildProcess, method: string, params: unknown = {}) {
+async function withServer<T>(fn: (server: ChildProcess) => Promise<T>): Promise<T> {
+	const server = spawn('bun', ['run', 'src/index.ts'], {
+		cwd: packageRoot,
+		env: { FMP_KEY, REDIS_URL: REDIS_URL ?? '', PATH: process.env.PATH },
+		stdio: ['pipe', 'pipe', 'inherit'],
+	})
+
+	let timeout: ReturnType<typeof setTimeout>
+
+	try {
+		const result = await Promise.race([
+			fn(server),
+			new Promise<never>((_, reject) => {
+				timeout = setTimeout(() => reject(new Error('Server test timed out')), 10_000)
+			}),
+		])
+		return result
+	} finally {
+		clearTimeout(timeout!)
+		server.stdin?.end()
+		server.kill('SIGTERM')
+		if (server.exitCode === null) {
+			await once(server, 'exit')
+		}
+	}
+}
+
+function request(server: ChildProcess, method: string, params: unknown = {}): Promise<any> {
 	return new Promise<any>((resolve, reject) => {
 		const msg = JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) + '\n'
-		let buffer = ''
+		const chunks: Buffer[] = []
 
 		const onData = (data: Buffer) => {
-			buffer += data.toString()
+			chunks.push(data)
+			const combined = Buffer.concat(chunks).toString()
 			try {
-				resolve(JSON.parse(buffer))
+				resolve(JSON.parse(combined))
 				server.stdout?.removeListener('data', onData)
 			} catch {}
 		}
 
-		server.stdout?.on('data', onData)
-		server.stdin?.write(msg)
-		setTimeout(() => {
+		const onError = (err: Error) => {
 			server.stdout?.removeListener('data', onData)
-			reject(new Error('Timeout waiting for response'))
-		}, 5_000)
+			reject(err)
+		}
+
+		const onClose = () => {
+			server.stdout?.removeListener('data', onData)
+			reject(new Error('Server closed before response'))
+		}
+
+		server.stdout?.on('data', onData)
+		server.stdout?.on('error', onError)
+		server.stdout?.on('end', onClose)
+		server.stdin?.write(msg)
 	})
 }
 
 describeIf(canRun, 'fmp-mcp server', () => {
 	it('lists all tools', async () => {
-		const server = spawn('bun', ['run', 'src/index.ts'], {
-			cwd: packageRoot,
-			env: { FMP_KEY, REDIS_URL: REDIS_URL ?? '', PATH: process.env.PATH },
-			stdio: ['pipe', 'pipe', 'inherit'],
-		})
-
-		try {
+		await withServer(async (server) => {
 			const res = await request(server, 'tools/list')
 			expect(res.result).toBeDefined()
 			expect(Array.isArray(res.result.tools)).toBe(true)
@@ -53,19 +85,11 @@ describeIf(canRun, 'fmp-mcp server', () => {
 			expect(names).toContain('searchSymbol')
 			expect(names).toContain('companyProfile')
 			expect(names).toContain('incomeStatement')
-		} finally {
-			server.kill()
-		}
+		})
 	})
 
 	it('calls a tool and returns a result', async () => {
-		const server = spawn('bun', ['run', 'src/index.ts'], {
-			cwd: packageRoot,
-			env: { FMP_KEY, REDIS_URL: REDIS_URL ?? '', PATH: process.env.PATH },
-			stdio: ['pipe', 'pipe', 'inherit'],
-		})
-
-		try {
+		await withServer(async (server) => {
 			const res = await request(server, 'tools/call', {
 				name: 'searchSymbol',
 				arguments: { query: 'AAPL' },
@@ -77,8 +101,6 @@ describeIf(canRun, 'fmp-mcp server', () => {
 			const data = JSON.parse(res.result.content[0].text)
 			expect(Array.isArray(data)).toBe(true)
 			expect(data[0].symbol).toBe('AAPL')
-		} finally {
-			server.kill()
-		}
+		})
 	})
 })

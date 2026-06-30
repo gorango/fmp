@@ -7,14 +7,13 @@
 		"generate:docs": "bun run ./src/docs.ts",
 		"generate:returns": "bun run ./src/returns.ts",
 		"lint": "oxlint --fix & oxfmt",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
 		"fmp-sdk": "workspace:*",
 		"ts-morph": "^28.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.9.4",
 		"puppeteer": "^25.2.1"
 	}
 }

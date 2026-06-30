@@ -10,18 +10,12 @@
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "tsgo --noEmit",
 		"test": "bun test"
 	},
 	"dependencies": {
 		"@modelcontextprotocol/sdk": "^1.29.0",
 		"fmp-tools": "workspace:*",
 		"zod": "^4.4.3"
-	},
-	"devDependencies": {
-		"@types/node": "^25.9.4",
-		"oxfmt": "^0.52.0",
-		"oxlint": "^1.72.0",
-		"typescript": "^6.0.3"
 	}
 }

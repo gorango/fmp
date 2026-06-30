@@ -8,10 +8,10 @@
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
-		"ai": "^6.0.216",
+		"ai": "^7.0.0",
 		"fmp-sdk": "workspace:*",
 		"zod": "^4.4.3"
 	}

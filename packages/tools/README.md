@@ -32,5 +32,5 @@ To regenerate after SDK changes:
 
 ```bash
 bun run --filter fmp-gen generate:tools
-bun run --filter fmp-gen generate:tools
+bun run --filter fmp-gen generate:docs
 ```

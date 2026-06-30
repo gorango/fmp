@@ -5,8 +5,8 @@
 		"packages/*"
 	],
 	"scripts": {
-		"lint": "oxlint --fix packages && oxfmt packages",
-		"typecheck": "bun run --filter @finset/* typecheck 2>&1 | grep -E \"(Exited|error|✓|✗)\""
+		"lint": "oxlint --fix && oxfmt",
+		"typecheck": "bun run --filter fmp-* typecheck 2>&1 | grep -E \"(Exited|error|✓|✗)\""
 	},
 	"devDependencies": {
 		"@tsconfig/bun": "^1.0.10",

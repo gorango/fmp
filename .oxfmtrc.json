@@ -3,5 +3,5 @@
 	"singleQuote": true,
 	"useTabs": true,
 	"semi": false,
-	"ignorePatterns": ["docs/*.html", "src/generated"]
+	"ignorePatterns": ["packages/tools/src"]
 }

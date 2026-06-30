@@ -1,2 +1,6 @@
 export * from './csv.js'
 export * from './fmp-ky.js'
+export { getRedis, closeRedis } from './redis.js'
+export { enforceRateLimit } from './rate-limit.js'
+export { getFmpCacheKey, getSecCacheKey, getFromCache, setCache } from './cache.js'
+export { injectApiKey, uppercaseSymbolParams, prepareFmpRequest } from './fmp-hooks.js'

@@ -1,117 +1,51 @@
 import type { Options as KyOptions, KyRequest } from 'ky'
 import { isHTTPError } from 'ky'
 import { Buffer } from 'node:buffer'
-import process from 'node:process'
-import Redis from 'ioredis'
 import ky from 'ky'
+import { enforceRateLimit, type RateLimitConfig } from './rate-limit.js'
+import { getFmpCacheKey, getFromCache, setCache } from './cache.js'
+import { prepareFmpRequest } from './fmp-hooks.js'
 import { TRANSFORMATION_CONFIG } from './transform.js'
 import { TTL_CONFIG } from './ttl.js'
 
-const apiKey = process.env.FMP_KEY
 const baseUrl = 'https://financialmodelingprep.com/stable/'
 
-if (!apiKey) {
-	throw new Error('FMP_KEY environment variable is required')
-}
+const DEFAULT_CACHE_TTL_SECONDS = 60 * 30
 
-if (!process.env.REDIS_URL) {
-	throw new Error('REDIS_URL environment variable is required')
-}
-
-interface CacheEntry {
-	contentType: string
-	body: string
-}
-
-const redis = new Redis(process.env.REDIS_URL)
-const CACHE_PREFIX = 'fmp_cache:'
-const RATE_LIMIT_PREFIX = 'fmp_rate_limit:'
-const DEFAULT_CACHE_TTL_SECONDS = 60 * 30 // 30 minutes
-
-const FMP_RATE_LIMIT = {
+const FMP_RATE_LIMIT: RateLimitConfig = {
 	maxRequests: 700,
 	windowSeconds: 60,
 	retryAfterMs: 10_000,
 }
 
-async function enforceRateLimit(): Promise<void> {
-	const now = Date.now()
-	const windowStart =
-		Math.floor(now / (FMP_RATE_LIMIT.windowSeconds * 1000)) * FMP_RATE_LIMIT.windowSeconds
-	const rateLimitKey = `${RATE_LIMIT_PREFIX}${windowStart}`
-	const currentCount = await redis.incr(rateLimitKey)
-	// Set expiration only on first increment to avoid race conditions
-	if (currentCount === 1) {
-		await redis.expire(rateLimitKey, FMP_RATE_LIMIT.windowSeconds + 1)
+const RATE_LIMIT_PREFIX = 'fmp_rate_limit:'
+
+// Shared before-request logic
+async function fmpBeforeRequest({
+	request,
+}: {
+	request: KyRequest
+	options: KyOptions
+}): Promise<Request | Response | void> {
+	const modifiedRequest = prepareFmpRequest(request)
+
+	if (request.method.toUpperCase() === 'GET') {
+		const cached = await getFromCache(getFmpCacheKey(modifiedRequest.url))
+		if (cached) {
+			console.error(`[CACHE HIT] ${modifiedRequest.url.split('/').pop()}`)
+			return cached
+		}
 	}
-	if (currentCount > FMP_RATE_LIMIT.maxRequests) {
-		const nextWindow = (windowStart + FMP_RATE_LIMIT.windowSeconds) * 1000
-		const waitTime = Math.max(nextWindow - now, FMP_RATE_LIMIT.retryAfterMs)
-		console.log(`SEC rate limit exceeded. Waiting ${waitTime}ms before retrying...`)
-		await new Promise((resolve) => setTimeout(resolve, waitTime))
-		return enforceRateLimit()
-	}
+
+	await enforceRateLimit(FMP_RATE_LIMIT, RATE_LIMIT_PREFIX)
+	return modifiedRequest
 }
 
 export const fmpApi = ky.create({
 	prefix: baseUrl,
 	timeout: 15000,
 	hooks: {
-		beforeRequest: [
-			async ({
-				request,
-				options: _options,
-			}: {
-				request: KyRequest
-				options: KyOptions
-			}): Promise<Request | Response | void> => {
-				const url = new URL(request.url)
-				url.searchParams.set('apikey', apiKey)
-
-				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = [
-					'symbol',
-					'symbols',
-					'tickers',
-				]
-				paramsToUppercase.forEach((paramName) => {
-					if (url.searchParams.has(paramName)) {
-						const value = url.searchParams.get(paramName)
-						if (typeof value === 'string') {
-							url.searchParams.set(paramName, value.toUpperCase())
-						}
-					}
-				})
-
-				const finalRequestUrl = url.href
-				const modifiedRequest = new Request(finalRequestUrl, request)
-
-				if (request.method.toUpperCase() === 'GET') {
-					const cacheKey = `${CACHE_PREFIX}${finalRequestUrl}`
-					const cachedDataString = await redis.get(cacheKey)
-					if (cachedDataString) {
-						try {
-							const cachedEntry: CacheEntry = JSON.parse(cachedDataString)
-							console.error(`[CACHE HIT] ${finalRequestUrl.split('/').pop()}`)
-							return new Response(cachedEntry.body, {
-								status: 200,
-								headers: {
-									'Content-Type': cachedEntry.contentType,
-									'X-Cache-Hit': 'true',
-								},
-							})
-						} catch (e) {
-							console.error(
-								`[CACHE ERROR] Failed to parse cached entry for ${finalRequestUrl}. Removing corrupted entry. Error:`,
-								e,
-							)
-							await redis.del(cacheKey)
-						}
-					}
-				}
-				await enforceRateLimit()
-				return modifiedRequest
-			},
-		],
+		beforeRequest: [fmpBeforeRequest],
 		afterResponse: [
 			async ({
 				request,
@@ -144,7 +78,6 @@ export const fmpApi = ky.create({
 									const parsedData = JSON.parse(originalResponseBody)
 									const transformedData = rule.transform(parsedData)
 									processedBody = JSON.stringify(transformedData)
-									// console.log(`[TRANSFORMATION] Applied rule for ${apiPath} (${rule.description || rule.pattern.toString()})`)
 									break
 								} catch (e) {
 									console.error(
@@ -157,13 +90,7 @@ export const fmpApi = ky.create({
 						}
 					}
 
-					const cacheKey = `${CACHE_PREFIX}${request.url}`
-					const cacheEntry: CacheEntry = {
-						contentType,
-						body: processedBody,
-					}
-					const cacheEntryString = JSON.stringify(cacheEntry)
-
+					const cacheKey = getFmpCacheKey(request.url)
 					let ttlToUse = DEFAULT_CACHE_TTL_SECONDS
 					const requestUrl = new URL(request.url)
 					const apiPath = requestUrl.pathname.startsWith(new URL(baseUrl).pathname)
@@ -173,21 +100,11 @@ export const fmpApi = ky.create({
 					for (const rule of TTL_CONFIG) {
 						if (rule.pattern.test(apiPath)) {
 							ttlToUse = rule.ttl
-							console.log(`[CACHE SET] ${request.url.split('/').pop()} with TTL: ${ttlToUse}s`)
 							break
 						}
 					}
-					if (
-						ttlToUse === DEFAULT_CACHE_TTL_SECONDS &&
-						!TTL_CONFIG.some((rule) => rule.pattern.test(apiPath))
-					) {
-						// Check if default was because no rule matched
-						console.log(
-							`[CACHE SET] ${request.url.split('/').pop()} with DEFAULT TTL: ${ttlToUse}s`,
-						)
-					}
 
-					await redis.set(cacheKey, cacheEntryString, 'EX', ttlToUse)
+					await setCache(cacheKey, processedBody, contentType, ttlToUse)
 
 					if (processedBody !== originalResponseBody) {
 						const headers = new Headers(response.headers)
@@ -229,33 +146,13 @@ export const fmpApiStream = ky.create({
 		beforeRequest: [
 			async ({
 				request,
-				options: _options,
 			}: {
 				request: KyRequest
 				options: KyOptions
 			}): Promise<Request | Response | void> => {
-				const url = new URL(request.url)
-				url.searchParams.set('apikey', apiKey)
-
-				const paramsToUppercase: ('symbol' | 'symbols' | 'tickers')[] = [
-					'symbol',
-					'symbols',
-					'tickers',
-				]
-				paramsToUppercase.forEach((paramName) => {
-					if (url.searchParams.has(paramName)) {
-						const value = url.searchParams.get(paramName)
-						if (typeof value === 'string') {
-							url.searchParams.set(paramName, value.toUpperCase())
-						}
-					}
-				})
-
-				const finalRequestUrl = url.href
-				const modifiedRequest = new Request(finalRequestUrl, request)
-
-				await enforceRateLimit()
-				return modifiedRequest
+				const modified = prepareFmpRequest(request)
+				await enforceRateLimit(FMP_RATE_LIMIT, RATE_LIMIT_PREFIX)
+				return modified
 			},
 		],
 		beforeError: [
@@ -282,9 +179,6 @@ export const fmpApiStream = ky.create({
 
 type KySearchParams = Record<string, string | number | boolean>
 
-/**
- * Cleans up query parameters for FMP API requests.
- */
 export function cleanQuery(query: Record<string, any> = {}): KySearchParams {
 	return Object.entries(query).reduce((acc: KySearchParams, [key, value]) => {
 		if (value !== undefined && value !== null) {

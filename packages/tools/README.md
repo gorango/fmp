@@ -8,8 +8,6 @@ Auto-generated [Vercel AI SDK](https://sdk.vercel.ai) tool definitions wrapping 
 bun add fmp-tools
 ```
 
-Requires `fmp-sdk` as a peer dependency.
-
 ## Usage
 
 ```typescript
@@ -17,7 +15,7 @@ import { tools } from 'fmp-tools'
 import { generateText } from 'ai'
 
 const result = await generateText({
-	model: openai('gpt-4o'),
+	model: openai('<model>'),
 	tools,
 	prompt: 'What is the price of AAPL?',
 })
@@ -30,12 +28,6 @@ Each tool wraps an SDK API function with a Zod input schema and an execute handl
 To regenerate after SDK changes:
 
 ```bash
-bun run --filter fmp-gen generate:tools
+bun run generate:tools
+bun run generate:docs
 ```
-
-## Exports
-
-| Path             | Description                                  |
-| ---------------- | -------------------------------------------- |
-| `fmp-tools`      | All tool definitions as a named export       |
-| `fmp-tools/docs` | Structured JSON documentation for every tool |

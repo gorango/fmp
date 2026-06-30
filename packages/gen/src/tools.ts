@@ -1,4 +1,5 @@
 import type { ToolSchema } from './schema'
+import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
@@ -192,7 +193,7 @@ export function applyFieldSelection<T extends Record<string, any>>(
 				result[requestedKey as string] = item[requestedKey]
 			}
 			if ('data' in item && Object.prototype.hasOwnProperty.call(item.data, requestedKey)) {
-				result[requestedKey as string] = item[requestedKey]
+				result[requestedKey as string] = (item.data as Record<string, any>)[requestedKey as string]
 			}
 		}
 
@@ -201,7 +202,7 @@ export function applyFieldSelection<T extends Record<string, any>>(
 				result[mandatoryKey] = (item as Record<string, any>)[mandatoryKey]
 			}
 			if ('data' in item && Object.prototype.hasOwnProperty.call(item.data, mandatoryKey)) {
-				result[mandatoryKey] = (item as Record<string, any>)[mandatoryKey]
+				result[mandatoryKey] = (item.data as Record<string, any>)[mandatoryKey]
 			}
 		}
 
@@ -269,6 +270,18 @@ async function main() {
 		fs.mkdirSync(path.dirname(EXPORT_FILE_PATH), { recursive: true })
 		fs.writeFileSync(EXPORT_FILE_PATH, toolsFileContent)
 		console.log(`Successfully generated tools.ts with ${schemas.length} tools.`)
+
+		try {
+			execSync('bun run typecheck 2>&1', {
+				cwd: path.join(process.cwd(), '../tools'),
+				stdio: 'inherit',
+				timeout: 30_000,
+			})
+			console.log('Generated tools.ts passes type checking.')
+		} catch {
+			console.error('WARNING: Generated tools.ts failed type checking.')
+			process.exit(1)
+		}
 	} catch (error) {
 		console.error('Error generating tools:')
 		if (error instanceof Error) {

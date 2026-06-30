@@ -1,7 +1,7 @@
 import type { JSDoc, Type } from 'ts-morph'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { Node, Project, SymbolFlags, TypeFormatFlags } from 'ts-morph'
+import { Node, Project, Symbol as TsmorphSymbol, SymbolFlags, TypeFormatFlags } from 'ts-morph'
 import { INCLUDED_API_FUNCTIONS } from './schema.include'
 
 /**
@@ -200,7 +200,11 @@ function typeToZod(type: Type, contextNode: Node, isParamOptionalFlag: boolean, 
  * @param depth Current recursion depth
  * @returns Zod object schema string representation
  */
-function generateObjectSchema(properties: any[], contextNode: Node, depth: number): string {
+function generateObjectSchema(
+	properties: TsmorphSymbol[],
+	contextNode: Node,
+	depth: number,
+): string {
 	const propEntries = properties.map((propSymbol) => {
 		const propName = propSymbol.getName()
 		const propType = propSymbol.getTypeAtLocation(contextNode)

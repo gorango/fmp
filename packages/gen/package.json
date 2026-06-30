@@ -5,7 +5,9 @@
 	"scripts": {
 		"generate:tools": "bun run ./src/tools.ts",
 		"generate:docs": "bun run ./src/docs.ts",
-		"generate:returns": "bun run ./src/returns.ts"
+		"generate:returns": "bun run ./src/returns.ts",
+		"lint": "oxlint --fix & oxfmt",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"fmp-sdk": "workspace:*",

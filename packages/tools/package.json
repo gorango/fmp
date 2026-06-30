@@ -6,7 +6,10 @@
 		".": "./src/tools.ts",
 		"./docs": "./src/docs.json"
 	},
-	"scripts": {},
+	"scripts": {
+		"lint": "oxlint --fix & oxfmt",
+		"typecheck": "tsc --noEmit"
+	},
 	"dependencies": {
 		"ai": "^6.0.216",
 		"fmp-sdk": "workspace:*",

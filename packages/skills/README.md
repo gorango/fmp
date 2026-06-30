@@ -1,7 +1,17 @@
----
-name: skills
-description: FMP (Financial Modeling Prep) financial data platform. Provides 100+ tools for stocks, ETFs, forex, crypto, commodities, economics, ESG, SEC filings, financial statements, and more. Use when asked about financial data, stock analysis, company research, market data, or economic indicators.
----
+# FMP Skills
+
+Financial Modeling Prep (FMP) provides 100+ tools for stocks, ETFs, forex, crypto, commodities, economics, ESG, SEC filings, financial statements, and more. Use when asked about financial data, stock analysis, company research, market data, or economic indicators.
+
+## Installation
+
+```sh
+# add the cli for agents
+bun add -g fmp-cmd
+# initialize the skills dir
+bunx fmp-skills
+```
+
+Creates a `skills/fmp` directory with all skills installed.
 
 ## How to use the FMP data tools
 
@@ -17,7 +27,7 @@ All tools return JSON to stdout.
 
 Browse tools by category in [assets/categories.json](assets/categories.json). Each category groups related tools (e.g., FINANCIAL STATEMENTS, ANALYST, ESG).
 
-Once you've identified the tool name, look up its parameters and return fields in [assets/tools.json](assets/tools.json). **Do not read the entire file** — it's 1448 lines. Query it with `jq`:
+Once you've identified the tool name, look up its parameters and return fields in [assets/tools.json](assets/tools.json). **Do not read the entire file** — it's 1500 lines. Query it with `jq`:
 
 ```bash
 # Look up a specific tool

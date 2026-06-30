@@ -1,8 +1,13 @@
 {
 	"name": "fmp-skills",
 	"version": "0.0.1",
-	"files": [
-		"SKILL.md",
-		"assets/"
-	]
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gorango/fmp.git",
+		"directory": "packages/skills"
+	},
+	"bin": {
+		"fmp-skills": "./install.mjs"
+	}
 }

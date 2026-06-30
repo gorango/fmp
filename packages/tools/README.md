@@ -10,6 +10,9 @@ bun add fmp-tools
 
 ## Usage
 
+> [!WARNING]
+> **~100 tools** — this module exports all SDK functions as tools. Passing the full `tools` object to `generateText` may saturate your prompt with tool definitions. Either pass a **selected subset** (e.g., `pick(tools, 'getStockPrice', 'getCompanyProfile')`) or use a retriever like [`ai-tool-retriever`](https://github.com/gorango/ai-tool-retriever) to dynamically select tools per request.
+
 ```typescript
 import { tools } from 'fmp-tools'
 import { generateText } from 'ai'
@@ -23,11 +26,11 @@ const result = await generateText({
 
 Each tool wraps an SDK API function with a Zod input schema and an execute handler. Return values can be filtered to specific fields using the `values` parameter.
 
-## Generation
+## Development
 
 To regenerate after SDK changes:
 
 ```bash
-bun run generate:tools
-bun run generate:docs
+bun run --filter fmp-gen generate:tools
+bun run --filter fmp-gen generate:tools
 ```

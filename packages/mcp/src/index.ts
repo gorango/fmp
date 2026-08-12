@@ -2,7 +2,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import type { z } from 'zod'
-import toolDefs from 'fmp-tools'
+import toolDefs from '@financialmodelingprep/tools'
 
 type FmpTool = {
 	description: string

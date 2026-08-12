@@ -166,7 +166,7 @@ export const ${functionName} = tool({
 function generateImports(): string {
 	return `import { tool } from 'ai'
 import { z } from 'zod'
-import * as fmp from 'fmp-sdk'
+import * as fmp from '@financialmodelingprep/sdk'
 
 /**
  * Applies field selection to a data object or array of objects

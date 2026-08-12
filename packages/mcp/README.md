@@ -1,6 +1,6 @@
 # FMP MCP Server
 
-[MCP](https://modelcontextprotocol.io) server exposing the Financial Modeling Prep API through the Model Context Protocol. Built on `fmp-tools` — all ~90 tools (stock data, financials, SEC filings, insider trades, etc.) are available to any MCP client.
+[MCP](https://modelcontextprotocol.io) server exposing the Financial Modeling Prep API through the Model Context Protocol. Built on `@financialmodelingprep/tools` — all ~90 tools (stock data, financials, SEC filings, insider trades, etc.) are available to any MCP client.
 
 ## Setup
 

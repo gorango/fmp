@@ -1,5 +1,5 @@
-import * as fmp from 'fmp-sdk'
-import type { SecFiling } from 'fmp-sdk/types'
+import * as fmp from '@financialmodelingprep/sdk'
+import type { SecFiling } from '@financialmodelingprep/sdk/types'
 import fs from 'node:fs'
 import path from 'node:path'
 

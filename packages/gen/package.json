@@ -1,5 +1,5 @@
 {
-	"name": "fmp-gen",
+	"name": "@financialmodelingprep/gen",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -10,7 +10,7 @@
 		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
-		"fmp-sdk": "workspace:*",
+		"@financialmodelingprep/sdk": "workspace:*",
 		"ts-morph": "^28.0.0"
 	},
 	"devDependencies": {

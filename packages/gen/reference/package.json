@@ -1,5 +1,5 @@
 {
-	"name": "fmp-gen-ref",
+	"name": "@financialmodelingprep/gen-ref",
 	"private": true,
 	"type": "module",
 	"dependencies": {

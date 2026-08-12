@@ -1,17 +1,17 @@
 # FMP CLI
 
-Terminal interface for all Financial Modeling Prep tools. Wraps `fmp-tools` for command-line execution. Can also run as an MCP server for AI tool integration (`--mcp`).
+Terminal interface for all Financial Modeling Prep tools. Wraps `@financialmodelingprep/tools` for command-line execution. Can also run as an MCP server for AI tool integration (`--mcp`).
 
 ## Installation
 
 ```bash
-bun add -g fmp-cmd
+bun add -g @financialmodelingprep/cli
 ```
 
 Or run directly without installing:
 
 ```bash
-bunx fmp-cmd <tool> [json-args...]
+bunx @financialmodelingprep/cli <tool> [json-args...]
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ fmp --mcp
 Run it directly without installing:
 
 ```bash
-bunx fmp-cmd --mcp
+bunx @financialmodelingprep/cli --mcp
 ```
 
 Configure in your AI client (e.g., Claude Desktop, VS Code settings, `opencode.json`):

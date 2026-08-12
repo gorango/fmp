@@ -9,18 +9,18 @@ A powerful TypeScript SDK for accessing real-time and historical financial data 
 - **Advanced Search & Screening**: Symbol, name, CIK search; stock screeners.
 - **Calendar & Events**: Dividends, earnings, IPOs, stock splits, economic releases.
 - **Type-Safe**: Full TypeScript with Zod validation.
-- **AI-Ready Tools**: Auto-generated Vercel AI SDK tool wrappers via `fmp-tools`.
+- **AI-Ready Tools**: Auto-generated Vercel AI SDK tool wrappers via `@financialmodelingprep/tools`.
 
 ## Installation
 
 ```bash
-bun add fmp-sdk
+bun add @financialmodelingprep/sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import * as fmp from 'fmp-sdk'
+import * as fmp from '@financialmodelingprep/sdk'
 
 const results = await fmp.searchSymbol('AAPL', { exchange: 'NASDAQ' })
 const profile = await fmp.companyProfile('AAPL')
@@ -28,11 +28,11 @@ const profile = await fmp.companyProfile('AAPL')
 
 ## Exports
 
-| Path                | Description                 |
-| ------------------- | --------------------------- |
-| `fmp-sdk`           | Main API client             |
-| `fmp-sdk/types`     | TypeScript type definitions |
-| `fmp-sdk/constants` | Shared constants            |
+| Path                                   | Description                 |
+| -------------------------------------- | --------------------------- |
+| `@financialmodelingprep/sdk`           | Main API client             |
+| `@financialmodelingprep/sdk/types`     | TypeScript type definitions |
+| `@financialmodelingprep/sdk/constants` | Shared constants            |
 
 ## License
 

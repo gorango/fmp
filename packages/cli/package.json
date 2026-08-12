@@ -1,29 +1,29 @@
 {
-	"name": "@financialmodelingprep/tools",
+	"name": "@financialmodelingprep/cli",
 	"version": "1.0.0",
-	"description": "Auto-generated Vercel AI SDK tool wrappers for the Financial Modeling Prep API",
+	"description": "CLI for the Financial Modeling Prep (FMP) API",
 	"keywords": [
-		"agents",
-		"ai-sdk",
+		"cli",
 		"finance",
 		"financial-modeling-prep",
-		"fmp",
-		"tools"
+		"fmp"
 	],
 	"homepage": "https://github.com/gorango/fmp",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gorango/fmp.git",
-		"directory": "packages/tools"
+		"directory": "packages/cli"
+	},
+	"bin": {
+		"fmp": "./src/index.ts"
 	},
 	"files": [
 		"src"
 	],
 	"type": "module",
 	"exports": {
-		".": "./src/tools.ts",
-		"./docs": "./src/docs.json"
+		".": "./src/index.ts"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -33,8 +33,11 @@
 		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
-		"@financialmodelingprep/sdk": "workspace:*",
-		"ai": "^7.0.0",
+		"@financialmodelingprep/mcp": "workspace:*",
+		"@financialmodelingprep/tools": "workspace:*",
 		"zod": "^4.4.3"
+	},
+	"engines": {
+		"bun": ">=1.2"
 	}
 }

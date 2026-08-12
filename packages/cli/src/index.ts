@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import toolDefs from 'fmp-tools'
+import toolDefs from '@financialmodelingprep/tools'
 import type { z } from 'zod'
 
 type FmpTool = {
@@ -37,7 +37,7 @@ async function main() {
 	}
 
 	if (args[0] === '--mcp') {
-		const { startMCPServer } = await import('fmp-mcp')
+		const { startMCPServer } = await import('@financialmodelingprep/mcp')
 		await startMCPServer()
 		return
 	}

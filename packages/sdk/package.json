@@ -1,11 +1,25 @@
 {
-	"name": "fmp-sdk",
-	"version": "0.0.1",
+	"name": "@financialmodelingprep/sdk",
+	"version": "1.0.0",
 	"description": "Financial Modeling Prep (FMP) SDK",
+	"keywords": [
+		"finance",
+		"financial-modeling-prep",
+		"fmp",
+		"sdk",
+		"sec",
+		"stocks"
+	],
+	"homepage": "https://github.com/gorango/fmp",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/gorango/fmp.git"
+		"url": "git+https://github.com/gorango/fmp.git",
+		"directory": "packages/sdk"
 	},
+	"files": [
+		"src"
+	],
 	"type": "module",
 	"exports": {
 		".": "./src/api.ts",
@@ -14,6 +28,9 @@
 		"./constants": "./src/constants/index.ts",
 		"./constants/returns": "./src/constants/returns.ts",
 		"./constants/categories": "./src/constants/categories.ts"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",

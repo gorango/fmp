@@ -1,13 +1,30 @@
 {
-	"name": "fmp-skills",
-	"version": "0.0.1",
+	"name": "@financialmodelingprep/skills",
+	"version": "1.0.0",
+	"description": "Agent skill installer for the Financial Modeling Prep (FMP) API",
+	"keywords": [
+		"agents",
+		"ai",
+		"financial-modeling-prep",
+		"fmp",
+		"skills"
+	],
+	"homepage": "https://github.com/gorango/fmp",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/gorango/fmp.git",
+		"url": "git+https://github.com/gorango/fmp.git",
 		"directory": "packages/skills"
 	},
 	"bin": {
-		"fmp-skills": "./install.mjs"
+		"fmp-skills": "install.mjs"
+	},
+	"files": [
+		"install.mjs",
+		"SKILL.md",
+		"assets"
+	],
+	"publishConfig": {
+		"access": "public"
 	}
 }

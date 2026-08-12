@@ -1,0 +1,79 @@
+name: publish
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+
+      - name: Verify versions match tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          for p in packages/*/package.json; do
+            private="$(node -p "require('./$p').private === true")"
+            if [ "$private" = "true" ]; then continue; fi
+            name="$(node -p "require('./$p').name")"
+            ver="$(node -p "require('./$p').version")"
+            if [ "$ver" != "$TAG" ]; then
+              echo "::error::$name version $ver does not match tag v$TAG"
+              exit 1
+            fi
+          done
+
+      - name: Rewrite workspace:* to exact version pins
+        run: node scripts/rewrite-workspace.mjs
+
+      - name: 'Verify no workspace: strings remain'
+        run: |
+          leftover=""
+          for p in packages/*/package.json; do
+            private="$(node -p "require('./$p').private === true")"
+            if [ "$private" = "true" ]; then continue; fi
+            if grep -q '"workspace:' "$p"; then leftover="$leftover $p"; fi
+          done
+          if [ -n "$leftover" ]; then
+            echo "::error::workspace: protocol still present in package.json:$leftover"
+            exit 1
+          fi
+          echo "ok: no workspace: strings remain in any publishable package"
+
+      - name: Publish to npm
+        run: |
+          # Dependency order: sdk → tools → mcp → cmd → skills.
+          # Published per-package (not `--workspaces`) so the private,
+          # version-less fmp-gen is never visited (npm 11 crashes on it).
+          # Versions already on the registry are skipped so a re-run after a
+          # partial failure can resume.
+          for pkg in packages/sdk packages/tools packages/mcp packages/cli packages/skills; do
+            name="$(node -p "require('./$pkg/package.json').name")"
+            ver="$(node -p "require('./$pkg/package.json').version")"
+            if npm view "$name@$ver" version >/dev/null 2>&1; then
+              echo "skip $name@$ver (already on registry)"
+              continue
+            fi
+            echo "publish $name@$ver"
+            (cd "$pkg" && npm publish)
+          done

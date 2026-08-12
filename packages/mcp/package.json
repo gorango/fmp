@@ -1,12 +1,33 @@
 {
-	"name": "fmp-mcp",
-	"version": "0.0.1",
+	"name": "@financialmodelingprep/mcp",
+	"version": "1.0.0",
+	"description": "MCP server exposing Financial Modeling Prep (FMP) data tools over stdio",
+	"keywords": [
+		"finance",
+		"financial-modeling-prep",
+		"fmp",
+		"mcp",
+		"model-context-protocol"
+	],
+	"homepage": "https://github.com/gorango/fmp",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gorango/fmp.git",
+		"directory": "packages/mcp"
+	},
 	"bin": {
 		"fmp-mcp": "./src/index.ts"
 	},
+	"files": [
+		"src"
+	],
 	"type": "module",
 	"exports": {
 		".": "./src/index.ts"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"scripts": {
 		"lint": "oxlint --fix & oxfmt",
@@ -14,8 +35,11 @@
 		"test": "bun test"
 	},
 	"dependencies": {
+		"@financialmodelingprep/tools": "workspace:*",
 		"@modelcontextprotocol/sdk": "^1.29.0",
-		"fmp-tools": "workspace:*",
 		"zod": "^4.4.3"
+	},
+	"engines": {
+		"bun": ">=1.2"
 	}
 }

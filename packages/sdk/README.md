@@ -28,11 +28,14 @@ const profile = await fmp.companyProfile('AAPL')
 
 ## Exports
 
-| Path                                   | Description                 |
-| -------------------------------------- | --------------------------- |
-| `@financialmodelingprep/sdk`           | Main API client             |
-| `@financialmodelingprep/sdk/types`     | TypeScript type definitions |
-| `@financialmodelingprep/sdk/constants` | Shared constants            |
+| Path                                              | Description                 |
+| ------------------------------------------------- | --------------------------- |
+| `@financialmodelingprep/sdk`                      | Main API client             |
+| `@financialmodelingprep/sdk/sec`                  | SEC filing access           |
+| `@financialmodelingprep/sdk/types`                | TypeScript type definitions |
+| `@financialmodelingprep/sdk/constants`            | Shared constants            |
+| `@financialmodelingprep/sdk/constants/returns`    | Return schemas              |
+| `@financialmodelingprep/sdk/constants/categories` | Tool categories             |
 
 ## License
 

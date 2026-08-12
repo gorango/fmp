@@ -8,10 +8,10 @@ Reads `@financialmodelingprep/sdk` source files using `ts-morph` and generates:
 ## Usage
 
 ```bash
-# Generate AI tools into packages/tools/src/generated/
+# Generate AI tools into packages/tools/src/
 bun run generate:tools
 
-# Generate documentation JSON into packages/tools/src/generated/
+# Generate documentation JSON into packages/tools/src/
 bun run generate:docs
 ```
 
@@ -23,7 +23,7 @@ bun run generate:docs
 
 ## Output
 
-Generated files land in `packages/tools/src/generated/`:
+Generated files land in `packages/tools/src/`:
 
 - `tools.ts` — AI SDK tool definitions
 - `docs.json` — Structured tool documentation

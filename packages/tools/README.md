@@ -11,7 +11,7 @@ bun add @financialmodelingprep/tools
 ## Usage
 
 > [!WARNING]
-> **~100 tools** — this module exports all SDK functions as tools. Passing the full `tools` object to `generateText` may saturate your prompt with tool definitions. Either pass a **selected subset** (e.g., `pick(tools, 'getStockPrice', 'getCompanyProfile')`) or use a retriever like [`ai-tool-retriever`](https://github.com/gorango/ai-tool-retriever) to dynamically select tools per request.
+> **~100 tools** — this module exports all SDK functions as tools. Passing the full `tools` object to `generateText` may saturate your prompt with tool definitions. Either pass a **selected subset** (e.g., `pick(tools, 'searchSymbol', 'companyProfile')`) or use a retriever like [`ai-tool-retriever`](https://github.com/gorango/ai-tool-retriever) to dynamically select tools per request.
 
 ```typescript
 import { tools } from '@financialmodelingprep/tools'

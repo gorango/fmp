@@ -8,7 +8,7 @@ Teach agents how to use the [`fmp` command](https://github.com/gorango/fmp/packa
 # add the cli for agents
 bun add -g @financialmodelingprep/cli
 # initialize the skills dir
-bunx fmp-skills
+bunx @financialmodelingprep/skills
 ```
 
 Creates a `skills/fmp` directory with all skills installed (move to your desired agent configuration as needed).

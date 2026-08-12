@@ -29,7 +29,7 @@ TypeScript SDK, Vercel AI SDK tools, CLI, MCP server, and code generation for th
 ```bash
 bun lint                    # oxlint + oxfmt across all packages
 bun run typecheck           # tsc --noEmit across all packages
-bun test --filter '@financialmodelingprep/*' # run tests (skipped without FMP_KEY)
+bun test                    # run all workspace tests (network tests skip without FMP_KEY)
 
 # Regenerate tools after SDK changes
 bun run --filter @financialmodelingprep/gen generate:tools

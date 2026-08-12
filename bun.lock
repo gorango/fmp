@@ -14,7 +14,7 @@
     },
     "packages/cli": {
       "name": "@financialmodelingprep/cli",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "bin": {
         "fmp": "./src/index.ts",
       },
@@ -36,7 +36,7 @@
     },
     "packages/mcp": {
       "name": "@financialmodelingprep/mcp",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "bin": {
         "fmp-mcp": "./src/index.ts",
       },
@@ -48,7 +48,7 @@
     },
     "packages/sdk": {
       "name": "@financialmodelingprep/sdk",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "dependencies": {
         "ioredis": "^5.11.1",
         "ky": "^2.0.2",
@@ -62,14 +62,14 @@
     },
     "packages/skills": {
       "name": "@financialmodelingprep/skills",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "bin": {
         "fmp-skills": "install.mjs",
       },
     },
     "packages/tools": {
       "name": "@financialmodelingprep/tools",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "dependencies": {
         "@financialmodelingprep/sdk": "workspace:*",
         "ai": "^7.0.0",

@@ -1,6 +1,6 @@
 {
 	"name": "@financialmodelingprep/mcp",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "MCP server exposing Financial Modeling Prep (FMP) data tools over stdio",
 	"keywords": [
 		"finance",

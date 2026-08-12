@@ -25,7 +25,8 @@ After a global install, the `fmp-mcp` binary is on your PATH. Configure it in yo
 			"command": "fmp-mcp",
 			"env": {
 				"FMP_KEY": "<your-api-key>",
-				"REDIS_URL": "redis://..."
+				"REDIS_URL": "redis://...",
+				"SEC_USER_AGENT": "YourName your@email.com"
 			}
 		}
 	}
@@ -42,14 +43,15 @@ Or, without a global install, run it on demand:
 			"args": ["@financialmodelingprep/mcp"],
 			"env": {
 				"FMP_KEY": "<your-api-key>",
-				"REDIS_URL": "redis://..."
+				"REDIS_URL": "redis://...",
+				"SEC_USER_AGENT": "YourName your@email.com"
 			}
 		}
 	}
 }
 ```
 
-`FMP_KEY` and `REDIS_URL` are required in env or config.
+`FMP_KEY` and `REDIS_URL` are required in env or config. `SEC_USER_AGENT` (format `"YourName your@email.com"`) is required only for SEC filing tools.
 
 ## Development
 

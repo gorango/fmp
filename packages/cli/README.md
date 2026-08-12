@@ -67,4 +67,4 @@ Configure in your AI client (e.g., Claude Desktop, VS Code settings, `opencode.j
 
 ## Env
 
-Requires `FMP_KEY` and optionally `REDIS_URL` set in the environment (or in a `.env` file).
+Requires `FMP_KEY` and optionally `REDIS_URL` set in the environment (or in a `.env` file). `SEC_USER_AGENT` (format `"YourName your@email.com"`) is required for SEC filing tools.

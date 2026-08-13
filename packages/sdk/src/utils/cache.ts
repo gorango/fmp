@@ -18,7 +18,8 @@ export function getSecCacheKey(url: string): string {
 
 export async function getFromCache(cacheKey: string): Promise<Response | null> {
 	try {
-		const redis = getRedis()
+		const redis = await getRedis()
+		if (!redis) return null
 		const cached = await redis.get(cacheKey)
 		if (cached) {
 			const entry: CacheEntry = JSON.parse(cached)
@@ -43,7 +44,8 @@ export async function setCache(
 	ttlSeconds: number,
 ): Promise<void> {
 	try {
-		const redis = getRedis()
+		const redis = await getRedis()
+		if (!redis) return
 		const entry: CacheEntry = { contentType, body }
 		await redis.set(cacheKey, JSON.stringify(entry), 'EX', ttlSeconds)
 	} catch (e) {

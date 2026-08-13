@@ -51,7 +51,7 @@ Or, without a global install, run it on demand:
 }
 ```
 
-`FMP_KEY` and `REDIS_URL` are required in env or config. `SEC_USER_AGENT` (format `"YourName your@email.com"`) is required only for SEC filing tools.
+`FMP_KEY` is required in env or config. `REDIS_URL` enables shared caching and rate limiting (optional — without it, the SDK uses an in-process cache/limiter). `SEC_USER_AGENT` (format `"YourName your@email.com"`) is required only for SEC filing tools.
 
 ## Development
 

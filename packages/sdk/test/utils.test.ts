@@ -106,12 +106,13 @@ describe('injectApiKey', () => {
 })
 
 describe('getRedis', () => {
-	it('throws when REDIS_URL is not set', () => {
+	it('returns null when REDIS_URL is not set', async () => {
 		const prev = process.env.REDIS_URL
 		delete process.env.REDIS_URL
 		try {
-			const { getRedis } = require('../src/utils/redis')
-			expect(() => getRedis()).toThrow('REDIS_URL')
+			const { getRedis, closeRedis } = await import('../src/utils/redis')
+			closeRedis()
+			expect(await getRedis()).toBeNull()
 		} finally {
 			if (prev) process.env.REDIS_URL = prev
 		}

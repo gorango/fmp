@@ -1,27 +1,19 @@
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import { writeFileSync } from 'node:fs'
+import { readWorkspacePackages, isPublishable } from './workspaces.mjs'
 
-const root = process.cwd()
-const rootPkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
-const dirs = rootPkg.workspaces.flatMap((w) =>
-	w.endsWith('/*')
-		? readdirSync(join(root, w.slice(0, -2))).map((d) => `${w.slice(0, -2)}/${d}`)
-		: [w],
-)
+const packages = readWorkspacePackages()
 
+// Internal deps are published as `workspace:*` in source, which npm does not
+// rewrite when packing — pin them to the sibling's version so consumers get an
+// installable tarball. Runs on the CI runner's throwaway checkout.
 const versions = {}
-for (const dir of dirs) {
-	const p = join(root, dir, 'package.json')
-	if (!existsSync(p)) continue
-	const pkg = JSON.parse(readFileSync(p, 'utf8'))
-	if (pkg.name) versions[pkg.name] = pkg.version
+for (const pkg of packages) {
+	if (pkg.manifest.name) versions[pkg.manifest.name] = pkg.manifest.version
 }
 
-for (const dir of dirs) {
-	const p = join(root, dir, 'package.json')
-	if (!existsSync(p)) continue
-	const pkg = JSON.parse(readFileSync(p, 'utf8'))
-	if (pkg.private) continue
+for (const pkg of packages) {
+	if (!isPublishable(pkg)) continue
+	const manifest = pkg.manifest
 	let touched = false
 	for (const block of [
 		'dependencies',
@@ -29,13 +21,13 @@ for (const dir of dirs) {
 		'peerDependencies',
 		'optionalDependencies',
 	]) {
-		if (!pkg[block]) continue
-		for (const [dep, spec] of Object.entries(pkg[block])) {
+		if (!manifest[block]) continue
+		for (const [dep, spec] of Object.entries(manifest[block])) {
 			if (typeof spec !== 'string' || !spec.startsWith('workspace:')) continue
 			if (!versions[dep])
-				throw new Error(`No workspace version known for ${dep} (dep of ${pkg.name})`)
+				throw new Error(`No workspace version known for ${dep} (dep of ${manifest.name})`)
 			const range = spec.slice('workspace:'.length)
-			pkg[block][dep] =
+			manifest[block][dep] =
 				{
 					'': versions[dep],
 					'*': versions[dep],
@@ -46,7 +38,7 @@ for (const dir of dirs) {
 		}
 	}
 	if (touched) {
-		writeFileSync(p, JSON.stringify(pkg, null, '\t') + '\n')
-		console.log(`rewrote ${pkg.name}`)
+		writeFileSync(pkg.path, JSON.stringify(manifest, null, '\t') + '\n')
+		console.log(`rewrote ${manifest.name}`)
 	}
 }

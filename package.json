@@ -6,7 +6,8 @@
 	],
 	"scripts": {
 		"lint": "oxlint --fix && oxfmt",
-		"typecheck": "bun run --filter '@financialmodelingprep/*' typecheck 2>&1 | grep -E \"(Exited|error|✓|✗)\""
+		"typecheck": "bun run --filter '@financialmodelingprep/*' typecheck 2>&1 | grep -E \"(Exited|error|✓|✗)\"",
+		"bump": "bun scripts/bump-version.mjs"
 	},
 	"devDependencies": {
 		"@types/bun": "^1.4.2",

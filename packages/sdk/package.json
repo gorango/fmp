@@ -39,13 +39,13 @@
 		"test:watch": "bun test --watch"
 	},
 	"dependencies": {
-		"ioredis": "^5.11.1",
-		"ky": "^2.0.2",
-		"papaparse": "^5.5.4",
-		"zod": "^4.4.3"
+		"ioredis": "^6.0.0",
+		"ky": "^2.1.0",
+		"papaparse": "^5.7.0",
+		"zod": "^4.6.5"
 	},
 	"devDependencies": {
-		"@ai-sdk/openai": "^4.0.0",
+		"@ai-sdk/openai": "^4.0.82",
 		"@types/papaparse": "^5.5.2"
 	}
 }

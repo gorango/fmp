@@ -34,7 +34,7 @@
 	},
 	"dependencies": {
 		"@financialmodelingprep/sdk": "workspace:*",
-		"ai": "^7.0.0",
-		"zod": "^4.4.3"
+		"ai": "^7.0.123",
+		"zod": "^4.6.5"
 	}
 }

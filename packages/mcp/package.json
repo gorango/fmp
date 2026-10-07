@@ -36,8 +36,8 @@
 	},
 	"dependencies": {
 		"@financialmodelingprep/tools": "workspace:*",
-		"@modelcontextprotocol/sdk": "^1.29.0",
-		"zod": "^4.4.3"
+		"@modelcontextprotocol/sdk": "^1.31.0",
+		"zod": "^4.6.5"
 	},
 	"engines": {
 		"bun": ">=1.2"

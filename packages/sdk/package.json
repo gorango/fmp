@@ -1,6 +1,6 @@
 {
 	"name": "@financialmodelingprep/sdk",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Financial Modeling Prep (FMP) SDK",
 	"keywords": [
 		"finance",

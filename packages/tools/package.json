@@ -1,6 +1,6 @@
 {
 	"name": "@financialmodelingprep/tools",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Auto-generated Vercel AI SDK tool wrappers for the Financial Modeling Prep API",
 	"keywords": [
 		"agents",

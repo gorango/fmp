@@ -1,6 +1,6 @@
 {
 	"name": "@financialmodelingprep/cli",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "CLI for the Financial Modeling Prep (FMP) API",
 	"keywords": [
 		"cli",
